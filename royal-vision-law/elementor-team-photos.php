@@ -20,7 +20,7 @@ $members = array(
 	array( 'Younis Amin', 'younis-amin', 4 ),
 	array( 'Shahid Amin', 'shahid-amin', 5 ),
 	array( 'Rana Tahir Mehmood', 'rana-tahir-mehmood', 6 ),
-	array( 'Advocate (name pending)', 'advocate-pending', 7, 'draft' ), // Publish once the name is set.
+	array( 'Ch. Umar Shahzad Ashraf', 'ch-umar-shahzad-ashraf', 7 ),
 );
 $out = array();
 foreach ( $members as $m ) {

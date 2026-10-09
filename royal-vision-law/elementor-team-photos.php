@@ -1,8 +1,9 @@
 <?php
 /**
  * Team portraits for royalvisionlaw.com.
- * Sideloads the four advocate portraits in team-photos/ (720x900, one shared format),
- * creates or updates their Team members (position "Advocate"), lets the homepage show
+ * Sideloads the advocate studio portraits in team-photos/ (960x1200, one shared ivory
+ * backdrop made by team-photos/compose.py), creates or updates their Team members
+ * (position "Advocate"), replaces any earlier portrait, lets the homepage show
  * up to 8 members, and sets the team grid to three cards per row with aligned buttons.
  * Run after elementor-law-premium.php (needs sandbox/rvl-team.php active). Safe to re-run.
  */
@@ -17,26 +18,30 @@ $members = array(
 	array( 'Younis Amin', 'younis-amin', 4 ),
 	array( 'Shahid Amin', 'shahid-amin', 5 ),
 	array( 'Rana Tahir Mehmood', 'rana-tahir-mehmood', 6 ),
+	array( 'Advocate (name pending)', 'advocate-pending', 7, 'draft' ), // Publish once the name is set.
 );
 $out = array();
 foreach ( $members as $m ) {
 	list( $name, $slug, $order ) = $m;
-	$ex = get_posts( array( 'post_type' => 'rvl_team', 'title' => $name, 'post_status' => 'any', 'numberposts' => 1, 'fields' => 'ids' ) );
-	$id = wp_insert_post( array( 'ID' => $ex ? $ex[0] : 0, 'post_type' => 'rvl_team', 'post_status' => 'publish', 'post_title' => $name, 'menu_order' => $order ) );
+	$status = $m[3] ?? 'publish';
+	$ex     = get_posts( array( 'post_type' => 'rvl_team', 'title' => $name, 'post_status' => 'any', 'numberposts' => 1, 'fields' => 'ids' ) );
+	$id     = $ex ? $ex[0] : wp_insert_post( array( 'post_type' => 'rvl_team', 'post_status' => $status, 'post_title' => $name, 'menu_order' => $order ) );
 	update_post_meta( $id, 'rvl_position', 'Advocate' );
-	$src = $base . $slug . '.jpg';
+	$src = $base . $slug . '.jpg?v=studio-2'; // Bump the version when a portrait file changes.
+	$old = (int) get_post_thumbnail_id( $id );
 	$att = get_posts( array( 'post_type' => 'attachment', 'post_status' => 'inherit', 'meta_key' => '_rvl_source', 'meta_value' => $src, 'numberposts' => 1, 'fields' => 'ids' ) );
 	if ( $att ) {
 		$aid = $att[0];
 	} else {
 		$tmp = download_url( $src, 60 );
 		if ( is_wp_error( $tmp ) ) { $out[ $name ] = 'download failed: ' . $tmp->get_error_message(); continue; }
-		$aid = media_handle_sideload( array( 'name' => 'team-' . $slug . '.jpg', 'tmp_name' => $tmp ), $id, $name );
+		$aid = media_handle_sideload( array( 'name' => 'team-' . $slug . '-studio.jpg', 'tmp_name' => $tmp ), $id, $name );
 		if ( is_wp_error( $aid ) ) { @unlink( $tmp ); $out[ $name ] = 'sideload failed: ' . $aid->get_error_message(); continue; }
 		update_post_meta( $aid, '_rvl_source', $src );
 		update_post_meta( $aid, '_wp_attachment_image_alt', $name . ', Advocate, Royal Vision Law Associate' );
 	}
 	set_post_thumbnail( $id, $aid );
+	if ( $old && $old !== $aid && get_post_meta( $old, '_rvl_source', true ) ) { wp_delete_attachment( $old, true ); } // Only portraits this script added.
 	$out[ $name ] = array( 'member' => $id, 'photo' => $aid );
 }
 
@@ -70,6 +75,6 @@ $kit_doc->save( array( 'settings' => $kit_set ) );
 \Elementor\Plugin::$instance->files_manager->clear_cache();
 do_action( 'litespeed_purge_all' );
 
-$all = get_posts( array( 'post_type' => 'rvl_team', 'post_status' => 'publish', 'numberposts' => -1, 'orderby' => array( 'menu_order' => 'ASC' ) ) );
+$all = get_posts( array( 'post_type' => 'rvl_team', 'post_status' => array( 'publish', 'draft' ), 'numberposts' => -1, 'orderby' => array( 'menu_order' => 'ASC' ) ) );
 $out['team_order'] = array_map( function ( $p ) { return $p->menu_order . ' ' . $p->post_title . ( has_post_thumbnail( $p ) ? ' [photo]' : ' [initials]' ); }, $all );
 return $out;

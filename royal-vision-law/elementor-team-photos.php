@@ -14,6 +14,8 @@ require_once ABSPATH . 'wp-admin/includes/image.php';
 
 $base    = 'https://raw.githubusercontent.com/royalvisioneducationchannel-jpg/blog-/claude/magical-turing-m9b0sf/royal-vision-law/team-photos/';
 $members = array(
+	array( 'Ch. Abdul Nabi Qamar', 'ch-abdul-nabi-qamar', 1 ),
+	array( 'Imran Ali', 'imran-ali', 2 ),
 	array( 'Ch. Arshad Mehmood Warraich', 'arshad-mehmood-warraich', 3 ),
 	array( 'Younis Amin', 'younis-amin', 4 ),
 	array( 'Shahid Amin', 'shahid-amin', 5 ),
@@ -27,7 +29,7 @@ foreach ( $members as $m ) {
 	$ex     = get_posts( array( 'post_type' => 'rvl_team', 'title' => $name, 'post_status' => 'any', 'numberposts' => 1, 'fields' => 'ids' ) );
 	$id     = $ex ? $ex[0] : wp_insert_post( array( 'post_type' => 'rvl_team', 'post_status' => $status, 'post_title' => $name, 'menu_order' => $order ) );
 	update_post_meta( $id, 'rvl_position', 'Advocate' );
-	$src = $base . $slug . '.jpg?v=studio-2'; // Bump the version when a portrait file changes.
+	$src = $base . $slug . '.jpg?v=studio-3'; // Bump the version when a portrait file changes.
 	$old = (int) get_post_thumbnail_id( $id );
 	$att = get_posts( array( 'post_type' => 'attachment', 'post_status' => 'inherit', 'meta_key' => '_rvl_source', 'meta_value' => $src, 'numberposts' => 1, 'fields' => 'ids' ) );
 	if ( $att ) {

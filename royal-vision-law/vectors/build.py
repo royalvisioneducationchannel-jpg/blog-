@@ -21,7 +21,8 @@ php = ['<?php', '/**',
  ' * in the hero with the seal at its base, a scales ornament under section headings, column',
  ' * icons on the stats, framing columns in Practice Areas, laurel + gavel in the maxim band and',
  ' * a scales watermark in Contact. No widgets are added; nothing is hidden before JavaScript.',
- ' * Also un-hides the hero art column on mobile so phones see the courthouse.',
+ ' * Hero: the founder cut-out portrait stands in a gold doorway with a name badge and the seal;',
+ ' * the hero art column is also shown on phones.',
  ' * Safe to re-run: the previous Vector Law block is replaced.',
  ' */', '', '$svg = array(']
 for k, s in svgs.items():
@@ -30,10 +31,44 @@ php += [');', '',
  "$css = <<<'CSS'\n%s\n/* /Vector Law layer */\nCSS;" % css.rstrip('\n'),
  "foreach ( $svg as $k => $s ) { $css = str_replace( '{{' . $k . '}}', 'url(\"data:image/svg+xml,' . rawurlencode( $s ) . '\")', $css ); }",
  '',
- "// Show the hero art column on phones too (it was hidden on mobile).",
+ "// Founder portrait (transparent cut-out) for the hero doorway.",
+ "require_once ABSPATH . 'wp-admin/includes/media.php';",
+ "require_once ABSPATH . 'wp-admin/includes/file.php';",
+ "require_once ABSPATH . 'wp-admin/includes/image.php';",
+ "$src = 'https://raw.githubusercontent.com/royalvisioneducationchannel-jpg/blog-/claude/magical-turing-m9b0sf/royal-vision-law/team-photos/hero-ch-abdul-nabi-qamar.webp';",
+ "$att = get_posts( array( 'post_type' => 'attachment', 'post_status' => 'inherit', 'meta_key' => '_rvl_source', 'meta_value' => $src, 'numberposts' => 1, 'fields' => 'ids' ) );",
+ "if ( $att ) { $aid = $att[0]; } else {",
+ "\t$tmp = download_url( $src, 60 );",
+ "\tif ( is_wp_error( $tmp ) ) { return 'portrait download failed: ' . $tmp->get_error_message(); }",
+ "\t$aid = media_handle_sideload( array( 'name' => 'hero-ch-abdul-nabi-qamar.webp', 'tmp_name' => $tmp ), 22, 'Ch. Abdul Nabi Qamar' );",
+ "\tif ( is_wp_error( $aid ) ) { @unlink( $tmp ); return 'portrait sideload failed: ' . $aid->get_error_message(); }",
+ "\tupdate_post_meta( $aid, '_rvl_source', $src );",
+ "\tupdate_post_meta( $aid, '_wp_attachment_image_alt', 'Ch. Abdul Nabi Qamar, Founding Advocate, Royal Vision Law Associate' );",
+ "}",
+ '',
+ "// Hero art column: show on phones, and add the portrait + name badge once.",
+ "$eid  = function () { return substr( md5( uniqid( '', true ) ), 0, 7 ); };",
+ "$head = function ( $title, $cls ) use ( $eid ) { return array( 'id' => $eid(), 'elType' => 'widget', 'widgetType' => 'heading', 'settings' => array( 'title' => $title, 'header_size' => 'p', '_css_classes' => $cls ), 'elements' => array() ); };",
+ "$add  = array(",
+ "\tarray( 'id' => $eid(), 'elType' => 'widget', 'widgetType' => 'image', 'settings' => array( 'image' => array( 'id' => $aid, 'url' => wp_get_attachment_url( $aid ) ), 'image_size' => 'full', '_css_classes' => 'rvl-hero-person' ), 'elements' => array() ),",
+ "\tarray( 'id' => $eid(), 'elType' => 'container', 'isInner' => true, 'settings' => array( 'css_classes' => 'rvl-hero-badge', 'content_width' => 'full', 'flex_direction' => 'column' ), 'elements' => array(",
+ "\t\t$head( 'Ch. Abdul Nabi Qamar', 'rvl-hero-badge-name' ),",
+ "\t\t$head( 'Founding Advocate · District Courts, Faisalabad', 'rvl-hero-badge-role' ),",
+ "\t) ),",
+ ");",
  "$doc  = \\Elementor\\Plugin::$instance->documents->get( 22, false );",
- "$show = function ( array $els ) use ( &$show ) { foreach ( $els as &$el ) { if ( false !== strpos( $el['settings']['css_classes'] ?? '', 'rvl-hero-seal-col' ) ) { unset( $el['settings']['hide_mobile'] ); } $el['elements'] = $show( $el['elements'] ); } return $els; };",
- "$doc->save( array( 'elements' => $show( $doc->get_elements_data() ), 'settings' => array( 'template' => 'elementor_canvas', 'hide_title' => 'yes' ) ) );",
+ "$hero = function ( array $els ) use ( &$hero, $add ) {",
+ "\tforeach ( $els as &$el ) {",
+ "\t\tif ( false !== strpos( $el['settings']['css_classes'] ?? '', 'rvl-hero-seal-col' ) ) {",
+ "\t\t\tunset( $el['settings']['hide_mobile'] );",
+ "\t\t\t$has = false; foreach ( $el['elements'] as $c ) { if ( false !== strpos( $c['settings']['_css_classes'] ?? '', 'rvl-hero-person' ) ) { $has = true; } }",
+ "\t\t\tif ( ! $has ) { $el['elements'] = array_merge( $add, $el['elements'] ); }",
+ "\t\t}",
+ "\t\t$el['elements'] = $hero( $el['elements'] );",
+ "\t}",
+ "\treturn $els;",
+ "};",
+ "$doc->save( array( 'elements' => $hero( $doc->get_elements_data() ), 'settings' => array( 'template' => 'elementor_canvas', 'hide_title' => 'yes' ) ) );",
  '',
  "$kit_doc = \\Elementor\\Plugin::$instance->documents->get( (int) get_option( 'elementor_active_kit' ), false );",
  "$kit_set = array_filter( (array) $kit_doc->get_settings(), function ( $k ) { return ! is_int( $k ); }, ARRAY_FILTER_USE_KEY );",
@@ -53,6 +88,12 @@ if len(sys.argv) == 3:
     import re
     html = pathlib.Path(sys.argv[1]).read_text()
     html = html.replace('rvl-hero-seal-col elementor-hidden-mobile', 'rvl-hero-seal-col')
+    person = str((here.parent / 'team-photos' / 'hero-ch-abdul-nabi-qamar.webp').resolve())
+    mock = ('<div class="elementor-element rvl-hero-person elementor-widget elementor-widget-image"><img src="file://%s" alt=""></div>'
+            '<div class="elementor-element e-con-full rvl-hero-badge e-flex e-con e-child">'
+            '<div class="elementor-element rvl-hero-badge-name elementor-widget elementor-widget-heading"><p class="elementor-heading-title">Ch. Abdul Nabi Qamar</p></div>'
+            '<div class="elementor-element rvl-hero-badge-role elementor-widget elementor-widget-heading"><p class="elementor-heading-title">Founding Advocate · District Courts, Faisalabad</p></div></div>') % person
+    html = re.sub(r'(<div class="elementor-element elementor-element-5720ec6[^>]*>)', lambda m: m.group(1) + mock, html, count=1)
     html = re.sub(r'class="([^"]*\be-con\b[^"]*)"', lambda m: 'class="%s e-lazyloaded"' % m.group(1), html)
     style = '<style id="vector-law-preview">%s</style>' % resolved(css).replace('selector', '.elementor-kit-5')
     html = html.replace('</body>', style + '</body>')

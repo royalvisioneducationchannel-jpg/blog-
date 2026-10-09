@@ -86,6 +86,37 @@ def laurel(stroke=G):
         parts.append(f'<ellipse cx="{x1+ (math.cos(a1+side*1.4))*0:.1f}" cy="{y1:.1f}" rx="2" ry="2" fill="{stroke}"/>')
     return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 120" fill="none" stroke="{stroke}" stroke-width="1.3">'+''.join(parts)+'</svg>')
 
+def doorway():
+    o=[]; a=o.append
+    a(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 540" fill="none" stroke="{G}" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round">')
+    a('<defs><radialGradient id="g" cx="50%" cy="46%" r="55%"><stop offset="0" stop-color="#E9D3A2" stop-opacity=".34"/><stop offset=".55" stop-color="#B08D57" stop-opacity=".1"/><stop offset="1" stop-color="#B08D57" stop-opacity="0"/></radialGradient></defs>')
+    a('<path d="M24 540V236C24 117 121 20 240 20s216 97 216 216v304z" fill="#0B1F1B" fill-opacity=".5" stroke="none"/>')
+    a('<path d="M24 540V236C24 117 121 20 240 20s216 97 216 216v304z" fill="url(#g)" stroke="none"/>')
+    a('<path d="M24 540V236C24 117 121 20 240 20s216 97 216 216v304" opacity=".7"/>')
+    a('<path d="M40 540V238C40 128 130 38 240 38s200 90 200 200v302" opacity=".35"/>')
+    rays=[]
+    for i in range(17):
+        ang=math.radians(196+i*(148/16))
+        x1=240+math.cos(ang)*70; y1=230+math.sin(ang)*70
+        x2=240+math.cos(ang)*196; y2=230+math.sin(ang)*190
+        rays.append(f'M{x1:.1f} {y1:.1f}L{x2:.1f} {y2:.1f}')
+    a(f'<path d="{"".join(rays)}" stroke-width="1" opacity=".3"/>')
+    # keystone medallion with scales
+    a('<circle cx="240" cy="62" r="22" fill="#0B1F1B" stroke-width="1.4"/><circle cx="240" cy="62" r="17" opacity=".5"/>')
+    a('<path d="M240 50v22M233 74h14M229 55h22M229 55l-4 8M229 55l4 8M222 63a7 3 0 0 0 14 0M251 55l-4 8M251 55l4 8M244 63a7 3 0 0 0 14 0" stroke-width="1.2"/>')
+    # side columns
+    for c in (82,398):
+        a(f'<path d="M{c-22} 200h44M{c-18} 208h36M{c-22} 200c-5 0-7 4-7 8M{c+22} 200c5 0 7 4 7 8" />')
+        a(f'<rect x="{c-15}" y="210" width="30" height="262"/>')
+        a(f'<path d="M{c-8} 216v250M{c} 216v250M{c+8} 216v250" stroke-width=".8" opacity=".6"/>')
+        a(f'<rect x="{c-19}" y="472" width="38" height="8"/>')
+    a('<path d="M60 192h360" opacity=".45"/><path d="M60 184h360" opacity=".25"/>')
+    # steps
+    a('<rect x="44" y="480" width="392" height="14"/><rect x="34" y="494" width="412" height="14" opacity=".8"/><rect x="24" y="508" width="432" height="14" opacity=".6"/>')
+    a('</svg>')
+    return ''.join(o)
+
+open('doorway.svg','w').write(doorway())
 open('courthouse.svg','w').write(courthouse())
 open('scales.svg','w').write(scales())
 open('column.svg','w').write(column())

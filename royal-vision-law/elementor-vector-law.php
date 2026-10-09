@@ -5,7 +5,8 @@
  * in the hero with the seal at its base, a scales ornament under section headings, column
  * icons on the stats, framing columns in Practice Areas, laurel + gavel in the maxim band and
  * a scales watermark in Contact. No widgets are added; nothing is hidden before JavaScript.
- * Also un-hides the hero art column on mobile so phones see the courthouse.
+ * Hero: the founder cut-out portrait stands in a gold doorway with a name badge and the seal;
+ * the hero art column is also shown on phones.
  * Safe to re-run: the previous Vector Law block is replaced.
  */
 
@@ -16,6 +17,10 @@ SVG
 	,
 	'courthouse' => <<<'SVG'
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 540" fill="none" stroke="#D4B77E" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><path d="M24 540V236C24 117 121 20 240 20s216 97 216 216v304z" fill="#0B1F1B" fill-opacity=".72" stroke="none"/><path d="M24 540V236C24 117 121 20 240 20s216 97 216 216v304" opacity=".55"/><path d="M40 540V238C40 128 130 38 240 38s200 90 200 200v302" opacity=".28"/><path d="M202.4 158.4L80.3 127.0M206.0 153.3L95.3 105.0M210.9 148.8L116.3 85.7M217.1 145.1L142.5 69.7M224.2 142.3L172.7 57.8M231.9 140.6L205.6 50.5M240.0 140.0L240.0 48.0M248.1 140.6L274.4 50.5M255.8 142.3L307.3 57.8M262.9 145.1L337.5 69.7M269.1 148.8L363.7 85.7M274.0 153.3L384.7 105.0M277.6 158.4L399.7 127.0" stroke-width="1" opacity=".22"/><circle cx="240" cy="112" r="5" fill="#D4B77E" fill-opacity=".9" stroke="none"/><path d="M92 252L240 172l148 80z" fill="#D4B77E" fill-opacity=".07"/><path d="M122 244L240 182l118 62z" opacity=".55"/><path d="M240 192v42M228 236h24M214 206h52M240 196m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"/><path d="M214 206l-8 15M214 206l8 15M201 221a13 5 0 0 0 26 0zM266 206l-8 15M266 206l8 15M253 221a13 5 0 0 0 26 0z" stroke-width="1.3"/><rect x="86" y="252" width="308" height="14"/><rect x="98" y="266" width="284" height="12"/><path d="M104 282h6v6h-6zM116 282h6v6h-6zM128 282h6v6h-6zM140 282h6v6h-6zM152 282h6v6h-6zM164 282h6v6h-6zM176 282h6v6h-6zM188 282h6v6h-6zM200 282h6v6h-6zM212 282h6v6h-6zM224 282h6v6h-6zM236 282h6v6h-6zM248 282h6v6h-6zM260 282h6v6h-6zM272 282h6v6h-6zM284 282h6v6h-6zM296 282h6v6h-6zM308 282h6v6h-6zM320 282h6v6h-6zM332 282h6v6h-6zM344 282h6v6h-6zM356 282h6v6h-6zM368 282h6v6h-6z" stroke-width="1" opacity=".75"/><path d="M108 292h34M111 298h28" /><path d="M108 292c-4 0-6 3-6 6M142 292c4 0 6 3 6 6" stroke-width="1.2"/><rect x="113" y="300" width="24" height="150"/><path d="M119 306v138M125 306v138M131 306v138" stroke-width=".8" opacity=".6"/><rect x="110" y="450" width="30" height="7"/><path d="M154 292h34M157 298h28" /><path d="M154 292c-4 0-6 3-6 6M188 292c4 0 6 3 6 6" stroke-width="1.2"/><rect x="159" y="300" width="24" height="150"/><path d="M165 306v138M171 306v138M177 306v138" stroke-width=".8" opacity=".6"/><rect x="156" y="450" width="30" height="7"/><path d="M200 292h34M203 298h28" /><path d="M200 292c-4 0-6 3-6 6M234 292c4 0 6 3 6 6" stroke-width="1.2"/><rect x="205" y="300" width="24" height="150"/><path d="M211 306v138M217 306v138M223 306v138" stroke-width=".8" opacity=".6"/><rect x="202" y="450" width="30" height="7"/><path d="M246 292h34M249 298h28" /><path d="M246 292c-4 0-6 3-6 6M280 292c4 0 6 3 6 6" stroke-width="1.2"/><rect x="251" y="300" width="24" height="150"/><path d="M257 306v138M263 306v138M269 306v138" stroke-width=".8" opacity=".6"/><rect x="248" y="450" width="30" height="7"/><path d="M292 292h34M295 298h28" /><path d="M292 292c-4 0-6 3-6 6M326 292c4 0 6 3 6 6" stroke-width="1.2"/><rect x="297" y="300" width="24" height="150"/><path d="M303 306v138M309 306v138M315 306v138" stroke-width=".8" opacity=".6"/><rect x="294" y="450" width="30" height="7"/><path d="M338 292h34M341 298h28" /><path d="M338 292c-4 0-6 3-6 6M372 292c4 0 6 3 6 6" stroke-width="1.2"/><rect x="343" y="300" width="24" height="150"/><path d="M349 306v138M355 306v138M361 306v138" stroke-width=".8" opacity=".6"/><rect x="340" y="450" width="30" height="7"/><rect x="88" y="457" width="304" height="13"/><rect x="72" y="470" width="336" height="13"/><rect x="56" y="483" width="368" height="13"/><path d="M24 506h432" opacity=".5"/><path d="M60 518h360" opacity=".25"/></svg>
+SVG
+	,
+	'doorway' => <<<'SVG'
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 540" fill="none" stroke="#D4B77E" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><defs><radialGradient id="g" cx="50%" cy="46%" r="55%"><stop offset="0" stop-color="#E9D3A2" stop-opacity=".34"/><stop offset=".55" stop-color="#B08D57" stop-opacity=".1"/><stop offset="1" stop-color="#B08D57" stop-opacity="0"/></radialGradient></defs><path d="M24 540V236C24 117 121 20 240 20s216 97 216 216v304z" fill="#0B1F1B" fill-opacity=".5" stroke="none"/><path d="M24 540V236C24 117 121 20 240 20s216 97 216 216v304z" fill="url(#g)" stroke="none"/><path d="M24 540V236C24 117 121 20 240 20s216 97 216 216v304" opacity=".7"/><path d="M40 540V238C40 128 130 38 240 38s200 90 200 200v302" opacity=".35"/><path d="M172.7 210.7L51.6 177.6M176.7 200.1L62.7 149.0M182.3 190.4L78.5 122.4M189.4 181.6L98.4 98.6M197.9 174.1L122.0 78.3M207.4 168.1L148.7 61.9M217.8 163.6L177.8 49.8M228.7 160.9L208.5 42.5M240.0 160.0L240.0 40.0M251.3 160.9L271.5 42.5M262.2 163.6L302.2 49.8M272.6 168.1L331.3 61.9M282.1 174.1L358.0 78.3M290.6 181.6L381.6 98.6M297.7 190.4L401.5 122.4M303.3 200.1L417.3 149.0M307.3 210.7L428.4 177.6" stroke-width="1" opacity=".3"/><circle cx="240" cy="62" r="22" fill="#0B1F1B" stroke-width="1.4"/><circle cx="240" cy="62" r="17" opacity=".5"/><path d="M240 50v22M233 74h14M229 55h22M229 55l-4 8M229 55l4 8M222 63a7 3 0 0 0 14 0M251 55l-4 8M251 55l4 8M244 63a7 3 0 0 0 14 0" stroke-width="1.2"/><path d="M60 200h44M64 208h36M60 200c-5 0-7 4-7 8M104 200c5 0 7 4 7 8" /><rect x="67" y="210" width="30" height="262"/><path d="M74 216v250M82 216v250M90 216v250" stroke-width=".8" opacity=".6"/><rect x="63" y="472" width="38" height="8"/><path d="M376 200h44M380 208h36M376 200c-5 0-7 4-7 8M420 200c5 0 7 4 7 8" /><rect x="383" y="210" width="30" height="262"/><path d="M390 216v250M398 216v250M406 216v250" stroke-width=".8" opacity=".6"/><rect x="379" y="472" width="38" height="8"/><path d="M60 192h360" opacity=".45"/><path d="M60 184h360" opacity=".25"/><rect x="44" y="480" width="392" height="14"/><rect x="34" y="494" width="412" height="14" opacity=".8"/><rect x="24" y="508" width="432" height="14" opacity=".6"/></svg>
 SVG
 	,
 	'gavel' => <<<'SVG'
@@ -42,18 +47,41 @@ SVG
 
 $css = <<<'CSS'
 
-/* Vector Law layer: courthouse hero art, scales ornaments, column and gavel watermarks */
+/* Vector Law layer: founder hero in a gold doorway, scales ornaments, column and gavel watermarks */
 @keyframes rvl-art-in{from{opacity:.35;transform:translate(-50%,22px)}to{opacity:1;transform:translate(-50%,0)}}
 selector .rvl-hero-dark,selector .rvl-night,selector .rvl-dark,selector .rvl-quote,selector .rvl-contact-dark{background-color:var(--rvl-night)}
 
-/* Hero: gold courthouse inside an arch, seal overlapping its base */
-selector .rvl-hero-seal-col{position:relative;align-self:stretch;justify-content:flex-end;min-height:560px}
-selector .rvl-hero-seal-col::before{content:"";position:absolute;left:50%;bottom:0;width:min(100%,470px);top:auto;aspect-ratio:480/540;transform:translateX(-50%);background:{{courthouse}} center bottom/contain no-repeat;filter:drop-shadow(0 34px 60px rgba(0,0,0,.5));-webkit-mask-image:linear-gradient(#000 86%,transparent);mask-image:linear-gradient(#000 86%,transparent);animation:rvl-art-in 1.1s .15s cubic-bezier(.2,.7,.2,1) both;pointer-events:none}
-selector .rvl-hero-seal-col .rvl-seal{position:absolute!important;z-index:2;left:max(0px,calc(50% - 270px));bottom:-26px;width:150px!important;--width:150px;height:150px;margin:0}
-selector .rvl-hero-seal-col .rvl-seal-icon .elementor-icon svg{width:30px!important;height:30px!important}
-selector .rvl-hero-seal-col .rvl-seal-est .elementor-heading-title{font-size:9px;letter-spacing:.24em}
+/* Hero: rich green field, founder standing in a gold doorway, name badge and seal */
+selector .elementor-element.rvl-hero-dark{background-image:radial-gradient(ellipse 55% 80% at 74% 58%,#28604F 0%,#15392F 40%,#0A1B16 80%)!important;position:relative;overflow:hidden}
+selector .rvl-hero-dark::before{opacity:0!important}
+selector .rvl-hero-dark::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(115deg,rgba(212,183,126,.06) 0 1px,transparent 1px 24px);-webkit-mask-image:radial-gradient(ellipse 60% 80% at 78% 50%,#000,transparent 72%);mask-image:radial-gradient(ellipse 60% 80% at 78% 50%,#000,transparent 72%);pointer-events:none}
+selector .rvl-hero-dark>.e-con-inner{position:relative;z-index:1;padding-bottom:0!important}
+@media (min-width:1025px){selector .rvl-hero-dark>.e-con-inner{padding-top:96px!important}}
+selector .rvl-hero-copy{padding-bottom:110px}
+selector .rvl-hero-dark .rvl-h1 .elementor-heading-title{font-size:clamp(40px,5vw,68px);line-height:1.05}
+selector .rvl-hero-seal-col{position:relative;align-self:stretch;justify-content:flex-end;min-height:640px}
+selector .rvl-hero-seal-col::before{content:"";position:absolute;left:50%;bottom:0;width:min(100%,500px);top:auto;aspect-ratio:480/540;transform:translateX(-50%);background:{{doorway}} center bottom/contain no-repeat;filter:drop-shadow(0 34px 60px rgba(0,0,0,.5));animation:rvl-art-in 1.1s .1s cubic-bezier(.2,.7,.2,1) both;pointer-events:none}
+selector .rvl-hero-person{position:absolute!important;z-index:1;left:50%;bottom:0;transform:translateX(-50%);width:min(68%,340px)!important;margin:0!important;animation:rvl-art-in 1.1s .25s cubic-bezier(.2,.7,.2,1) both}
+selector .rvl-hero-person img{display:block;width:100%;height:auto;filter:drop-shadow(0 24px 40px rgba(0,0,0,.5))}
+selector .rvl-hero-badge{position:absolute!important;z-index:3;right:max(0px,calc(50% - 270px));bottom:52px;width:auto!important;--width:auto;max-width:250px;--gap:2px;padding:14px 20px 14px 18px;background:rgba(10,27,22,.78);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:1px solid rgba(212,183,126,.4);border-left:3px solid var(--rvl-gold);box-shadow:0 22px 44px -18px rgba(0,0,0,.7)}
+selector .rvl-hero-badge .elementor-heading-title{margin:0}
+selector .rvl-hero-badge-name .elementor-heading-title{font-family:var(--rvl-serif);font-size:18px;line-height:1.3;color:#FFFFFF}
+selector .rvl-hero-badge-role .elementor-heading-title{font-family:var(--rvl-sans);font-size:11px;line-height:1.5;letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:var(--rvl-gold-light)}
+selector .rvl-hero-seal-col .rvl-seal{position:absolute!important;z-index:2;left:max(0px,calc(50% - 300px));top:96px;bottom:auto;width:132px!important;--width:132px;height:132px;margin:0}
+selector .rvl-hero-seal-col .rvl-seal-icon .elementor-icon svg{width:26px!important;height:26px!important}
+selector .rvl-hero-seal-col .rvl-seal-est .elementor-heading-title{font-size:8px;letter-spacing:.24em}
 selector .rvl-hero-seal-col .rvl-seal .rvl-seal-est{top:57%}
 selector .rvl-hero-seal-col .rvl-seal::before{content:"";position:absolute;inset:8px;border-radius:50%;background:var(--rvl-night);box-shadow:0 18px 40px rgba(0,0,0,.55)}
+
+/* Registration: courthouse watermark */
+selector #registration{position:relative;overflow:hidden}
+selector #registration::after{content:"";position:absolute;right:-30px;bottom:-40px;width:420px;aspect-ratio:480/540;background:{{courthouse}} center bottom/contain no-repeat;opacity:.12;pointer-events:none}
+selector #registration>.e-con-inner{position:relative;z-index:1}
+
+/* Practice cards: large outlined numerals */
+selector .rvl-practice-grid{counter-reset:rvlp}
+selector .rvl-practice-grid>.rvl-card{counter-increment:rvlp;position:relative}
+selector .rvl-practice-grid>.rvl-card::after{content:counter(rvlp,decimal-leading-zero);position:absolute;top:20px;right:24px;font-family:var(--rvl-serif);font-size:54px;line-height:1;color:transparent;-webkit-text-stroke:1px rgba(212,183,126,.5);pointer-events:none}
 
 /* Section headings: line, scales, line */
 selector .rvl-head .rvl-h2 .elementor-heading-title::after{content:"";width:112px;height:22px;margin-top:18px;background:{{scales_ink}} 50% 50%/22px 22px no-repeat,linear-gradient(var(--rvl-gold),var(--rvl-gold)) 0 50%/40px 1px no-repeat,linear-gradient(var(--rvl-gold),var(--rvl-gold)) 100% 50%/40px 1px no-repeat}
@@ -80,25 +108,64 @@ selector #contact::after{content:"";position:absolute;left:-40px;bottom:-30px;wi
 selector #contact>.e-con-inner{position:relative;z-index:1}
 
 @media (min-width:1440px){selector #practice::after{display:block}}
-@media (max-width:1024px){selector .rvl-hero-seal-col{min-height:500px;width:100%}}
+@media (max-width:1024px){selector .rvl-hero-seal-col{min-height:560px;width:100%}selector .rvl-hero-copy{padding-bottom:24px}}
 @media (max-width:767px){
-selector .rvl-hero-seal-col{min-height:390px;margin-top:8px}
-selector .rvl-hero-seal-col::before{width:min(100%,340px)}
-selector .rvl-hero-seal-col .rvl-seal{left:0;bottom:-18px;width:112px!important;--width:112px;height:112px}
-selector .rvl-hero-seal-col .rvl-seal-icon .elementor-icon svg{width:22px!important;height:22px!important}
-selector .rvl-hero-seal-col .rvl-seal-est .elementor-heading-title{font-size:7px}
+selector .rvl-hero-seal-col{min-height:430px;margin-top:8px}
+selector .rvl-hero-seal-col::before{width:min(100%,370px)}
+selector .rvl-hero-person{width:min(70%,260px)!important}
+selector .rvl-hero-badge{right:0;bottom:22px;max-width:178px;padding:9px 12px 9px 11px}
+selector .rvl-hero-badge-name .elementor-heading-title{font-size:14px}
+selector .rvl-hero-badge-role .elementor-heading-title{font-size:9px;letter-spacing:.1em}
+selector .rvl-hero-seal-col .rvl-seal{left:0;top:40px;width:96px!important;--width:96px;height:96px}
+selector .rvl-hero-seal-col .rvl-seal-icon .elementor-icon svg{width:20px!important;height:20px!important}
+selector .rvl-hero-seal-col .rvl-seal-est .elementor-heading-title{font-size:6.5px}
+selector #registration::after{width:240px}
 selector .rvl-quote::after{background-size:120px auto,130px auto;opacity:.06}
 selector #contact::after{width:220px;height:220px}
 }
-@media (prefers-reduced-motion:reduce){selector .rvl-hero-seal-col::before{animation:none}}
+@media (prefers-reduced-motion:reduce){selector .rvl-hero-seal-col::before,selector .rvl-hero-person{animation:none}}
 /* /Vector Law layer */
 CSS;
 foreach ( $svg as $k => $s ) { $css = str_replace( '{{' . $k . '}}', 'url("data:image/svg+xml,' . rawurlencode( $s ) . '")', $css ); }
 
-// Show the hero art column on phones too (it was hidden on mobile).
+// Founder portrait (transparent cut-out) for the hero doorway.
+require_once ABSPATH . 'wp-admin/includes/media.php';
+require_once ABSPATH . 'wp-admin/includes/file.php';
+require_once ABSPATH . 'wp-admin/includes/image.php';
+$src = 'https://raw.githubusercontent.com/royalvisioneducationchannel-jpg/blog-/claude/magical-turing-m9b0sf/royal-vision-law/team-photos/hero-ch-abdul-nabi-qamar.webp';
+$att = get_posts( array( 'post_type' => 'attachment', 'post_status' => 'inherit', 'meta_key' => '_rvl_source', 'meta_value' => $src, 'numberposts' => 1, 'fields' => 'ids' ) );
+if ( $att ) { $aid = $att[0]; } else {
+	$tmp = download_url( $src, 60 );
+	if ( is_wp_error( $tmp ) ) { return 'portrait download failed: ' . $tmp->get_error_message(); }
+	$aid = media_handle_sideload( array( 'name' => 'hero-ch-abdul-nabi-qamar.webp', 'tmp_name' => $tmp ), 22, 'Ch. Abdul Nabi Qamar' );
+	if ( is_wp_error( $aid ) ) { @unlink( $tmp ); return 'portrait sideload failed: ' . $aid->get_error_message(); }
+	update_post_meta( $aid, '_rvl_source', $src );
+	update_post_meta( $aid, '_wp_attachment_image_alt', 'Ch. Abdul Nabi Qamar, Founding Advocate, Royal Vision Law Associate' );
+}
+
+// Hero art column: show on phones, and add the portrait + name badge once.
+$eid  = function () { return substr( md5( uniqid( '', true ) ), 0, 7 ); };
+$head = function ( $title, $cls ) use ( $eid ) { return array( 'id' => $eid(), 'elType' => 'widget', 'widgetType' => 'heading', 'settings' => array( 'title' => $title, 'header_size' => 'p', '_css_classes' => $cls ), 'elements' => array() ); };
+$add  = array(
+	array( 'id' => $eid(), 'elType' => 'widget', 'widgetType' => 'image', 'settings' => array( 'image' => array( 'id' => $aid, 'url' => wp_get_attachment_url( $aid ) ), 'image_size' => 'full', '_css_classes' => 'rvl-hero-person' ), 'elements' => array() ),
+	array( 'id' => $eid(), 'elType' => 'container', 'isInner' => true, 'settings' => array( 'css_classes' => 'rvl-hero-badge', 'content_width' => 'full', 'flex_direction' => 'column' ), 'elements' => array(
+		$head( 'Ch. Abdul Nabi Qamar', 'rvl-hero-badge-name' ),
+		$head( 'Founding Advocate · District Courts, Faisalabad', 'rvl-hero-badge-role' ),
+	) ),
+);
 $doc  = \Elementor\Plugin::$instance->documents->get( 22, false );
-$show = function ( array $els ) use ( &$show ) { foreach ( $els as &$el ) { if ( false !== strpos( $el['settings']['css_classes'] ?? '', 'rvl-hero-seal-col' ) ) { unset( $el['settings']['hide_mobile'] ); } $el['elements'] = $show( $el['elements'] ); } return $els; };
-$doc->save( array( 'elements' => $show( $doc->get_elements_data() ), 'settings' => array( 'template' => 'elementor_canvas', 'hide_title' => 'yes' ) ) );
+$hero = function ( array $els ) use ( &$hero, $add ) {
+	foreach ( $els as &$el ) {
+		if ( false !== strpos( $el['settings']['css_classes'] ?? '', 'rvl-hero-seal-col' ) ) {
+			unset( $el['settings']['hide_mobile'] );
+			$has = false; foreach ( $el['elements'] as $c ) { if ( false !== strpos( $c['settings']['_css_classes'] ?? '', 'rvl-hero-person' ) ) { $has = true; } }
+			if ( ! $has ) { $el['elements'] = array_merge( $add, $el['elements'] ); }
+		}
+		$el['elements'] = $hero( $el['elements'] );
+	}
+	return $els;
+};
+$doc->save( array( 'elements' => $hero( $doc->get_elements_data() ), 'settings' => array( 'template' => 'elementor_canvas', 'hide_title' => 'yes' ) ) );
 
 $kit_doc = \Elementor\Plugin::$instance->documents->get( (int) get_option( 'elementor_active_kit' ), false );
 $kit_set = array_filter( (array) $kit_doc->get_settings(), function ( $k ) { return ! is_int( $k ); }, ARRAY_FILTER_USE_KEY );

@@ -4,7 +4,7 @@
  * Sideloads the advocate studio portraits in team-photos/ (960x1200, one shared ivory
  * backdrop made by team-photos/compose.py), creates or updates their Team members
  * (position "Advocate"), replaces any earlier portrait, lets the homepage show
- * up to 8 members, and sets the team grid to three cards per row with aligned buttons.
+ * up to 8 members, and sets the team grid to three cards per row (last row centred) with aligned buttons.
  * Run after elementor-law-premium.php (needs sandbox/rvl-team.php active). Safe to re-run.
  */
 
@@ -62,16 +62,20 @@ $kit_doc = \Elementor\Plugin::$instance->documents->get( (int) get_option( 'elem
 $kit_set = array_filter( (array) $kit_doc->get_settings(), function ( $k ) { return ! is_int( $k ); }, ARRAY_FILTER_USE_KEY );
 $add = <<<'CSS'
 
-/* Team grid v2: three per row, aligned buttons */
-selector .rvl-team{grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));max-width:1120px}
-selector .rvl-team[data-count="4"]{max-width:760px}
+/* Team grid v3: three per row, incomplete last row centred, aligned buttons */
+selector .rvl-team{display:flex;flex-wrap:wrap;justify-content:center;max-width:1120px}
+selector .rvl-team>.rvl-tm{flex:0 0 calc((100% - 64px)/3);min-width:0}
+@media (max-width:1024px){selector .rvl-team>.rvl-tm{flex-basis:calc((100% - 32px)/2)}}
+@media (max-width:640px){selector .rvl-team>.rvl-tm{flex-basis:100%}}
 selector .rvl-tm{display:flex;flex-direction:column}
 selector .rvl-tm-body{flex:1 1 auto;display:flex;flex-direction:column;align-items:center}
 selector .rvl-tm-links{margin-top:auto;padding-top:20px;flex-wrap:nowrap}
 selector .rvl-tm-links a{white-space:nowrap;padding:10px 12px}
 @media (max-width:360px){selector .rvl-tm-links{flex-wrap:wrap}}
 CSS;
-if ( false === strpos( $kit_set['custom_css'], '/* Team grid v2:' ) ) { $kit_set['custom_css'] .= $add; }
+// Replace the earlier v2 block (plain grid, left-aligned last row) if present.
+$kit_set['custom_css'] = preg_replace( '#\n/\* Team grid v2:.*?@media \(max-width:360px\)\{selector \.rvl-tm-links\{flex-wrap:wrap\}\}#s', '', $kit_set['custom_css'] );
+if ( false === strpos( $kit_set['custom_css'], '/* Team grid v3:' ) ) { $kit_set['custom_css'] .= $add; }
 $kit_doc->save( array( 'settings' => $kit_set ) );
 
 \Elementor\Plugin::$instance->files_manager->clear_cache();

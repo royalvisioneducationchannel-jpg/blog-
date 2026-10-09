@@ -21,7 +21,7 @@ php = ['<?php', '/**',
  ' * in the hero with the seal at its base, a scales ornament under section headings, column',
  ' * icons on the stats, framing columns in Practice Areas, laurel + gavel in the maxim band and',
  ' * a scales watermark in Contact. No widgets are added; nothing is hidden before JavaScript.',
- ' * Hero: the founder cut-out portrait stands in a gold doorway with a name badge and the seal;',
+ ' * Hero: the founder portrait sits in an arched gold frame with a name plaque and the seal;',
  ' * the hero art column is also shown on phones.',
  ' * Safe to re-run: the previous Vector Law block is replaced.',
  ' */', '', '$svg = array(']
@@ -52,7 +52,7 @@ php += [');', '',
  "$add  = array(",
  "\tarray( 'id' => $eid(), 'elType' => 'widget', 'widgetType' => 'image', 'settings' => array( 'image' => array( 'id' => $aid, 'url' => wp_get_attachment_url( $aid ) ), 'image_size' => 'full', '_css_classes' => 'rvl-hero-person' ), 'elements' => array() ),",
  "\tarray( 'id' => $eid(), 'elType' => 'container', 'isInner' => true, 'settings' => array( 'css_classes' => 'rvl-hero-badge', 'content_width' => 'full', 'flex_direction' => 'column' ), 'elements' => array(",
- "\t\t$head( 'Ch. Abdul Nabi Qamar', 'rvl-hero-badge-name' ),",
+ "\t\t$head( 'Adv. Ch. Abdul Nabi Qamar', 'rvl-hero-badge-name' ),",
  "\t\t$head( 'Founding Advocate · District Courts, Faisalabad', 'rvl-hero-badge-role' ),",
  "\t) ),",
  ");",
@@ -64,6 +64,7 @@ php += [');', '',
  "\t\t\t$has = false; foreach ( $el['elements'] as $c ) { if ( false !== strpos( $c['settings']['_css_classes'] ?? '', 'rvl-hero-person' ) ) { $has = true; } }",
  "\t\t\tif ( ! $has ) { $el['elements'] = array_merge( $add, $el['elements'] ); }",
  "\t\t}",
+ "\t\tif ( false !== strpos( $el['settings']['_css_classes'] ?? '', 'rvl-hero-badge-name' ) ) { $el['settings']['title'] = 'Adv. Ch. Abdul Nabi Qamar'; }",
  "\t\t$el['elements'] = $hero( $el['elements'] );",
  "\t}",
  "\treturn $els;",
@@ -87,13 +88,16 @@ php += [');', '',
 if len(sys.argv) == 3:
     import re
     html = pathlib.Path(sys.argv[1]).read_text()
+    html = re.sub(r'\n/\* Vector Law layer:.*?/\* /Vector Law layer \*/', '', html, flags=re.S)  # drop the live copy of this layer
     html = html.replace('rvl-hero-seal-col elementor-hidden-mobile', 'rvl-hero-seal-col')
+    html = html.replace('>Ch. Abdul Nabi Qamar</', '>Adv. Ch. Abdul Nabi Qamar</')
     person = str((here.parent / 'team-photos' / 'hero-ch-abdul-nabi-qamar.webp').resolve())
     mock = ('<div class="elementor-element rvl-hero-person elementor-widget elementor-widget-image"><img src="file://%s" alt=""></div>'
             '<div class="elementor-element e-con-full rvl-hero-badge e-flex e-con e-child">'
-            '<div class="elementor-element rvl-hero-badge-name elementor-widget elementor-widget-heading"><p class="elementor-heading-title">Ch. Abdul Nabi Qamar</p></div>'
+            '<div class="elementor-element rvl-hero-badge-name elementor-widget elementor-widget-heading"><p class="elementor-heading-title">Adv. Ch. Abdul Nabi Qamar</p></div>'
             '<div class="elementor-element rvl-hero-badge-role elementor-widget elementor-widget-heading"><p class="elementor-heading-title">Founding Advocate · District Courts, Faisalabad</p></div></div>') % person
-    html = re.sub(r'(<div class="elementor-element elementor-element-5720ec6[^>]*>)', lambda m: m.group(1) + mock, html, count=1)
+    if 'rvl-hero-person' not in html:
+        html = re.sub(r'(<div class="elementor-element elementor-element-5720ec6[^>]*>)', lambda m: m.group(1) + mock, html, count=1)
     html = re.sub(r'class="([^"]*\be-con\b[^"]*)"', lambda m: 'class="%s e-lazyloaded"' % m.group(1), html)
     style = '<style id="vector-law-preview">%s</style>' % resolved(css).replace('selector', '.elementor-kit-5')
     html = html.replace('</body>', style + '</body>')

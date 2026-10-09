@@ -5,7 +5,7 @@
  * in the hero with the seal at its base, a scales ornament under section headings, column
  * icons on the stats, framing columns in Practice Areas, laurel + gavel in the maxim band and
  * a scales watermark in Contact. No widgets are added; nothing is hidden before JavaScript.
- * Hero: the founder cut-out portrait stands in a gold doorway with a name badge and the seal;
+ * Hero: the founder portrait sits in an arched gold frame with a name plaque and the seal;
  * the hero art column is also shown on phones.
  * Safe to re-run: the previous Vector Law block is replaced.
  */
@@ -35,6 +35,10 @@ SVG
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 40" fill="none" stroke="#D4B77E" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M3 6L16 1l13 5zM4 6h24v3H4zM8 9v24M13 9v24M19 9v24M24 9v24M5 33h22v3H5zM3 36h26v3H3z"/></svg>
 SVG
 	,
+	'rays' => <<<'SVG'
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" fill="none" stroke="#D4B77E" stroke-width="1" stroke-linecap="round"><path d="M140.0 190.0L-130.0 190.0M140.5 182.2L-127.2 146.9M142.0 174.5L-118.8 104.6M144.6 167.0L-104.9 63.7M148.0 160.0L-85.8 25.0M152.4 153.5L-61.8 -10.9M157.6 147.6L-33.3 -43.3M163.5 142.4L-0.9 -71.8M170.0 138.0L35.0 -95.8M177.0 134.6L73.7 -114.9M184.5 132.0L114.6 -128.8M192.2 130.5L156.9 -137.2M200.0 130.0L200.0 -140.0M207.8 130.5L243.1 -137.2M215.5 132.0L285.4 -128.8M223.0 134.6L326.3 -114.9M230.0 138.0L365.0 -95.8M236.5 142.4L400.9 -71.8M242.4 147.6L433.3 -43.3M247.6 153.5L461.8 -10.9M252.0 160.0L485.8 25.0M255.4 167.0L504.9 63.7M258.0 174.5L518.8 104.6M259.5 182.2L527.2 146.9M260.0 190.0L530.0 190.0" opacity=".22"/><circle cx="200" cy="190" r="120" opacity=".14"/><circle cx="200" cy="190" r="150" opacity=".08"/></svg>
+SVG
+	,
 	'scales' => <<<'SVG'
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke="#D4B77E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M32 8v44M22 56h20M26 52h12M12 18h40M32 12a2.5 2.5 0 1 0 0 .1"/><path d="M12 18l-7 16M12 18l7 16M4 34a8 3.5 0 0 0 16 0zM52 18l-7 16M52 18l7 16M44 34a8 3.5 0 0 0 16 0z"/></svg>
 SVG
@@ -47,29 +51,26 @@ SVG
 
 $css = <<<'CSS'
 
-/* Vector Law layer: founder hero in a gold doorway, scales ornaments, column and gavel watermarks */
-@keyframes rvl-art-in{from{opacity:.35;transform:translate(-50%,22px)}to{opacity:1;transform:translate(-50%,0)}}
+/* Vector Law layer: founder portrait in an arched gold frame, scales ornaments, column and gavel watermarks */
 selector .rvl-hero-dark,selector .rvl-night,selector .rvl-dark,selector .rvl-quote,selector .rvl-contact-dark{background-color:var(--rvl-night)}
 
-/* Hero: rich green field, founder standing in a gold doorway, name badge and seal */
-selector .elementor-element.rvl-hero-dark{background-image:radial-gradient(ellipse 55% 80% at 74% 58%,#28604F 0%,#15392F 40%,#0A1B16 80%)!important;position:relative;overflow:hidden}
+/* Hero: rich green field; founder portrait in an arched gold frame with a name plaque and seal */
+selector .elementor-element.rvl-hero-dark{background-image:radial-gradient(ellipse 55% 80% at 74% 50%,#245746 0%,#14372E 42%,#0A1B16 82%)!important;position:relative;overflow:hidden}
+selector .rvl-hero-dark>.elementor-motion-effects-container{display:none!important}
 selector .rvl-hero-dark::before{opacity:0!important}
 selector .rvl-hero-dark::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(115deg,rgba(212,183,126,.06) 0 1px,transparent 1px 24px);-webkit-mask-image:radial-gradient(ellipse 60% 80% at 78% 50%,#000,transparent 72%);mask-image:radial-gradient(ellipse 60% 80% at 78% 50%,#000,transparent 72%);pointer-events:none}
-selector .rvl-hero-dark>.e-con-inner{position:relative;z-index:1;padding-bottom:0!important}
-@media (min-width:1025px){selector .rvl-hero-dark>.e-con-inner{padding-top:96px!important}}
-selector .rvl-hero-copy{padding-bottom:110px}
+selector .rvl-hero-dark>.e-con-inner{position:relative;z-index:1}
 selector .rvl-hero-dark .rvl-h1 .elementor-heading-title{font-size:clamp(40px,5vw,68px);line-height:1.05}
-selector .rvl-hero-seal-col{position:relative;align-self:stretch;justify-content:flex-end;min-height:640px}
-selector .rvl-hero-seal-col::before{content:"";position:absolute;left:50%;bottom:0;width:min(100%,500px);top:auto;aspect-ratio:480/540;transform:translateX(-50%);background:{{doorway}} center bottom/contain no-repeat;filter:drop-shadow(0 34px 60px rgba(0,0,0,.5));animation:rvl-art-in 1.1s .1s cubic-bezier(.2,.7,.2,1) both;pointer-events:none}
-selector .rvl-hero-person{position:absolute!important;z-index:1;left:50%;bottom:0;transform:translateX(-50%);width:min(68%,340px)!important;margin:0!important;animation:rvl-art-in 1.1s .25s cubic-bezier(.2,.7,.2,1) both}
-selector .rvl-hero-person img{display:block;width:100%;height:auto;filter:drop-shadow(0 24px 40px rgba(0,0,0,.5))}
-selector .rvl-hero-badge{position:absolute!important;z-index:3;right:max(0px,calc(50% - 270px));bottom:52px;width:auto!important;--width:auto;max-width:250px;--gap:2px;padding:14px 20px 14px 18px;background:rgba(10,27,22,.78);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:1px solid rgba(212,183,126,.4);border-left:3px solid var(--rvl-gold);box-shadow:0 22px 44px -18px rgba(0,0,0,.7)}
-selector .rvl-hero-badge .elementor-heading-title{margin:0}
-selector .rvl-hero-badge-name .elementor-heading-title{font-family:var(--rvl-serif);font-size:18px;line-height:1.3;color:#FFFFFF}
-selector .rvl-hero-badge-role .elementor-heading-title{font-family:var(--rvl-sans);font-size:11px;line-height:1.5;letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:var(--rvl-gold-light)}
-selector .rvl-hero-seal-col .rvl-seal{position:absolute!important;z-index:2;left:max(0px,calc(50% - 300px));top:96px;bottom:auto;width:132px!important;--width:132px;height:132px;margin:0}
-selector .rvl-hero-seal-col .rvl-seal-icon .elementor-icon svg{width:26px!important;height:26px!important}
-selector .rvl-hero-seal-col .rvl-seal-est .elementor-heading-title{font-size:8px;letter-spacing:.24em}
+selector .rvl-hero-seal-col{position:relative;align-self:center;justify-content:flex-start;align-items:center;padding:22px 0 0}
+selector .rvl-hero-person{position:relative;z-index:1;width:min(80%,340px)!important;--width:min(80%,340px);aspect-ratio:4/5;overflow:hidden;margin:0!important;border-radius:50% 50% 4px 4px/40% 40% 4px 4px;background:{{rays}} center top/100% auto no-repeat,radial-gradient(ellipse 80% 60% at 50% 32%,#3A7864 0%,#1A4438 45%,#0C211C 100%);box-shadow:0 0 0 1px rgba(212,183,126,.95),0 0 0 9px rgba(10,27,22,.55),0 0 0 10px rgba(212,183,126,.45),0 46px 80px -34px rgba(0,0,0,.85);animation:rvl-up .9s .15s cubic-bezier(.2,.7,.2,1) both}
+selector .rvl-hero-person img{position:absolute;left:50%;bottom:0;width:84%;max-width:none;height:auto;transform:translateX(-50%);filter:drop-shadow(0 16px 26px rgba(0,0,0,.45))}
+selector .rvl-hero-badge{position:relative;z-index:3;margin-top:-30px!important;width:auto!important;--width:auto;--gap:4px;align-items:center;text-align:center;padding:14px 24px;max-width:min(100%,370px);background:linear-gradient(180deg,#132F28,#0B1D18);border:1px solid rgba(212,183,126,.55);border-top:2px solid var(--rvl-gold);box-shadow:0 22px 44px -18px rgba(0,0,0,.75)}
+selector .rvl-hero-badge .elementor-heading-title{margin:0;text-align:center}
+selector .rvl-hero-badge-name .elementor-heading-title{font-family:var(--rvl-serif);font-size:19px;line-height:1.3;color:#FFFFFF;white-space:nowrap}
+selector .rvl-hero-badge-role .elementor-heading-title{font-family:var(--rvl-sans);font-size:10.5px;line-height:1.5;letter-spacing:.18em;text-transform:uppercase;font-weight:600;color:var(--rvl-gold-light)}
+selector .rvl-hero-seal-col .rvl-seal{position:absolute!important;z-index:2;left:max(0px,calc(50% - 232px));top:0;bottom:auto;width:118px!important;--width:118px;height:118px;margin:0}
+selector .rvl-hero-seal-col .rvl-seal-icon .elementor-icon svg{width:24px!important;height:24px!important}
+selector .rvl-hero-seal-col .rvl-seal-est .elementor-heading-title{font-size:7.5px;letter-spacing:.22em}
 selector .rvl-hero-seal-col .rvl-seal .rvl-seal-est{top:57%}
 selector .rvl-hero-seal-col .rvl-seal::before{content:"";position:absolute;inset:8px;border-radius:50%;background:var(--rvl-night);box-shadow:0 18px 40px rgba(0,0,0,.55)}
 
@@ -108,22 +109,20 @@ selector #contact::after{content:"";position:absolute;left:-40px;bottom:-30px;wi
 selector #contact>.e-con-inner{position:relative;z-index:1}
 
 @media (min-width:1440px){selector #practice::after{display:block}}
-@media (max-width:1024px){selector .rvl-hero-seal-col{min-height:560px;width:100%}selector .rvl-hero-copy{padding-bottom:24px}}
+@media (max-width:1024px){selector .rvl-hero-seal-col{width:100%;padding-top:16px}}
 @media (max-width:767px){
-selector .rvl-hero-seal-col{min-height:430px;margin-top:8px}
-selector .rvl-hero-seal-col::before{width:min(100%,370px)}
-selector .rvl-hero-person{width:min(70%,260px)!important}
-selector .rvl-hero-badge{right:0;bottom:22px;max-width:178px;padding:9px 12px 9px 11px}
-selector .rvl-hero-badge-name .elementor-heading-title{font-size:14px}
-selector .rvl-hero-badge-role .elementor-heading-title{font-size:9px;letter-spacing:.1em}
-selector .rvl-hero-seal-col .rvl-seal{left:0;top:40px;width:96px!important;--width:96px;height:96px}
-selector .rvl-hero-seal-col .rvl-seal-icon .elementor-icon svg{width:20px!important;height:20px!important}
-selector .rvl-hero-seal-col .rvl-seal-est .elementor-heading-title{font-size:6.5px}
+selector .rvl-hero-person{width:min(76%,270px)!important;--width:min(76%,270px)}
+selector .rvl-hero-badge{padding:11px 16px;margin-top:-24px!important}
+selector .rvl-hero-badge-name .elementor-heading-title{font-size:16px}
+selector .rvl-hero-badge-role .elementor-heading-title{font-size:9px;letter-spacing:.12em}
+selector .rvl-hero-seal-col .rvl-seal{left:max(0px,calc(50% - 176px));top:0;width:88px!important;--width:88px;height:88px}
+selector .rvl-hero-seal-col .rvl-seal-icon .elementor-icon svg{width:18px!important;height:18px!important}
+selector .rvl-hero-seal-col .rvl-seal-est .elementor-heading-title{font-size:6px}
 selector #registration::after{width:240px}
 selector .rvl-quote::after{background-size:120px auto,130px auto;opacity:.06}
 selector #contact::after{width:220px;height:220px}
 }
-@media (prefers-reduced-motion:reduce){selector .rvl-hero-seal-col::before,selector .rvl-hero-person{animation:none}}
+@media (prefers-reduced-motion:reduce){selector .rvl-hero-person{animation:none}}
 /* /Vector Law layer */
 CSS;
 foreach ( $svg as $k => $s ) { $css = str_replace( '{{' . $k . '}}', 'url("data:image/svg+xml,' . rawurlencode( $s ) . '")', $css ); }
@@ -149,7 +148,7 @@ $head = function ( $title, $cls ) use ( $eid ) { return array( 'id' => $eid(), '
 $add  = array(
 	array( 'id' => $eid(), 'elType' => 'widget', 'widgetType' => 'image', 'settings' => array( 'image' => array( 'id' => $aid, 'url' => wp_get_attachment_url( $aid ) ), 'image_size' => 'full', '_css_classes' => 'rvl-hero-person' ), 'elements' => array() ),
 	array( 'id' => $eid(), 'elType' => 'container', 'isInner' => true, 'settings' => array( 'css_classes' => 'rvl-hero-badge', 'content_width' => 'full', 'flex_direction' => 'column' ), 'elements' => array(
-		$head( 'Ch. Abdul Nabi Qamar', 'rvl-hero-badge-name' ),
+		$head( 'Adv. Ch. Abdul Nabi Qamar', 'rvl-hero-badge-name' ),
 		$head( 'Founding Advocate · District Courts, Faisalabad', 'rvl-hero-badge-role' ),
 	) ),
 );
@@ -161,6 +160,7 @@ $hero = function ( array $els ) use ( &$hero, $add ) {
 			$has = false; foreach ( $el['elements'] as $c ) { if ( false !== strpos( $c['settings']['_css_classes'] ?? '', 'rvl-hero-person' ) ) { $has = true; } }
 			if ( ! $has ) { $el['elements'] = array_merge( $add, $el['elements'] ); }
 		}
+		if ( false !== strpos( $el['settings']['_css_classes'] ?? '', 'rvl-hero-badge-name' ) ) { $el['settings']['title'] = 'Adv. Ch. Abdul Nabi Qamar'; }
 		$el['elements'] = $hero( $el['elements'] );
 	}
 	return $els;

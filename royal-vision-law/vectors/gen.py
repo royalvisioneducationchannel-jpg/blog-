@@ -116,6 +116,20 @@ def doorway():
     a('</svg>')
     return ''.join(o)
 
+def rays():
+    o=[f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" fill="none" stroke="{G}" stroke-width="1" stroke-linecap="round">']
+    d=''
+    for i in range(25):
+        ang=math.radians(180+i*(180/24))
+        x1=200+math.cos(ang)*60; y1=190+math.sin(ang)*60
+        x2=200+math.cos(ang)*330; y2=190+math.sin(ang)*330
+        d+=f'M{x1:.1f} {y1:.1f}L{x2:.1f} {y2:.1f}'
+    o.append(f'<path d="{d}" opacity=".22"/>')
+    o.append('<circle cx="200" cy="190" r="120" opacity=".14"/><circle cx="200" cy="190" r="150" opacity=".08"/>')
+    o.append('</svg>')
+    return ''.join(o)
+
+open('rays.svg','w').write(rays())
 open('doorway.svg','w').write(doorway())
 open('courthouse.svg','w').write(courthouse())
 open('scales.svg','w').write(scales())

@@ -1,0 +1,50 @@
+
+/* Vector Law layer: courthouse hero art, scales ornaments, column and gavel watermarks */
+@keyframes rvl-art-in{from{opacity:.35;transform:translate(-50%,22px)}to{opacity:1;transform:translate(-50%,0)}}
+selector .rvl-hero-dark,selector .rvl-night,selector .rvl-dark,selector .rvl-quote,selector .rvl-contact-dark{background-color:var(--rvl-night)}
+
+/* Hero: gold courthouse inside an arch, seal overlapping its base */
+selector .rvl-hero-seal-col{position:relative;align-self:stretch;justify-content:flex-end;min-height:560px}
+selector .rvl-hero-seal-col::before{content:"";position:absolute;left:50%;bottom:0;width:min(100%,470px);top:auto;aspect-ratio:480/540;transform:translateX(-50%);background:{{courthouse}} center bottom/contain no-repeat;filter:drop-shadow(0 34px 60px rgba(0,0,0,.5));-webkit-mask-image:linear-gradient(#000 86%,transparent);mask-image:linear-gradient(#000 86%,transparent);animation:rvl-art-in 1.1s .15s cubic-bezier(.2,.7,.2,1) both;pointer-events:none}
+selector .rvl-hero-seal-col .rvl-seal{position:absolute!important;z-index:2;left:max(0px,calc(50% - 270px));bottom:-26px;width:150px!important;--width:150px;height:150px;margin:0}
+selector .rvl-hero-seal-col .rvl-seal-icon .elementor-icon svg{width:30px!important;height:30px!important}
+selector .rvl-hero-seal-col .rvl-seal-est .elementor-heading-title{font-size:9px;letter-spacing:.24em}
+selector .rvl-hero-seal-col .rvl-seal .rvl-seal-est{top:57%}
+selector .rvl-hero-seal-col .rvl-seal::before{content:"";position:absolute;inset:8px;border-radius:50%;background:var(--rvl-night);box-shadow:0 18px 40px rgba(0,0,0,.55)}
+
+/* Section headings: line, scales, line */
+selector .rvl-head .rvl-h2 .elementor-heading-title::after{content:"";width:112px;height:22px;margin-top:18px;background:{{scales_ink}} 50% 50%/22px 22px no-repeat,linear-gradient(var(--rvl-gold),var(--rvl-gold)) 0 50%/40px 1px no-repeat,linear-gradient(var(--rvl-gold),var(--rvl-gold)) 100% 50%/40px 1px no-repeat}
+selector .rvl-night .rvl-head .rvl-h2 .elementor-heading-title::after,selector .rvl-dark .rvl-head .rvl-h2 .elementor-heading-title::after{background:{{scales}} 50% 50%/22px 22px no-repeat,linear-gradient(var(--rvl-gold),var(--rvl-gold)) 0 50%/40px 1px no-repeat,linear-gradient(var(--rvl-gold),var(--rvl-gold)) 100% 50%/40px 1px no-repeat}
+
+/* Stats: parchment band with a column above each figure */
+selector .rvl-stats{background-color:#F8F4EA;background-image:linear-gradient(90deg,rgba(176,141,87,.07) 1px,transparent 1px);background-size:56px 100%}
+selector .rvl-stat::before{content:"";position:static;display:block;width:30px;height:38px;margin:0 auto 6px;background:{{mini_column}} center/contain no-repeat}
+
+/* Practice areas: a pair of columns framing the cards */
+selector #practice{position:relative;overflow:hidden}
+selector #practice::after{content:"";display:none;position:absolute;inset:40px 2.5% 0;background:{{column}} left bottom/130px auto no-repeat,{{column}} right bottom/130px auto no-repeat;opacity:.08;pointer-events:none}
+selector #practice>.e-con-inner{position:relative;z-index:1}
+
+/* Legal maxim: laurel around the quote mark, scales and gavel watermarks */
+selector .rvl-quote{position:relative;overflow:hidden}
+selector .rvl-quote::after{content:"";position:absolute;inset:0 4%;background:{{scales}} left 50%/230px auto no-repeat,{{gavel}} right 50%/250px auto no-repeat;opacity:.09;pointer-events:none}
+selector .rvl-quote>.e-con-inner{position:relative;z-index:1}
+selector .rvl-quote-mark .elementor-heading-title{width:150px;height:112px;margin:0 auto;display:flex;align-items:center;justify-content:center;padding-top:44px;line-height:1;background:{{laurel}} center/contain no-repeat}
+
+/* Contact: scales watermark behind the details */
+selector #contact{position:relative;overflow:hidden}
+selector #contact::after{content:"";position:absolute;left:-40px;bottom:-30px;width:340px;height:340px;background:{{scales}} center/contain no-repeat;opacity:.06;pointer-events:none}
+selector #contact>.e-con-inner{position:relative;z-index:1}
+
+@media (min-width:1440px){selector #practice::after{display:block}}
+@media (max-width:1024px){selector .rvl-hero-seal-col{min-height:500px;width:100%}}
+@media (max-width:767px){
+selector .rvl-hero-seal-col{min-height:390px;margin-top:8px}
+selector .rvl-hero-seal-col::before{width:min(100%,340px)}
+selector .rvl-hero-seal-col .rvl-seal{left:0;bottom:-18px;width:112px!important;--width:112px;height:112px}
+selector .rvl-hero-seal-col .rvl-seal-icon .elementor-icon svg{width:22px!important;height:22px!important}
+selector .rvl-hero-seal-col .rvl-seal-est .elementor-heading-title{font-size:7px}
+selector .rvl-quote::after{background-size:120px auto,130px auto;opacity:.06}
+selector #contact::after{width:220px;height:220px}
+}
+@media (prefers-reduced-motion:reduce){selector .rvl-hero-seal-col::before{animation:none}}

@@ -6,7 +6,7 @@
  * icons on the stats, framing columns in Practice Areas, laurel + gavel in the maxim band and
  * a scales watermark in Contact. No widgets are added; nothing is hidden before JavaScript.
  * Hero: the founder portrait sits in an arched gold frame with a name plaque and the seal;
- * the hero art column is also shown on phones.
+ * the hero art column is also shown on phones. Sets the global fonts (Cormorant Garamond + Manrope).
  * Safe to re-run: the previous Vector Law block is replaced.
  */
 
@@ -76,13 +76,56 @@ selector .rvl-hero-seal-col .rvl-seal::before{content:"";position:absolute;inset
 
 /* Registration: courthouse watermark */
 selector #registration{position:relative;overflow:hidden}
-selector #registration::after{content:"";position:absolute;right:-30px;bottom:-40px;width:420px;aspect-ratio:480/540;background:{{courthouse}} center bottom/contain no-repeat;opacity:.12;pointer-events:none}
+selector #registration::after{content:"";position:absolute;right:-30px;bottom:-40px;width:420px;aspect-ratio:480/540;background:{{courthouse}} center bottom/contain no-repeat;opacity:.08;pointer-events:none}
 selector #registration>.e-con-inner{position:relative;z-index:1}
 
 /* Practice cards: large outlined numerals */
 selector .rvl-practice-grid{counter-reset:rvlp}
 selector .rvl-practice-grid>.rvl-card{counter-increment:rvlp;position:relative}
 selector .rvl-practice-grid>.rvl-card::after{content:counter(rvlp,decimal-leading-zero);position:absolute;top:20px;right:24px;font-family:var(--rvl-serif);font-size:54px;line-height:1;color:transparent;-webkit-text-stroke:1px rgba(212,183,126,.5);pointer-events:none}
+
+/* Typography: Cormorant Garamond headings, Manrope text */
+selector{--rvl-serif:'Cormorant Garamond',Georgia,'Times New Roman',serif;--rvl-sans:'Manrope',system-ui,-apple-system,'Segoe UI',sans-serif;font-family:var(--rvl-sans);font-variant-numeric:lining-nums}
+selector .rvl-body p,selector .rvl-body,selector .rvl-lead p{font-family:var(--rvl-sans);font-variant-numeric:lining-nums}
+selector .rvl-body p{font-size:16px;line-height:1.75}
+selector .rvl-lead p{font-size:18px;line-height:1.7}
+selector .rvl-h1 .elementor-heading-title{font-family:var(--rvl-serif)!important;font-weight:600;font-size:clamp(46px,5.6vw,82px)!important;line-height:1!important;letter-spacing:-.01em}
+selector .rvl-h1 .elementor-heading-title em,selector .rvl-h1 .elementor-heading-title i{font-weight:500}
+selector .rvl-h2 .elementor-heading-title{font-family:var(--rvl-serif);font-weight:600;font-size:clamp(32px,3.6vw,50px);line-height:1.1;letter-spacing:-.005em}
+selector .rvl-h3 .elementor-heading-title{font-family:var(--rvl-serif);font-weight:600;font-size:25px;line-height:1.2}
+selector .rvl-h3-sm .elementor-heading-title{font-size:22px}
+selector .rvl-eyebrow .elementor-heading-title{font-family:var(--rvl-sans);font-size:12px;letter-spacing:.22em;font-weight:700}
+selector .rvl-counter .elementor-counter-number-wrapper{font-family:var(--rvl-serif);font-weight:600;font-size:clamp(50px,5vw,70px);line-height:1}
+selector .rvl-counter .elementor-counter-title{font-family:var(--rvl-sans);font-weight:700;font-size:11.5px;letter-spacing:.16em}
+selector .rvl-quote-text .elementor-heading-title{font-family:var(--rvl-serif);font-style:italic;font-weight:500;font-size:clamp(38px,5vw,68px)}
+selector .rvl-tm-name{font-family:var(--rvl-serif);font-weight:600;font-size:26px}
+selector .rvl-hero-badge-name .elementor-heading-title{font-size:22px;font-weight:600}
+selector .rvl-fact-v .elementor-heading-title{font-family:var(--rvl-serif);font-weight:600;font-size:21px;line-height:1.3}
+selector .rvl-more .elementor-heading-title,selector .rvl-card-cta .elementor-heading-title,selector .rvl-inline-link .elementor-heading-title{font-family:var(--rvl-sans);font-weight:700;letter-spacing:.02em}
+selector .elementor-nav-menu .elementor-item{font-family:var(--rvl-sans)!important;font-weight:600!important;letter-spacing:.02em}
+
+/* Buttons: gold gradient, small caps, gentle lift */
+selector .rvl-btn .elementor-button{font-family:var(--rvl-sans);font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;padding:17px 30px;border-radius:2px;transition:transform .2s ease,box-shadow .2s ease,background-color .2s ease}
+selector .rvl-btn-gold .elementor-button{background:linear-gradient(135deg,#D2B27A 0%,#B08D57 55%,#94733F 100%);border-color:#B08D57;box-shadow:0 14px 30px -14px rgba(176,141,87,.8)}
+selector .rvl-btn .elementor-button:hover{transform:translateY(-2px)}
+selector .rvl-btn-gold .elementor-button:hover{box-shadow:0 20px 36px -14px rgba(176,141,87,.9)}
+
+/* The Firm facts as cards */
+selector .rvl-facts{gap:18px!important;border-top:0!important;padding-top:0!important}
+selector .rvl-fact{background:#F8F4EA;border:1px solid #EAE1CF;border-top:2px solid var(--rvl-gold);padding:22px 22px 24px!important;transition:transform .2s ease,box-shadow .2s ease}
+selector .rvl-fact:hover{transform:translateY(-3px);box-shadow:0 18px 34px -24px rgba(20,48,42,.45)}
+selector .rvl-fact-k .elementor-heading-title{font-family:var(--rvl-sans);font-weight:700;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--rvl-gold-ink)}
+
+/* Why choose us: lifted cards with gold ring icons */
+selector .rvl-why-item{position:relative;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;border-top:2px solid transparent!important}
+selector .rvl-why-item:hover{transform:translateY(-4px);border-top-color:var(--rvl-gold)!important;box-shadow:0 24px 44px -28px rgba(20,48,42,.5)}
+selector .rvl-why-icon .elementor-icon{background:radial-gradient(circle at 30% 30%,#1F4A3E,#0F2621)!important;box-shadow:0 0 0 1px var(--rvl-gold),0 0 0 5px #FFFFFF,0 0 0 6px rgba(176,141,87,.35)}
+
+/* Insights: image zoom on hover */
+selector .rvl-article{transition:transform .2s ease}
+selector .rvl-slot-thumb{overflow:hidden}
+selector .rvl-article:hover{transform:translateY(-3px)}
+selector .rvl-article .rvl-h3 .elementor-heading-title{font-size:23px}
 
 /* Section headings: line, scales, line */
 selector .rvl-head .rvl-h2 .elementor-heading-title::after{content:"";width:112px;height:22px;margin-top:18px;background:{{scales_ink}} 50% 50%/22px 22px no-repeat,linear-gradient(var(--rvl-gold),var(--rvl-gold)) 0 50%/40px 1px no-repeat,linear-gradient(var(--rvl-gold),var(--rvl-gold)) 100% 50%/40px 1px no-repeat}
@@ -169,6 +212,13 @@ $doc->save( array( 'elements' => $hero( $doc->get_elements_data() ), 'settings' 
 
 $kit_doc = \Elementor\Plugin::$instance->documents->get( (int) get_option( 'elementor_active_kit' ), false );
 $kit_set = array_filter( (array) $kit_doc->get_settings(), function ( $k ) { return ! is_int( $k ); }, ARRAY_FILTER_USE_KEY );
+// Global fonts: Cormorant Garamond for headings, Manrope for text (Elementor enqueues them).
+foreach ( (array) ( $kit_set['system_typography'] ?? array() ) as $i => $t ) {
+	$serif = in_array( $t['_id'] ?? '', array( 'primary', 'secondary' ), true );
+	$kit_set['system_typography'][ $i ]['typography_font_family'] = $serif ? 'Cormorant Garamond' : 'Manrope';
+	if ( $serif ) { $kit_set['system_typography'][ $i ]['typography_font_weight'] = '600'; }
+}
+if ( isset( $kit_set['body_typography_font_family'] ) ) { $kit_set['body_typography_font_family'] = 'Manrope'; }
 $kit_set['custom_css'] = preg_replace( '#\n/\* Vector Law layer:.*?/\* /Vector Law layer \*/#s', '', $kit_set['custom_css'] );
 $kit_set['custom_css'] .= $css;
 $kit_doc->save( array( 'settings' => $kit_set ) );

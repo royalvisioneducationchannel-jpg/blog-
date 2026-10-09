@@ -22,7 +22,7 @@ php = ['<?php', '/**',
  ' * icons on the stats, framing columns in Practice Areas, laurel + gavel in the maxim band and',
  ' * a scales watermark in Contact. No widgets are added; nothing is hidden before JavaScript.',
  ' * Hero: the founder portrait sits in an arched gold frame with a name plaque and the seal;',
- ' * the hero art column is also shown on phones.',
+ ' * the hero art column is also shown on phones. Sets the global fonts (Cormorant Garamond + Manrope).',
  ' * Safe to re-run: the previous Vector Law block is replaced.',
  ' */', '', '$svg = array(']
 for k, s in svgs.items():
@@ -73,6 +73,13 @@ php += [');', '',
  '',
  "$kit_doc = \\Elementor\\Plugin::$instance->documents->get( (int) get_option( 'elementor_active_kit' ), false );",
  "$kit_set = array_filter( (array) $kit_doc->get_settings(), function ( $k ) { return ! is_int( $k ); }, ARRAY_FILTER_USE_KEY );",
+ "// Global fonts: Cormorant Garamond for headings, Manrope for text (Elementor enqueues them).",
+ "foreach ( (array) ( $kit_set['system_typography'] ?? array() ) as $i => $t ) {",
+ "\t$serif = in_array( $t['_id'] ?? '', array( 'primary', 'secondary' ), true );",
+ "\t$kit_set['system_typography'][ $i ]['typography_font_family'] = $serif ? 'Cormorant Garamond' : 'Manrope';",
+ "\tif ( $serif ) { $kit_set['system_typography'][ $i ]['typography_font_weight'] = '600'; }",
+ "}",
+ "if ( isset( $kit_set['body_typography_font_family'] ) ) { $kit_set['body_typography_font_family'] = 'Manrope'; }",
  "$kit_set['custom_css'] = preg_replace( '#\\n/\\* Vector Law layer:.*?/\\* /Vector Law layer \\*/#s', '', $kit_set['custom_css'] );",
  "$kit_set['custom_css'] .= $css;",
  "$kit_doc->save( array( 'settings' => $kit_set ) );",
@@ -99,7 +106,9 @@ if len(sys.argv) == 3:
     if 'rvl-hero-person' not in html:
         html = re.sub(r'(<div class="elementor-element elementor-element-5720ec6[^>]*>)', lambda m: m.group(1) + mock, html, count=1)
     html = re.sub(r'class="([^"]*\be-con\b[^"]*)"', lambda m: 'class="%s e-lazyloaded"' % m.group(1), html)
-    style = '<style id="vector-law-preview">%s</style>' % resolved(css).replace('selector', '.elementor-kit-5')
+    import os
+    fonts = pathlib.Path(os.environ['RVL_PREVIEW_FONTS']).read_text() if os.environ.get('RVL_PREVIEW_FONTS') else ''
+    style = '<style>' + fonts + '</style><style id="vector-law-preview">%s</style>' % resolved(css).replace('selector', '.elementor-kit-5')
     html = html.replace('</body>', style + '</body>')
     pathlib.Path(sys.argv[2]).write_text(html)
 print('built', len(resolved(css)), 'bytes of CSS')

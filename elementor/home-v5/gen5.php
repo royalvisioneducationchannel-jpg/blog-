@@ -202,6 +202,7 @@ $rv5 = function ( $cfg ) {
 				$img( $p['front'], $p['name'] . ', ' . $p['fabric'] . ' suit', 'v5-front' ),
 				$img( $p['detail'], $p['name'] . ' print close-up', 'v5-detail' ),
 				$row( [ 'cls' => 'v5-badges', 'flex_gap' => $gap( 6 ) ], $badges ),
+				$btn( '+ Bundle', '#bundle-tray', [ 'size' => 12.5, 'py' => 8, 'px' => 13, 'ls' => 0.04, 'up' => false, 'cls' => 'v5-pick' ] ),
 				$btn( 'Order Now', $wa( "Assalam o Alaikum, mujhe {$p['name']} ({$p['fabric']}, {$p['price']}) chahiye." ), [ 'size' => 13.5, 'py' => 14, 'px' => 16, 'ls' => 0.14, 'cls' => 'v5-add', 'align' => 'justify' ] ),
 			] ),
 			$con( [ 'cls' => 'v5-meta', 'flex_gap' => $gap( 3 ), 'flex_align_items' => 'center' ], $meta ),
@@ -224,7 +225,7 @@ $rv5 = function ( $cfg ) {
 	// ---------- 8. sale countdown ----------
 	$imgStrip = function ( $ids, $cls ) use ( $con, $img, $P ) { return $con( [ 'cls' => $cls, 'flex_direction' => 'row', 'flex_wrap' => 'nowrap' ], array_map( function ( $id ) use ( $img, $P ) { return $img( $P[ $id ]['front'], $P[ $id ]['name'] . ' suit' ); }, $ids ) ); };
 	$out[] = $section( [ 'cls' => 'v5-sec v5-sale-sec', 'anchor' => 'sale' ], [
-		$con( [ 'cls' => 'v5-sale', 'flex_direction' => 'row', 'flex_wrap' => 'nowrap', 'background_background' => 'classic', 'background_color' => $C['plum'] ], [
+		$con( [ 'cls' => 'v5-sale', 'animation' => 'fadeInUp', 'animation_duration' => 'slow', 'flex_direction' => 'row', 'flex_wrap' => 'nowrap', 'background_background' => 'classic', 'background_color' => $C['plum'] ], [
 			$con( [ 'cls' => 'v5-sale-text', 'flex_gap' => $gap( 14 ) ], [
 				$eyebrow( 'Winter Sale', [ 'color' => '#C9B4FF' ] ),
 				$display( 'Upto 19% Off', 84, [ 't' => 64, 'm' => 50, 'lh' => 0.95, 'color' => '#FFFFFF' ] ),
@@ -244,7 +245,7 @@ $rv5 = function ( $cfg ) {
 
 	// ---------- 10. karandi promo ----------
 	$out[] = $section( [ 'cls' => 'v5-sec v5-promo-sec', 'anchor' => 'karandi' ], [
-		$a( $wa( 'Assalam o Alaikum, mujhe Light Karandi collection dekhni hai.' ), [ 'cls' => 'v5-promo', 'flex_direction' => 'row', 'flex_wrap' => 'nowrap', 'background_background' => 'classic', 'background_color' => '#EFE5DC' ], [
+		$a( $wa( 'Assalam o Alaikum, mujhe Light Karandi collection dekhni hai.' ), [ 'cls' => 'v5-promo', 'animation' => 'fadeInUp', 'animation_duration' => 'slow', 'flex_direction' => 'row', 'flex_wrap' => 'nowrap', 'background_background' => 'classic', 'background_color' => '#EFE5DC' ], [
 			$con( [ 'cls' => 'v5-promo-text', 'flex_justify_content' => 'center', 'flex_gap' => $gap( 4 ) ], [
 				$h( 'NEW', [ 'font' => $FH, 'w' => '600', 'size' => 30, 'ls' => 0.04, 'color' => $C['wine'], 'lh' => 1.1 ] ),
 				$eyebrow( 'Collection', [ 'color' => $C['wine'] ] ),
@@ -260,18 +261,18 @@ $rv5 = function ( $cfg ) {
 
 	// ---------- 12. bundle ----------
 	$out[] = $section( [ 'cls' => 'v5-sec v5-bundle-sec', 'anchor' => 'bundle' ], [
-		$con( [ 'cls' => 'v5-bundle', 'flex_direction' => 'row', 'flex_wrap' => 'nowrap' ], [
+		$con( [ 'cls' => 'v5-bundle', 'animation' => 'fadeInUp', 'animation_duration' => 'slow', 'flex_direction' => 'row', 'flex_wrap' => 'nowrap' ], [
 			$con( [ 'cls' => 'v5-bundle-img' ], [ $img( 'p07-front', 'Maya, light khaddar' ) ] ),
 			$con( [ 'cls' => 'v5-bundle-img' ], [ $img( 'p17-front', 'Peachy, light karandi' ) ] ),
 			$con( [ 'cls' => 'v5-bundle-panel', 'flex_justify_content' => 'center', 'flex_gap' => $gap( 12 ), 'background_background' => 'classic', 'background_color' => $C['lilac'] ], [
 				$h( 'BUNDLE OFFER', [ 'size' => 14, 'w' => '700', 'ls' => 0.12, 'color' => '#FFFFFF', 'cls' => 'v5-chip' ] ),
 				$display( 'Any 2 Suits<br>for Rs 6,990', 66, [ 't' => 52, 'm' => 42 ] ),
-				$p( 'Mix khaddar and karandi. Send us the two names on WhatsApp and the bundle price is applied.', [ 'size' => 17, 'm' => 16 ] ),
+				$p( 'Mix khaddar and karandi. Tap “+ Bundle” on any two suits and order both in one WhatsApp message.', [ 'size' => 17, 'm' => 16 ] ),
 				$row( [ 'flex_gap' => $gap( 10 ), 'flex_align_items' => 'baseline' ], [
 					$h( 'Rs 10,580', [ 'size' => 16, 'color' => '#9A939F', 'cls' => 'v5-num v5-strike' ] ),
 					$h( 'Save up to Rs 3,590', [ 'size' => 16, 'w' => '700', 'color' => $C['purple'], 'cls' => 'v5-num' ] ),
 				] ),
-				$btn( 'Pick any 2', $wa( 'Assalam o Alaikum, mujhe 2 suits ka bundle (Rs 6,990) chahiye. Suit 1: … Suit 2: …' ), [ 'py' => 20, 'px' => 34, 'cls' => 'v5-mt4', 'icon' => $fa( 'fa-whatsapp', 'fa-brands' ) ] ),
+				$btn( 'Pick any 2', '#new-arrivals', [ 'py' => 20, 'px' => 34, 'cls' => 'v5-mt4' ] ),
 			] ),
 		] ),
 	] );
@@ -293,6 +294,18 @@ $rv5 = function ( $cfg ) {
 			$h( 'Cash on Delivery', [ 'size' => 15, 'w' => '700', 'ls' => 0.06, 'up' => true, 'color' => '#FFFFFF', 'cls' => 'v5-pay' ] ),
 		] ),
 	] );
+
+	// ---------- bundle tray (hidden until a suit is picked) ----------
+	$out[] = $con( [ 'cls' => 'v5-tray', 'anchor' => 'bundle-tray', 'flex_direction' => 'row', 'flex_wrap' => 'nowrap', 'flex_align_items' => 'center', 'flex_gap' => $gap( 14 ), 'background_background' => 'classic', 'background_color' => '#FFFFFF' ], [
+		$con( [ 'cls' => 'v5-tray-slots', 'flex_direction' => 'row', 'flex_wrap' => 'nowrap', 'flex_gap' => $gap( 8 ) ] ),
+		$con( [ 'cls' => 'v5-tray-info', 'flex_gap' => $gap( 1 ) ], [
+			$eyebrow( 'Your bundle', [ 'size' => 12, 'm' => 11, 'cls' => 'v5-tray-eyebrow' ] ),
+			$h( 'Pick any 2 suits', [ 'size' => 16, 'm' => 14.5, 'w' => '600', 'lh' => 1.3, 'cls' => 'v5-tray-msg' ] ),
+			$h( 'Any 2 for <b>Rs 6,990</b>', [ 'size' => 14.5, 'm' => 13, 'color' => $C['body'], 'lh' => 1.3, 'cls' => 'v5-tray-total v5-num' ] ),
+		] ),
+		$btn( 'Order bundle', $WA, [ 'size' => 13.5, 'py' => 15, 'px' => 22, 'ls' => 0.12, 'cls' => 'v5-tray-go', 'icon' => $fa( 'fa-whatsapp', 'fa-brands' ) ] ),
+		$btn( 'Clear', '#bundle-tray', [ 'style' => 'light', 'size' => 13.5, 'py' => 12, 'px' => 12, 'ls' => 0, 'up' => false, 'cls' => 'v5-tray-clear' ] ),
+	], false );
 
 	// ---------- 14. footer ----------
 	$links = function ( $list ) use ( $w, $typo, $FB, $link ) {

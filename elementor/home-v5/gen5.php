@@ -340,7 +340,7 @@ $rv5 = function ( $cfg ) {
 				$seal( 1, 'FREE DELIVERY • ALL PAKISTAN • NO MINIMUM • ', $fa( 'fa-truck' ), 'FREE' ),
 				$seal( 2, 'CASH ON DELIVERY • NO ADVANCE NEEDED • ', $fa( 'fa-money-bill-wave' ), 'COD' ),
 				$seal( 3, '100% ORIGINAL • SEALED BRAND PACKET • ', $fa( 'fa-certificate' ), '100%' ),
-				$seal( 4, '7-DAY EXCHANGE • EASY & HASSLE-FREE • ', $fa( 'fa-sync-alt' ), '7 DAY' ),
+				$seal( 4, '7-DAY EXCHANGE • EASY AND HASSLE-FREE • ', $fa( 'fa-sync-alt' ), '7 DAY' ),
 				$seal( 5, 'TRACKED PARCEL • UPDATES ON WHATSAPP • ', $fa( 'fa-map-marker-alt' ), 'TRACKED' ),
 			] ),
 			$row( [ 'cls' => 'v5-promise-foot', 'flex_justify_content' => 'center', 'flex_align_items' => 'center', 'flex_gap' => $gap( 12 ) ], [

@@ -274,7 +274,6 @@ body:has(.v5-tray.is-open) .rvt-wao-fab{opacity:0;pointer-events:none}
 .v5-tray-go{flex:1 1 auto!important;order:3}
 .v5-tray-go .elementor-button{width:100%;justify-content:center}
 .v5-tray-clear{order:4}
-.v5-pick{top:auto;bottom:10px;right:10px}
 .v5-pick .elementor-button{padding:7px 10px!important;font-size:11.5px!important}
 }
 @media (prefers-reduced-motion:reduce){.e-con.v5-tray,.e-con.v5-tray.is-open{transition:none}.e-con.v5-tray.pulse{animation:none}}

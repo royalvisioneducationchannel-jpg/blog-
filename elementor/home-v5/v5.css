@@ -580,3 +580,8 @@ body .rvt-wao-fab{padding:14px!important;border-radius:50%!important;gap:0!impor
 .e-con.v9-foot-bar{flex-direction:column!important;align-items:flex-start!important;gap:6px!important}
 .v9-promise .elementor-heading-title{font-size:10.5px}
 }
+.v5-flinks ul,.v5-flinks .elementor-icon-list-items{list-style:none!important;padding:0!important;margin:0!important}
+.v5-flinks .elementor-icon-list-item{padding-left:0!important;margin-left:0!important}
+.v5-flinks .elementor-icon-list-item:before,.v5-flinks .elementor-icon-list-item::marker{content:none!important;display:none!important}
+.v5-flinks .elementor-icon-list-text{white-space:nowrap}
+@media (max-width:767px){.v9-promise .elementor-heading-title{font-size:9.5px;letter-spacing:.08em}}

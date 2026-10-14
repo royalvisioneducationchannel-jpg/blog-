@@ -191,9 +191,9 @@ $rv5 = function ( $cfg ) {
 		$name = $h( $p['name'], [ 'size' => 15.5, 'm' => 14, 'w' => '700', 'ls' => 0.08, 'up' => true, 'lh' => 1.3, 'align' => 'center', 'cls' => 'v5-name' ] );
 		$price = $h( '<del>' . $p['compare'] . '</del> <ins>' . $p['price'] . '</ins>', [ 'size' => 16.5, 'm' => 15, 'w' => '600', 'align' => 'center', 'cls' => 'v5-price v5-num' ] );
 		$meta = [
-			$p['pid'] ? $dyn( $name, 'woocommerce-product-title-tag', [ 'product_id' => (string) $p['pid'] ] ) : $name,
+			$p['pid'] ? $dyn( $name, 'rv-product-title', [ 'product_id' => (string) $p['pid'] ] ) : $name,
 			$h( '3 PC · Light ' . $p['fabric'], [ 'size' => 14.5, 'm' => 13, 'color' => $C['mute'], 'align' => 'center' ] ),
-			$p['pid'] ? $dyn( $price, 'woocommerce-product-price-tag', [ 'format' => 'both', 'product_id' => (string) $p['pid'] ] ) : $price,
+			$p['pid'] ? $dyn( $price, 'rv-product-price', [ 'product_id' => (string) $p['pid'] ] ) : $price,
 		];
 		if ( $p['pid'] ) $meta[] = $w( 'rv-sale-timer', [ 'product_id' => (string) $p['pid'], 'label' => 'Sale ends in', 'cls' => 'v5-timer' ] );
 		$meta[] = $con( [ 'cls' => 'v5-swatch', 'background_background' => 'classic', 'background_color' => $p['swatch'] ] );

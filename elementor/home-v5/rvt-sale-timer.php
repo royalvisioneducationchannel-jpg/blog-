@@ -5,6 +5,9 @@
  * Adds two native Elementor pieces:
  * - "RV Sale Timer" widget: a "Sale ends in 17d 08h 14m 11s" bar.
  * - "RV Product Discount" dynamic tag: prints "-18%" for a product on sale.
+ * - "RV Product Title" and "RV Product Price" dynamic tags: the product's live
+ *   name and price (crossed-out regular price + sale price while on sale).
+ *   Elementor Pro's own WooCommerce tags need a licence, so these are used instead.
  *
  * Both read the product's own WooCommerce data. The timer counts down to the
  * product's "Sale price dates -> to" (Edit product -> General -> Schedule), so
@@ -228,5 +231,43 @@ add_action( 'elementor/dynamic_tags/register', function ( $dynamic_tags ) {
 		}
 	}
 
+	class RVT_Product_Title_Tag extends RVT_Product_Discount_Tag {
+
+		public function get_name() {
+			return 'rv-product-title';
+		}
+
+		public function get_title() {
+			return esc_html__( 'RV Product Title', 'rvt' );
+		}
+
+		public function render() {
+			$product = rvt_st_product( $this->get_settings( 'product_id' ) );
+			if ( $product ) {
+				echo esc_html( $product->get_name() );
+			}
+		}
+	}
+
+	class RVT_Product_Price_Tag extends RVT_Product_Discount_Tag {
+
+		public function get_name() {
+			return 'rv-product-price';
+		}
+
+		public function get_title() {
+			return esc_html__( 'RV Product Price', 'rvt' );
+		}
+
+		public function render() {
+			$product = rvt_st_product( $this->get_settings( 'product_id' ) );
+			if ( $product ) {
+				echo wp_kses_post( $product->get_price_html() );
+			}
+		}
+	}
+
 	$dynamic_tags->register( new RVT_Product_Discount_Tag() );
+	$dynamic_tags->register( new RVT_Product_Title_Tag() );
+	$dynamic_tags->register( new RVT_Product_Price_Tag() );
 } );

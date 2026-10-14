@@ -320,25 +320,28 @@ $rv5 = function ( $cfg ) {
 		] ),
 	] );
 
-	// ---------- 13. the Royal Vision promise ----------
-	$promise = function ( $icon, $title, $text ) use ( $w, $typo, $px, $C, $FH, $FB ) {
-		return $w( 'icon-box', array_merge( [ 'selected_icon' => $icon, 'view' => 'stacked', 'shape' => 'circle', 'position' => 'top', 'position_mobile' => 'left', 'title_text' => $title, 'description_text' => $text, 'title_size' => 'h3',
-			'primary_color' => '#FFFFFF', 'secondary_color' => $C['purple'], 'icon_size' => $px( 22 ), 'icon_padding' => $px( 19 ), 'icon_space' => $px( 18 ), 'icon_space_mobile' => $px( 16 ), 'title_bottom_space' => $px( 6 ),
-			'text_align' => 'center', 'text_align_mobile' => 'left', 'title_color' => $C['ink'], 'description_color' => $C['body'], 'cls' => 'v5-promise-card' ],
-			$typo( 'title_typography_', $FH, 24, [ 'w' => '600', 'lh' => 1.1, 'm' => 21 ] ), $typo( 'description_typography_', $FB, 15, [ 'lh' => 1.5, 'm' => 14 ] ) ) );
+	// ---------- 13. the Royal Vision promise: royal seals ----------
+	$seal = function ( $n, $ring, $icon, $big ) use ( $con, $w, $h, $px, $FH ) {
+		return $con( [ 'cls' => 'v7-seal v7-seal-' . $n, 'flex_justify_content' => 'center', 'flex_align_items' => 'center' ], [
+			$w( 'text-path', [ 'text' => $ring, 'path' => 'circle', 'align' => 'center', 'size' => $px( 150 ), 'size_mobile' => $px( 104 ), 'text_color_normal' => '#E2C285', 'cls' => 'v7-ring' ] ),
+			$con( [ 'cls' => 'v7-core', 'flex_justify_content' => 'center', 'flex_align_items' => 'center' ], [
+				$w( 'icon', [ 'selected_icon' => $icon, 'primary_color' => '#E2C285', 'size' => $px( 18 ), 'size_mobile' => $px( 14 ), 'cls' => 'v7-icon' ] ),
+				$h( $big, [ 'font' => $FH, 'w' => '600', 'size' => 21, 'm' => 15, 'lh' => 1, 'color' => '#FFF6E6', 'align' => 'center', 'cls' => 'v7-big' ] ),
+			] ),
+		] );
 	};
-	$out[] = $section( [ 'cls' => 'v5-sec v5-promise' ], [
-		$con( [ 'cls' => 'v5-promise-panel', 'flex_gap' => $gap( 34 ), 'flex_gap_mobile' => $gap( 22 ), 'background_background' => 'classic', 'background_color' => '#F6F1EC' ], [
+	$out[] = $section( [ 'cls' => 'v5-sec v5-promise v7-promise' ], [
+		$con( [ 'cls' => 'v7-panel', 'flex_align_items' => 'center', 'flex_gap' => $gap( 30 ), 'flex_gap_mobile' => $gap( 20 ), 'background_background' => 'classic', 'background_color' => '#F6F1EC' ], [
 			$con( [ 'flex_align_items' => 'center', 'flex_gap' => $gap( 6 ) ], [
 				$eyebrow( 'hamara wada', [ 'align' => 'center' ] ),
 				$display( 'The Royal Vision Promise', 48, [ 't' => 40, 'm' => 32, 'align' => 'center' ] ),
 			] ),
-			$con( [ 'cls' => 'v5-promise-grid', 'container_type' => 'grid', 'grid_columns_grid' => [ 'unit' => 'fr', 'size' => 5 ], 'grid_columns_grid_tablet' => [ 'unit' => 'fr', 'size' => 3 ], 'grid_columns_grid_mobile' => [ 'unit' => 'fr', 'size' => 1 ], 'grid_rows_grid' => [ 'unit' => 'fr', 'size' => 1 ], 'grid_auto_flow' => 'row', 'grid_gaps' => $gap( 16 ), 'grid_gaps_mobile' => $gap( 10 ) ], [
-				$promise( $fa( 'fa-truck' ), 'Free Delivery', 'Free on every order, all over Pakistan. No minimum.' ),
-				$promise( $fa( 'fa-money-bill-wave' ), 'Cash on Delivery', 'No advance. Pay the rider in cash when it arrives.' ),
-				$promise( $fa( 'fa-certificate' ), '100% Original', 'Sealed brand packet with its tag, code and QR.' ),
-				$promise( $fa( 'fa-sync-alt' ), '7-Day Exchange', 'Unused, in the original packet with tags.' ),
-				$promise( $fa( 'fa-map-marker-alt' ), 'Tracked Parcel', 'Tracking number on WhatsApp once it ships.' ),
+			$row( [ 'cls' => 'v7-seals', 'flex_justify_content' => 'center', 'flex_gap' => $gap( 34, 22 ), 'flex_gap_mobile' => $gap( 12, 14 ) ], [
+				$seal( 1, 'FREE DELIVERY • ALL PAKISTAN • NO MINIMUM • ', $fa( 'fa-truck' ), 'FREE' ),
+				$seal( 2, 'CASH ON DELIVERY • NO ADVANCE NEEDED • ', $fa( 'fa-money-bill-wave' ), 'COD' ),
+				$seal( 3, '100% ORIGINAL • SEALED BRAND PACKET • ', $fa( 'fa-certificate' ), '100%' ),
+				$seal( 4, '7-DAY EXCHANGE • EASY & HASSLE-FREE • ', $fa( 'fa-sync-alt' ), '7 DAY' ),
+				$seal( 5, 'TRACKED PARCEL • UPDATES ON WHATSAPP • ', $fa( 'fa-map-marker-alt' ), 'TRACKED' ),
 			] ),
 			$row( [ 'cls' => 'v5-promise-foot', 'flex_justify_content' => 'center', 'flex_align_items' => 'center', 'flex_gap' => $gap( 12 ) ], [
 				$h( 'We accept', [ 'size' => 13, 'w' => '700', 'ls' => 0.14, 'up' => true, 'color' => $C['mute'] ] ),

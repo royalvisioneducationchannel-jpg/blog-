@@ -227,3 +227,8 @@ body{background:#FFFFFF}
 .v5-hero-line,.v5-hero-line p{color:#4A4350!important}
 .v5-flinks .elementor-icon-list-text,.v5-head-wa .elementor-icon-list-text,.v5-news .elementor-field,.v5-news .elementor-button,.v5-trust .elementor-icon-box-description,.v5-trust .elementor-icon-box-title{font-family:'Jost',sans-serif!important}
 @media (max-width:767px){.e-con.v5-slide{height:auto!important}}
+.v5-hero,.v5-shop-car{--arrow-normal-color:#1A1A1A;--arrow-hover-color:#7B3FF2;--arrow-size:13px}
+.v5-hero .elementor-swiper-button,.v5-shop-car .elementor-swiper-button{opacity:1}
+.v5-hero .elementor-swiper-button:hover svg,.v5-shop-car .elementor-swiper-button:hover svg{fill:#7B3FF2!important}
+.v5-nav .elementor-nav-menu--main{justify-content:safe center}
+@media (max-width:1024px){.v5-nav .elementor-nav-menu--main{justify-content:flex-start;padding:0 12px}.v5-nav .elementor-nav-menu{justify-content:flex-start}}

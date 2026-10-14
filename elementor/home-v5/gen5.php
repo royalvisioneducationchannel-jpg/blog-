@@ -237,19 +237,49 @@ $rv5 = function ( $cfg ) {
 
 	// ---------- 8. sale countdown ----------
 	$imgStrip = function ( $ids, $cls ) use ( $con, $img, $P ) { return $con( [ 'cls' => $cls, 'flex_direction' => 'row', 'flex_wrap' => 'nowrap' ], array_map( function ( $id ) use ( $img, $P ) { return $img( $P[ $id ]['front'], $P[ $id ]['name'] . ' suit' ); }, $ids ) ); };
+	$priceCard = function ( $fabric, $now, $was ) use ( $con, $row, $h, $FH, $gap ) {
+		return $con( [ 'cls' => 'v5-pc', 'flex_gap' => $gap( 2 ) ], [
+			$h( $fabric, [ 'size' => 12, 'w' => '600', 'ls' => 0.16, 'up' => true, 'color' => '#C9B4FF' ] ),
+			$row( [ 'flex_wrap' => 'nowrap', 'flex_align_items' => 'baseline', 'flex_gap' => $gap( 10 ) ], [
+				$h( $now, [ 'font' => $FH, 'w' => '600', 'size' => 32, 'm' => 26, 'lh' => 1.05, 'color' => '#FFFFFF', 'cls' => 'v5-num' ] ),
+				$h( $was, [ 'size' => 14.5, 'm' => 13, 'color' => 'rgba(255,255,255,0.55)', 'cls' => 'v5-num v5-strike' ] ),
+			] ),
+		] );
+	};
+	$saleEnds = date( 'j M', strtotime( $cfg['sale_end'] ) );
 	$out[] = $section( [ 'cls' => 'v5-sec v5-sale-sec', 'anchor' => 'sale' ], [
 		$con( [ 'cls' => 'v5-sale', 'animation' => 'fadeInUp', 'animation_duration' => 'slow', 'flex_direction' => 'row', 'flex_wrap' => 'nowrap', 'background_background' => 'classic', 'background_color' => $C['plum'] ], [
-			$con( [ 'cls' => 'v5-sale-text', 'flex_gap' => $gap( 14 ) ], [
-				$eyebrow( 'Winter Sale', [ 'color' => '#C9B4FF' ] ),
-				$display( 'Upto 19% Off', 84, [ 't' => 64, 'm' => 50, 'lh' => 0.95, 'color' => '#FFFFFF' ] ),
-				$p( 'Khaddar now Rs 3,990 and karandi Rs 4,290. Free delivery and Cash on Delivery on every order.', [ 'size' => 17.5, 'm' => 16, 'color' => '#E6DDF0' ] ),
-				$w( 'countdown', array_merge( [ 'countdown_type' => 'due_date', 'due_date' => $cfg['sale_end'], 'label_display' => 'block', 'show_days' => 'yes', 'show_hours' => 'yes', 'show_minutes' => 'yes', 'show_seconds' => 'yes', 'show_labels' => 'yes',
-					'custom_labels' => 'yes', 'label_days' => 'Days', 'label_hours' => 'Hours', 'label_minutes' => 'Mins', 'label_seconds' => 'Secs',
-					'box_background_color' => '#FFFFFF', 'box_border_radius' => $box( 10 ), 'box_spacing' => $px( 10 ), 'box_padding' => $box( 14, 0 ), 'digits_color' => $C['plum'], 'label_color' => $C['mute'], 'cls' => 'v5-count' ],
-					$typo( 'digits_typography_', $FH, 36, [ 'w' => '700', 'lh' => 1.1, 'm' => 28 ] ), $typo( 'label_typography_', $FB, 13, [ 'w' => '600', 'ls' => 0.08, 'up' => true, 'm' => 11 ] ) ) ),
-				$btn( 'Shop the Sale', '#new-arrivals', [ 'style' => 'light', 'py' => 20, 'px' => 34, 'cls' => 'v5-mt4' ] ),
+			$con( [ 'cls' => 'v5-sale-text', 'flex_gap' => $gap( 18 ) ], [
+				$row( [ 'cls' => 'v5-sale-top', 'flex_align_items' => 'center', 'flex_gap' => $gap( 12 ) ], [
+					$eyebrow( 'Winter Sale', [ 'color' => '#C9B4FF', 'cls' => 'v5-sale-live' ] ),
+					$h( 'Ends ' . $saleEnds, [ 'size' => 12.5, 'w' => '600', 'ls' => 0.12, 'up' => true, 'color' => '#FFFFFF', 'cls' => 'v5-sale-ends' ] ),
+				] ),
+				$display( 'Upto <em>19%</em> Off', 84, [ 't' => 64, 'm' => 48, 'lh' => 0.95, 'color' => '#FFFFFF', 'cls' => 'v5-sale-title' ] ),
+				$row( [ 'cls' => 'v5-sale-prices', 'flex_wrap' => 'nowrap', 'flex_gap' => $gap( 12 ) ], [
+					$priceCard( 'Light Khaddar', 'Rs 3,990', 'Rs 4,890' ),
+					$priceCard( 'Light Karandi', 'Rs 4,290', 'Rs 5,290' ),
+				] ),
+				$con( [ 'cls' => 'v5-count-wrap', 'flex_gap' => $gap( 8 ) ], [
+					$h( 'Sale ends in', [ 'size' => 12, 'w' => '600', 'ls' => 0.16, 'up' => true, 'color' => 'rgba(255,255,255,0.6)' ] ),
+					$w( 'countdown', array_merge( [ 'countdown_type' => 'due_date', 'due_date' => $cfg['sale_end'], 'label_display' => 'block', 'show_days' => 'yes', 'show_hours' => 'yes', 'show_minutes' => 'yes', 'show_seconds' => 'yes', 'show_labels' => 'yes',
+						'custom_labels' => 'yes', 'label_days' => 'Days', 'label_hours' => 'Hours', 'label_minutes' => 'Mins', 'label_seconds' => 'Secs',
+						'box_background_color' => 'rgba(255,255,255,0.07)', 'box_border_border' => 'solid', 'box_border_width' => $box( 1 ), 'box_border_color' => 'rgba(255,255,255,0.16)',
+						'box_border_radius' => $box( 12 ), 'box_spacing' => $px( 10 ), 'box_padding' => $box( 12, 0 ), 'digits_color' => '#FFFFFF', 'label_color' => '#C9B4FF', 'cls' => 'v5-count' ],
+						$typo( 'digits_typography_', $FH, 44, [ 'w' => '600', 'lh' => 1, 'm' => 32 ] ), $typo( 'label_typography_', $FB, 11, [ 'w' => '600', 'ls' => 0.14, 'up' => true, 'm' => 10 ] ) ) ),
+				] ),
+				$row( [ 'cls' => 'v5-sale-ctas', 'flex_align_items' => 'center', 'flex_gap' => $gap( 12 ) ], [
+					$btn( 'Shop the Sale', '#new-arrivals', [ 'style' => 'light', 'py' => 20, 'px' => 34 ] ),
+					$btn( 'Order on WhatsApp', $WA, [ 'py' => 20, 'px' => 28, 'cls' => 'v5-btn-ghost', 'icon' => $fa( 'fa-whatsapp', 'fa-brands' ) ] ),
+				] ),
 			] ),
-			$imgStrip( [ 5, 20, 14 ], 'v5-sale-imgs' ),
+			$con( [ 'cls' => 'v5-sale-media' ], [
+				$imgStrip( [ 5, 20, 14 ], 'v5-sale-imgs' ),
+				$con( [ 'cls' => 'v5-stamp', 'flex_justify_content' => 'center', 'flex_align_items' => 'center' ], [
+					$h( 'Upto', [ 'size' => 11.5, 'w' => '600', 'ls' => 0.2, 'up' => true, 'color' => '#FFFFFF', 'align' => 'center' ] ),
+					$h( '19%', [ 'font' => $FH, 'w' => '600', 'size' => 40, 'm' => 30, 'lh' => 1, 'color' => '#FFFFFF', 'align' => 'center' ] ),
+					$h( 'Off', [ 'size' => 11.5, 'w' => '600', 'ls' => 0.2, 'up' => true, 'color' => '#FFFFFF', 'align' => 'center' ] ),
+				] ),
+			] ),
 		] ),
 	] );
 

@@ -557,3 +557,26 @@ body .rvt-wao-fab{padding:14px!important;border-radius:50%!important;gap:0!impor
 .e-con.v8-foot-bar{flex-direction:column!important;align-items:flex-start!important;gap:12px!important}
 .v8-flogo img{height:42px!important}
 }
+
+/* ===== footer v3: compact, lace-edged (scalloped hem like a dupatta border) ===== */
+.e-con.v9-foot{position:relative;overflow:visible!important;margin-top:22px;padding:0 clamp(16px,2.4vw,32px)!important}
+.e-con.v9-foot:before{content:"";position:absolute;left:0;right:0;top:-13px;height:14px;background:radial-gradient(circle at 9px 14px,#17111C 8.5px,rgba(23,17,28,0) 9px) repeat-x;background-size:18px 14px;pointer-events:none}
+.e-con.v9-foot:after{content:"";position:absolute;left:0;right:0;top:6px;height:1px;background:repeating-linear-gradient(90deg,rgba(226,194,133,.45) 0 6px,transparent 6px 12px);pointer-events:none}
+.e-con.v9-foot-grid{padding:40px 0 30px!important;align-items:start}
+.v9-ftitle .elementor-heading-title{display:flex;align-items:center;gap:8px}
+.v9-ftitle .elementor-heading-title:before{content:"";width:6px;height:6px;background:#E2C285;transform:rotate(45deg);flex:none}
+.v9-fbrand .v5-num .elementor-heading-title{max-width:34ch}
+.v9-news .elementor-field{height:38px!important}
+.v9-news .elementor-button{height:38px!important;padding:0 18px!important}
+.v9-contact a{color:#CFC9D4;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.2);transition:color .2s,border-color .2s}
+.v9-contact a:hover{color:#FFFFFF;border-color:#C9B4FF}
+.v9-contact .elementor-heading-title{font-size:12.5px}
+.e-con.v9-foot-bar{padding:14px 0 16px!important;border-top:1px solid rgba(255,255,255,.08)}
+.v9-foot-bar > .elementor-widget{width:auto!important}
+@media (max-width:1024px){.v9-foot-grid > .v9-fbrand,.v9-foot-grid > .v9-fnews{grid-column:1 / -1}.v9-fbrand .v5-num .elementor-heading-title{max-width:none}}
+@media (max-width:767px){
+.e-con.v9-foot-grid{padding:32px 0 22px!important}
+.v9-fbrand{align-items:flex-start}
+.e-con.v9-foot-bar{flex-direction:column!important;align-items:flex-start!important;gap:6px!important}
+.v9-promise .elementor-heading-title{font-size:10.5px}
+}

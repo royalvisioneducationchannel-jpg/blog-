@@ -399,3 +399,25 @@ body:has(.v5-tray.is-open) .rvt-wao-fab{opacity:0;pointer-events:none}
 body .rvt-wao-fab .rvt-wao-fab__text{display:none!important}
 body .rvt-wao-fab{padding:14px!important;border-radius:50%!important;gap:0!important}
 }
+
+/* ===== promise v2 ===== */
+.e-con.v5-promise-panel{border-radius:22px;padding:clamp(36px,4.4vw,64px) clamp(16px,3vw,48px)!important}
+.v5-promise-card{height:100%;padding:28px 20px 26px;border-radius:16px;background:#FFFFFF;border:1px solid #ECE3DC;transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s,border-color .3s}
+.v5-promise-card:hover{transform:translateY(-4px);border-color:#D9C8FF;box-shadow:0 22px 40px -26px rgba(42,24,56,.45)}
+.v5-promise-card .elementor-icon-box-icon{position:relative}
+.v5-promise-card .elementor-icon{position:relative;width:60px;height:60px;padding:0!important;display:flex!important;align-items:center;justify-content:center;box-shadow:0 10px 22px -10px rgba(123,63,242,.7)}
+.v5-promise-card .elementor-icon:after{content:"";position:absolute;inset:-7px;border-radius:50%;border:1.5px dashed #C9B4FF;transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.v5-promise-card:hover .elementor-icon:after{transform:rotate(180deg)}
+.v5-promise-card .elementor-icon-box-title{margin-top:4px}
+.v5-promise-foot > .elementor-widget{width:auto!important}
+.v5-promise-q a{color:#7B3FF2;font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.v5-pay .elementor-heading-title{height:34px;padding:0 14px;border-radius:6px}
+@media (max-width:1024px){.v5-promise-grid > .v5-promise-card:nth-child(n+4){grid-column:span 1}}
+@media (max-width:767px){
+.v5-promise-card{padding:16px 16px 16px 20px}
+.v5-promise-card .elementor-icon-box-wrapper{display:flex;align-items:center;text-align:left}
+.v5-promise-card .elementor-icon{width:50px;height:50px}
+.v5-promise-card .elementor-icon:after{inset:-6px}
+.v5-promise-q{width:100%!important;text-align:center}
+}
+@media (prefers-reduced-motion:reduce){.v5-promise-card,.v5-promise-card .elementor-icon:after{transition:none}}

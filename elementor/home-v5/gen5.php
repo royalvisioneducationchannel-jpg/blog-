@@ -320,21 +320,31 @@ $rv5 = function ( $cfg ) {
 		] ),
 	] );
 
-	// ---------- 13. promise seals ----------
-	$seal = function ( $big, $small, $c ) use ( $con, $h, $FH, $gap ) {
-		return $con( [ 'cls' => 'v5-seal', 'flex_justify_content' => 'center', 'flex_align_items' => 'center', 'flex_gap' => $gap( 2 ), 'border_border' => 'solid', 'border_width' => [ 'unit' => 'px', 'top' => '2', 'right' => '2', 'bottom' => '2', 'left' => '2', 'isLinked' => true ], 'border_color' => $c ], [
-			$h( $big, [ 'font' => $FH, 'w' => '600', 'size' => 23, 'lh' => 1, 'color' => $c, 'align' => 'center' ] ),
-			$h( $small, [ 'size' => 11.5, 'w' => '700', 'ls' => 0.08, 'up' => true, 'lh' => 1.25, 'color' => $c, 'align' => 'center', 'cls' => 'v5-seal-small' ] ),
-		] );
+	// ---------- 13. the Royal Vision promise ----------
+	$promise = function ( $icon, $title, $text ) use ( $w, $typo, $px, $C, $FH, $FB ) {
+		return $w( 'icon-box', array_merge( [ 'selected_icon' => $icon, 'view' => 'stacked', 'shape' => 'circle', 'position' => 'top', 'position_mobile' => 'left', 'title_text' => $title, 'description_text' => $text, 'title_size' => 'h3',
+			'primary_color' => '#FFFFFF', 'secondary_color' => $C['purple'], 'icon_size' => $px( 22 ), 'icon_padding' => $px( 19 ), 'icon_space' => $px( 18 ), 'icon_space_mobile' => $px( 16 ), 'title_bottom_space' => $px( 6 ),
+			'text_align' => 'center', 'text_align_mobile' => 'left', 'title_color' => $C['ink'], 'description_color' => $C['body'], 'cls' => 'v5-promise-card' ],
+			$typo( 'title_typography_', $FH, 24, [ 'w' => '600', 'lh' => 1.1, 'm' => 21 ] ), $typo( 'description_typography_', $FB, 15, [ 'lh' => 1.5, 'm' => 14 ] ) ) );
 	};
-	$out[] = $section( [ 'cls' => 'v5-sec v5-promise', 'flex_align_items' => 'center' ], [
-		$row( [ 'cls' => 'v5-seals', 'flex_justify_content' => 'center', 'flex_gap' => $gap( 44, 18 ), 'flex_gap_mobile' => $gap( 14 ) ], [
-			$seal( 'FREE', 'Delivery all Pakistan', $C['purple'] ), $seal( 'COD', 'Cash on delivery', $C['ink'] ), $seal( '100%', 'Original brands', '#B8860B' ),
-			$seal( '7 DAY', 'Easy exchange', $C['purple'] ), $seal( 'TRACKED', 'Every parcel', '#1E8E4E' ),
-		] ),
-		$con( [ 'flex_align_items' => 'center', 'flex_gap' => $gap( 14 ) ], [
-			$h( 'We accept', [ 'size' => 15, 'w' => '700', 'ls' => 0.14, 'up' => true, 'align' => 'center' ] ),
-			$h( 'Cash on Delivery', [ 'size' => 15, 'w' => '700', 'ls' => 0.06, 'up' => true, 'color' => '#FFFFFF', 'cls' => 'v5-pay' ] ),
+	$out[] = $section( [ 'cls' => 'v5-sec v5-promise' ], [
+		$con( [ 'cls' => 'v5-promise-panel', 'flex_gap' => $gap( 34 ), 'flex_gap_mobile' => $gap( 22 ), 'background_background' => 'classic', 'background_color' => '#F6F1EC' ], [
+			$con( [ 'flex_align_items' => 'center', 'flex_gap' => $gap( 6 ) ], [
+				$eyebrow( 'hamara wada', [ 'align' => 'center' ] ),
+				$display( 'The Royal Vision Promise', 48, [ 't' => 40, 'm' => 32, 'align' => 'center' ] ),
+			] ),
+			$con( [ 'cls' => 'v5-promise-grid', 'container_type' => 'grid', 'grid_columns_grid' => [ 'unit' => 'fr', 'size' => 5 ], 'grid_columns_grid_tablet' => [ 'unit' => 'fr', 'size' => 3 ], 'grid_columns_grid_mobile' => [ 'unit' => 'fr', 'size' => 1 ], 'grid_rows_grid' => [ 'unit' => 'fr', 'size' => 1 ], 'grid_auto_flow' => 'row', 'grid_gaps' => $gap( 16 ), 'grid_gaps_mobile' => $gap( 10 ) ], [
+				$promise( $fa( 'fa-truck' ), 'Free Delivery', 'Free on every order, all over Pakistan. No minimum.' ),
+				$promise( $fa( 'fa-money-bill-wave' ), 'Cash on Delivery', 'No advance. Pay the rider in cash when it arrives.' ),
+				$promise( $fa( 'fa-certificate' ), '100% Original', 'Sealed brand packet with its tag, code and QR.' ),
+				$promise( $fa( 'fa-sync-alt' ), '7-Day Exchange', 'Unused, in the original packet with tags.' ),
+				$promise( $fa( 'fa-map-marker-alt' ), 'Tracked Parcel', 'Tracking number on WhatsApp once it ships.' ),
+			] ),
+			$row( [ 'cls' => 'v5-promise-foot', 'flex_justify_content' => 'center', 'flex_align_items' => 'center', 'flex_gap' => $gap( 12 ) ], [
+				$h( 'We accept', [ 'size' => 13, 'w' => '700', 'ls' => 0.14, 'up' => true, 'color' => $C['mute'] ] ),
+				$h( 'Cash on Delivery', [ 'size' => 13.5, 'w' => '700', 'ls' => 0.06, 'up' => true, 'color' => '#FFFFFF', 'cls' => 'v5-pay' ] ),
+				$h( 'Questions? <a href="' . $WA . '" target="_blank" rel="noopener">WhatsApp 0322 778 2932</a>', [ 'size' => 14.5, 'color' => $C['body'], 'cls' => 'v5-promise-q v5-num' ] ),
+			] ),
 		] ),
 	] );
 

@@ -73,14 +73,16 @@ $rv5 = function ( $cfg ) {
 	};
 
 	// ---------- data ----------
-	$RAW = [ [ 'Tropical Bloom', 'Khaddar' ], [ 'Ice Slit', 'Khaddar' ], [ 'Janan', 'Khaddar' ], [ 'Terilis', 'Khaddar' ], [ 'Vela', 'Khaddar' ], [ 'Limelight', 'Khaddar' ], [ 'Maya', 'Khaddar' ], [ 'Serena', 'Khaddar' ], [ 'Solid', 'Khaddar' ], [ 'Gulaal', 'Khaddar' ], [ 'Greenry', 'Khaddar' ], [ 'Verdant', 'Khaddar' ], [ 'Resham', 'Khaddar' ], [ 'Floral', 'Khaddar' ], [ 'Hermony', 'Khaddar' ], [ 'Gold', 'Karandi' ], [ 'Peachy', 'Karandi' ], [ 'Texture', 'Karandi' ], [ 'Berry', 'Karandi' ], [ 'Zareen', 'Karandi' ], [ 'Miraaz', 'Karandi' ], [ 'Aura', 'Karandi' ], [ 'Twilight', 'Karandi' ], [ 'Dhani', 'Karandi' ] ];
+	$RAW = [ [ 'Tropical Bloom', 'Khaddar', '#1A1A1A' ], [ 'Ice Slit', 'Khaddar', '#8FD3D0' ], [ 'Janan', 'Khaddar', '#1F2C4F' ], [ 'Terilis', 'Khaddar', '#B48BA8' ], [ 'Vela', 'Khaddar', '#1F2C4F' ], [ 'Limelight', 'Khaddar', '#F1C6CF' ], [ 'Maya', 'Khaddar', '#D49A2C' ], [ 'Serena', 'Khaddar', '#8C8F96' ], [ 'Solid', 'Khaddar', '#6B4A35' ], [ 'Gulaal', 'Khaddar', '#3B4FA0' ], [ 'Greenry', 'Khaddar', '#3E8E6A' ], [ 'Verdant', 'Khaddar', '#EFE8D8' ], [ 'Resham', 'Khaddar', '#7A2230' ], [ 'Floral', 'Khaddar', '#3E8E6A' ], [ 'Hermony', 'Khaddar', '#B5532E' ], [ 'Gold', 'Karandi', '#3B4FA0' ], [ 'Peachy', 'Karandi', '#F2A98E' ], [ 'Texture', 'Karandi', '#B48BA8' ], [ 'Berry', 'Karandi', '#7A2230' ], [ 'Zareen', 'Karandi', '#D49A2C' ], [ 'Miraaz', 'Karandi', '#6B4A35' ], [ 'Aura', 'Karandi', '#8C8F96' ], [ 'Twilight', 'Karandi', '#3E8E6A' ], [ 'Dhani', 'Karandi', '#3E8E6A' ] ];
 	$P = [];
 	foreach ( $RAW as $i => $r ) {
 		$id = $i + 1; $n = str_pad( (string) $id, 2, '0', STR_PAD_LEFT ); $kh = $r[1] === 'Khaddar';
 		$compare = $kh ? 4890 : 5290; $price = $kh ? 3990 : 4290;
-		$P[ $id ] = [ 'name' => $r[0], 'fabric' => $r[1], 'price' => 'Rs ' . number_format( $price ), 'compare' => 'Rs ' . number_format( $compare ),
+		$P[ $id ] = [ 'name' => $r[0], 'fabric' => $r[1], 'swatch' => $r[2], 'pid' => (int) ( $cfg['pid'][ $id ] ?? 0 ), 'price' => 'Rs ' . number_format( $price ), 'compare' => 'Rs ' . number_format( $compare ),
 			'off' => '-' . round( ( 1 - $price / $compare ) * 100 ) . '%', 'new' => $id % 4 === 1, 'front' => "p$n-front", 'detail' => "p$n-detail" ];
 	}
+	// Elementor dynamic tag string, e.g. a product's live title or price.
+	$tag = function ( $name, $settings ) { return '[elementor-tag id="' . substr( md5( $name . wp_json_encode( $settings ) ), 0, 7 ) . '" name="' . $name . '" settings="' . rawurlencode( wp_json_encode( $settings ) ) . '"]'; };
 
 	$out = [];
 
@@ -180,10 +182,21 @@ $rv5 = function ( $cfg ) {
 	] );
 
 	// ---------- product card + shop section ----------
-	$card = function ( $id ) use ( $con, $row, $h, $img, $btn, $wa, $P, $C, $FH, $gap ) {
+	$card = function ( $id ) use ( $con, $row, $h, $w, $img, $btn, $wa, $tag, $P, $C, $gap ) {
 		$p = $P[ $id ];
-		$badges = [ $h( $p['off'], [ 'size' => 13, 'w' => '700', 'color' => '#FFFFFF', 'cls' => 'v5-badge v5-badge-off' ] ) ];
+		$dyn = function ( $el, $name, $settings ) use ( $tag ) { $el['settings']['__dynamic__'] = [ 'title' => $tag( $name, $settings ) ]; return $el; };
+		$off = $h( $p['off'], [ 'size' => 13, 'w' => '700', 'color' => '#FFFFFF', 'cls' => 'v5-badge v5-badge-off' ] );
+		$badges = [ $p['pid'] ? $dyn( $off, 'rv-product-discount', [ 'product_id' => (string) $p['pid'] ] ) : $off ];
 		if ( $p['new'] ) $badges[] = $h( 'NEW', [ 'size' => 13, 'w' => '700', 'color' => '#FFFFFF', 'cls' => 'v5-badge v5-badge-new' ] );
+		$name = $h( $p['name'], [ 'size' => 15.5, 'm' => 14, 'w' => '700', 'ls' => 0.08, 'up' => true, 'lh' => 1.3, 'align' => 'center', 'cls' => 'v5-name' ] );
+		$price = $h( '<del>' . $p['compare'] . '</del> <ins>' . $p['price'] . '</ins>', [ 'size' => 16.5, 'm' => 15, 'w' => '600', 'align' => 'center', 'cls' => 'v5-price v5-num' ] );
+		$meta = [
+			$p['pid'] ? $dyn( $name, 'woocommerce-product-title-tag', [ 'product_id' => (string) $p['pid'] ] ) : $name,
+			$h( '3 PC · Light ' . $p['fabric'], [ 'size' => 14.5, 'm' => 13, 'color' => $C['mute'], 'align' => 'center' ] ),
+			$p['pid'] ? $dyn( $price, 'woocommerce-product-price-tag', [ 'format' => 'both', 'product_id' => (string) $p['pid'] ] ) : $price,
+		];
+		if ( $p['pid'] ) $meta[] = $w( 'rv-sale-timer', [ 'product_id' => (string) $p['pid'], 'label' => 'Sale ends in', 'cls' => 'v5-timer' ] );
+		$meta[] = $con( [ 'cls' => 'v5-swatch', 'background_background' => 'classic', 'background_color' => $p['swatch'] ] );
 		return $con( [ 'cls' => 'v5-card', 'flex_gap' => $gap( 12 ) ], [
 			$con( [ 'cls' => 'v5-media' ], [
 				$img( $p['front'], $p['name'] . ', ' . $p['fabric'] . ' suit', 'v5-front' ),
@@ -191,14 +204,7 @@ $rv5 = function ( $cfg ) {
 				$row( [ 'cls' => 'v5-badges', 'flex_gap' => $gap( 6 ) ], $badges ),
 				$btn( 'Order Now', $wa( "Assalam o Alaikum, mujhe {$p['name']} ({$p['fabric']}, {$p['price']}) chahiye." ), [ 'size' => 13.5, 'py' => 14, 'px' => 16, 'ls' => 0.14, 'cls' => 'v5-add', 'align' => 'justify' ] ),
 			] ),
-			$con( [ 'cls' => 'v5-meta', 'flex_gap' => $gap( 2 ) ], [
-				$h( '3 PC · Light ' . $p['fabric'], [ 'size' => 12.5, 'w' => '500', 'ls' => 0.12, 'up' => true, 'color' => $C['mute'] ] ),
-				$h( $p['name'], [ 'font' => $FH, 'w' => '600', 'size' => 24, 'm' => 20, 'lh' => 1.15 ] ),
-				$row( [ 'cls' => 'v5-price', 'flex_align_items' => 'baseline', 'flex_gap' => $gap( 10 ) ], [
-					$h( $p['price'], [ 'size' => 17, 'm' => 15.5, 'w' => '600', 'color' => $C['purple'], 'cls' => 'v5-num' ] ),
-					$h( $p['compare'], [ 'size' => 14.5, 'm' => 13, 'color' => '#9A939F', 'cls' => 'v5-num v5-strike' ] ),
-				] ),
-			] ),
+			$con( [ 'cls' => 'v5-meta', 'flex_gap' => $gap( 3 ), 'flex_align_items' => 'center' ], $meta ),
 		] );
 	};
 	$shop = function ( $anchor, $title, $script, $ids ) use ( $section, $con, $w, $eyebrow, $display, $card, $px, $fa, $gap ) {

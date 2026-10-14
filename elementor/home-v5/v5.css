@@ -232,3 +232,15 @@ body{background:#FFFFFF}
 .v5-hero .elementor-swiper-button:hover svg,.v5-shop-car .elementor-swiper-button:hover svg{fill:#7B3FF2!important}
 .v5-nav .elementor-nav-menu--main{justify-content:safe center}
 @media (max-width:1024px){.v5-nav .elementor-nav-menu--main{justify-content:flex-start;padding:0 12px}.v5-nav .elementor-nav-menu{justify-content:flex-start}}
+
+/* product card v2: live title/price, per-product sale timer, swatch */
+.v5-meta{text-align:center}
+.v5-meta > .elementor-widget{width:100%}
+.v5-price .elementor-heading-title del{color:#9A939F;font-weight:400;font-size:.88em;margin-right:6px;text-decoration:line-through}
+.v5-price .elementor-heading-title ins{color:#7B3FF2;text-decoration:none;font-weight:600}
+.v5-price .screen-reader-text{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap}
+.v5-timer{margin-top:8px}
+.v5-timer .rv-sale-timer{border-radius:2px}
+.e-con.v5-swatch{flex:none!important;width:16px!important;height:16px;margin-top:10px;border-radius:50%;box-shadow:0 0 0 2px #FFFFFF,0 0 0 3px #D9D3DE}
+.v5-badge .elementor-heading-title:empty{display:none}
+@media (max-width:767px){.v5-timer .rv-sale-timer{font-size:10.5px;letter-spacing:.03em;gap:5px;padding:9px 6px}.v5-timer .rv-sale-timer svg{width:10px;height:10px}}

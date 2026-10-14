@@ -516,3 +516,6 @@ body .rvt-wao-fab{padding:14px!important;border-radius:50%!important;gap:0!impor
 .v5-head-r .v5-hicon{display:none}
 }
 @media (prefers-reduced-motion:reduce){.e-con.v5-head-bar,.v5-logo img{transition:none}}
+.v5-nav .elementor-menu-toggle{margin-left:-8px!important;margin-right:auto!important}
+.v5-search .elementor-search-form__toggle i,.v5-search .elementor-search-form__toggle i:before{font-size:17px!important}
+.v5-search .elementor-search-form__toggle svg{width:17px!important;height:17px!important}

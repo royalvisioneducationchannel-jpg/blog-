@@ -375,44 +375,67 @@ $rv5 = function ( $cfg ) {
 		$btn( 'Clear', '#bundle-tray', [ 'style' => 'light', 'size' => 13.5, 'py' => 12, 'px' => 12, 'ls' => 0, 'up' => false, 'cls' => 'v5-tray-clear' ] ),
 	], false );
 
-	// ---------- 14. footer ----------
+	// ---------- 14. footer: newsletter band, five columns, bottom bar, wordmark ----------
 	$links = function ( $list ) use ( $w, $typo, $FB, $link ) {
-		return $w( 'icon-list', array_merge( [ 'icon_list' => array_map( function ( $l, $k ) use ( $link ) { return [ 'text' => $l[0], 'selected_icon' => [ 'value' => '', 'library' => '' ], 'link' => $link( $l[1] ), '_id' => 'v5f' . md5( $l[0] ) ]; }, $list, array_keys( $list ) ),
-			'space_between' => [ 'unit' => 'px', 'size' => 9, 'sizes' => [] ], 'text_color' => '#CFC9D4', 'text_color_hover' => '#FFFFFF', 'text_indent' => [ 'unit' => 'px', 'size' => 0, 'sizes' => [] ], 'cls' => 'v5-flinks' ], $typo( 'icon_typography_', $FB, 16, [ 'lh' => 1.5 ] ) ) );
+		return $w( 'icon-list', array_merge( [ 'icon_list' => array_map( function ( $l ) use ( $link ) { return [ 'text' => $l[0], 'selected_icon' => [ 'value' => '', 'library' => '' ], 'link' => $link( $l[1] ), '_id' => 'v8f' . substr( md5( $l[0] ), 0, 6 ) ]; }, $list ),
+			'space_between' => [ 'unit' => 'px', 'size' => 12, 'sizes' => [] ], 'text_color' => '#CFC9D4', 'text_color_hover' => '#FFFFFF', 'text_indent' => [ 'unit' => 'px', 'size' => 0, 'sizes' => [] ], 'cls' => 'v5-flinks' ], $typo( 'icon_typography_', $FB, 15, [ 'lh' => 1.4 ] ) ) );
 	};
-	$ftitle = function ( $t ) use ( $h ) { return $h( $t, [ 'size' => 15, 'w' => '700', 'ls' => 0.1, 'up' => true, 'color' => '#FFFFFF', 'cls' => 'v5-ftitle' ] ); };
-	$fp = function ( $t ) use ( $h ) { return $h( $t, [ 'size' => 16, 'color' => '#CFC9D4', 'lh' => 1.6, 'cls' => 'v5-num' ] ); };
-	$out[] = $con( [ 'cls' => 'v5-foot', 'content_width' => 'boxed', 'boxed_width' => [ 'unit' => 'px', 'size' => 1520, 'sizes' => [] ], 'background_background' => 'classic', 'background_color' => $C['ink'], 'flex_gap' => $gap( 28 ) ], [
-		$con( [ 'cls' => 'v5-foot-grid', 'container_type' => 'grid', 'grid_columns_grid' => [ 'unit' => 'custom', 'size' => '1.2fr 1fr 1fr 1.3fr' ], 'grid_columns_grid_tablet' => [ 'unit' => 'fr', 'size' => 2 ], 'grid_columns_grid_mobile' => [ 'unit' => 'fr', 'size' => 1 ], 'grid_rows_grid' => [ 'unit' => 'fr', 'size' => 1 ], 'grid_auto_flow' => 'row', 'grid_gaps' => $gap( 36 ), 'grid_gaps_mobile' => $gap( 30 ) ], [
-			$con( [ 'flex_gap' => $gap( 12 ) ], [
-				$w( 'image', [ 'image' => $cfg['img']( 'logo' ) + [ 'alt' => 'Royal Vision Store' ], 'image_size' => 'full', 'link_to' => 'custom', 'link' => $link( '/' ), 'cls' => 'v5-flogo' ] ),
-				$fp( 'Original branded ladies suits, delivered free all over Pakistan with Cash on Delivery.' ),
-				$w( 'social-icons', [ 'social_icon_list' => [
-					[ 'social_icon' => $fa( 'fa-instagram', 'fa-brands' ), 'link' => $link( 'https://www.instagram.com/royal_vision_traders' ), '_id' => 'v5si1' ],
-					[ 'social_icon' => $fa( 'fa-facebook-f', 'fa-brands' ), 'link' => $link( 'https://www.facebook.com/royalvisiontraders' ), '_id' => 'v5si2' ],
-					[ 'social_icon' => $fa( 'fa-tiktok', 'fa-brands' ), 'link' => $link( 'https://www.tiktok.com/@royalvisiontraders' ), '_id' => 'v5si3' ] ],
-					'shape' => 'circle', 'align' => 'left', 'icon_color' => 'custom', 'icon_primary_color' => 'rgba(0,0,0,0)', 'icon_secondary_color' => '#FFFFFF', 'icon_size' => $px( 15 ), 'icon_padding' => [ 'unit' => 'em', 'size' => 0.75, 'sizes' => [] ], 'icon_spacing' => $px( 8 ),
-					'image_border_border' => 'solid', 'image_border_width' => $box( 1 ), 'image_border_color' => '#3A3640', 'hover_primary_color' => $C['purple'], 'hover_secondary_color' => '#FFFFFF', 'cls' => 'v5-social' ] ),
+	$ftitle = function ( $t ) use ( $h ) { return $h( $t, [ 'size' => 12.5, 'w' => '600', 'ls' => 0.16, 'up' => true, 'color' => '#FFFFFF', 'cls' => 'v8-ftitle' ] ); };
+	$fp = function ( $t, $cls = '' ) use ( $h ) { return $h( $t, [ 'size' => 15, 'color' => '#ADA6B6', 'lh' => 1.65, 'cls' => trim( 'v5-num ' . $cls ) ] ); };
+	$out[] = $con( [ 'cls' => 'v5-foot v8-foot', 'content_width' => 'boxed', 'boxed_width' => [ 'unit' => 'px', 'size' => 1520, 'sizes' => [] ], 'background_background' => 'classic', 'background_color' => '#17111C', 'flex_gap' => $gap( 0 ) ], [
+		$row( [ 'cls' => 'v8-foot-top', 'flex_wrap' => 'nowrap', 'flex_direction_mobile' => 'column', 'flex_align_items' => 'flex-end', 'flex_justify_content' => 'space-between', 'flex_gap' => $gap( 40 ), 'flex_gap_mobile' => $gap( 24 ) ], [
+			$con( [ 'cls' => 'v8-foot-intro', 'flex_gap' => $gap( 10 ) ], [
+				$eyebrow( 'Stay in the loop', [ 'color' => '#C9B4FF' ] ),
+				$display( 'Winter, delivered<br>to your door.', 52, [ 't' => 42, 'm' => 34, 'lh' => 1.02, 'color' => '#FFFFFF' ] ),
 			] ),
-			$con( [ 'flex_gap' => $gap( 12 ) ], [ $ftitle( 'Quick links' ), $links( [ [ 'Search', '/?s=' ], [ 'Track Your Order', $wa( 'Assalam o Alaikum, mujhe apna order track karna hai. Order number: ' ) ], [ 'Contact Information', '/contact-us/' ], [ 'Privacy Policy', '/privacy-policy/' ], [ 'Refund & Exchange Policy', '/returns-and-refunds/' ], [ 'Shipping & Delivery', '/shipping-and-delivery/' ], [ 'Terms of Service', '/terms-and-conditions/' ] ] ) ] ),
-			$con( [ 'flex_gap' => $gap( 9 ) ], [
-				$ftitle( 'Contact' ), $fp( 'Faisalabad, Pakistan' ), $fp( 'WhatsApp 0322 778 2932' ), $fp( 'Call 0334 529 8703' ), $fp( 'royalvision.online' ),
-				$w( 'image', [ 'image' => $cfg['img']( 'qr' ) + [ 'alt' => 'QR code for royalvision.online' ], 'image_size' => 'full', 'cls' => 'v5-qr' ] ),
-			] ),
-			$con( [ 'flex_gap' => $gap( 12 ) ], [
-				$ftitle( 'Newsletter signup' ), $fp( 'Get new arrivals and sale alerts first.' ),
+			$con( [ 'cls' => 'v8-foot-news', 'flex_gap' => $gap( 12 ) ], [
+				$fp( 'New arrivals and sale alerts, first. No spam.' ),
 				$w( 'form', array_merge( [ 'form_name' => 'Newsletter', 'form_fields' => [ [ 'custom_id' => 'email', 'field_type' => 'email', 'field_label' => 'Email', 'placeholder' => 'Your email address', 'required' => 'true', 'width' => '100', '_id' => 'v5nl1' ] ],
 					'show_labels' => '', 'input_size' => 'md', 'button_text' => 'Subscribe', 'button_size' => 'md', 'button_width' => '100', 'submit_actions' => [ 'email' ],
 					'email_to' => $cfg['admin_email'], 'email_subject' => 'New newsletter signup – Royal Vision', 'email_content' => '[all-fields]', 'success_message' => 'Thank you. You are subscribed.',
 					'field_text_color' => $C['ink'], 'field_background_color' => '#FFFFFF', 'field_border_radius' => $box( 999 ), 'field_border_width' => $box( 0 ),
 					'button_background_color' => $C['purple'], 'button_text_color' => '#FFFFFF', 'button_background_hover_color' => '#5B24D6', 'button_border_radius' => $box( 999 ), 'cls' => 'v5-news' ],
-					$typo( 'field_typography_', $FB, 15.5 ), $typo( 'button_typography_', $FB, 15, [ 'w' => '700' ] ) ) ),
+					$typo( 'field_typography_', $FB, 15.5 ), $typo( 'button_typography_', $FB, 14, [ 'w' => '600', 'ls' => 0.06 ] ) ) ),
+				$fp( 'Prefer WhatsApp? <a href="' . $wa( 'Assalam o Alaikum, mujhe new arrivals aur sale ki updates WhatsApp par chahiye.' ) . '" target="_blank" rel="noopener">Get updates on WhatsApp</a>', 'v8-foot-wa' ),
 			] ),
 		] ),
-		$row( [ 'cls' => 'v5-foot-bar', 'flex_justify_content' => 'space-between', 'flex_gap' => $gap( 12 ) ], [
-			$h( '© 2026 Royal Vision Store. All rights reserved.', [ 'size' => 15, 'color' => '#9E98A8' ] ),
-			$h( 'Free delivery · Cash on Delivery · 100% Original', [ 'size' => 15, 'color' => '#9E98A8' ] ),
+		$con( [ 'cls' => 'v8-foot-grid', 'container_type' => 'grid', 'grid_columns_grid' => [ 'unit' => 'custom', 'size' => '1.6fr 1fr 1fr 1fr 1.3fr' ], 'grid_columns_grid_tablet' => [ 'unit' => 'fr', 'size' => 3 ], 'grid_columns_grid_mobile' => [ 'unit' => 'fr', 'size' => 2 ], 'grid_rows_grid' => [ 'unit' => 'fr', 'size' => 1 ], 'grid_auto_flow' => 'row', 'grid_gaps' => $gap( 40, 40 ), 'grid_gaps_mobile' => $gap( 24, 34 ) ], [
+			$con( [ 'cls' => 'v8-fcol v8-fbrand', 'flex_gap' => $gap( 16 ) ], [
+				$w( 'image', [ 'image' => $cfg['img']( 'logo' ) + [ 'alt' => 'Royal Vision Store' ], 'image_size' => 'full', 'link_to' => 'custom', 'link' => $link( '/' ), 'cls' => 'v8-flogo' ] ),
+				$fp( 'Original branded ladies suits in light khaddar and karandi, delivered free all over Pakistan with Cash on Delivery.' ),
+				$w( 'social-icons', [ 'social_icon_list' => [
+					[ 'social_icon' => $fa( 'fa-instagram', 'fa-brands' ), 'link' => $link( 'https://www.instagram.com/royal_vision_traders' ), '_id' => 'v5si1' ],
+					[ 'social_icon' => $fa( 'fa-facebook-f', 'fa-brands' ), 'link' => $link( 'https://www.facebook.com/royalvisiontraders' ), '_id' => 'v5si2' ],
+					[ 'social_icon' => $fa( 'fa-tiktok', 'fa-brands' ), 'link' => $link( 'https://www.tiktok.com/@royalvisiontraders' ), '_id' => 'v5si3' ],
+					[ 'social_icon' => $fa( 'fa-whatsapp', 'fa-brands' ), 'link' => $link( $WA ), '_id' => 'v5si4' ] ],
+					'shape' => 'circle', 'align' => 'left', 'icon_color' => 'custom', 'icon_primary_color' => 'rgba(255,255,255,0.06)', 'icon_secondary_color' => '#FFFFFF', 'icon_size' => $px( 15 ), 'icon_padding' => [ 'unit' => 'em', 'size' => 0.8, 'sizes' => [] ], 'icon_spacing' => $px( 10 ),
+					'hover_primary_color' => $C['purple'], 'hover_secondary_color' => '#FFFFFF', 'cls' => 'v5-social v8-social' ] ),
+			] ),
+			$con( [ 'cls' => 'v8-fcol', 'flex_gap' => $gap( 16 ) ], [ $ftitle( 'Shop' ), $links( [ [ 'New In', '#new-arrivals' ], [ 'Winter Sale', '#sale' ], [ 'Khaddar', '#khaddar' ], [ 'Karandi', '#karandi' ], [ 'Best Sellers', '#best-sellers' ], [ 'Any 2 for Rs 6,990', '#bundle' ] ] ) ] ),
+			$con( [ 'cls' => 'v8-fcol', 'flex_gap' => $gap( 16 ) ], [ $ftitle( 'Help' ), $links( [ [ 'Track your order', $wa( 'Assalam o Alaikum, mujhe apna order track karna hai. Order number: ' ) ], [ 'Shipping & Delivery', '/shipping-and-delivery/' ], [ 'Returns & Exchange', '/returns-and-refunds/' ], [ 'Contact us', '/contact-us/' ] ] ) ] ),
+			$con( [ 'cls' => 'v8-fcol', 'flex_gap' => $gap( 16 ) ], [ $ftitle( 'Company' ), $links( [ [ 'About us', '/about-us/' ], [ 'Privacy Policy', '/privacy-policy/' ], [ 'Terms of Service', '/terms-and-conditions/' ] ] ) ] ),
+			$con( [ 'cls' => 'v8-fcol v8-fcontact', 'flex_gap' => $gap( 16 ) ], [
+				$ftitle( 'Contact' ),
+				$w( 'icon-list', array_merge( [ 'icon_list' => [
+					[ 'text' => 'WhatsApp 0322 778 2932', 'selected_icon' => $fa( 'fa-whatsapp', 'fa-brands' ), 'link' => $link( $WA ), '_id' => 'v8c1' ],
+					[ 'text' => 'Call 0334 529 8703', 'selected_icon' => $fa( 'fa-phone-alt' ), 'link' => $link( 'tel:03345298703' ), '_id' => 'v8c2' ],
+					[ 'text' => 'Faisalabad, Pakistan', 'selected_icon' => $fa( 'fa-map-marker-alt' ), 'link' => [ 'url' => '' ], '_id' => 'v8c3' ] ],
+					'space_between' => $px( 12 ), 'icon_color' => '#C9B4FF', 'icon_size' => $px( 14 ), 'text_indent' => $px( 10 ), 'text_color' => '#CFC9D4', 'text_color_hover' => '#FFFFFF', 'cls' => 'v5-flinks v8-contact' ], $typo( 'icon_typography_', $FB, 15, [ 'lh' => 1.4 ] ) ) ),
+				$row( [ 'cls' => 'v8-qr-row', 'flex_wrap' => 'nowrap', 'flex_align_items' => 'center', 'flex_gap' => $gap( 12 ) ], [
+					$w( 'image', [ 'image' => $cfg['img']( 'qr' ) + [ 'alt' => 'QR code for royalvision.online' ], 'image_size' => 'full', 'cls' => 'v8-qr' ] ),
+					$fp( 'Scan to shop<br>on your phone', 'v8-qr-text' ),
+				] ),
+			] ),
 		] ),
+		$row( [ 'cls' => 'v8-foot-bar', 'flex_justify_content' => 'space-between', 'flex_align_items' => 'center', 'flex_gap' => $gap( 14 ) ], [
+			$h( '© 2026 Royal Vision Store. All rights reserved.', [ 'size' => 13.5, 'color' => '#8E879A' ] ),
+			$row( [ 'cls' => 'v8-pay', 'flex_wrap' => 'nowrap', 'flex_align_items' => 'center', 'flex_gap' => $gap( 10 ) ], [
+				$h( 'We accept', [ 'size' => 12, 'w' => '600', 'ls' => 0.14, 'up' => true, 'color' => '#8E879A' ] ),
+				$h( 'Cash on Delivery', [ 'size' => 12, 'w' => '700', 'ls' => 0.08, 'up' => true, 'color' => '#FFFFFF', 'cls' => 'v8-chip' ] ),
+			] ),
+			$h( 'Back to top ↑', [ 'size' => 13.5, 'w' => '500', 'color' => '#CFC9D4', 'url' => '#', 'cls' => 'v8-top' ] ),
+		] ),
+		$h( 'Royal Vision', [ 'font' => $FH, 'w' => '600', 'size' => 200, 'lh' => 0.8, 'color' => 'rgba(255,255,255,0.055)', 'align' => 'center', 'cls' => 'v8-wordmark' ] ),
 	], false );
 
 	return $out;

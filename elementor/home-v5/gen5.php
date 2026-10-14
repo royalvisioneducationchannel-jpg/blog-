@@ -113,33 +113,46 @@ $rv5 = function ( $cfg ) {
 			'padding_horizontal_menu_item' => $px( 13 ), 'padding_vertical_menu_item' => $px( 6 ), 'pointer_width' => $px( 2 ), 'cls' => 'v5-nav' ], $typo( 'menu_', $FB, 12.5, [ 'w' => '600', 'ls' => 0.02 ] ) ) ),
 	], false );
 
-	// ---------- 3. hero carousel ----------
+	// ---------- 3. hero: text slider + moving "runway wall" of suits ----------
 	$slides = [
-		[ '#EBDDD2', [ 13, 16, 1 ], 'Winter Sale', 'Upto 19% Off', 'Light khaddar and karandi, 3-piece unstitched. Free delivery all over Pakistan.', 'Shop the Sale', '#new-arrivals', 'LIVE NOW' ],
-		[ '#E6DCF3', [ 19, 21, 22 ], 'New Collection', "Karandi '26", 'Soft woven karandi in deep berry, earth and gold tones.', 'Shop Karandi', '#karandi', 'JUST IN' ],
-		[ '#DDE5D9', [ 10, 7, 17 ], 'Bundle Offer', 'Any 2 for Rs 6,990', 'Mix and match any two winter suits and save up to Rs 3,590.', 'Pick Any 2', '#bundle', 'LIMITED OFFER' ],
+		[ 'Winter Sale', 'Upto 19% Off', 'Light khaddar and karandi, 3-piece unstitched. Free delivery all over Pakistan.', 'Shop the Sale', '#new-arrivals', 'LIVE NOW' ],
+		[ 'New Collection', "Karandi '26", 'Soft woven karandi in deep berry, earth and gold tones.', 'Shop Karandi', '#karandi', 'JUST IN' ],
+		[ 'Bundle Offer', 'Any 2 for Rs 6,990', 'Mix and match any two winter suits. Tap + Bundle on the ones you like.', 'Pick Any 2', '#new-arrivals', 'LIMITED OFFER' ],
 	];
 	$slideEls = []; $items = [];
 	foreach ( $slides as $k => $s ) {
-		$items[] = [ 'slide_title' => 'Slide ' . ( $k + 1 ), '_id' => 'v5s' . $k ];
-		$slideEls[] = $con( [ 'cls' => 'v5-slide', 'background_background' => 'classic', 'background_color' => $s[0] ], [
-			$con( [ 'cls' => 'v5-slide-imgs', 'flex_direction' => 'row', 'flex_wrap' => 'nowrap' ], array_map( function ( $id ) use ( $img, $P ) { return $img( $P[ $id ]['front'], $P[ $id ]['name'] . ' suit' ); }, $s[1] ) ),
-			$con( [ 'cls' => 'v5-slide-text', 'flex_justify_content' => 'center', 'flex_gap' => $gap( 14 ) ], [
-				$eyebrow( $s[2] ),
-				$h( $s[3], [ 'tag' => $k === 0 ? 'h1' : 'h2', 'font' => $FH, 'w' => '600', 'size' => 104, 't' => 72, 'm' => 46, 'lh' => 0.95, 'cls' => 'v5-hero-title' ] ),
-				$p( $s[4], [ 'size' => 18, 'm' => 16, 'cls' => 'v5-hero-line' ] ),
-				$row( [ 'cls' => 'v5-hero-ctas', 'flex_align_items' => 'center', 'flex_gap' => $gap( 14 ) ], [
-					$btn( $s[5], $s[6] ),
-					$h( $s[7], [ 'size' => 14.5, 'm' => 12.5, 'w' => '700', 'ls' => 0.16, 'color' => $C['purple'], 'cls' => 'v5-live' ] ),
-				] ),
+		$items[] = [ 'slide_title' => 'Slide ' . ( $k + 1 ), '_id' => 'v6s' . $k ];
+		$slideEls[] = $con( [ 'cls' => 'v6-slide', 'flex_justify_content' => 'center', 'flex_gap' => $gap( 16 ) ], [
+			$eyebrow( $s[0] ),
+			$h( $s[1], [ 'tag' => $k === 0 ? 'h1' : 'h2', 'font' => $FH, 'w' => '600', 'size' => 104, 't' => 68, 'm' => 50, 'lh' => 0.95, 'cls' => 'v6-title' ] ),
+			$p( $s[2], [ 'size' => 18, 'm' => 16, 'cls' => 'v6-line' ] ),
+			$row( [ 'cls' => 'v5-hero-ctas', 'flex_align_items' => 'center', 'flex_gap' => $gap( 14 ) ], [
+				$btn( $s[3], $s[4] ),
+				$h( $s[5], [ 'size' => 14.5, 'm' => 12.5, 'w' => '700', 'ls' => 0.16, 'color' => $C['purple'], 'cls' => 'v5-live' ] ),
 			] ),
 		] );
 	}
-	$out[] = $con( [ 'cls' => 'v5-hero-wrap' ], [
-		array_merge( $w( 'nested-carousel', [ 'carousel_items' => $items, 'slides_to_show' => '1', 'slides_to_show_tablet' => '1', 'slides_to_show_mobile' => '1', 'slides_to_scroll' => '1',
-			'autoplay' => 'yes', 'autoplay_speed' => 6000, 'pause_on_hover' => 'yes', 'pause_on_interaction' => 'yes', 'infinite' => 'yes', 'speed' => 900,
-			'arrows' => 'yes', 'pagination' => 'bullets', 'image_spacing_custom' => $px( 0 ),
-			'navigation_previous_icon' => $fa( 'fa-chevron-left' ), 'navigation_next_icon' => $fa( 'fa-chevron-right' ), 'cls' => 'v5-hero' ] ), [ 'elements' => $slideEls ] ),
+	$tile = function ( $id ) use ( $a, $img, $h, $wa, $P ) {
+		$p = $P[ $id ];
+		return $a( $wa( "Assalam o Alaikum, mujhe {$p['name']} ({$p['fabric']}, {$p['price']}) chahiye." ), [ 'cls' => 'v6-tile' ], [
+			$img( $p['front'], $p['name'] . ', ' . $p['fabric'] . ' suit' ),
+			$h( $p['name'] . ' <span>· ' . $p['fabric'] . '</span>', [ 'size' => 13, 'w' => '600', 'lh' => 1.2, 'cls' => 'v6-chip' ] ),
+		] );
+	};
+	// Each column lists its suits twice so the CSS loop (translateY -50%) is seamless.
+	$col = function ( $ids ) use ( $con, $tile ) { return $con( [ 'cls' => 'v6-col' ], array_map( $tile, array_merge( $ids, $ids ) ) ); };
+	$out[] = $con( [ 'cls' => 'v6-hero', 'flex_direction' => 'row', 'flex_wrap' => 'nowrap', 'background_background' => 'classic', 'background_color' => '#EBDDD2' ], [
+		$con( [ 'cls' => 'v6-hero-left', 'flex_justify_content' => 'center' ], [
+			array_merge( $w( 'nested-carousel', [ 'carousel_items' => $items, 'slides_to_show' => '1', 'slides_to_show_tablet' => '1', 'slides_to_show_mobile' => '1', 'slides_to_scroll' => '1',
+				'autoplay' => 'yes', 'autoplay_speed' => 6000, 'pause_on_hover' => 'yes', 'pause_on_interaction' => '', 'infinite' => 'yes', 'speed' => 700,
+				'arrows' => 'yes', 'pagination' => 'bullets', 'image_spacing_custom' => $px( 40 ),
+				'navigation_previous_icon' => $fa( 'fa-arrow-left' ), 'navigation_next_icon' => $fa( 'fa-arrow-right' ), 'cls' => 'v6-text-car' ] ), [ 'elements' => $slideEls ] ),
+		] ),
+		$con( [ 'cls' => 'v6-wall', 'flex_direction' => 'row', 'flex_wrap' => 'nowrap' ], [
+			$col( [ 13, 1, 16, 7, 19, 3 ] ),
+			$col( [ 21, 10, 17, 22, 5, 24 ] ),
+			$col( [ 14, 18, 20, 9, 11, 6 ] ),
+		] ),
 	], false );
 
 	// ---------- 4. sale marquee ----------

@@ -278,3 +278,56 @@ body:has(.v5-tray.is-open) .rvt-wao-fab{opacity:0;pointer-events:none}
 }
 @media (prefers-reduced-motion:reduce){.e-con.v5-tray,.e-con.v5-tray.is-open{transition:none}.e-con.v5-tray.pulse{animation:none}}
 @media (max-width:480px){.v5-timer .rv-st-label{display:none}.v5-timer .rv-st-time:before{content:"Ends in ";color:#FFFFFF;text-transform:uppercase;letter-spacing:.04em}.v5-timer .rv-sale-timer{font-size:10.5px;padding:9px 4px}}
+
+/* ===== hero v6: text slider + moving runway wall ===== */
+.e-con.v6-hero{position:relative;height:clamp(560px,52vw,780px);overflow:hidden;padding:0!important;transition:background-color .9s ease}
+.e-con.v6-hero-left{flex:0 0 46%!important;width:46%!important;padding:0 clamp(16px,3vw,48px) 0 clamp(24px,5vw,80px)!important;position:relative;z-index:2}
+.v6-text-car{width:100%;position:relative}
+.v6-text-car .e-n-carousel{margin-bottom:0!important;padding-bottom:64px}
+.e-con.v6-slide{padding:0!important}
+.v6-line p{margin:0;max-width:24em;color:#4A4350}
+/* story-style progress bars instead of dots */
+.v6-text-car .swiper-pagination{position:absolute!important;left:0!important;right:auto!important;top:auto!important;bottom:10px!important;width:min(300px,60%)!important;margin:0!important;transform:none!important;display:flex!important;gap:8px}
+.v6-text-car .swiper-pagination .swiper-pagination-bullet{position:relative;flex:1 1 0;width:auto!important;height:14px!important;margin:0!important;border-radius:0!important;background:transparent!important;opacity:1!important}
+.v6-text-car .swiper-pagination-bullet:before,.v6-text-car .swiper-pagination-bullet:after{content:"";position:absolute;left:0;right:0;top:5px;height:3px;border-radius:3px}
+.v6-text-car .swiper-pagination-bullet:before{background:rgba(26,26,26,.16)}
+.v6-text-car .swiper-pagination-bullet:after{background:#1A1A1A;transform:scaleX(0);transform-origin:left}
+.v6-text-car .swiper-pagination-bullet-active:after{animation:v6Fill 6s linear forwards}
+.v6-text-car:hover .swiper-pagination-bullet-active:after{animation-play-state:paused}
+@keyframes v6Fill{to{transform:scaleX(1)}}
+.v6-text-car .elementor-swiper-button{position:absolute!important;top:auto!important;bottom:0!important;width:36px;height:36px;border-radius:50%;border:1px solid rgba(26,26,26,.25);display:flex!important;align-items:center;justify-content:center;transform:none!important;--arrow-normal-color:#1A1A1A;--arrow-size:12px;transition:background .2s,border-color .2s}
+.v6-text-car .elementor-swiper-button svg{width:12px;height:12px;fill:#1A1A1A!important}
+.v6-text-car .elementor-swiper-button:hover{background:#1A1A1A;border-color:#1A1A1A}
+.v6-text-car .elementor-swiper-button:hover svg{fill:#FFFFFF!important}
+.v6-text-car .elementor-swiper-button-prev{left:calc(min(300px,60%) + 24px)!important;right:auto!important}
+.v6-text-car .elementor-swiper-button-next{left:calc(min(300px,60%) + 68px)!important;right:auto!important}
+.swiper-initialized .swiper-slide-active .v6-slide > *,.swiper-initialized .swiper-slide-active.v6-slide > *{animation:v5Up .8s cubic-bezier(.2,.7,.2,1) both}
+.swiper-initialized .swiper-slide-active.v6-slide > *:nth-child(2){animation-delay:.1s}
+.swiper-initialized .swiper-slide-active.v6-slide > *:nth-child(3){animation-delay:.2s}
+.swiper-initialized .swiper-slide-active.v6-slide > *:nth-child(4){animation-delay:.3s}
+/* the wall: three columns drifting in opposite directions, tilted, fading at the edges */
+.e-con.v6-wall{flex:1 1 auto!important;height:100%;gap:16px!important;padding:0 20px!important;transform:rotate(-6deg) scale(1.16);transform-origin:center;-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 14%,#000 86%,transparent 100%);mask-image:linear-gradient(180deg,transparent 0,#000 14%,#000 86%,transparent 100%)}
+.e-con.v6-col{flex:1 1 0!important;min-width:0;width:auto!important;gap:0!important;animation:v6Up 46s linear infinite;will-change:transform}
+.e-con.v6-col:nth-child(2){animation-name:v6Down;animation-duration:54s}
+.e-con.v6-col:nth-child(3){animation-duration:40s}
+@keyframes v6Up{from{transform:translateY(0)}to{transform:translateY(-50%)}}
+@keyframes v6Down{from{transform:translateY(-50%)}to{transform:translateY(0)}}
+.v6-wall:hover .v6-col{animation-play-state:paused}
+.e-con.v6-tile{position:relative;display:block;flex:none!important;aspect-ratio:3/4;margin:0 0 16px!important;padding:0!important;border-radius:14px;overflow:hidden;background:#F6F1EC;box-shadow:0 18px 34px -22px rgba(42,24,56,.55);transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s}
+.v6-tile > .v5-img{position:absolute!important;inset:0;margin:0}
+.v6-tile > .v5-img img{width:100%!important;height:100%!important;max-width:none!important;object-fit:cover;object-position:center top;mix-blend-mode:multiply}
+.e-con.v6-tile:hover{transform:translateY(-4px) scale(1.03);box-shadow:0 26px 44px -20px rgba(42,24,56,.6)}
+.v6-chip{position:absolute!important;left:8px;bottom:8px;width:auto!important;max-width:calc(100% - 16px);z-index:2;opacity:0;transform:translateY(6px);transition:opacity .3s,transform .3s}
+.v6-chip .elementor-heading-title{background:rgba(255,255,255,.95);padding:6px 10px;border-radius:999px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.v6-chip span{color:#77707D;font-weight:500;margin-left:2px}
+.e-con.v6-tile:hover .v6-chip,.e-con.v6-tile:focus-visible .v6-chip{opacity:1;transform:none}
+@media (hover:none){.v6-chip{opacity:1;transform:none}}
+@media (max-width:1024px){.e-con.v6-hero{height:600px}.e-con.v6-hero-left{flex-basis:50%!important;width:50%!important}}
+@media (max-width:767px){
+.e-con.v6-hero{flex-direction:column!important;height:auto}
+.e-con.v6-wall{order:-1;flex:none!important;width:100%!important;height:340px;padding:0 10px!important;gap:10px!important;transform:rotate(-5deg) scale(1.12)}
+.e-con.v6-tile{margin-bottom:10px!important;border-radius:10px}
+.v6-chip .elementor-heading-title{font-size:10.5px;padding:4px 7px}
+.e-con.v6-hero-left{flex:none!important;width:100%!important;padding:6px 20px 28px!important}
+}
+@media (prefers-reduced-motion:reduce){.e-con.v6-col{animation:none}.v6-text-car .swiper-pagination-bullet-active:after{animation:none;transform:none}}

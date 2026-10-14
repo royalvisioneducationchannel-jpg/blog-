@@ -215,3 +215,15 @@ body{background:#FFFFFF}
 .swiper-initialized .swiper-slide-active .v5-slide-text > *{animation:none}
 .v5-slide-imgs img{transition:none}
 }
+
+/* fixes after first render */
+.e-con.v5-slide{height:clamp(520px,50vw,760px)!important}
+.rvt-actionbar{display:none!important}
+.v5-ann-rot span:nth-child(1){animation-delay:-.6s}
+.v5-ann-rot span:nth-child(2){animation-delay:3.4s}
+.v5-ann-rot span:nth-child(3){animation-delay:7.4s}
+.v5-ann-rot span:nth-child(4){animation-delay:11.4s}
+.v5-sale-text .elementor-widget-text-editor,.v5-sale-text .elementor-widget-text-editor p{color:#E6DDF0!important}
+.v5-hero-line,.v5-hero-line p{color:#4A4350!important}
+.v5-flinks .elementor-icon-list-text,.v5-head-wa .elementor-icon-list-text,.v5-news .elementor-field,.v5-news .elementor-button,.v5-trust .elementor-icon-box-description,.v5-trust .elementor-icon-box-title{font-family:'Jost',sans-serif!important}
+@media (max-width:767px){.e-con.v5-slide{height:auto!important}}

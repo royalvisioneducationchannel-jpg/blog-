@@ -1,0 +1,332 @@
+<?php
+// Royal Vision fashion home page, design v5: builds Elementor data (containers + native widgets, no HTML widget).
+// Loaded server-side and run as: $data = $rv5( $cfg );
+$rv5 = function ( $cfg ) {
+	// Royal Vision home, design v5. Native Elementor containers + widgets only (no HTML widget).
+	$ID = 0;
+	$nid = function () use ( &$ID ) { $ID++; return substr( md5( 'rv5home' . $ID ), 0, 7 ); };
+	$C = [ 'ink' => '#1A1A1A', 'plum' => '#2A1838', 'purple' => '#7B3FF2', 'line' => '#ECE6E1', 'mute' => '#77707D', 'body' => '#4A4350', 'lilac' => '#F2ECFE', 'sand' => '#EBDDD2', 'wine' => '#7A2230' ];
+	$FH = 'Cormorant'; $FB = 'Jost';
+	$WA = 'https://wa.me/923227782932';
+	$wa = function ( $t ) use ( $WA ) { return $WA . '?text=' . rawurlencode( $t ); };
+
+	$px = function ( $n ) { return [ 'unit' => 'px', 'size' => $n, 'sizes' => [] ]; };
+	$box = function ( $t, $r = null, $b = null, $l = null ) { $r = $r ?? $t; $b = $b ?? $t; $l = $l ?? $r; return [ 'unit' => 'px', 'top' => (string) $t, 'right' => (string) $r, 'bottom' => (string) $b, 'left' => (string) $l, 'isLinked' => ( $t === $r && $r === $b && $b === $l ) ]; };
+	$gap = function ( $c, $r = null ) { $r = $r ?? $c; return [ 'column' => (string) $c, 'row' => (string) $r, 'isLinked' => $c === $r, 'unit' => 'px', 'size' => $c ]; };
+	$link = function ( $url ) { return [ 'url' => $url, 'is_external' => 0 === strpos( $url, 'http' ) ? 'on' : '', 'nofollow' => '' ]; };
+
+	$con = function ( $s, $kids = [], $inner = true ) use ( $nid, $box, $gap ) {
+		$base = [ 'content_width' => 'full', 'flex_direction' => 'column', 'flex_gap' => $gap( 0 ), 'padding' => $box( 0 ), 'padding_tablet' => $box( 0 ), 'padding_mobile' => $box( 0 ) ];
+		if ( isset( $s['cls'] ) ) { $s['css_classes'] = $s['cls']; $s['_css_classes'] = $s['cls']; unset( $s['cls'] ); }
+		if ( isset( $s['anchor'] ) ) { $s['_element_id'] = $s['anchor']; unset( $s['anchor'] ); }
+		return [ 'id' => $nid(), 'elType' => 'container', 'isInner' => $inner, 'settings' => array_merge( $base, $s ), 'elements' => $kids ];
+	};
+	$row = function ( $s, $kids = [] ) use ( $con ) { return $con( array_merge( [ 'flex_direction' => 'row', 'flex_wrap' => 'wrap' ], $s ), $kids ); };
+	$a = function ( $url, $s, $kids ) use ( $con, $link ) { return $con( array_merge( [ 'html_tag' => 'a', 'link' => $link( $url ) ], $s ), $kids ); };
+	$w = function ( $type, $s ) use ( $nid ) {
+		if ( isset( $s['cls'] ) ) { $s['_css_classes'] = $s['cls']; unset( $s['cls'] ); }
+		return [ 'id' => $nid(), 'elType' => 'widget', 'widgetType' => $type, 'settings' => $s, 'elements' => [] ];
+	};
+	$typo = function ( $p, $fam, $size, $o = [] ) use ( $px ) {
+		$t = [ $p . 'typography_typography' => 'custom', $p . 'typography_font_family' => $fam, $p . 'typography_font_size' => $px( $size ), $p . 'typography_font_weight' => (string) ( $o['w'] ?? '400' ) ];
+		if ( isset( $o['t'] ) ) $t[ $p . 'typography_font_size_tablet' ] = $px( $o['t'] );
+		if ( isset( $o['m'] ) ) $t[ $p . 'typography_font_size_mobile' ] = $px( $o['m'] );
+		if ( isset( $o['lh'] ) ) $t[ $p . 'typography_line_height' ] = [ 'unit' => 'em', 'size' => $o['lh'], 'sizes' => [] ];
+		if ( isset( $o['ls'] ) ) $t[ $p . 'typography_letter_spacing' ] = [ 'unit' => 'em', 'size' => $o['ls'], 'sizes' => [] ];
+		if ( ! empty( $o['up'] ) ) $t[ $p . 'typography_text_transform' ] = 'uppercase';
+		return $t;
+	};
+	$h = function ( $text, $o = [] ) use ( $w, $typo, $C, $FB ) {
+		$s = array_merge( [ 'title' => $text, 'header_size' => $o['tag'] ?? 'div', 'title_color' => $o['color'] ?? $C['ink'] ], $typo( '', $o['font'] ?? $FB, $o['size'] ?? 16, $o ) );
+		if ( isset( $o['align'] ) ) $s['align'] = $o['align'];
+		if ( isset( $o['url'] ) ) $s['link'] = [ 'url' => $o['url'], 'is_external' => '', 'nofollow' => '' ];
+		if ( isset( $o['cls'] ) ) $s['cls'] = $o['cls'];
+		return $w( 'heading', $s );
+	};
+	$eyebrow = function ( $t, $o = [] ) use ( $h, $C ) { return $h( $t, array_merge( [ 'size' => 14.5, 'w' => '500', 'ls' => 0.28, 'up' => true, 'lh' => 1.4, 'color' => $C['purple'], 'm' => 12.5 ], $o ) ); };
+	$display = function ( $t, $size, $o = [] ) use ( $h, $FH ) { return $h( $t, array_merge( [ 'tag' => 'h2', 'font' => $FH, 'w' => '600', 'size' => $size, 'lh' => 1 ], $o ) ); };
+	$p = function ( $text, $o = [] ) use ( $w, $typo, $C, $FB ) {
+		$s = array_merge( [ 'editor' => '<p>' . $text . '</p>', 'text_color' => $o['color'] ?? $C['body'] ], $typo( '', $FB, $o['size'] ?? 17, array_merge( [ 'lh' => 1.6 ], $o ) ) );
+		if ( isset( $o['align'] ) ) $s['align'] = $o['align'];
+		if ( isset( $o['cls'] ) ) $s['cls'] = $o['cls'];
+		return $w( 'text-editor', $s );
+	};
+	$btn = function ( $text, $url, $o = [] ) use ( $w, $typo, $box, $C, $FB, $link ) {
+		$light = ( $o['style'] ?? 'dark' ) === 'light';
+		$s = array_merge( [ 'text' => $text, 'link' => $link( $url ),
+			'button_text_color' => $light ? $C['ink'] : '#FFFFFF', 'background_color' => $light ? '#FFFFFF' : $C['ink'],
+			'hover_color' => $light ? $C['ink'] : '#FFFFFF', 'button_background_hover_color' => $light ? '#C9B4FF' : $C['purple'],
+			'border_radius' => $box( 999 ), 'text_padding' => $box( $o['py'] ?? 21, $o['px'] ?? 38 ) ],
+			$typo( '', $FB, $o['size'] ?? 15.5, [ 'w' => '500', 'ls' => $o['ls'] ?? 0.18, 'up' => $o['up'] ?? true, 'lh' => 1.2 ] ) );
+		if ( isset( $o['icon'] ) ) { $s['selected_icon'] = $o['icon']; $s['icon_align'] = 'left'; $s['icon_indent'] = [ 'unit' => 'px', 'size' => 10, 'sizes' => [] ]; }
+		if ( isset( $o['align'] ) ) $s['align'] = $o['align'];
+		$s['cls'] = trim( 'v5-btn ' . ( $o['cls'] ?? '' ) );
+		return $w( 'button', $s );
+	};
+	$img = function ( $key, $alt, $cls = '' ) use ( $w, $cfg ) {
+		$src = $cfg['img']( $key );
+		return $w( 'image', [ 'image' => [ 'id' => $src['id'], 'url' => $src['url'], 'alt' => $alt ], 'image_size' => 'full', 'cls' => trim( 'v5-img ' . $cls ) ] );
+	};
+	$fa = function ( $name, $lib = 'fa-solid' ) { return [ 'value' => ( $lib === 'fa-brands' ? 'fab ' : 'fas ' ) . $name, 'library' => $lib ]; };
+	$section = function ( $s, $kids ) use ( $con, $box, $gap ) {
+		return $con( array_merge( [ 'content_width' => 'boxed', 'boxed_width' => [ 'unit' => 'px', 'size' => 1520, 'sizes' => [] ], 'flex_gap' => $gap( 26 ) ], $s ), $kids, false );
+	};
+
+	// ---------- data ----------
+	$RAW = [ [ 'Tropical Bloom', 'Khaddar' ], [ 'Ice Slit', 'Khaddar' ], [ 'Janan', 'Khaddar' ], [ 'Terilis', 'Khaddar' ], [ 'Vela', 'Khaddar' ], [ 'Limelight', 'Khaddar' ], [ 'Maya', 'Khaddar' ], [ 'Serena', 'Khaddar' ], [ 'Solid', 'Khaddar' ], [ 'Gulaal', 'Khaddar' ], [ 'Greenry', 'Khaddar' ], [ 'Verdant', 'Khaddar' ], [ 'Resham', 'Khaddar' ], [ 'Floral', 'Khaddar' ], [ 'Hermony', 'Khaddar' ], [ 'Gold', 'Karandi' ], [ 'Peachy', 'Karandi' ], [ 'Texture', 'Karandi' ], [ 'Berry', 'Karandi' ], [ 'Zareen', 'Karandi' ], [ 'Miraaz', 'Karandi' ], [ 'Aura', 'Karandi' ], [ 'Twilight', 'Karandi' ], [ 'Dhani', 'Karandi' ] ];
+	$P = [];
+	foreach ( $RAW as $i => $r ) {
+		$id = $i + 1; $n = str_pad( (string) $id, 2, '0', STR_PAD_LEFT ); $kh = $r[1] === 'Khaddar';
+		$compare = $kh ? 4890 : 5290; $price = $kh ? 3990 : 4290;
+		$P[ $id ] = [ 'name' => $r[0], 'fabric' => $r[1], 'price' => 'Rs ' . number_format( $price ), 'compare' => 'Rs ' . number_format( $compare ),
+			'off' => '-' . round( ( 1 - $price / $compare ) * 100 ) . '%', 'new' => $id % 4 === 1, 'front' => "p$n-front", 'detail' => "p$n-detail" ];
+	}
+
+	$out = [];
+
+	// ---------- 1. announcement ----------
+	$ann = [ 'Free delivery all over Pakistan', 'Winter Sale is live · upto 19% off', 'Any 2 suits for Rs 6,990', 'Cash on Delivery · 100% original brands' ];
+	$out[] = $con( [ 'cls' => 'v5-ann', 'flex_justify_content' => 'center', 'flex_align_items' => 'center', 'min_height' => $px( 40 ), 'background_background' => 'classic', 'background_color' => $C['ink'] ], [
+		$h( implode( '', array_map( function ( $t ) { return '<span>' . $t . '</span>'; }, $ann ) ), [ 'size' => 15, 'm' => 12.5, 'w' => '600', 'ls' => 0.08, 'up' => true, 'color' => '#FFFFFF', 'align' => 'center', 'cls' => 'v5-ann-rot' ] ),
+	], false );
+
+	// ---------- 2. header ----------
+	$out[] = $con( [ 'cls' => 'v5-head', 'sticky' => 'top', 'sticky_on' => [ 'desktop', 'tablet', 'mobile' ], 'z_index' => 40, 'background_background' => 'classic', 'background_color' => '#FFFFFF',
+		'border_border' => 'solid', 'border_width' => [ 'unit' => 'px', 'top' => '0', 'right' => '0', 'bottom' => '1', 'left' => '0', 'isLinked' => false ], 'border_color' => $C['line'] ], [
+		$con( [ 'cls' => 'v5-head-bar', 'flex_direction' => 'row', 'flex_wrap' => 'nowrap', 'flex_align_items' => 'center' ], [
+			$con( [ 'cls' => 'v5-head-l', 'flex_direction' => 'row', 'flex_wrap' => 'nowrap', 'flex_align_items' => 'center', 'flex_gap' => $gap( 4 ) ], [
+				$w( 'search-form', [ 'skin' => 'full_screen', 'placeholder' => 'Search suits…', 'toggle_color' => $C['ink'], 'toggle_size' => $px( 42 ), 'cls' => 'v5-search' ] ),
+				$w( 'icon-list', array_merge( [ 'view' => 'inline', 'icon_list' => [ [ 'text' => '0322 778 2932', 'selected_icon' => $fa( 'fa-whatsapp', 'fa-brands' ), 'link' => $link( $WA ), '_id' => 'v5wa' ] ],
+					'icon_color' => '#25A954', 'text_color' => $C['ink'], 'text_color_hover' => $C['purple'], 'icon_size' => $px( 17 ), 'text_indent' => $px( 6 ), 'cls' => 'v5-head-wa' ], $typo( 'icon_typography_', $FB, 15.5, [ 'w' => '600' ] ) ) ),
+			] ),
+			$w( 'image', [ 'image' => $cfg['img']( 'logo' ) + [ 'alt' => 'Royal Vision Store' ], 'image_size' => 'full', 'link_to' => 'custom', 'link' => $link( '/' ), 'cls' => 'v5-logo' ] ),
+			$con( [ 'cls' => 'v5-head-r', 'flex_direction' => 'row', 'flex_wrap' => 'nowrap', 'flex_justify_content' => 'flex-end', 'flex_align_items' => 'center', 'flex_gap' => $gap( 2 ) ], [
+				$w( 'icon', [ 'selected_icon' => [ 'value' => 'far fa-user', 'library' => 'fa-regular' ], 'link' => $link( '/my-account/' ), 'primary_color' => $C['ink'], 'hover_primary_color' => $C['purple'], 'size' => $px( 19 ), 'cls' => 'v5-hicon' ] ),
+				$w( 'icon', [ 'selected_icon' => [ 'value' => 'far fa-heart', 'library' => 'fa-regular' ], 'link' => $link( '/wishlist/' ), 'primary_color' => $C['ink'], 'hover_primary_color' => $C['purple'], 'size' => $px( 19 ), 'cls' => 'v5-hicon' ] ),
+				$w( 'woocommerce-menu-cart', [ 'icon' => 'bag-light', 'items_indicator' => 'bubble', 'hide_empty_indicator' => '', 'show_subtotal' => '', 'toggle_button_text_color' => $C['ink'], 'toggle_button_icon_color' => $C['ink'], 'toggle_button_background_color' => 'rgba(0,0,0,0)', 'toggle_button_border_width' => $px( 0 ), 'items_indicator_text_color' => '#FFFFFF', 'items_indicator_background_color' => $C['purple'], 'cls' => 'v5-cart' ] ),
+			] ),
+		] ),
+		$w( 'nav-menu', array_merge( [ 'menu' => $cfg['menu'], 'layout' => 'horizontal', 'align_items' => 'center', 'pointer' => 'underline', 'animation_line' => 'fade', 'dropdown' => 'none',
+			'color_menu_item' => $C['ink'], 'color_menu_item_hover' => $C['purple'], 'pointer_color_menu_item_hover' => $C['ink'], 'color_menu_item_active' => $C['ink'], 'pointer_color_menu_item_active' => $C['ink'],
+			'padding_horizontal_menu_item' => $px( 13 ), 'padding_vertical_menu_item' => $px( 6 ), 'pointer_width' => $px( 2 ), 'cls' => 'v5-nav' ], $typo( 'menu_', $FB, 12.5, [ 'w' => '600', 'ls' => 0.02 ] ) ) ),
+	], false );
+
+	// ---------- 3. hero carousel ----------
+	$slides = [
+		[ '#EBDDD2', [ 13, 16, 1 ], 'Winter Sale', 'Upto 19% Off', 'Light khaddar and karandi, 3-piece unstitched. Free delivery all over Pakistan.', 'Shop the Sale', '#new-arrivals', 'LIVE NOW' ],
+		[ '#E6DCF3', [ 19, 21, 22 ], 'New Collection', "Karandi '26", 'Soft woven karandi in deep berry, earth and gold tones.', 'Shop Karandi', '#karandi', 'JUST IN' ],
+		[ '#DDE5D9', [ 10, 7, 17 ], 'Bundle Offer', 'Any 2 for Rs 6,990', 'Mix and match any two winter suits and save up to Rs 3,590.', 'Pick Any 2', '#bundle', 'LIMITED OFFER' ],
+	];
+	$slideEls = []; $items = [];
+	foreach ( $slides as $k => $s ) {
+		$items[] = [ 'slide_title' => 'Slide ' . ( $k + 1 ), '_id' => 'v5s' . $k ];
+		$slideEls[] = $con( [ 'cls' => 'v5-slide', 'background_background' => 'classic', 'background_color' => $s[0] ], [
+			$con( [ 'cls' => 'v5-slide-imgs', 'flex_direction' => 'row', 'flex_wrap' => 'nowrap' ], array_map( function ( $id ) use ( $img, $P ) { return $img( $P[ $id ]['front'], $P[ $id ]['name'] . ' suit' ); }, $s[1] ) ),
+			$con( [ 'cls' => 'v5-slide-text', 'flex_justify_content' => 'center', 'flex_gap' => $gap( 14 ) ], [
+				$eyebrow( $s[2] ),
+				$h( $s[3], [ 'tag' => $k === 0 ? 'h1' : 'h2', 'font' => $FH, 'w' => '600', 'size' => 104, 't' => 72, 'm' => 46, 'lh' => 0.95, 'cls' => 'v5-hero-title' ] ),
+				$p( $s[4], [ 'size' => 18, 'm' => 16, 'cls' => 'v5-hero-line' ] ),
+				$row( [ 'cls' => 'v5-hero-ctas', 'flex_align_items' => 'center', 'flex_gap' => $gap( 14 ) ], [
+					$btn( $s[5], $s[6] ),
+					$h( $s[7], [ 'size' => 14.5, 'm' => 12.5, 'w' => '700', 'ls' => 0.16, 'color' => $C['purple'], 'cls' => 'v5-live' ] ),
+				] ),
+			] ),
+		] );
+	}
+	$out[] = $con( [ 'cls' => 'v5-hero-wrap' ], [
+		array_merge( $w( 'nested-carousel', [ 'carousel_items' => $items, 'slides_to_show' => '1', 'slides_to_show_tablet' => '1', 'slides_to_show_mobile' => '1', 'slides_to_scroll' => '1',
+			'autoplay' => 'yes', 'autoplay_speed' => 6000, 'pause_on_hover' => 'yes', 'pause_on_interaction' => 'yes', 'infinite' => 'yes', 'speed' => 900,
+			'arrows' => 'yes', 'pagination' => 'bullets', 'image_spacing_custom' => $px( 0 ),
+			'navigation_previous_icon' => $fa( 'fa-chevron-left' ), 'navigation_next_icon' => $fa( 'fa-chevron-right' ), 'cls' => 'v5-hero' ] ), [ 'elements' => $slideEls ] ),
+	], false );
+
+	// ---------- 4. sale marquee ----------
+	$marqItems = [ 'Winter Sale is live', 'Upto 19% off', 'Any 2 suits for Rs 6,990', 'Free delivery all over Pakistan', 'Cash on Delivery', '100% original brands' ];
+	$t = ''; for ( $k = 0; $k < 4; $k++ ) foreach ( $marqItems as $it ) $t .= '<span>' . $it . '</span><i>✦</i>';
+	$out[] = $con( [ 'cls' => 'v5-marq', 'flex_justify_content' => 'center', 'min_height' => $px( 58 ), 'background_background' => 'classic', 'background_color' => $C['purple'] ], [
+		$h( $t, [ 'size' => 16, 'm' => 14, 'w' => '500', 'ls' => 0.2, 'up' => true, 'color' => '#FFFFFF', 'cls' => 'v5-marq-track' ] ),
+	], false );
+
+	// ---------- 5. trust row ----------
+	$trust = function ( $t, $sub, $icon ) use ( $w, $typo, $px, $C, $FB ) {
+		return $w( 'icon-box', array_merge( [ 'selected_icon' => $icon, 'view' => 'stacked', 'shape' => 'circle', 'position' => 'left', 'title_text' => $t, 'description_text' => $sub, 'title_size' => 'div',
+			'primary_color' => $C['lilac'], 'secondary_color' => $C['purple'], 'icon_size' => $px( 20 ), 'icon_padding' => $px( 14 ), 'icon_space' => $px( 14 ), 'title_bottom_space' => $px( 2 ),
+			'title_color' => $C['ink'], 'description_color' => $C['mute'], 'content_vertical_alignment' => 'middle', 'cls' => 'v5-trust' ],
+			$typo( 'title_typography_', $FB, 16, [ 'w' => '700', 'lh' => 1.35 ] ), $typo( 'description_typography_', $FB, 15, [ 'lh' => 1.35, 'm' => 13 ] ) ) );
+	};
+	$out[] = $con( [ 'cls' => 'v5-trust-row', 'content_width' => 'boxed', 'boxed_width' => [ 'unit' => 'px', 'size' => 1520, 'sizes' => [] ],
+		'border_border' => 'solid', 'border_width' => [ 'unit' => 'px', 'top' => '0', 'right' => '0', 'bottom' => '1', 'left' => '0', 'isLinked' => false ], 'border_color' => $C['line'] ], [
+		$con( [ 'cls' => 'v5-trust-grid', 'container_type' => 'grid', 'grid_columns_grid' => [ 'unit' => 'fr', 'size' => 4 ], 'grid_columns_grid_tablet' => [ 'unit' => 'fr', 'size' => 2 ], 'grid_columns_grid_mobile' => [ 'unit' => 'fr', 'size' => 2 ], 'grid_rows_grid' => [ 'unit' => 'fr', 'size' => 1 ], 'grid_auto_flow' => 'row', 'grid_gaps' => $gap( 0 ) ], [
+			$trust( 'Free Delivery', 'All over Pakistan', $fa( 'fa-truck' ) ),
+			$trust( 'Cash on Delivery', 'Pay when it arrives', $fa( 'fa-money-bill-wave' ) ),
+			$trust( '100% Original', 'Sealed brand packet', $fa( 'fa-shield-alt' ) ),
+			$trust( '7-Day Exchange', 'Easy and hassle-free', $fa( 'fa-sync-alt' ) ),
+		] ),
+	], false );
+
+	// ---------- 6. collections ----------
+	$col = function ( $label, $id, $bg, $url ) use ( $a, $img, $h, $P, $FH ) {
+		return $a( $url, [ 'cls' => 'v5-col', 'background_background' => 'classic', 'background_color' => $bg ], [
+			$img( $P[ $id ]['front'], $label ),
+			$h( $label, [ 'font' => $FH, 'w' => '600', 'size' => 36, 't' => 30, 'm' => 22, 'lh' => 1.1, 'color' => '#FFFFFF', 'align' => 'center', 'cls' => 'v5-col-label' ] ),
+		] );
+	};
+	$out[] = $section( [ 'cls' => 'v5-sec v5-cols', 'anchor' => 'collections' ], [
+		$display( 'Our Collections', 54, [ 't' => 44, 'm' => 34, 'ls' => 0.04, 'up' => true, 'align' => 'center' ] ),
+		$con( [ 'cls' => 'v5-col-grid', 'container_type' => 'grid', 'grid_columns_grid' => [ 'unit' => 'fr', 'size' => 4 ], 'grid_columns_grid_tablet' => [ 'unit' => 'fr', 'size' => 4 ], 'grid_columns_grid_mobile' => [ 'unit' => 'fr', 'size' => 2 ], 'grid_rows_grid' => [ 'unit' => 'fr', 'size' => 1 ], 'grid_auto_flow' => 'row', 'grid_gaps' => $gap( 28 ), 'grid_gaps_tablet' => $gap( 18 ), 'grid_gaps_mobile' => $gap( 14 ) ], [
+			$col( 'Sale', 21, '#EBDDD2', '#sale' ), $col( 'Khaddar', 3, '#E6DCF3', '#khaddar' ), $col( 'Karandi', 19, '#F1E3DA', '#karandi' ), $col( "Winter '26", 13, '#DDE5D9', '#khaddar' ),
+			$col( 'New In', 1, '#E9E2D6', '#new-arrivals' ), $col( '3-Piece', 14, '#E6DCF3', '#new-arrivals' ), $col( 'Best Sellers', 11, '#F1E3DA', '#best-sellers' ), $col( 'Bundle Offer', 7, '#EBDDD2', '#bundle' ),
+		] ),
+	] );
+
+	// ---------- product card + shop section ----------
+	$card = function ( $id ) use ( $con, $row, $h, $img, $btn, $wa, $P, $C, $FH, $gap ) {
+		$p = $P[ $id ];
+		$badges = [ $h( $p['off'], [ 'size' => 13, 'w' => '700', 'color' => '#FFFFFF', 'cls' => 'v5-badge v5-badge-off' ] ) ];
+		if ( $p['new'] ) $badges[] = $h( 'NEW', [ 'size' => 13, 'w' => '700', 'color' => '#FFFFFF', 'cls' => 'v5-badge v5-badge-new' ] );
+		return $con( [ 'cls' => 'v5-card', 'flex_gap' => $gap( 12 ) ], [
+			$con( [ 'cls' => 'v5-media' ], [
+				$img( $p['front'], $p['name'] . ', ' . $p['fabric'] . ' suit', 'v5-front' ),
+				$img( $p['detail'], $p['name'] . ' print close-up', 'v5-detail' ),
+				$row( [ 'cls' => 'v5-badges', 'flex_gap' => $gap( 6 ) ], $badges ),
+				$btn( 'Order Now', $wa( "Assalam o Alaikum, mujhe {$p['name']} ({$p['fabric']}, {$p['price']}) chahiye." ), [ 'size' => 13.5, 'py' => 14, 'px' => 16, 'ls' => 0.14, 'cls' => 'v5-add', 'align' => 'justify' ] ),
+			] ),
+			$con( [ 'cls' => 'v5-meta', 'flex_gap' => $gap( 2 ) ], [
+				$h( '3 PC · Light ' . $p['fabric'], [ 'size' => 12.5, 'w' => '500', 'ls' => 0.12, 'up' => true, 'color' => $C['mute'] ] ),
+				$h( $p['name'], [ 'font' => $FH, 'w' => '600', 'size' => 24, 'm' => 20, 'lh' => 1.15 ] ),
+				$row( [ 'cls' => 'v5-price', 'flex_align_items' => 'baseline', 'flex_gap' => $gap( 10 ) ], [
+					$h( $p['price'], [ 'size' => 17, 'm' => 15.5, 'w' => '600', 'color' => $C['purple'], 'cls' => 'v5-num' ] ),
+					$h( $p['compare'], [ 'size' => 14.5, 'm' => 13, 'color' => '#9A939F', 'cls' => 'v5-num v5-strike' ] ),
+				] ),
+			] ),
+		] );
+	};
+	$shop = function ( $anchor, $title, $script, $ids ) use ( $section, $con, $w, $eyebrow, $display, $card, $px, $fa, $gap ) {
+		$items = []; foreach ( $ids as $k => $id ) $items[] = [ 'slide_title' => 'Item ' . ( $k + 1 ), '_id' => 'v5' . $anchor . $k ];
+		return $section( [ 'cls' => 'v5-sec v5-shop', 'anchor' => $anchor ], [
+			$con( [ 'flex_align_items' => 'center', 'flex_gap' => $gap( 6 ) ], [ $eyebrow( $script, [ 'align' => 'center' ] ), $display( $title, 54, [ 't' => 44, 'm' => 34, 'ls' => 0.04, 'up' => true, 'align' => 'center' ] ) ] ),
+			array_merge( $w( 'nested-carousel', [ 'carousel_items' => $items, 'slides_to_show' => '5', 'slides_to_show_tablet' => '3', 'slides_to_show_mobile' => '2', 'slides_to_scroll' => '1',
+				'autoplay' => '', 'infinite' => '', 'speed' => 500, 'arrows' => 'yes', 'pagination' => '', 'image_spacing_custom' => $px( 22 ), 'image_spacing_custom_mobile' => $px( 12 ),
+				'navigation_previous_icon' => $fa( 'fa-chevron-left' ), 'navigation_next_icon' => $fa( 'fa-chevron-right' ), 'cls' => 'v5-shop-car' ] ),
+				[ 'elements' => array_map( function ( $id ) use ( $con, $card ) { return $con( [ 'cls' => 'v5-cell' ], [ $card( $id ) ] ); }, $ids ) ] ),
+		] );
+	};
+
+	// ---------- 7. new arrivals ----------
+	$out[] = $shop( 'new-arrivals', 'New Arrivals', 'just landed', [ 1, 16, 6, 19, 11, 22, 4, 17, 2, 20 ] );
+
+	// ---------- 8. sale countdown ----------
+	$imgStrip = function ( $ids, $cls ) use ( $con, $img, $P ) { return $con( [ 'cls' => $cls, 'flex_direction' => 'row', 'flex_wrap' => 'nowrap' ], array_map( function ( $id ) use ( $img, $P ) { return $img( $P[ $id ]['front'], $P[ $id ]['name'] . ' suit' ); }, $ids ) ); };
+	$out[] = $section( [ 'cls' => 'v5-sec v5-sale-sec', 'anchor' => 'sale' ], [
+		$con( [ 'cls' => 'v5-sale', 'flex_direction' => 'row', 'flex_wrap' => 'nowrap', 'background_background' => 'classic', 'background_color' => $C['plum'] ], [
+			$con( [ 'cls' => 'v5-sale-text', 'flex_gap' => $gap( 14 ) ], [
+				$eyebrow( 'Winter Sale', [ 'color' => '#C9B4FF' ] ),
+				$display( 'Upto 19% Off', 84, [ 't' => 64, 'm' => 50, 'lh' => 0.95, 'color' => '#FFFFFF' ] ),
+				$p( 'Khaddar now Rs 3,990 and karandi Rs 4,290. Free delivery and Cash on Delivery on every order.', [ 'size' => 17.5, 'm' => 16, 'color' => '#E6DDF0' ] ),
+				$w( 'countdown', array_merge( [ 'countdown_type' => 'due_date', 'due_date' => $cfg['sale_end'], 'label_display' => 'block', 'show_days' => 'yes', 'show_hours' => 'yes', 'show_minutes' => 'yes', 'show_seconds' => 'yes', 'show_labels' => 'yes',
+					'custom_labels' => 'yes', 'label_days' => 'Days', 'label_hours' => 'Hours', 'label_minutes' => 'Mins', 'label_seconds' => 'Secs',
+					'box_background_color' => '#FFFFFF', 'box_border_radius' => $box( 10 ), 'box_spacing' => $px( 10 ), 'box_padding' => $box( 14, 0 ), 'digits_color' => $C['plum'], 'label_color' => $C['mute'], 'cls' => 'v5-count' ],
+					$typo( 'digits_typography_', $FH, 36, [ 'w' => '700', 'lh' => 1.1, 'm' => 28 ] ), $typo( 'label_typography_', $FB, 13, [ 'w' => '600', 'ls' => 0.08, 'up' => true, 'm' => 11 ] ) ) ),
+				$btn( 'Shop the Sale', '#new-arrivals', [ 'style' => 'light', 'py' => 20, 'px' => 34, 'cls' => 'v5-mt4' ] ),
+			] ),
+			$imgStrip( [ 5, 20, 14 ], 'v5-sale-imgs' ),
+		] ),
+	] );
+
+	// ---------- 9. khaddar ----------
+	$out[] = $shop( 'khaddar', "Winter '26 · Khaddar", 'garam aur halka', range( 1, 15 ) );
+
+	// ---------- 10. karandi promo ----------
+	$out[] = $section( [ 'cls' => 'v5-sec v5-promo-sec', 'anchor' => 'karandi' ], [
+		$a( $wa( 'Assalam o Alaikum, mujhe Light Karandi collection dekhni hai.' ), [ 'cls' => 'v5-promo', 'flex_direction' => 'row', 'flex_wrap' => 'nowrap', 'background_background' => 'classic', 'background_color' => '#EFE5DC' ], [
+			$con( [ 'cls' => 'v5-promo-text', 'flex_justify_content' => 'center', 'flex_gap' => $gap( 4 ) ], [
+				$h( 'NEW', [ 'font' => $FH, 'w' => '600', 'size' => 30, 'ls' => 0.04, 'color' => $C['wine'], 'lh' => 1.1 ] ),
+				$eyebrow( 'Collection', [ 'color' => $C['wine'] ] ),
+				$h( 'Light Karandi', [ 'font' => $FH, 'w' => '600', 'size' => 32, 'm' => 26, 'ls' => 0.08, 'up' => true, 'lh' => 1.15, 'cls' => 'v5-mt6' ] ),
+				$h( '9 styles · Bonanza Satrangi LIA', [ 'size' => 15.5, 'color' => $C['body'], 'cls' => 'v5-mt8' ] ),
+			] ),
+			$imgStrip( [ 16, 18, 19, 22, 24 ], 'v5-promo-imgs' ),
+		] ),
+	] );
+
+	// ---------- 11. best sellers ----------
+	$out[] = $shop( 'best-sellers', 'Best Sellers', 'sab ki pasand', [ 13, 21, 7, 23, 10, 18, 5, 24 ] );
+
+	// ---------- 12. bundle ----------
+	$out[] = $section( [ 'cls' => 'v5-sec v5-bundle-sec', 'anchor' => 'bundle' ], [
+		$con( [ 'cls' => 'v5-bundle', 'flex_direction' => 'row', 'flex_wrap' => 'nowrap' ], [
+			$con( [ 'cls' => 'v5-bundle-img' ], [ $img( 'p07-front', 'Maya, light khaddar' ) ] ),
+			$con( [ 'cls' => 'v5-bundle-img' ], [ $img( 'p17-front', 'Peachy, light karandi' ) ] ),
+			$con( [ 'cls' => 'v5-bundle-panel', 'flex_justify_content' => 'center', 'flex_gap' => $gap( 12 ), 'background_background' => 'classic', 'background_color' => $C['lilac'] ], [
+				$h( 'BUNDLE OFFER', [ 'size' => 14, 'w' => '700', 'ls' => 0.12, 'color' => '#FFFFFF', 'cls' => 'v5-chip' ] ),
+				$display( 'Any 2 Suits<br>for Rs 6,990', 66, [ 't' => 52, 'm' => 42 ] ),
+				$p( 'Mix khaddar and karandi. Send us the two names on WhatsApp and the bundle price is applied.', [ 'size' => 17, 'm' => 16 ] ),
+				$row( [ 'flex_gap' => $gap( 10 ), 'flex_align_items' => 'baseline' ], [
+					$h( 'Rs 10,580', [ 'size' => 16, 'color' => '#9A939F', 'cls' => 'v5-num v5-strike' ] ),
+					$h( 'Save up to Rs 3,590', [ 'size' => 16, 'w' => '700', 'color' => $C['purple'], 'cls' => 'v5-num' ] ),
+				] ),
+				$btn( 'Pick any 2', $wa( 'Assalam o Alaikum, mujhe 2 suits ka bundle (Rs 6,990) chahiye. Suit 1: … Suit 2: …' ), [ 'py' => 20, 'px' => 34, 'cls' => 'v5-mt4', 'icon' => $fa( 'fa-whatsapp', 'fa-brands' ) ] ),
+			] ),
+		] ),
+	] );
+
+	// ---------- 13. promise seals ----------
+	$seal = function ( $big, $small, $c ) use ( $con, $h, $FH, $gap ) {
+		return $con( [ 'cls' => 'v5-seal', 'flex_justify_content' => 'center', 'flex_align_items' => 'center', 'flex_gap' => $gap( 2 ), 'border_border' => 'solid', 'border_width' => [ 'unit' => 'px', 'top' => '2', 'right' => '2', 'bottom' => '2', 'left' => '2', 'isLinked' => true ], 'border_color' => $c ], [
+			$h( $big, [ 'font' => $FH, 'w' => '600', 'size' => 23, 'lh' => 1, 'color' => $c, 'align' => 'center' ] ),
+			$h( $small, [ 'size' => 11.5, 'w' => '700', 'ls' => 0.08, 'up' => true, 'lh' => 1.25, 'color' => $c, 'align' => 'center', 'cls' => 'v5-seal-small' ] ),
+		] );
+	};
+	$out[] = $section( [ 'cls' => 'v5-sec v5-promise', 'flex_align_items' => 'center' ], [
+		$row( [ 'cls' => 'v5-seals', 'flex_justify_content' => 'center', 'flex_gap' => $gap( 44, 18 ), 'flex_gap_mobile' => $gap( 14 ) ], [
+			$seal( 'FREE', 'Delivery all Pakistan', $C['purple'] ), $seal( 'COD', 'Cash on delivery', $C['ink'] ), $seal( '100%', 'Original brands', '#B8860B' ),
+			$seal( '7 DAY', 'Easy exchange', $C['purple'] ), $seal( 'TRACKED', 'Every parcel', '#1E8E4E' ),
+		] ),
+		$con( [ 'flex_align_items' => 'center', 'flex_gap' => $gap( 14 ) ], [
+			$h( 'We accept', [ 'size' => 15, 'w' => '700', 'ls' => 0.14, 'up' => true, 'align' => 'center' ] ),
+			$h( 'Cash on Delivery', [ 'size' => 15, 'w' => '700', 'ls' => 0.06, 'up' => true, 'color' => '#FFFFFF', 'cls' => 'v5-pay' ] ),
+		] ),
+	] );
+
+	// ---------- 14. footer ----------
+	$links = function ( $list ) use ( $w, $typo, $FB, $link ) {
+		return $w( 'icon-list', array_merge( [ 'icon_list' => array_map( function ( $l, $k ) use ( $link ) { return [ 'text' => $l[0], 'selected_icon' => [ 'value' => '', 'library' => '' ], 'link' => $link( $l[1] ), '_id' => 'v5f' . md5( $l[0] ) ]; }, $list, array_keys( $list ) ),
+			'space_between' => [ 'unit' => 'px', 'size' => 9, 'sizes' => [] ], 'text_color' => '#CFC9D4', 'text_color_hover' => '#FFFFFF', 'text_indent' => [ 'unit' => 'px', 'size' => 0, 'sizes' => [] ], 'cls' => 'v5-flinks' ], $typo( 'icon_typography_', $FB, 16, [ 'lh' => 1.5 ] ) ) );
+	};
+	$ftitle = function ( $t ) use ( $h ) { return $h( $t, [ 'size' => 15, 'w' => '700', 'ls' => 0.1, 'up' => true, 'color' => '#FFFFFF', 'cls' => 'v5-ftitle' ] ); };
+	$fp = function ( $t ) use ( $h ) { return $h( $t, [ 'size' => 16, 'color' => '#CFC9D4', 'lh' => 1.6, 'cls' => 'v5-num' ] ); };
+	$out[] = $con( [ 'cls' => 'v5-foot', 'content_width' => 'boxed', 'boxed_width' => [ 'unit' => 'px', 'size' => 1520, 'sizes' => [] ], 'background_background' => 'classic', 'background_color' => $C['ink'], 'flex_gap' => $gap( 28 ) ], [
+		$con( [ 'cls' => 'v5-foot-grid', 'container_type' => 'grid', 'grid_columns_grid' => [ 'unit' => 'custom', 'size' => '1.2fr 1fr 1fr 1.3fr' ], 'grid_columns_grid_tablet' => [ 'unit' => 'fr', 'size' => 2 ], 'grid_columns_grid_mobile' => [ 'unit' => 'fr', 'size' => 1 ], 'grid_rows_grid' => [ 'unit' => 'fr', 'size' => 1 ], 'grid_auto_flow' => 'row', 'grid_gaps' => $gap( 36 ), 'grid_gaps_mobile' => $gap( 30 ) ], [
+			$con( [ 'flex_gap' => $gap( 12 ) ], [
+				$w( 'image', [ 'image' => $cfg['img']( 'logo' ) + [ 'alt' => 'Royal Vision Store' ], 'image_size' => 'full', 'link_to' => 'custom', 'link' => $link( '/' ), 'cls' => 'v5-flogo' ] ),
+				$fp( 'Original branded ladies suits, delivered free all over Pakistan with Cash on Delivery.' ),
+				$w( 'social-icons', [ 'social_icon_list' => [
+					[ 'social_icon' => $fa( 'fa-instagram', 'fa-brands' ), 'link' => $link( 'https://www.instagram.com/royal_vision_traders' ), '_id' => 'v5si1' ],
+					[ 'social_icon' => $fa( 'fa-facebook-f', 'fa-brands' ), 'link' => $link( 'https://www.facebook.com/royalvisiontraders' ), '_id' => 'v5si2' ],
+					[ 'social_icon' => $fa( 'fa-tiktok', 'fa-brands' ), 'link' => $link( 'https://www.tiktok.com/@royalvisiontraders' ), '_id' => 'v5si3' ] ],
+					'shape' => 'circle', 'align' => 'left', 'icon_color' => 'custom', 'icon_primary_color' => 'rgba(0,0,0,0)', 'icon_secondary_color' => '#FFFFFF', 'icon_size' => $px( 15 ), 'icon_padding' => [ 'unit' => 'em', 'size' => 0.75, 'sizes' => [] ], 'icon_spacing' => $px( 8 ),
+					'image_border_border' => 'solid', 'image_border_width' => $box( 1 ), 'image_border_color' => '#3A3640', 'hover_primary_color' => $C['purple'], 'hover_secondary_color' => '#FFFFFF', 'cls' => 'v5-social' ] ),
+			] ),
+			$con( [ 'flex_gap' => $gap( 12 ) ], [ $ftitle( 'Quick links' ), $links( [ [ 'Search', '/?s=' ], [ 'Track Your Order', $wa( 'Assalam o Alaikum, mujhe apna order track karna hai. Order number: ' ) ], [ 'Contact Information', '/contact-us/' ], [ 'Privacy Policy', '/privacy-policy/' ], [ 'Refund & Exchange Policy', '/returns-and-refunds/' ], [ 'Shipping & Delivery', '/shipping-and-delivery/' ], [ 'Terms of Service', '/terms-and-conditions/' ] ] ) ] ),
+			$con( [ 'flex_gap' => $gap( 9 ) ], [
+				$ftitle( 'Contact' ), $fp( 'Faisalabad, Pakistan' ), $fp( 'WhatsApp 0322 778 2932' ), $fp( 'Call 0334 529 8703' ), $fp( 'royalvision.online' ),
+				$w( 'image', [ 'image' => $cfg['img']( 'qr' ) + [ 'alt' => 'QR code for royalvision.online' ], 'image_size' => 'full', 'cls' => 'v5-qr' ] ),
+			] ),
+			$con( [ 'flex_gap' => $gap( 12 ) ], [
+				$ftitle( 'Newsletter signup' ), $fp( 'Get new arrivals and sale alerts first.' ),
+				$w( 'form', array_merge( [ 'form_name' => 'Newsletter', 'form_fields' => [ [ 'custom_id' => 'email', 'field_type' => 'email', 'field_label' => 'Email', 'placeholder' => 'Your email address', 'required' => 'true', 'width' => '100', '_id' => 'v5nl1' ] ],
+					'show_labels' => '', 'input_size' => 'md', 'button_text' => 'Subscribe', 'button_size' => 'md', 'button_width' => '100', 'submit_actions' => [ 'email' ],
+					'email_to' => $cfg['admin_email'], 'email_subject' => 'New newsletter signup – Royal Vision', 'email_content' => '[all-fields]', 'success_message' => 'Thank you. You are subscribed.',
+					'field_text_color' => $C['ink'], 'field_background_color' => '#FFFFFF', 'field_border_radius' => $box( 999 ), 'field_border_width' => $box( 0 ),
+					'button_background_color' => $C['purple'], 'button_text_color' => '#FFFFFF', 'button_background_hover_color' => '#5B24D6', 'button_border_radius' => $box( 999 ), 'cls' => 'v5-news' ],
+					$typo( 'field_typography_', $FB, 15.5 ), $typo( 'button_typography_', $FB, 15, [ 'w' => '700' ] ) ) ),
+			] ),
+		] ),
+		$row( [ 'cls' => 'v5-foot-bar', 'flex_justify_content' => 'space-between', 'flex_gap' => $gap( 12 ) ], [
+			$h( '© 2026 Royal Vision Store. All rights reserved.', [ 'size' => 15, 'color' => '#9E98A8' ] ),
+			$h( 'Free delivery · Cash on Delivery · 100% Original', [ 'size' => 15, 'color' => '#9E98A8' ] ),
+		] ),
+	], false );
+
+	return $out;
+};

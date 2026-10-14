@@ -412,7 +412,7 @@ body .rvt-wao-fab{padding:14px!important;border-radius:50%!important;gap:0!impor
 .v5-promise-foot > .elementor-widget{width:auto!important}
 .v5-promise-q a{color:#7B3FF2;font-weight:600;text-decoration:underline;text-underline-offset:3px}
 .v5-pay .elementor-heading-title{height:34px;padding:0 14px;border-radius:6px}
-@media (max-width:1024px){.v5-promise-grid > .v5-promise-card:nth-child(n+4){grid-column:span 1}}
+@media (min-width:768px) and (max-width:1024px){.e-con.v5-promise-grid{grid-template-columns:repeat(6,minmax(0,1fr))!important}.v5-promise-grid > .v5-promise-card{grid-column:span 2}.v5-promise-grid > .v5-promise-card:nth-child(4){grid-column:2 / span 2}}
 @media (max-width:767px){
 .v5-promise-card{padding:16px 16px 16px 20px}
 .v5-promise-card .elementor-icon-box-wrapper{display:flex;align-items:center;text-align:left}

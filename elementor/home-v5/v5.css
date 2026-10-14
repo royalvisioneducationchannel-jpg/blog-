@@ -474,3 +474,44 @@ body .rvt-wao-fab{padding:14px!important;border-radius:50%!important;gap:0!impor
 .v5-pc .v5-strike .elementor-heading-title{font-size:12.5px!important}
 .v5-stamp .elementor-widget:nth-child(2) .elementor-heading-title{font-size:22px!important}
 }
+
+/* ===== header v2: utility bar + split header that shrinks on scroll ===== */
+.e-con.v5-ann{padding:0 clamp(14px,2.4vw,32px)!important;gap:16px!important}
+.v5-util{width:auto!important;flex:none!important}
+.v5-ann-rot{flex:1 1 auto;width:auto!important;min-width:0}
+.v5-ann-rot .elementor-heading-title{height:22px}
+.v5-head{transition:box-shadow .35s,background-color .35s}
+.e-con.v5-head-bar{height:84px;grid-template-columns:1fr auto 1fr;transition:height .35s cubic-bezier(.2,.7,.2,1)}
+.v5-logo img{height:62px!important;transition:height .35s cubic-bezier(.2,.7,.2,1)}
+.v5-head.elementor-sticky--effects{background-color:rgba(255,255,255,.9)!important;-webkit-backdrop-filter:saturate(180%) blur(12px);backdrop-filter:saturate(180%) blur(12px);box-shadow:0 10px 30px -20px rgba(26,16,36,.45)}
+.v5-head.elementor-sticky--effects .e-con.v5-head-bar{height:64px}
+.v5-head.elementor-sticky--effects .v5-logo img{height:46px!important}
+.v5-nav{width:auto!important;max-width:none;margin:0}
+.v5-nav .elementor-nav-menu--main{height:auto;display:block;overflow:visible;padding:0}
+.v5-nav .elementor-nav-menu{justify-content:flex-start!important}
+.v5-nav .elementor-nav-menu > li:nth-child(3) > a{color:inherit!important}
+.v5-nav .elementor-nav-menu--main > .elementor-nav-menu > li:nth-child(2) > a{color:#7B3FF2!important}
+.v5-nav .elementor-nav-menu > li:last-child > a{text-transform:inherit}
+.v5-nav .elementor-menu-toggle{padding:8px;border-radius:10px;margin-left:-8px}
+.v5-nav .elementor-menu-toggle:hover{background:#F2ECFE}
+.v5-nav .elementor-nav-menu--dropdown{box-shadow:0 24px 40px -24px rgba(26,16,36,.4);border-top:1px solid #ECE6E1}
+.v5-head-r > .elementor-widget{width:auto!important}
+.v5-hicon .elementor-icon{width:40px;height:40px;border-radius:50%;transition:background .2s,color .2s}
+.v5-hicon .elementor-icon:hover{background:#F2ECFE}
+.v5-search .elementor-search-form__toggle{--e-search-form-toggle-size:40px}
+.v5-search .elementor-search-form__toggle div,.v5-search .elementor-search-form__toggle i{border-radius:50%;transition:background .2s}
+.v5-search .elementor-search-form__toggle:hover div,.v5-search .elementor-search-form__toggle:hover i{background:#F2ECFE!important}
+.v5-cart .elementor-menu-cart__toggle .elementor-button{border-radius:50%!important;padding:10px!important}
+.v5-cart .elementor-menu-cart__toggle .elementor-button:hover{background:#F2ECFE!important}
+.v5-cart .elementor-button-icon[data-counter]:before{font-size:10px;min-width:17px;height:17px;line-height:17px;top:-6px;right:-8px}
+@media (max-width:1024px){.e-con.v5-head-bar{height:72px}.v5-logo img{height:52px!important}}
+@media (max-width:767px){
+.v5-util{display:none!important}
+.e-con.v5-ann{justify-content:center!important}
+.e-con.v5-head-bar{height:62px}
+.v5-logo img{height:44px!important}
+.v5-head.elementor-sticky--effects .e-con.v5-head-bar{height:56px}
+.v5-head.elementor-sticky--effects .v5-logo img{height:38px!important}
+.v5-head-r .v5-hicon{display:none}
+}
+@media (prefers-reduced-motion:reduce){.e-con.v5-head-bar,.v5-logo img{transition:none}}

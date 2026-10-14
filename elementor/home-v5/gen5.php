@@ -86,31 +86,43 @@ $rv5 = function ( $cfg ) {
 
 	$out = [];
 
-	// ---------- 1. announcement ----------
+	// ---------- 1. utility bar: contact left, rotating messages centre, help right ----------
 	$ann = [ 'Free delivery all over Pakistan', 'Winter Sale is live · upto 19% off', 'Any 2 suits for Rs 6,990', 'Cash on Delivery · 100% original brands' ];
-	$out[] = $con( [ 'cls' => 'v5-ann', 'flex_justify_content' => 'center', 'flex_align_items' => 'center', 'min_height' => $px( 40 ), 'background_background' => 'classic', 'background_color' => $C['ink'] ], [
-		$h( implode( '', array_map( function ( $t ) { return '<span>' . $t . '</span>'; }, $ann ) ), [ 'size' => 15, 'm' => 12.5, 'w' => '600', 'ls' => 0.08, 'up' => true, 'color' => '#FFFFFF', 'align' => 'center', 'cls' => 'v5-ann-rot' ] ),
+	$util = function ( $items, $cls ) use ( $w, $typo, $px, $FB, $link ) {
+		return $w( 'icon-list', array_merge( [ 'view' => 'inline', 'icon_list' => $items, 'icon_color' => '#C9B4FF', 'text_color' => 'rgba(255,255,255,0.82)', 'text_color_hover' => '#FFFFFF',
+			'icon_size' => $px( 13 ), 'text_indent' => $px( 6 ), 'space_between' => $px( 22 ), 'cls' => 'v5-util ' . $cls ], $typo( 'icon_typography_', $FB, 12.5, [ 'w' => '500', 'ls' => 0.04 ] ) ) );
+	};
+	$out[] = $con( [ 'cls' => 'v5-ann', 'flex_direction' => 'row', 'flex_wrap' => 'nowrap', 'flex_justify_content' => 'space-between', 'flex_align_items' => 'center', 'min_height' => $px( 38 ), 'background_background' => 'classic', 'background_color' => $C['ink'] ], [
+		$util( [ [ 'text' => 'WhatsApp 0322 778 2932', 'selected_icon' => $fa( 'fa-whatsapp', 'fa-brands' ), 'link' => $link( $WA ), '_id' => 'v5u1' ] ], 'v5-util-l' ),
+		$h( implode( '', array_map( function ( $t ) { return '<span>' . $t . '</span>'; }, $ann ) ), [ 'size' => 12.5, 'm' => 11.5, 'w' => '600', 'ls' => 0.14, 'up' => true, 'color' => '#FFFFFF', 'align' => 'center', 'cls' => 'v5-ann-rot' ] ),
+		$util( [
+			[ 'text' => 'Track order', 'selected_icon' => $fa( 'fa-map-marker-alt' ), 'link' => $link( $wa( 'Assalam o Alaikum, mujhe apna order track karna hai. Order number: ' ) ), '_id' => 'v5u2' ],
+			[ 'text' => 'Help', 'selected_icon' => $fa( 'fa-question-circle' ), 'link' => $link( '/contact-us/' ), '_id' => 'v5u3' ],
+		], 'v5-util-r' ),
 	], false );
 
-	// ---------- 2. header ----------
-	$out[] = $con( [ 'cls' => 'v5-head', 'sticky' => 'top', 'sticky_on' => [ 'desktop', 'tablet', 'mobile' ], 'z_index' => 40, 'background_background' => 'classic', 'background_color' => '#FFFFFF',
+	// ---------- 2. header: menu left, logo centre, actions right; shrinks once scrolled ----------
+	$hicon = function ( $value, $url, $label ) use ( $w, $px, $C, $link ) {
+		return $w( 'icon', [ 'selected_icon' => [ 'value' => $value, 'library' => 'fa-regular' ], 'link' => $link( $url ), 'primary_color' => $C['ink'], 'hover_primary_color' => $C['purple'], 'size' => $px( 19 ), 'cls' => 'v5-hicon' ] );
+	};
+	$out[] = $con( [ 'cls' => 'v5-head', 'sticky' => 'top', 'sticky_on' => [ 'desktop', 'tablet', 'mobile' ], 'sticky_effects_offset' => 40, 'z_index' => 40, 'background_background' => 'classic', 'background_color' => '#FFFFFF',
 		'border_border' => 'solid', 'border_width' => [ 'unit' => 'px', 'top' => '0', 'right' => '0', 'bottom' => '1', 'left' => '0', 'isLinked' => false ], 'border_color' => $C['line'] ], [
 		$con( [ 'cls' => 'v5-head-bar', 'flex_direction' => 'row', 'flex_wrap' => 'nowrap', 'flex_align_items' => 'center' ], [
-			$con( [ 'cls' => 'v5-head-l', 'flex_direction' => 'row', 'flex_wrap' => 'nowrap', 'flex_align_items' => 'center', 'flex_gap' => $gap( 4 ) ], [
-				$w( 'search-form', [ 'skin' => 'full_screen', 'placeholder' => 'Search suits…', 'toggle_color' => $C['ink'], 'toggle_size' => $px( 42 ), 'cls' => 'v5-search' ] ),
-				$w( 'icon-list', array_merge( [ 'view' => 'inline', 'icon_list' => [ [ 'text' => '0322 778 2932', 'selected_icon' => $fa( 'fa-whatsapp', 'fa-brands' ), 'link' => $link( $WA ), '_id' => 'v5wa' ] ],
-					'icon_color' => '#25A954', 'text_color' => $C['ink'], 'text_color_hover' => $C['purple'], 'icon_size' => $px( 17 ), 'text_indent' => $px( 6 ), 'cls' => 'v5-head-wa' ], $typo( 'icon_typography_', $FB, 15.5, [ 'w' => '600' ] ) ) ),
-			] ),
+			$w( 'nav-menu', array_merge( [ 'menu' => $cfg['menu'], 'layout' => 'horizontal', 'align_items' => 'left', 'pointer' => 'underline', 'animation_line' => 'grow', 'dropdown' => 'tablet', 'toggle' => 'burger', 'full_width' => 'stretch', 'text_align' => 'aside',
+				'color_menu_item' => $C['ink'], 'color_menu_item_hover' => $C['purple'], 'pointer_color_menu_item_hover' => $C['purple'], 'color_menu_item_active' => $C['ink'], 'pointer_color_menu_item_active' => $C['ink'],
+				'padding_horizontal_menu_item' => $px( 0 ), 'padding_vertical_menu_item' => $px( 8 ), 'menu_space_between' => $px( 30 ), 'pointer_width' => $px( 1.5 ),
+				'color_dropdown_item' => $C['ink'], 'background_color_dropdown_item' => '#FFFFFF', 'color_dropdown_item_hover' => $C['purple'], 'background_color_dropdown_item_hover' => $C['lilac'],
+				'padding_horizontal_dropdown_item' => $px( 24 ), 'padding_vertical_dropdown_item' => $px( 16 ), 'dropdown_divider_border' => 'solid', 'dropdown_divider_width' => $px( 1 ), 'dropdown_divider_color' => $C['line'],
+				'toggle_color' => $C['ink'], 'toggle_background_color' => 'rgba(0,0,0,0)', 'toggle_size' => $px( 22 ), 'cls' => 'v5-nav' ],
+				$typo( 'menu_', $FB, 12.5, [ 'w' => '500', 'ls' => 0.14, 'up' => true ] ), $typo( 'dropdown_', $FB, 14, [ 'w' => '500', 'ls' => 0.1, 'up' => true ] ) ) ),
 			$w( 'image', [ 'image' => $cfg['img']( 'logo' ) + [ 'alt' => 'Royal Vision Store' ], 'image_size' => 'full', 'link_to' => 'custom', 'link' => $link( '/' ), 'cls' => 'v5-logo' ] ),
-			$con( [ 'cls' => 'v5-head-r', 'flex_direction' => 'row', 'flex_wrap' => 'nowrap', 'flex_justify_content' => 'flex-end', 'flex_align_items' => 'center', 'flex_gap' => $gap( 2 ) ], [
-				$w( 'icon', [ 'selected_icon' => [ 'value' => 'far fa-user', 'library' => 'fa-regular' ], 'link' => $link( '/my-account/' ), 'primary_color' => $C['ink'], 'hover_primary_color' => $C['purple'], 'size' => $px( 19 ), 'cls' => 'v5-hicon' ] ),
-				$w( 'icon', [ 'selected_icon' => [ 'value' => 'far fa-heart', 'library' => 'fa-regular' ], 'link' => $link( '/wishlist/' ), 'primary_color' => $C['ink'], 'hover_primary_color' => $C['purple'], 'size' => $px( 19 ), 'cls' => 'v5-hicon' ] ),
+			$con( [ 'cls' => 'v5-head-r', 'flex_direction' => 'row', 'flex_wrap' => 'nowrap', 'flex_justify_content' => 'flex-end', 'flex_align_items' => 'center', 'flex_gap' => $gap( 4 ) ], [
+				$w( 'search-form', [ 'skin' => 'full_screen', 'placeholder' => 'Search suits, colours, fabrics…', 'toggle_color' => $C['ink'], 'toggle_size' => $px( 40 ), 'cls' => 'v5-search' ] ),
+				$hicon( 'far fa-user', '/my-account/', 'Account' ),
+				$hicon( 'far fa-heart', '/wishlist/', 'Wishlist' ),
 				$w( 'woocommerce-menu-cart', [ 'icon' => 'bag-light', 'items_indicator' => 'bubble', 'hide_empty_indicator' => '', 'show_subtotal' => '', 'toggle_button_text_color' => $C['ink'], 'toggle_button_icon_color' => $C['ink'], 'toggle_button_background_color' => 'rgba(0,0,0,0)', 'toggle_button_border_width' => $px( 0 ), 'items_indicator_text_color' => '#FFFFFF', 'items_indicator_background_color' => $C['purple'], 'cls' => 'v5-cart' ] ),
 			] ),
 		] ),
-		$w( 'nav-menu', array_merge( [ 'menu' => $cfg['menu'], 'layout' => 'horizontal', 'align_items' => 'center', 'pointer' => 'underline', 'animation_line' => 'fade', 'dropdown' => 'none',
-			'color_menu_item' => $C['ink'], 'color_menu_item_hover' => $C['purple'], 'pointer_color_menu_item_hover' => $C['ink'], 'color_menu_item_active' => $C['ink'], 'pointer_color_menu_item_active' => $C['ink'],
-			'padding_horizontal_menu_item' => $px( 13 ), 'padding_vertical_menu_item' => $px( 6 ), 'pointer_width' => $px( 2 ), 'cls' => 'v5-nav' ], $typo( 'menu_', $FB, 12.5, [ 'w' => '600', 'ls' => 0.02 ] ) ) ),
 	], false );
 
 	// ---------- 3. hero: text slider + moving "runway wall" of suits ----------

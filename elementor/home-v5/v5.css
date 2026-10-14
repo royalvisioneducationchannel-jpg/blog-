@@ -277,3 +277,4 @@ body:has(.v5-tray.is-open) .rvt-wao-fab{opacity:0;pointer-events:none}
 .v5-pick .elementor-button{padding:7px 10px!important;font-size:11.5px!important}
 }
 @media (prefers-reduced-motion:reduce){.e-con.v5-tray,.e-con.v5-tray.is-open{transition:none}.e-con.v5-tray.pulse{animation:none}}
+@media (max-width:480px){.v5-timer .rv-st-label{display:none}.v5-timer .rv-st-time:before{content:"Ends in ";color:#FFFFFF;text-transform:uppercase;letter-spacing:.04em}.v5-timer .rv-sale-timer{font-size:10.5px;padding:9px 4px}}

@@ -454,3 +454,6 @@ body .rvt-wao-fab{padding:14px!important;border-radius:50%!important;gap:0!impor
 .e-con.v7-seal-5 .v7-big .elementor-heading-title{font-size:11px}
 }
 @media (prefers-reduced-motion:reduce){.v7-ring svg{animation:none}.e-con.v7-seal{transition:none}}
+/* seal ring sits inside the rosette: text grows outward from the path, so the svg is sized to keep it within the disc */
+.v7-ring svg{width:127px!important;height:127px!important}
+@media (max-width:767px){.e-con.v7-seal{width:132px!important;height:132px}.v7-ring svg{width:99px!important;height:99px!important}.e-con.v7-core{width:62px!important;height:62px}}

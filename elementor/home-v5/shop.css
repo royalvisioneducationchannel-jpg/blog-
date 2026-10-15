@@ -153,49 +153,10 @@ body.sh-has-filters .e-con.sh-chips{display:flex!important}
 .sh-seo > .e-con-inner > .sh-seo-p{flex:1.4 1 0!important}
 .sh-seo-p p{margin:0}
 
-/* shop product card: store layout on top of the shared v5 card */
-.sh-grid .e-con.v5-card{gap:14px!important}
-.sh-grid .e-con.v5-media{border-radius:4px}
-.sh-grid .v5-card:hover .v5-front img{transform:scale(1.03)}
-.sh-grid .e-con.v5-badges{flex-direction:column!important;align-items:flex-start!important;gap:6px!important;top:12px;left:12px}
-.sh-grid .v5-badge .elementor-heading-title{font-size:11.5px!important;letter-spacing:.08em;padding:5px 10px;border-radius:999px}
-.sh-grid .v5-badge-new .elementor-heading-title{background:#FFFFFF;color:#1A1A1A!important}
-.sh-grid .v5-pick{top:12px;right:12px}
-.sh-grid .v5-pick .elementor-button{font-size:12px!important;padding:7px 12px!important;box-shadow:0 2px 10px rgba(0,0,0,.1)}
-.sh-grid .v5-add{left:12px;right:12px;bottom:12px}
-.sh-grid .v5-add .elementor-button{padding:14px 12px!important;font-size:12.5px!important;letter-spacing:.14em!important}
-.sh-grid .e-con.v5-meta{align-items:stretch!important;text-align:left;gap:6px!important;padding:0 2px!important}
-.sh-grid .v5-meta > .elementor-widget{width:100%}
-.sh-grid .e-con.sh-meta-top{width:100%!important}
-.sh-grid .sh-meta-top > .sh-fabric{flex:1 1 auto!important;width:auto!important;min-width:0}
-.sh-grid .e-con.sh-colour{width:auto!important;flex:none!important}
-.sh-grid .sh-colour > .elementor-widget{width:auto!important}
-.sh-grid .sh-fabric .elementor-heading-title{font-size:11.5px!important;letter-spacing:.12em!important;text-transform:uppercase;color:#77707D!important;text-align:left!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.sh-grid .e-con.v5-swatch{width:12px!important;height:12px;margin:0!important;box-shadow:inset 0 0 0 1px rgba(26,26,26,.2)}
-.sh-grid .sh-colour-name .elementor-heading-title{white-space:nowrap}
-.sh-grid .v5-name .elementor-heading-title{font-family:'Cormorant',serif!important;font-size:23px!important;font-weight:600!important;letter-spacing:0!important;text-transform:none!important;line-height:1.1!important;text-align:left!important}
-.sh-grid .v5-price .elementor-heading-title{display:flex;align-items:baseline;flex-wrap:wrap;gap:2px 8px;justify-content:flex-start;text-align:left!important}
-.sh-grid .v5-price ins{order:-1;font-size:17px}
-.sh-grid .v5-price del{margin:0!important;font-size:14px!important}
-.sh-grid .v5-timer{margin-top:4px!important}
-.sh-grid .v5-timer .rv-sale-timer{justify-content:flex-start;gap:6px!important;padding:10px 0 0!important;border-top:1px solid #ECE6E1;border-radius:0!important;background:transparent!important;color:#77707D!important;font-size:12.5px!important;font-weight:500!important;letter-spacing:.01em!important;text-transform:none!important}
-.sh-grid .v5-timer .rv-sale-timer svg{width:12px!important;height:12px!important;color:#7B3FF2!important}
-.sh-grid .v5-timer .rv-st-time{color:#7B3FF2!important;font-weight:600}
-.sh-grid .v5-timer .rv-st-time:before{color:#77707D!important;text-transform:none!important;letter-spacing:0!important;font-weight:500}
-@media (max-width:600px){
-.sh-grid .v5-name .elementor-heading-title{font-size:19px!important}
-.sh-grid .v5-price ins{font-size:15.5px}
-.sh-grid .v5-price del{font-size:12.5px!important}
-.sh-grid .sh-fabric .elementor-heading-title{font-size:10.5px!important;letter-spacing:.08em!important}
-.sh-grid .sh-colour-name{display:none}
-.sh-grid .v5-timer .rv-sale-timer{font-size:11.5px!important}
-.sh-grid .e-con.v5-badges{top:8px;left:8px}
-.sh-grid .v5-badge .elementor-heading-title{font-size:10.5px!important;padding:4px 8px}
-.sh-grid .v5-pick{top:8px;right:8px}
-.sh-grid .v5-pick .elementor-button{font-size:11px!important;padding:6px 9px!important}
-.sh-grid .v5-add{left:8px;right:8px;bottom:8px}
-.sh-grid .v5-add .elementor-button{padding:11px 8px!important;font-size:11px!important;letter-spacing:.1em!important}
-}
+/* sale timer: short label so it fits narrower grid cards */
+.sh-grid .v5-timer .rv-sale-timer{font-size:11.5px;letter-spacing:.04em;gap:5px;padding:9px 6px}
+.sh-grid .v5-timer .rv-st-label{display:none}
+.sh-grid .v5-timer .rv-st-time:before{content:"Ends in ";color:#FFFFFF;text-transform:uppercase;letter-spacing:.04em}
 
 @media (max-width:1366px){
 .e-con.sh-grid,.e-con.sh-grid.is-3{grid-template-columns:repeat(3,minmax(0,1fr))!important}

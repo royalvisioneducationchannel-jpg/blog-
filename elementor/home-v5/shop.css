@@ -150,11 +150,19 @@ body.sh-has-filters .e-con.sh-chips{display:flex!important}
 .sh-seo > .e-con-inner > .sh-seo-p{flex:1.4 1 0!important}
 .sh-seo-p p{margin:0}
 
-@media (max-width:1199px){
+/* sale timer: short label so it fits narrower grid cards */
+.sh-grid .v5-timer .rv-sale-timer{font-size:11.5px;letter-spacing:.04em;gap:5px;padding:9px 6px}
+.sh-grid .v5-timer .rv-st-label{display:none}
+.sh-grid .v5-timer .rv-st-time:before{content:"Ends in ";color:#FFFFFF;text-transform:uppercase;letter-spacing:.04em}
+
+@media (max-width:1366px){
 .e-con.sh-grid,.e-con.sh-grid.is-3{grid-template-columns:repeat(3,minmax(0,1fr))!important}
 .e-con.sh-cols{display:none!important}
 .e-con.sh-promo-img{display:none!important}
 .e-con.sh-promo{min-height:0}
+}
+@media (max-width:1099px){
+.e-con.sh-grid,.e-con.sh-grid.is-3{grid-template-columns:repeat(2,minmax(0,1fr))!important}
 }
 @media (max-width:899px){
 .e-con.sh-hero-in{grid-template-columns:1fr}

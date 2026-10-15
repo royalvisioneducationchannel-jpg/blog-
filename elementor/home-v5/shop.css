@@ -178,6 +178,8 @@ body.sh-has-filters .e-con.sh-chips{display:flex!important}
 .sh-fbtn .elementor-button{border:1px solid #1A1A1A!important}
 .e-con.sh-aside{position:fixed!important;top:0;left:0;bottom:0;z-index:9990;width:min(380px,90%)!important;overflow-y:auto;background:#FFFFFF;padding:22px 20px 0!important;box-shadow:0 0 40px rgba(0,0,0,.25);transform:translateX(-105%);visibility:hidden;transition:transform .3s cubic-bezier(.2,.7,.2,1),visibility .3s}
 body.sh-open .e-con.sh-aside{transform:none;visibility:visible}
+.e-con.sh-aside{flex-wrap:nowrap!important;display:flex!important}
+.e-con.sh-aside > *{flex-shrink:0!important}
 .e-con.sh-backdrop{display:block!important;position:fixed!important;inset:0;z-index:9980;width:auto!important;background:rgba(26,16,36,.45);opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s}
 body.sh-open .e-con.sh-backdrop{opacity:1;visibility:visible}
 body.sh-open{overflow:hidden}

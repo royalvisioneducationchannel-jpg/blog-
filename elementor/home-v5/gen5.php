@@ -416,5 +416,7 @@ $rv5 = function ( $cfg ) {
 		] ),
 	], false );
 
+	// Shop page (gen-shop.php) reuses these helpers and the header, trust row, tray and footer built above.
+	if ( ! empty( $cfg['kit'] ) ) return get_defined_vars();
 	return $out;
 };

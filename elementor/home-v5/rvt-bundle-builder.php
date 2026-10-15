@@ -2,6 +2,7 @@
 /**
  * Royal Vision - "Any 2 for Rs 6,990" bundle builder on the fashion home page.
  *
+ * Runs on the fashion home page and the fashion shop page (same card markup).
  * Adds behaviour to markup built in Elementor: the "+ Bundle" button on each
  * product card (.v5-pick) and the bottom tray container (.v5-tray). A shopper
  * picks two suits, sees the real saving against the two current prices, and
@@ -12,8 +13,8 @@
 defined( 'ABSPATH' ) || exit;
 
 add_action( 'wp_footer', function () {
-	$page_id = (int) get_option( 'rv_fashion_home_id' );
-	if ( ! $page_id || get_queried_object_id() !== $page_id ) {
+	$pages = array_filter( array( (int) get_option( 'rv_fashion_home_id' ), (int) get_option( 'rv_fashion_shop_id' ) ) );
+	if ( ! in_array( get_queried_object_id(), $pages, true ) ) {
 		return;
 	}
 	?>

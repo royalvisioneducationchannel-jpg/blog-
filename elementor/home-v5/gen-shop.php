@@ -92,10 +92,36 @@ $rvShop = function ( $cfg ) use ( $rv5 ) {
 		$btn( 'Show 24 suits', '#close', [ 'size' => 15, 'py' => 19, 'px' => 20, 'ls' => 0.1, 'cls' => 'sh-show', 'align' => 'justify' ] ),
 	] );
 
+	// Shop card: same card as home, with the details re-ordered into a store layout
+	// (fabric + colour on top, then name, price and a quiet sale timer).
+	$shopCard = function ( $id ) use ( $card, $row, $h, $gap, $COLS, $C ) {
+		$c = $card( $id );
+		foreach ( $c['elements'] as $k => $part ) {
+			if ( ( $part['settings']['css_classes'] ?? '' ) !== 'v5-meta' ) continue;
+			$by = [];
+			foreach ( $part['elements'] as $el ) {
+				$cls = $el['settings']['_css_classes'] ?? '';
+				$key = ( $el['widgetType'] ?? '' ) === 'rv-sale-timer' ? 'timer' : ( strpos( $cls, 'v5-name' ) !== false ? 'name' : ( strpos( $cls, 'v5-price' ) !== false ? 'price' : ( strpos( $cls, 'v5-swatch' ) !== false ? 'swatch' : 'fabric' ) ) );
+				$by[ $key ] = $el;
+			}
+			$by['fabric']['settings']['_css_classes'] = 'sh-fabric';
+			$part['settings']['css_classes'] = $part['settings']['_css_classes'] = 'v5-meta sh-meta';
+			$part['elements'] = array_values( array_filter( [
+				$row( [ 'cls' => 'sh-meta-top', 'flex_wrap' => 'nowrap', 'flex_justify_content' => 'space-between', 'flex_align_items' => 'center', 'flex_gap' => $gap( 8 ) ], [
+					$by['fabric'],
+					$row( [ 'cls' => 'sh-colour', 'flex_wrap' => 'nowrap', 'flex_align_items' => 'center', 'flex_gap' => $gap( 6 ) ], [ $by['swatch'], $h( $COLS[ $id - 1 ], [ 'size' => 13, 'color' => $C['mute'], 'lh' => 1.2, 'cls' => 'sh-colour-name' ] ) ] ),
+				] ),
+				$by['name'], $by['price'], $by['timer'] ?? null,
+			] ) );
+			$c['elements'][ $k ] = $part;
+		}
+		return $c;
+	};
+
 	$cells = [];
 	foreach ( $P as $id => $pp ) {
 		$cls = 'sh-cell sh-fab-' . strtolower( $pp['fabric'] ) . ' sh-col-' . strtolower( $COLS[ $id - 1 ] ) . ( $pp['new'] ? ' sh-new' : '' ) . ( in_array( $id, $BEST, true ) ? ' sh-best' : '' );
-		$cells[] = $con( [ 'cls' => $cls ], [ $card( $id ) ] );
+		$cells[] = $con( [ 'cls' => $cls ], [ $shopCard( $id ) ] );
 		if ( $id === 6 ) {
 			$cells[] = $a( $HOME . '#bundle', [ 'cls' => 'sh-promo', 'flex_direction' => 'row', 'flex_wrap' => 'nowrap', 'background_background' => 'classic', 'background_color' => $C['plum'] ], [
 				$con( [ 'cls' => 'sh-promo-txt', 'flex_justify_content' => 'center', 'flex_gap' => $gap( 14 ) ], [

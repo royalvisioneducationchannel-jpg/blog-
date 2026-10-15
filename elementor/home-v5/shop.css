@@ -193,4 +193,5 @@ body.sh-open{overflow:hidden}
 .sh-count .elementor-heading-title{font-size:14.5px!important}
 .sh-g-col-opts .elementor-icon-list-items{grid-template-columns:repeat(4,minmax(0,1fr))}
 }
+@media (min-width:600px) and (max-width:899px){.e-con.sh-grid,.e-con.sh-grid.is-3{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
 @media (prefers-reduced-motion:reduce){.e-con.sh-aside,.e-con.sh-backdrop,.e-con.sh-prog-fill{transition:none}}

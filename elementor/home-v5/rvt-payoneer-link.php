@@ -114,3 +114,82 @@ add_filter( 'woocommerce_payment_gateways', function ( $gateways ) {
 	}
 	return $gateways;
 } );
+
+/* ---------------------------------------------------------------
+   International checkout
+   Pakistan orders go through the COD form (rvt-cod-order.php and
+   rvt-cod-cart.php), which redirects the WooCommerce checkout. A
+   visitor who follows an "Ordering from outside Pakistan?" link gets
+   the standard WooCommerce checkout instead, where outside Pakistan
+   only the card (Payoneer link) method is offered.
+--------------------------------------------------------------- */
+
+/** Whether this visitor chose the international checkout. */
+function rvt_intl_active() {
+	return function_exists( 'WC' ) && WC()->session && WC()->session->get( 'rvt_intl' );
+}
+
+// ?rvt_intl=1 marks the session, before WooCommerce handles ?add-to-cart (which may redirect).
+add_action( 'wp_loaded', function () {
+	if ( empty( $_GET['rvt_intl'] ) || ! function_exists( 'WC' ) || ! WC()->session ) { // phpcs:ignore WordPress.Security.NonceVerification
+		return;
+	}
+	if ( ! WC()->session->has_session() ) {
+		WC()->session->set_customer_session_cookie( true );
+	}
+	WC()->session->set( 'rvt_intl', 1 );
+}, 5 );
+
+// Let the international visitor through to the WooCommerce checkout.
+add_action( 'template_redirect', function () {
+	if ( rvt_intl_active() ) {
+		remove_action( 'template_redirect', 'rvt_cod_checkout_redirect', 5 );
+	}
+}, 4 );
+
+// No country preselected on the international checkout.
+add_filter( 'default_checkout_billing_country', function ( $country ) {
+	return rvt_intl_active() ? '' : $country;
+} );
+
+// Outside Pakistan: card only. Cash on Delivery and JazzCash stay Pakistan-only.
+add_filter( 'woocommerce_available_payment_gateways', function ( $gateways ) {
+	if ( is_admin() || ! WC()->customer ) {
+		return $gateways;
+	}
+	$country = WC()->customer->get_billing_country();
+	if ( '' !== $country && 'PK' !== $country ) {
+		unset( $gateways['cod'], $gateways['bacs'] );
+	}
+	return $gateways;
+} );
+
+// The order is placed; later visits use the Pakistan form again.
+add_action( 'woocommerce_thankyou', function () {
+	if ( rvt_intl_active() ) {
+		WC()->session->set( 'rvt_intl', null );
+	}
+} );
+
+// "Ordering from outside Pakistan?" link above the COD order form.
+add_filter( 'do_shortcode_tag', function ( $output, $tag ) {
+	if ( 'rvt_order_form' !== $tag || ! function_exists( 'wc_get_checkout_url' ) ) {
+		return $output;
+	}
+	$url = add_query_arg( 'rvt_intl', 1, wc_get_checkout_url() );
+	$pid = isset( $_GET['rvt_pid'] ) ? absint( $_GET['rvt_pid'] ) : 0; // phpcs:ignore WordPress.Security.NonceVerification
+	if ( $pid ) {
+		$product = wc_get_product( $pid );
+		if ( ! $product || ! $product->is_purchasable() ) {
+			return $output;
+		}
+		// Simple products go straight into the cart; others go back to the product page to pick options.
+		$url = $product->is_type( 'simple' )
+			? add_query_arg( array( 'add-to-cart' => $pid, 'rvt_intl' => 1 ), wc_get_checkout_url() )
+			: add_query_arg( 'rvt_intl', 1, $product->get_permalink() );
+	}
+	$note = '<p class="rvt-intl-note" style="margin:0 0 14px;padding:12px 14px;border:1px solid #E4DDF5;border-radius:10px;background:#F7F4FE;font-size:14.5px;line-height:1.5;color:#1A1A1A">'
+		. esc_html__( 'Ordering from outside Pakistan (UK, USA, Canada, Australia)?', 'rvt' ) . ' '
+		. '<a href="' . esc_url( $url ) . '" style="color:#5B24D6;font-weight:600;text-decoration:underline">' . esc_html__( 'Pay by Visa / Mastercard here', 'rvt' ) . '</a></p>';
+	return $note . $output;
+}, 10, 2 );

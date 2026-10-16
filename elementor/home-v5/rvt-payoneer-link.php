@@ -176,16 +176,22 @@ add_action( 'woocommerce_thankyou', function () {
 	}
 } );
 
-// "Ordering from outside Pakistan?" link above the COD order form.
+// "Ordering from outside Pakistan?" link above the COD order form and under the product page Buy Now button.
 add_filter( 'do_shortcode_tag', function ( $output, $tag ) {
-	if ( 'rvt_order_form' !== $tag || ! function_exists( 'wc_get_checkout_url' ) ) {
+	if ( ! in_array( $tag, array( 'rvt_order_form', 'rvt_buy_now' ), true ) || ! function_exists( 'wc_get_checkout_url' ) ) {
 		return $output;
 	}
 	$url = add_query_arg( 'rvt_intl', 1, wc_get_checkout_url() );
 	$pid = isset( $_GET['rvt_pid'] ) ? absint( $_GET['rvt_pid'] ) : 0; // phpcs:ignore WordPress.Security.NonceVerification
+	if ( 'rvt_buy_now' === $tag ) {
+		$pid = is_product() ? get_queried_object_id() : 0;
+		if ( ! $pid ) {
+			return $output;
+		}
+	}
 	if ( $pid ) {
 		$product = wc_get_product( $pid );
-		if ( ! $product || ! $product->is_purchasable() ) {
+		if ( ! $product || ! $product->is_purchasable() || ( 'rvt_buy_now' === $tag && ! $product->is_type( 'simple' ) ) ) {
 			return $output;
 		}
 		// Simple products go straight into the cart; others go back to the product page to pick options.
@@ -193,8 +199,8 @@ add_filter( 'do_shortcode_tag', function ( $output, $tag ) {
 			? add_query_arg( array( 'add-to-cart' => $pid, 'rvt_intl' => 1 ), wc_get_checkout_url() )
 			: add_query_arg( 'rvt_intl', 1, $product->get_permalink() );
 	}
-	$note = '<p class="rvt-intl-note" style="margin:0 0 14px;padding:12px 14px;border:1px solid #E4DDF5;border-radius:10px;background:#F7F4FE;font-size:14.5px;line-height:1.5;color:#1A1A1A">'
+	$note = '<p class="rvt-intl-note" style="margin:' . ( 'rvt_buy_now' === $tag ? '12px 0 0' : '0 0 14px' ) . ';padding:12px 14px;border:1px solid #E4DDF5;border-radius:10px;background:#F7F4FE;font-size:14.5px;line-height:1.5;color:#1A1A1A">'
 		. esc_html__( 'Ordering from outside Pakistan (UK, USA, Canada, Australia)?', 'rvt' ) . ' '
 		. '<a href="' . esc_url( $url ) . '" style="color:#5B24D6;font-weight:600;text-decoration:underline">' . esc_html__( 'Pay by Visa / Mastercard here', 'rvt' ) . '</a></p>';
-	return $note . $output;
+	return 'rvt_buy_now' === $tag ? $output . $note : $note . $output;
 }, 10, 2 );

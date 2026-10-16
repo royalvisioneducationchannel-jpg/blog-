@@ -140,6 +140,11 @@ add_action( 'wp_loaded', function () {
 	WC()->session->set( 'rvt_intl', 1 );
 }, 5 );
 
+// An international "add to cart" link lands on the checkout, not the cart page.
+add_filter( 'woocommerce_add_to_cart_redirect', function ( $url ) {
+	return empty( $_GET['rvt_intl'] ) ? $url : add_query_arg( 'rvt_intl', 1, wc_get_checkout_url() ); // phpcs:ignore WordPress.Security.NonceVerification
+}, 20 );
+
 // Let the international visitor through to the WooCommerce checkout.
 add_action( 'template_redirect', function () {
 	if ( rvt_intl_active() ) {

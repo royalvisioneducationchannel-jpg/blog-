@@ -21,6 +21,9 @@ $rvt_pl_define = function () {
 
 	class RVT_Payoneer_Link_Gateway extends WC_Payment_Gateway {
 
+		/** @var string Text for the thank-you page and customer email. */
+		public $instructions = '';
+
 		public function __construct() {
 			$this->id                 = 'rvt_payoneer_link';
 			$this->has_fields         = false;

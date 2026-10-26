@@ -9,3 +9,4 @@ renders/
 assets/media/
 .transcode-cache/
 backup-v2/
+backup-v3/

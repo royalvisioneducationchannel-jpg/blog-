@@ -119,7 +119,7 @@
     </style>
   </head>
   <body>
-    <div id="root" data-composition-id="main" data-start="0" data-duration="33" data-width="1080" data-height="1920">
+    <div id="root" data-motion-blur="on" data-composition-id="main" data-start="0" data-duration="33" data-width="1080" data-height="1920">
       <div id="cam" class="cam">
         <video id="footage" class="clip fill" src="assets/media/footage.mp4" muted playsinline data-start="0" data-duration="30.35" data-track-index="0"></video>
       </div>
@@ -227,7 +227,8 @@
       <audio id="sfx-line" class="clip" src="assets/audio/click-soft.mp3" data-start="26.6" data-duration="0.36" data-track-index="12" data-volume="0.2"></audio>
       <audio id="sfx-ship" class="clip" src="assets/audio/impact-bass-1.mp3" data-start="26.88" data-duration="2.1" data-track-index="13" data-volume="0.35"></audio>
       <audio id="sfx-truck" class="clip" src="assets/audio/whoosh-short.mp3" data-start="27.05" data-duration="0.57" data-track-index="9" data-volume="0.2"></audio>
-      <audio id="sfx-hero" class="clip" src="assets/audio/impact-bass-1.mp3" data-start="29.75" data-duration="2.1" data-track-index="10" data-volume="0.3"></audio>
+      <audio id="sfx-push" class="clip" src="assets/audio/whoosh-short.mp3" data-start="29.45" data-duration="0.57" data-track-index="11" data-volume="0.25"></audio>
+      <audio id="sfx-hero" class="clip" src="assets/audio/impact-bass-1.mp3" data-start="30.0" data-duration="2.1" data-track-index="10" data-volume="0.3"></audio>
     </div>
     <script>
       const tl = gsap.timeline({ paused: true });
@@ -258,6 +259,8 @@
       tl.set(CAM, at(1.14), 22.3);
       tl.to(CAM, { ...at(1.02), duration: 2.9, ease: "power2.out" }, 22.66);
       tl.set(CAM, at(1), 29.0);
+      // Push into the hero card: footage leaves upward with it
+      tl.to(CAM, { y: -1920, duration: 0.5, ease: "expo.inOut" }, 29.55);
 
       // red
       tl.fromTo("#co-red-lab", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.35, ease: E }, 11.36);

@@ -221,7 +221,9 @@
       <audio id="sfx-c5" class="clip" src="assets/audio/click-soft.mp3" data-start="17.14" data-duration="0.36" data-track-index="11" data-volume="0.3"></audio>
       <audio id="sfx-riser" class="clip" src="assets/audio/riser.mp3" data-start="19.1" data-duration="2.0" data-media-start="8.0" data-track-index="13" data-volume="0.22" data-fade-in="0.6"></audio>
       <audio id="sfx-off" class="clip" src="assets/audio/impact-bass-1.mp3" data-start="21.1" data-duration="2.1" data-track-index="10" data-volume="0.45"></audio>
-      <audio id="sfx-web" class="clip" src="assets/audio/whoosh-short.mp3" data-start="22.6" data-duration="0.57" data-track-index="9" data-volume="0.22"></audio>
+      <audio id="sfx-web" class="clip" src="assets/audio/whoosh-short.mp3" data-start="22.3" data-duration="0.57" data-track-index="9" data-volume="0.22"></audio>
+      <audio id="sfx-wipe" class="clip" src="assets/audio/whoosh-short.mp3" data-start="20.85" data-duration="0.57" data-track-index="12" data-volume="0.28"></audio>
+      <audio id="sfx-bars" class="clip" src="assets/audio/whoosh-short.mp3" data-start="25.28" data-duration="0.57" data-track-index="13" data-volume="0.14"></audio>
       <audio id="sfx-line" class="clip" src="assets/audio/click-soft.mp3" data-start="26.6" data-duration="0.36" data-track-index="12" data-volume="0.2"></audio>
       <audio id="sfx-ship" class="clip" src="assets/audio/impact-bass-1.mp3" data-start="26.88" data-duration="2.1" data-track-index="13" data-volume="0.35"></audio>
       <audio id="sfx-truck" class="clip" src="assets/audio/whoosh-short.mp3" data-start="27.05" data-duration="0.57" data-track-index="9" data-volume="0.2"></audio>
@@ -235,14 +237,26 @@
       // origin is top-left; x = -(s-1)*540, y = -(s-1)*500 keeps the push centred on the speaker
       const at = (s) => ({ scale: s, x: -(s - 1) * 540, y: -(s - 1) * 500 });
       tl.set(CAM, at(1), 0);
-      tl.to(CAM, { ...at(1.05), duration: 3.4, ease: "none" }, 3.0);
-      tl.to(CAM, { ...at(1.09), duration: 4.8, ease: "none" }, 6.5);
-      tl.to(CAM, { ...at(1.06), duration: 0.4, ease: io }, 11.36);
-      tl.to(CAM, { ...at(1.1), duration: 6.9, ease: "none" }, 11.8);
-      tl.to(CAM, { ...at(1.0), duration: 0.5, ease: io }, 18.73);
-      tl.to(CAM, { ...at(1.1), duration: 1.85, ease: "power1.in" }, 19.25);
-      tl.set(CAM, at(1), 21.5);
-      tl.to(CAM, { ...at(1.06), duration: 2.85, ease: "none" }, 22.66);
+      // ORDER: slow push on the speaker
+      tl.to(CAM, { ...at(1.06), duration: 3.4, ease: "none" }, 3.0);
+      // COLORS: a lateral glide at a fixed size; the wall type drifts less, so it reads as its own plane
+      tl.to(CAM, { scale: 1.08, x: 0, y: -40, duration: 0.6, ease: io }, 6.48);
+      tl.to(CAM, { scale: 1.08, x: -86, y: -40, duration: 4.2, ease: "sine.inOut" }, 7.08);
+      // Colour reveals: the camera leans toward whichever box is being named (track data)
+      const S = 1.12, YC = -(S - 1) * 500;
+      const follow = (bx) => Math.max(-(S - 1) * 1080, Math.min(0, -(S - 1) * 540 - (bx - 540) * 0.35));
+      tl.to(CAM, { scale: S, x: follow(861), y: YC, duration: 0.6, ease: io }, 11.36);
+      tl.to(CAM, { x: follow(560), duration: 1.2, ease: "sine.inOut" }, 11.9);
+      tl.to(CAM, { x: follow(410), duration: 0.6, ease: io }, 13.32);
+      tl.to(CAM, { x: follow(560), duration: 0.6, ease: io }, 14.74);
+      tl.to(CAM, { x: follow(684), duration: 0.6, ease: io }, 16.27);
+      tl.to(CAM, { x: follow(282), duration: 0.6, ease: io }, 17.14);
+      // OFFER: back to wide, then a tension push that the 20% cut releases
+      tl.to(CAM, { ...at(1.0), duration: 0.45, ease: io }, 18.73);
+      tl.to(CAM, { ...at(1.14), duration: 1.65, ease: "power2.in" }, 19.2);
+      // WEBSITE: the reverse move, a pull-out
+      tl.set(CAM, at(1.14), 22.3);
+      tl.to(CAM, { ...at(1.02), duration: 2.9, ease: "power2.out" }, 22.66);
       tl.set(CAM, at(1), 29.0);
 
       // red

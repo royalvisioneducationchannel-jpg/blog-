@@ -112,7 +112,7 @@
     tl.fromTo("#b-colors-kt", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "none" }, 8.46);
     tl.fromTo(["#b-sw1", "#b-sw2", "#b-sw3", "#b-sw4"], { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, stagger: 0.09, ease: "back.out(2.2)" }, 8.86);
     tl.to(["#b-colors-w", "#b-colors-k"], { yPercent: -105, opacity: 0, duration: 0.3, ease: "power2.in" }, 11.0);
-    drift("#b-colors", 6.48, 4.85);
+    tl.fromTo("#b-colors", { scale: 1, x: 0 }, { scale: 1.025, x: -40, duration: 4.85, ease: "none" }, 6.48);
 
     // OFFER: outline first, then a solid fill wipes across with the riser
     tl.fromTo("#b-offer-k", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.35, ease: E }, 18.8);

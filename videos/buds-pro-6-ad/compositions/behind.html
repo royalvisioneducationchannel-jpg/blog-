@@ -1,0 +1,130 @@
+<template>
+  <style>
+    /* Type that lives on the wall, between the footage and the cutout of the speaker */
+    #root {
+      position: absolute;
+      inset: 0;
+      font-family: "Inter", sans-serif;
+      pointer-events: none;
+      --ink: #121418;
+    }
+    .layer {
+      position: absolute;
+      inset: 0;
+      transform-origin: 540px 480px;
+    }
+    .giant {
+      position: absolute;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-weight: 900;
+      line-height: 0.86;
+      letter-spacing: -0.045em;
+      white-space: nowrap;
+      color: var(--ink);
+    }
+    .mask {
+      display: inline-block;
+      overflow: hidden;
+      padding: 0 6px 10px;
+    }
+    .mask > span {
+      display: inline-block;
+    }
+    .stroke {
+      letter-spacing: 0.03em;
+      color: rgba(18, 20, 24, 0.07);
+      -webkit-text-stroke: 4px var(--ink);
+    }
+    .kicker {
+      position: absolute;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 14px;
+      font-weight: 700;
+      font-size: 28px;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: #3d424c;
+    }
+    .sw {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+    }
+  </style>
+  <div id="root" data-composition-id="behind" data-width="1080" data-height="1920" data-layout-allow-overlap>
+    <div id="b-order" class="clip layer" data-start="2.95" data-duration="3.5" data-track-index="0">
+      <div id="b-order-k" class="kicker" style="top: 282px">To der kis baat ki?</div>
+      <div class="giant" style="top: 322px; font-size: 300px">
+        <span class="mask"><span id="b-order-w">ORDER</span></span>
+      </div>
+    </div>
+
+    <div id="b-colors" class="clip layer" data-start="6.48" data-duration="4.85" data-track-index="1">
+      <div id="b-colors-k" class="kicker" style="top: 282px">
+        <span id="b-sw1" class="sw" style="background: #e5483e"></span>
+        <span id="b-sw2" class="sw" style="background: #f4f4f2; box-shadow: inset 0 0 0 2px #b9bdc5"></span>
+        <span id="b-sw3" class="sw" style="background: #2a2e38"></span>
+        <span id="b-sw4" class="sw" style="background: #f3d417"></span>
+        <span id="b-colors-kt">&nbsp;Different Colors</span>
+      </div>
+      <div class="giant" style="top: 330px; font-size: 230px">
+        <span class="mask"><span id="b-colors-w" class="stroke">COLORS</span></span>
+      </div>
+    </div>
+
+    <div id="b-offer" class="clip layer" data-start="18.73" data-duration="2.37" data-track-index="0">
+      <div id="b-offer-k" class="kicker" style="top: 282px">Is offer se faida uthayein</div>
+      <div class="giant" style="top: 322px; font-size: 300px">
+        <span class="mask"><span id="b-offer-o" class="stroke">OFFER</span></span>
+      </div>
+      <div class="giant" style="top: 322px; font-size: 300px">
+        <span class="mask"><span id="b-offer-f" style="letter-spacing: 0.03em">OFFER</span></span>
+      </div>
+    </div>
+
+    <div id="b-web" class="clip layer" data-start="22.66" data-duration="2.88" data-track-index="1">
+      <div id="b-web-k" class="kicker" style="top: 282px">Order Now On Our</div>
+      <div class="giant" style="top: 330px; font-size: 212px">
+        <span class="mask"><span id="b-web-w">WEBSITE</span></span>
+      </div>
+    </div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    const E = "power3.out";
+    // Each block: a slow drift that is slower than the camera, so the wall type reads as a separate plane
+    function drift(id, s, d) {
+      tl.fromTo(id, { scale: 1 }, { scale: 1.025, duration: d, ease: "none" }, s);
+    }
+
+    tl.fromTo("#b-order-k", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.35, ease: E }, 2.95);
+    tl.fromTo("#b-order-w", { yPercent: 105 }, { yPercent: 0, duration: 0.6, ease: "expo.out" }, 3.89);
+    tl.to(["#b-order-w", "#b-order-k"], { yPercent: -105, opacity: 0, duration: 0.3, ease: "power2.in" }, 6.12);
+    drift("#b-order", 2.95, 3.5);
+
+    tl.fromTo("#b-colors-w", { yPercent: 105 }, { yPercent: 0, duration: 0.6, ease: "expo.out" }, 6.55);
+    tl.fromTo("#b-colors-kt", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "none" }, 8.46);
+    tl.fromTo(["#b-sw1", "#b-sw2", "#b-sw3", "#b-sw4"], { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, stagger: 0.09, ease: "back.out(2.2)" }, 8.86);
+    tl.to(["#b-colors-w", "#b-colors-k"], { yPercent: -105, opacity: 0, duration: 0.3, ease: "power2.in" }, 11.0);
+    drift("#b-colors", 6.48, 4.85);
+
+    // OFFER: outline first, then a solid fill wipes across with the riser
+    tl.fromTo("#b-offer-k", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.35, ease: E }, 18.8);
+    tl.fromTo("#b-offer-o", { yPercent: 105 }, { yPercent: 0, duration: 0.6, ease: "expo.out" }, 19.5);
+    tl.fromTo("#b-offer-f", { clipPath: "inset(0% 100% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 1.0, ease: "power2.in" }, 20.05);
+    drift("#b-offer", 18.73, 2.37);
+
+    tl.fromTo("#b-web-k", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.35, ease: E }, 22.7);
+    tl.fromTo("#b-web-w", { yPercent: 105 }, { yPercent: 0, duration: 0.6, ease: "expo.out" }, 23.25);
+    tl.to(["#b-web-w", "#b-web-k"], { yPercent: -105, opacity: 0, duration: 0.3, ease: "power2.in" }, 25.22);
+    drift("#b-web", 22.66, 2.88);
+
+    window.__timelines["behind"] = tl;
+  </script>
+</template>

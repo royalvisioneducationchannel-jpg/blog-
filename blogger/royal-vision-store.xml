@@ -1,0 +1,1000 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html b:css='false' b:defaultwidgetversion='2' b:layoutsVersion='3' b:responsive='true' b:templateVersion='1.0.0' expr:dir='data:blog.languageDirection' expr:lang='data:blog.locale' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
+<head>
+<meta charset='utf-8'/>
+<meta content='width=device-width, initial-scale=1' name='viewport'/>
+<meta content='#2A1838' name='theme-color'/>
+<title><data:blog.pageTitle/></title>
+<b:include data='blog' name='all-head-content'/>
+<link href='https://fonts.googleapis.com' rel='preconnect'/>
+<link crossorigin='anonymous' href='https://fonts.gstatic.com' rel='preconnect'/>
+<link href='https://fonts.googleapis.com/css2?family=Cormorant:wght@500;600;700&amp;family=Jost:wght@400;500;600&amp;display=swap' rel='stylesheet'/>
+<b:skin><![CDATA[
+/* Royal Vision Store - Blogger theme
+   Products are Blogger posts, categories are labels.
+   Store options live in the "Store Settings" gadget (Layout page). */
+
+:root{
+  --ink:#1A1A1A;--ink-2:#4A4350;--muted:#77707D;--line:#ECE6E1;--paper:#FFFFFF;--cream:#F6F1EC;
+  --violet:#7B3FF2;--violet-dk:#5B24D6;--violet-soft:#F2ECFE;--plum:#2A1838;--gold:#E2C285;
+  --sale:#C8325F;--ok:#1F7A4D;--warn:#9A5B00;
+  --display:'Cormorant',Georgia,'Times New Roman',serif;
+  --body:'Jost',system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;
+  --r:12px;--wrap:1240px;--gut:16px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 16px/1.6 var(--body);overflow-x:hidden}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--violet);outline-offset:2px}
+[hidden]{display:none!important}
+.rv-wrap{max-width:var(--wrap);margin:0 auto;padding-inline:var(--gut)}
+.rv-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.rv-settings-sec{display:none}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+
+/* Buttons */
+.rv-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 24px;border:1.5px solid var(--ink);border-radius:999px;background:var(--ink);color:#fff;font-weight:500;font-size:15px;letter-spacing:.02em;cursor:pointer;transition:background .2s,border-color .2s,color .2s}
+.rv-btn:hover{background:var(--violet-dk);border-color:var(--violet-dk)}
+.rv-btn[disabled]{opacity:.5;cursor:not-allowed}
+.rv-btn-ghost{background:transparent;color:var(--ink)}
+.rv-btn-ghost:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+.rv-btn-violet{background:var(--violet);border-color:var(--violet)}
+.rv-btn-wa{background:#1F7A4D;border-color:#1F7A4D}
+.rv-btn-wa:hover{background:#17603C;border-color:#17603C}
+.rv-btn-block{width:100%}
+.rv-btn-sm{min-height:40px;padding:0 16px;font-size:14px}
+
+/* Announcement + header */
+.rv-ann{background:var(--plum);color:#F4EAFB;font-size:13px;letter-spacing:.04em;text-align:center;padding:8px var(--gut)}
+.rv-head{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.96);backdrop-filter:saturate(1.4) blur(8px);border-bottom:1px solid var(--line)}
+.rv-head-row{display:flex;align-items:center;gap:12px;min-height:68px}
+.rv-logo{font:700 26px/1 var(--display);letter-spacing:.14em;text-transform:uppercase;white-space:nowrap}
+.rv-logo small{display:block;font:500 10px/1.2 var(--body);letter-spacing:.32em;color:var(--violet);margin-top:4px}
+.rv-head-actions{margin-left:auto;display:flex;align-items:center;gap:4px}
+.rv-icon-btn{position:relative;display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border:0;border-radius:50%;background:transparent;cursor:pointer}
+.rv-icon-btn:hover{background:var(--violet-soft)}
+.rv-icon-btn svg{width:22px;height:22px}
+.rv-count{position:absolute;top:4px;right:2px;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--violet);color:#fff;font-size:11px;font-weight:600;line-height:18px;text-align:center;font-variant-numeric:tabular-nums}
+.rv-count[data-n='0']{display:none}
+.rv-search{padding:0 0 12px}
+.rv-search form{display:flex;gap:8px}
+.rv-search input{flex:1;min-width:0;height:46px;padding:0 16px;border:1.5px solid var(--line);border-radius:999px;background:var(--cream)}
+.rv-search input:focus{outline:none;border-color:var(--violet);background:#fff}
+.rv-nav{display:flex;gap:8px;overflow-x:auto;padding:10px 0 12px;scrollbar-width:none}
+.rv-nav::-webkit-scrollbar{display:none}
+.rv-chip{flex:0 0 auto;padding:7px 16px;border:1px solid var(--line);border-radius:999px;font-size:14px;white-space:nowrap;transition:border-color .2s,background .2s}
+.rv-chip:hover{border-color:var(--violet)}
+.rv-chip.is-on{background:var(--ink);border-color:var(--ink);color:#fff}
+
+/* Hero */
+.rv-hero{background:var(--plum);color:#fff;border-radius:0 0 28px 28px;overflow:hidden}
+.rv-hero-grid{display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:32px;padding-block:56px}
+.rv-eyebrow{font-size:12px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
+.rv-hero h2{margin:12px 0 14px;font:600 clamp(36px,5.4vw,64px)/1.02 var(--display);text-wrap:balance}
+.rv-hero p{margin:0 0 26px;max-width:46ch;color:#E6DCEF;font-size:17px}
+.rv-hero .rv-btn{background:var(--gold);border-color:var(--gold);color:var(--plum)}
+.rv-hero .rv-btn:hover{background:#fff;border-color:#fff}
+.rv-hero-art{aspect-ratio:4/5;max-height:440px;justify-self:end;width:100%;max-width:360px;border-radius:200px 200px 18px 18px;background:linear-gradient(160deg,#4A2A66,#2A1838 70%);border:1px solid rgba(226,194,133,.35);overflow:hidden;display:flex;align-items:flex-end;justify-content:center}
+.rv-hero-art img{width:100%;height:100%;object-fit:cover}
+.rv-hero-art span{margin-bottom:28px;font:600 22px/1.2 var(--display);color:var(--gold);letter-spacing:.08em;text-align:center;padding:0 20px}
+.rv-trust{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:24px auto 8px}
+.rv-trust div{display:flex;align-items:center;gap:12px;padding:14px 16px;border:1px solid var(--line);border-radius:var(--r);font-size:14px;line-height:1.35}
+.rv-trust b{display:block;font-weight:600}
+.rv-trust i{flex:0 0 36px;height:36px;border-radius:50%;background:var(--violet-soft);display:grid;place-items:center;font-style:normal;color:var(--violet-dk)}
+.rv-trust svg{width:18px;height:18px}
+
+/* Listing */
+.rv-sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin:36px 0 18px}
+.rv-h1{margin:0;font:600 clamp(30px,4vw,42px)/1.1 var(--display);text-wrap:balance}
+.rv-sub{color:var(--muted);font-size:14px}
+.rv-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px 20px}
+.rv-card{display:flex;flex-direction:column;min-width:0}
+.rv-card-img{position:relative;display:block;aspect-ratio:4/5;border-radius:var(--r);overflow:hidden;background:var(--cream)}
+.rv-card-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.rv-card:hover .rv-card-img img{transform:scale(1.04)}
+.rv-noimg{position:absolute;inset:0;display:grid;place-items:center;color:var(--muted);font-size:13px}
+.rv-badge{position:absolute;top:10px;left:10px;padding:4px 10px;border-radius:999px;background:var(--sale);color:#fff;font-size:12px;font-weight:600;letter-spacing:.03em}
+.rv-badge.is-out{background:var(--ink)}
+.rv-card-body{display:flex;flex-direction:column;gap:6px;padding-top:12px;flex:1}
+.rv-card-cat{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--violet-dk)}
+.rv-card-title{margin:0;font:500 16px/1.35 var(--body);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.rv-card-title a:hover{color:var(--violet-dk)}
+.rv-price{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 10px;font-variant-numeric:tabular-nums lining-nums}
+.rv-price .now{font-weight:600;font-size:17px}
+.rv-price .was{color:var(--muted);text-decoration:line-through;font-size:14px}
+.rv-price .off{color:var(--sale);font-size:13px;font-weight:600}
+.rv-price .ask{color:var(--muted);font-size:14px}
+.rv-card .rv-btn{margin-top:auto;align-self:stretch}
+.rv-card-body .rv-price{min-height:27px}
+.rv-pager{display:flex;justify-content:center;gap:12px;margin:40px 0 8px}
+.rv-empty{grid-column:1/-1;padding:56px 16px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:var(--r)}
+
+/* Product page */
+.rv-crumb{display:flex;flex-wrap:wrap;gap:6px;margin:20px 0;color:var(--muted);font-size:13px}
+.rv-crumb a:hover{color:var(--violet-dk)}
+.rv-pgrid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:48px;align-items:start}
+.rv-gallery{position:sticky;top:92px}
+.rv-gmain{aspect-ratio:4/5;border-radius:var(--r);overflow:hidden;background:var(--cream)}
+.rv-gmain img{width:100%;height:100%;object-fit:cover}
+.rv-gthumbs{display:flex;gap:10px;margin-top:10px;overflow-x:auto;padding-bottom:4px}
+.rv-gthumbs button{flex:0 0 72px;height:90px;padding:0;border:2px solid transparent;border-radius:8px;overflow:hidden;background:var(--cream);cursor:pointer}
+.rv-gthumbs button.is-on{border-color:var(--violet)}
+.rv-gthumbs img{width:100%;height:100%;object-fit:cover}
+.rv-info .rv-card-cat{display:inline-block;margin-bottom:6px}
+.rv-ptitle{margin:0 0 12px;font:600 clamp(30px,3.6vw,42px)/1.1 var(--display);text-wrap:balance}
+.rv-price-lg .now{font-size:26px}
+.rv-price-lg .was{font-size:17px}
+.rv-price-lg .off{font-size:14px;padding:2px 10px;border-radius:999px;background:#FBE9EF}
+.rv-meta{display:flex;flex-wrap:wrap;gap:6px 18px;margin:14px 0 0;color:var(--ink-2);font-size:14px}
+.rv-meta b{font-weight:600;color:var(--ink)}
+.rv-opt{margin-top:22px}
+.rv-opt-label{display:flex;justify-content:space-between;font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.rv-opt-label span{font-weight:400;letter-spacing:0;text-transform:none;color:var(--muted)}
+.rv-opt-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.rv-opt-list button{min-width:52px;height:44px;padding:0 16px;border:1.5px solid var(--line);border-radius:10px;background:#fff;cursor:pointer;font-weight:500}
+.rv-opt-list button:hover{border-color:var(--ink)}
+.rv-opt-list button.is-on{border-color:var(--ink);background:var(--ink);color:#fff}
+.rv-opt.is-err .rv-opt-list button{border-color:var(--sale)}
+.rv-opt-err{margin-top:8px;color:var(--sale);font-size:13px}
+.rv-buy{display:grid;grid-template-columns:auto 1fr;gap:10px;margin-top:24px}
+.rv-buy .rv-btn-buy{grid-column:1/-1}
+.rv-qty{display:inline-flex;align-items:center;height:48px;border:1.5px solid var(--line);border-radius:999px}
+.rv-qty button{width:42px;height:100%;border:0;background:transparent;font-size:20px;cursor:pointer}
+.rv-qty input{width:36px;border:0;text-align:center;font-weight:600;background:transparent;-moz-appearance:textfield}
+.rv-qty input::-webkit-inner-spin-button{-webkit-appearance:none}
+.rv-ask{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:12px;color:var(--ok);font-weight:500;font-size:15px}
+.rv-ask svg{width:18px;height:18px}
+.rv-assure{list-style:none;margin:24px 0 0;padding:16px 18px;border-radius:var(--r);background:var(--cream);display:grid;gap:10px;font-size:14px}
+.rv-assure li{display:flex;gap:10px;align-items:center}
+.rv-assure svg{flex:0 0 18px;width:18px;height:18px;color:var(--violet-dk)}
+.rv-desc{margin:56px 0 0;padding-top:32px;border-top:1px solid var(--line)}
+.rv-desc h2,.rv-related h2{margin:0 0 16px;font:600 30px/1.15 var(--display)}
+.rv-body{max-width:72ch;color:var(--ink-2)}
+.rv-body img{border-radius:var(--r);margin:12px 0}
+.rv-body table{border-collapse:collapse;width:100%}
+.rv-body td,.rv-body th{border:1px solid var(--line);padding:8px 10px;text-align:left}
+.rv-related{margin:56px 0 0}
+.rv-related .rv-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+.rv-page{max-width:820px;margin:0 auto;padding:24px 0 8px}
+.rv-page h1{font:600 clamp(32px,4vw,44px)/1.1 var(--display);margin:8px 0 20px}
+
+/* Footer */
+.rv-foot{margin-top:72px;background:var(--plum);color:#E6DCEF;padding:48px 0 24px;font-size:14px}
+.rv-foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px}
+.rv-foot .rv-logo{color:#fff}
+.rv-foot p{margin:14px 0 0;max-width:36ch;color:#CBBBD8}
+.rv-fh{margin:0 0 12px;color:var(--gold);font:600 12px/1 var(--body);letter-spacing:.2em;text-transform:uppercase}
+.rv-flinks{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.rv-flinks a:hover{color:#fff;text-decoration:underline}
+.rv-foot-bottom{margin-top:36px;padding-top:18px;border-top:1px solid rgba(255,255,255,.12);display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;color:#A895B8;font-size:13px}
+
+/* Floating WhatsApp */
+.rv-wa-float{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:45;width:56px;height:56px;border-radius:50%;background:#25D366;color:#fff;display:grid;place-items:center;box-shadow:0 8px 24px rgba(0,0,0,.18)}
+.rv-wa-float svg{width:28px;height:28px}
+
+/* Cart drawer + checkout */
+.rv-drawer{position:fixed;inset:0;z-index:60;visibility:hidden}
+.rv-drawer.is-open{visibility:visible}
+.rv-drawer-bg{position:absolute;inset:0;background:rgba(26,16,34,.5);opacity:0;transition:opacity .25s}
+.rv-drawer.is-open .rv-drawer-bg{opacity:1}
+.rv-panel{position:absolute;top:0;right:0;bottom:0;width:min(440px,100%);background:#fff;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .3s ease}
+.rv-drawer.is-open .rv-panel{transform:none}
+.rv-panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px;border-bottom:1px solid var(--line)}
+.rv-panel-head h2{margin:0;font:600 26px/1.1 var(--display)}
+.rv-panel-body{flex:1;overflow-y:auto;padding:16px 20px}
+.rv-panel-foot{padding:16px 20px calc(16px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);display:grid;gap:10px}
+.rv-steps{display:flex;gap:6px;padding:0 20px 12px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--line)}
+.rv-steps span.is-on{color:var(--violet-dk);font-weight:600}
+.rv-line{display:grid;grid-template-columns:72px 1fr auto;gap:12px;padding:14px 0;border-bottom:1px solid var(--line)}
+.rv-line img,.rv-line .ph{width:72px;height:90px;border-radius:8px;object-fit:cover;background:var(--cream)}
+.rv-line h3{margin:0;font:500 15px/1.35 var(--body)}
+.rv-line .opt{color:var(--muted);font-size:13px}
+.rv-line .rv-qty{height:36px;margin-top:8px}
+.rv-line .rv-qty button{width:32px;font-size:17px}
+.rv-line .rv-qty input{width:30px}
+.rv-line .amt{font-weight:600;font-variant-numeric:tabular-nums;text-align:right}
+.rv-line .rm{display:block;margin-top:8px;border:0;background:none;padding:0;color:var(--muted);font-size:13px;text-decoration:underline;cursor:pointer}
+.rv-sum{display:grid;gap:6px;font-variant-numeric:tabular-nums}
+.rv-sum div{display:flex;justify-content:space-between}
+.rv-sum .tot{font-size:18px;font-weight:600;padding-top:6px;border-top:1px dashed var(--line)}
+.rv-cart-empty{padding:48px 8px;text-align:center;color:var(--muted)}
+.rv-cart-empty .rv-btn{margin-top:16px}
+.rv-form{display:grid;gap:14px}
+.rv-field label{display:block;margin-bottom:6px;font-size:13px;font-weight:600}
+.rv-field input,.rv-field textarea,.rv-field select{width:100%;min-height:46px;padding:10px 14px;border:1.5px solid var(--line);border-radius:10px;background:#fff}
+.rv-field textarea{min-height:84px;resize:vertical}
+.rv-field input:focus,.rv-field textarea:focus{outline:none;border-color:var(--violet)}
+.rv-field.is-err input,.rv-field.is-err textarea{border-color:var(--sale)}
+.rv-field .err{margin-top:4px;color:var(--sale);font-size:12.5px}
+.rv-pay{display:grid;gap:8px}
+.rv-pay label{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;cursor:pointer;font-size:14.5px}
+.rv-pay label:has(input:checked){border-color:var(--violet);background:var(--violet-soft)}
+.rv-field .rv-pay input{flex:0 0 auto;width:18px;min-height:0;height:18px;margin:2px 0 0;padding:0;accent-color:var(--violet)}
+.rv-pay small{display:block;color:var(--muted)}
+.rv-hp{position:absolute;left:-9999px}
+.rv-done{text-align:center;padding:24px 4px}
+.rv-done .tick{width:64px;height:64px;margin:0 auto 14px;border-radius:50%;background:#E7F4EC;color:var(--ok);display:grid;place-items:center}
+.rv-done .tick svg{width:30px;height:30px}
+.rv-done h3{margin:0 0 6px;font:600 28px/1.15 var(--display)}
+.rv-done .oid{display:inline-block;margin:6px 0 14px;padding:4px 12px;border-radius:999px;background:var(--cream);font-weight:600;letter-spacing:.04em}
+.rv-done .pay-box{margin:14px 0;padding:14px;border-radius:10px;background:var(--violet-soft);text-align:left;font-size:14px;white-space:pre-line}
+.rv-note{font-size:12.5px;color:var(--muted);text-align:center}
+.rv-toast{position:fixed;left:50%;bottom:24px;z-index:70;transform:translate(-50%,20px);opacity:0;padding:12px 18px;border-radius:999px;background:var(--ink);color:#fff;font-size:14px;transition:opacity .25s,transform .25s;pointer-events:none}
+.rv-toast.is-on{opacity:1;transform:translate(-50%,0)}
+
+/* Responsive */
+@media (max-width:1099px){.rv-grid,.rv-related .rv-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.rv-foot-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:899px){
+  .rv-hero-grid{grid-template-columns:1fr;padding-block:40px}
+  .rv-hero-art{display:none}
+  .rv-pgrid{grid-template-columns:1fr;gap:24px}
+  .rv-gallery{position:static}
+  .rv-trust{grid-template-columns:1fr}
+}
+@media (max-width:699px){
+  .rv-grid,.rv-related .rv-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 12px}
+  .rv-logo{font-size:21px}
+  .rv-card-title{font-size:14.5px}
+  .rv-price .now{font-size:15.5px}
+  .rv-card .rv-btn{min-height:40px;padding:0 10px;font-size:13.5px}
+  .rv-foot-grid{grid-template-columns:1fr}
+  .rv-sec-head{margin-top:28px}
+}
+]]></b:skin>
+</head>
+<body expr:class='data:view.isSingleItem ? "rv-single" : "rv-list"'>
+
+<b:section class='rv-settings-sec' id='settings' maxwidgets='1' showaddelement='no'>
+  <b:widget id='Text1' locked='true' title='Store Settings' type='Text' version='2' visible='true'>
+    <b:includable id='main'>
+      <div hidden='hidden' id='rv-settings'><data:content/></div>
+    </b:includable>
+  </b:widget>
+</b:section>
+
+<div class='rv-ann' id='rv-ann'>Cash on Delivery all over Pakistan</div>
+
+<header class='rv-head'>
+  <div class='rv-wrap'>
+    <div class='rv-head-row'>
+      <a class='rv-logo' expr:href='data:blog.homepageUrl'><data:blog.title/><small>Fashion Store</small></a>
+      <div class='rv-head-actions'>
+        <button aria-controls='rv-search' aria-expanded='false' aria-label='Search' class='rv-icon-btn' id='rv-search-btn' type='button'>
+          <svg fill='none' stroke='currentColor' stroke-linecap='round' stroke-width='1.8' viewBox='0 0 24 24'><circle cx='11' cy='11' r='7'/><path d='m20 20-3.5-3.5'/></svg>
+        </button>
+        <button aria-label='Open cart' class='rv-icon-btn' data-cart-open='' type='button'>
+          <svg fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.8' viewBox='0 0 24 24'><path d='M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8L5 8Z'/><path d='M9 8V6a3 3 0 0 1 6 0v2'/></svg>
+          <span class='rv-count' data-n='0' id='rv-count'>0</span>
+        </button>
+      </div>
+    </div>
+    <div class='rv-search' hidden='hidden' id='rv-search'>
+      <form expr:action='data:blog.searchUrl' method='get' role='search'>
+        <label class='rv-sr' for='rv-q'>Search products</label>
+        <input id='rv-q' name='q' placeholder='Search suits, khaddar, colours…' type='search'/>
+        <button class='rv-btn rv-btn-sm' type='submit'>Search</button>
+      </form>
+    </div>
+    <b:section class='rv-nav-sec' id='nav' maxwidgets='1' showaddelement='no'>
+      <b:widget id='Label1' locked='true' title='Categories' type='Label' version='2' visible='true'>
+        <b:includable id='main'>
+          <nav aria-label='Categories' class='rv-nav' id='rv-nav'>
+            <a class='rv-chip' data-all='' expr:href='data:blog.homepageUrl'>All</a>
+            <b:loop values='data:labels' var='label'>
+              <a class='rv-chip' expr:data-label='data:label.name' expr:href='data:label.url'><data:label.name/></a>
+            </b:loop>
+          </nav>
+        </b:includable>
+      </b:widget>
+    </b:section>
+  </div>
+</header>
+
+<main id='rv-main'>
+<b:section class='rv-main-sec' id='main' maxwidgets='1' showaddelement='no'>
+  <b:widget id='Blog1' locked='true' title='Products' type='Blog' version='2' visible='true'>
+    <b:includable id='main'>
+      <b:if cond='data:view.isSingleItem'>
+
+        <b:loop values='data:posts' var='post'>
+          <b:if cond='data:view.isPage'>
+            <article class='rv-wrap rv-page'>
+              <h1><data:post.title/></h1>
+              <div class='rv-body'><data:post.body/></div>
+            </article>
+          <b:else/>
+            <article class='rv-wrap rv-product' expr:data-id='data:post.id' expr:data-title='data:post.title' expr:data-url='data:post.url' id='rv-product'>
+              <nav aria-label='Breadcrumb' class='rv-crumb'>
+                <a expr:href='data:blog.homepageUrl'>Home</a><span>/</span>
+                <b:loop index='i' values='data:post.labels' var='label'>
+                  <b:if cond='data:i == 0'><a class='rv-crumb-cat' expr:data-label='data:label.name' expr:href='data:label.url'><data:label.name/></a><span>/</span></b:if>
+                </b:loop>
+                <span aria-current='page'><data:post.title/></span>
+              </nav>
+              <div class='rv-pgrid'>
+                <div class='rv-gallery'>
+                  <div class='rv-gmain' id='rv-gmain'>
+                    <b:if cond='data:post.featuredImage'>
+                      <img expr:alt='data:post.title' expr:src='resizeImage(data:post.featuredImage, 1000, "4:5")' height='1250' width='1000'/>
+                    </b:if>
+                  </div>
+                  <div class='rv-gthumbs' id='rv-gthumbs'/>
+                </div>
+                <div class='rv-info'>
+                  <b:loop index='i' values='data:post.labels' var='label'>
+                    <b:if cond='data:i == 0'><a class='rv-card-cat' expr:href='data:label.url'><data:label.name/></a></b:if>
+                  </b:loop>
+                  <h1 class='rv-ptitle'><data:post.title/></h1>
+                  <div class='rv-price rv-price-lg' id='rv-pprice'/>
+                  <div class='rv-meta' id='rv-pmeta'/>
+                  <div id='rv-popts'/>
+                  <div class='rv-buy'>
+                    <div class='rv-qty'>
+                      <button aria-label='Decrease quantity' data-step='-1' type='button'>−</button>
+                      <input aria-label='Quantity' id='rv-pqty' inputmode='numeric' max='20' min='1' type='number' value='1'/>
+                      <button aria-label='Increase quantity' data-step='1' type='button'>+</button>
+                    </div>
+                    <button class='rv-btn rv-btn-ghost' id='rv-padd' type='button'>Add to Cart</button>
+                    <button class='rv-btn rv-btn-violet rv-btn-buy' id='rv-pbuy' type='button'>Buy Now</button>
+                  </div>
+                  <a class='rv-ask' href='#' id='rv-pask' rel='noopener' target='_blank'>
+                    <svg fill='currentColor' viewBox='0 0 24 24'><path d='M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.3-.5 0-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.7-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3Z'/></svg>
+                    Ask about this product on WhatsApp
+                  </a>
+                  <ul class='rv-assure' id='rv-assure'/>
+                </div>
+              </div>
+              <section class='rv-desc'>
+                <h2>Product details</h2>
+                <div class='rv-body' id='rv-pbody'><data:post.body/></div>
+              </section>
+              <section class='rv-related' hidden='hidden' id='rv-related'>
+                <h2>You may also like</h2>
+                <div class='rv-grid' id='rv-related-grid'/>
+              </section>
+            </article>
+          </b:if>
+        </b:loop>
+
+      <b:else/>
+
+        <b:if cond='data:view.isHomepage'>
+          <section class='rv-hero'>
+            <div class='rv-wrap rv-hero-grid'>
+              <div>
+                <div class='rv-eyebrow' id='rv-hero-eyebrow'>New Season</div>
+                <h2 id='rv-hero-title'>Elegant suits, delivered to your door</h2>
+                <p id='rv-hero-text'>Khaddar, karandi and unstitched collections for every occasion. Pay cash when your parcel arrives.</p>
+                <a class='rv-btn' href='#rv-products'>Shop the collection</a>
+              </div>
+              <div aria-hidden='true' class='rv-hero-art' id='rv-hero-art'><span><data:blog.title/></span></div>
+            </div>
+          </section>
+          <div class='rv-wrap'><div class='rv-trust' id='rv-trust'/></div>
+        </b:if>
+
+        <div class='rv-wrap' id='rv-products'>
+          <div class='rv-sec-head'>
+            <b:if cond='data:view.isLabelSearch'>
+              <h1 class='rv-h1'><data:view.search.label/></h1>
+            <b:elseif cond='data:view.search.query'/>
+              <h1 class='rv-h1'>Results for “<data:view.search.query/>”</h1>
+            <b:elseif cond='data:view.isHomepage'/>
+              <h2 class='rv-h1'>New Arrivals</h2>
+            <b:else/>
+              <h1 class='rv-h1'>All Products</h1>
+            </b:if>
+            <span class='rv-sub' id='rv-sub'/>
+          </div>
+          <div class='rv-grid' id='rv-grid'>
+            <b:loop values='data:posts' var='post'>
+              <article class='rv-card' expr:data-id='data:post.id' expr:data-title='data:post.title' expr:data-url='data:post.url'>
+                <a class='rv-card-img' expr:aria-label='data:post.title' expr:href='data:post.url'>
+                  <b:if cond='data:post.featuredImage'>
+                    <img expr:alt='data:post.title' expr:src='resizeImage(data:post.featuredImage, 600, "4:5")' height='750' loading='lazy' width='600'/>
+                  <b:else/>
+                    <span class='rv-noimg'>Photo coming soon</span>
+                  </b:if>
+                </a>
+                <div class='rv-card-body'>
+                  <b:loop index='i' values='data:post.labels' var='label'>
+                    <b:if cond='data:i == 0'><span class='rv-card-cat'><data:label.name/></span></b:if>
+                  </b:loop>
+                  <h3 class='rv-card-title'><a expr:href='data:post.url'><data:post.title/></a></h3>
+                  <div class='rv-price'/>
+                  <button class='rv-btn rv-btn-sm rv-card-add' type='button'>Add to Cart</button>
+                </div>
+                <template class='rv-raw'><data:post.body/></template>
+              </article>
+            </b:loop>
+          </div>
+          <nav aria-label='More products' class='rv-pager'>
+            <b:if cond='data:newerPageUrl'><a class='rv-btn rv-btn-ghost' expr:href='data:newerPageUrl'>← Previous</a></b:if>
+            <b:if cond='data:olderPageUrl'><a class='rv-btn' expr:href='data:olderPageUrl'>More products →</a></b:if>
+          </nav>
+        </div>
+
+      </b:if>
+    </b:includable>
+  </b:widget>
+</b:section>
+</main>
+
+<footer class='rv-foot'>
+  <div class='rv-wrap'>
+    <div class='rv-foot-grid'>
+      <div>
+        <a class='rv-logo' expr:href='data:blog.homepageUrl'><data:blog.title/></a>
+        <p id='rv-foot-about'>Quality ladies and gents suits from Faisalabad, delivered all over Pakistan.</p>
+      </div>
+      <div>
+        <h3 class='rv-fh'>Shop</h3>
+        <ul class='rv-flinks' id='rv-foot-cats'/>
+      </div>
+      <b:section class='rv-foot-pages' id='footer-pages' maxwidgets='1' showaddelement='no'>
+        <b:widget id='PageList1' locked='true' title='Help' type='PageList' version='2' visible='true'>
+          <b:includable id='main'>
+            <h3 class='rv-fh'><data:title/></h3>
+            <ul class='rv-flinks'>
+              <b:loop values='data:links' var='link'>
+                <li><a expr:href='data:link.href'><data:link.title/></a></li>
+              </b:loop>
+            </ul>
+          </b:includable>
+        </b:widget>
+      </b:section>
+      <div>
+        <h3 class='rv-fh'>Contact</h3>
+        <ul class='rv-flinks' id='rv-foot-contact'/>
+      </div>
+    </div>
+    <div class='rv-foot-bottom'>
+      <span>© <span id='rv-year'/> <data:blog.title/>. All rights reserved.</span>
+      <span>Cash on Delivery · Nationwide delivery</span>
+    </div>
+  </div>
+</footer>
+
+<a aria-label='Chat on WhatsApp' class='rv-wa-float' href='#' id='rv-wa-float' rel='noopener' target='_blank'>
+  <svg fill='currentColor' viewBox='0 0 24 24'><path d='M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.3-.5 0-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.7-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3Z'/></svg>
+</a>
+
+<div aria-hidden='true' class='rv-drawer' id='rv-drawer'>
+  <div class='rv-drawer-bg' data-cart-close=''/>
+  <aside aria-labelledby='rv-drawer-title' aria-modal='true' class='rv-panel' role='dialog'>
+    <div class='rv-panel-head'>
+      <h2 id='rv-drawer-title'>Your Cart</h2>
+      <button aria-label='Close cart' class='rv-icon-btn' data-cart-close='' type='button'>
+        <svg fill='none' stroke='currentColor' stroke-linecap='round' stroke-width='1.8' viewBox='0 0 24 24'><path d='M6 6l12 12M18 6 6 18'/></svg>
+      </button>
+    </div>
+    <div class='rv-steps' id='rv-steps'><span data-step='cart'>1 Cart</span><span>›</span><span data-step='checkout'>2 Details</span><span>›</span><span data-step='done'>3 Done</span></div>
+
+    <div class='rv-panel-body' data-view='cart'>
+      <div id='rv-lines'/>
+      <div class='rv-cart-empty' hidden='hidden' id='rv-empty'>
+        <p>Your cart is empty.</p>
+        <button class='rv-btn rv-btn-ghost' data-cart-close='' type='button'>Continue shopping</button>
+      </div>
+    </div>
+    <div class='rv-panel-foot' data-view='cart' id='rv-cart-foot'>
+      <div class='rv-sum' id='rv-sum'/>
+      <button class='rv-btn rv-btn-block' id='rv-to-checkout' type='button'>Checkout</button>
+      <p class='rv-note'>Cash on Delivery available</p>
+    </div>
+
+    <form class='rv-panel-body rv-form' data-view='checkout' hidden='hidden' id='rv-checkout' novalidate='novalidate'>
+      <div class='rv-field'><label for='rv-f-name'>Full name</label><input autocomplete='name' id='rv-f-name' maxlength='80' name='name' required='required' type='text'/></div>
+      <div class='rv-field'><label for='rv-f-phone'>Mobile number (WhatsApp)</label><input autocomplete='tel' id='rv-f-phone' inputmode='tel' maxlength='16' name='phone' placeholder='03XX XXXXXXX' required='required' type='tel'/></div>
+      <div class='rv-field'><label for='rv-f-city'>City</label><input autocomplete='address-level2' id='rv-f-city' maxlength='60' name='city' required='required' type='text'/></div>
+      <div class='rv-field'><label for='rv-f-address'>Full address</label><input autocomplete='street-address' data-ta='' id='rv-f-address' maxlength='300' name='address' placeholder='House no, street, area, nearest landmark' required='required' type='text'/></div>
+      <fieldset class='rv-field' style='border:0;margin:0;padding:0'>
+        <legend style='font-size:13px;font-weight:600;margin-bottom:6px'>Payment method</legend>
+        <div class='rv-pay' id='rv-pay'/>
+      </fieldset>
+      <div class='rv-field'><label for='rv-f-note'>Note (optional)</label><input data-ta='' id='rv-f-note' maxlength='300' name='note' placeholder='Delivery time, stitching request…' type='text'/></div>
+      <div aria-hidden='true' class='rv-hp'><label for='rv-f-web'>Website</label><input autocomplete='off' id='rv-f-web' name='website' tabindex='-1' type='text'/></div>
+      <div class='rv-sum' id='rv-sum2'/>
+    </form>
+    <div class='rv-panel-foot' data-view='checkout' hidden='hidden'>
+      <button class='rv-btn rv-btn-violet rv-btn-block' form='rv-checkout' id='rv-place' type='submit'>Place Order</button>
+      <button class='rv-btn rv-btn-ghost rv-btn-block' id='rv-back' type='button'>Back to cart</button>
+    </div>
+
+    <div class='rv-panel-body' data-view='done' hidden='hidden'>
+      <div class='rv-done'>
+        <div class='tick'><svg fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2.4' viewBox='0 0 24 24'><path d='m5 12 5 5L19 8'/></svg></div>
+        <h3>Thank you!</h3>
+        <p>Your order has been received.</p>
+        <span class='oid' id='rv-oid'/>
+        <div class='pay-box' hidden='hidden' id='rv-paybox'/>
+        <p>Tap the button below to send your order on WhatsApp. We confirm every order there before dispatch.</p>
+        <a class='rv-btn rv-btn-wa rv-btn-block' href='#' id='rv-wa-confirm' rel='noopener' target='_blank'>Send order on WhatsApp</a>
+        <button class='rv-btn rv-btn-ghost rv-btn-block' data-cart-close='' style='margin-top:10px' type='button'>Continue shopping</button>
+      </div>
+    </div>
+  </aside>
+</div>
+<div aria-live='polite' class='rv-toast' id='rv-toast' role='status'/>
+
+<script>//<![CDATA[
+(function () {
+  'use strict';
+  var D = document;
+  function $(s, r) { return (r || D).querySelector(s); }
+  function $$(s, r) { return Array.prototype.slice.call((r || D).querySelectorAll(s)); }
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+
+  /* ---------- Store settings (Layout > "Store Settings" gadget, one "key: value" per line) ---------- */
+  var S = {
+    whatsapp: '923227782932', sheet: '', currency: 'Rs', delivery: '0', free_over: '',
+    delivery_days: '3–5 working days', announce: '', tagline: '', email: '',
+    hero_eyebrow: '', hero_title: '', hero_text: '', hero_image: '',
+    jazzcash: '', easypaisa: '', bank: '', exchange: ''
+  };
+  (function () {
+    var el = $('#rv-settings');
+    if (!el) return;
+    var t = el.innerHTML.replace(/<br\s*\/?>/gi, '\n').replace(/<\/(p|div|li)>/gi, '\n').replace(/<[^>]+>/g, '');
+    var ta = D.createElement('textarea');
+    ta.innerHTML = t;
+    ta.value.split('\n').forEach(function (line) {
+      var m = line.match(/^\s*([a-z][a-z_ ]*?)\s*[:=]\s*(.*?)\s*$/i);
+      if (m && m[2] !== '') S[m[1].toLowerCase().replace(/\s+/g, '_')] = m[2];
+    });
+  })();
+  var WA = String(S.whatsapp).replace(/\D/g, '').replace(/^0/, '92');
+  var DELIVERY = num(S.delivery) || 0, FREE_OVER = num(S.free_over) || 0;
+
+  function num(v) { var n = parseFloat(String(v == null ? '' : v).replace(/[^0-9.]/g, '')); return isNaN(n) ? 0 : n; }
+  function money(n) { return S.currency + ' ' + Math.round(n).toLocaleString('en-PK'); }
+  function waLink(text) { return 'https://wa.me/' + WA + (text ? '?text=' + encodeURIComponent(text) : ''); }
+  var toastT;
+  function toast(msg) { var t = $('#rv-toast'); t.textContent = msg; t.classList.add('is-on'); clearTimeout(toastT); toastT = setTimeout(function () { t.classList.remove('is-on'); }, 2200); }
+  var ICON = {
+    truck: '<svg fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M3 6h11v10H3zM14 9h4l3 3v4h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg>',
+    cash: '<svg fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/></svg>',
+    chat: '<svg fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12Z"/></svg>',
+    swap: '<svg fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M4 8h13l-3-3M20 16H7l3 3"/></svg>'
+  };
+
+  /* ---------- Store-wide text from settings ---------- */
+  if (S.announce) $('#rv-ann').textContent = S.announce;
+  if (S.tagline) $('#rv-foot-about').textContent = S.tagline;
+  $('#rv-year').textContent = new Date().getFullYear();
+  $('#rv-wa-float').href = waLink('Assalam o Alaikum, I have a question about your products.');
+  var deliveryText = DELIVERY ? money(DELIVERY) + (FREE_OVER ? ' (free over ' + money(FREE_OVER) + ')' : '') : 'Free';
+  var assure = [
+    [ICON.cash, 'Cash on Delivery', 'Pay when your parcel arrives'],
+    [ICON.truck, 'Delivery: ' + deliveryText, S.delivery_days + ', all over Pakistan'],
+    [ICON.chat, 'WhatsApp support', 'Order confirmation and help']
+  ];
+  if (S.exchange) assure.push([ICON.swap, 'Exchange', S.exchange]);
+  var trust = $('#rv-trust');
+  if (trust) trust.innerHTML = assure.slice(0, 3).map(function (a) { return '<div><i>' + a[0] + '</i><span><b>' + esc(a[1]) + '</b>' + esc(a[2]) + '</span></div>'; }).join('');
+  if ($('#rv-hero-title')) {
+    if (S.hero_eyebrow) $('#rv-hero-eyebrow').textContent = S.hero_eyebrow;
+    if (S.hero_title) $('#rv-hero-title').textContent = S.hero_title;
+    if (S.hero_text) $('#rv-hero-text').textContent = S.hero_text;
+    if (/^https?:\/\//.test(S.hero_image)) $('#rv-hero-art').innerHTML = '<img src="' + esc(S.hero_image) + '" alt=""/>';
+  }
+  var contact = [];
+  if (WA) contact.push('<li><a href="' + waLink() + '" target="_blank" rel="noopener">WhatsApp +' + esc(WA) + '</a></li>');
+  if (S.email) contact.push('<li><a href="mailto:' + esc(S.email) + '">' + esc(S.email) + '</a></li>');
+  $('#rv-foot-contact').innerHTML = contact.join('');
+
+  /* Categories: highlight the current one and copy them into the footer. */
+  var here = decodeURIComponent(location.pathname);
+  var catHtml = [];
+  $$('#rv-nav .rv-chip').forEach(function (a) {
+    var lbl = a.getAttribute('data-label');
+    var on = lbl ? here.indexOf('/search/label/' + lbl) === 0 : (here === '/' && !location.search);
+    if (on) { a.classList.add('is-on'); a.setAttribute('aria-current', 'page'); }
+    if (lbl) catHtml.push('<li><a href="' + esc(a.href) + '">' + esc(lbl) + '</a></li>');
+  });
+  $('#rv-foot-cats').innerHTML = catHtml.slice(0, 8).join('');
+
+  /* Search toggle */
+  var sBtn = $('#rv-search-btn'), sBox = $('#rv-search');
+  sBtn.addEventListener('click', function () {
+    var open = sBox.hidden;
+    sBox.hidden = !open;
+    sBtn.setAttribute('aria-expanded', String(open));
+    if (open) $('#rv-q').focus();
+  });
+
+  /* ---------- Product details written in the post ----------
+     Lines like "Price: 3500", "Sale Price: 2999", "Sizes: S, M, L" are read as
+     product data and hidden from the description. */
+  var KEYS = {
+    'price': 'price', 'regular price': 'price', 'original price': 'price',
+    'sale price': 'sale', 'sale': 'sale', 'offer price': 'sale', 'discount price': 'sale',
+    'size': 'sizes', 'sizes': 'sizes', 'color': 'colors', 'colors': 'colors', 'colour': 'colors', 'colours': 'colors',
+    'fabric': 'fabric', 'material': 'fabric', 'code': 'code', 'sku': 'code', 'article': 'code', 'article no': 'code', 'stock': 'stock'
+  };
+  var BLOCK = /^(P|DIV|LI|UL|OL|H[1-6]|TABLE|TBODY|TR|TD|BLOCKQUOTE|SECTION|FIGURE)$/;
+
+  function readLine(text, p) {
+    var lines = text.replace(/ /g, ' ').split('\n').filter(function (l) { return l.trim(); });
+    if (!lines.length) return false;
+    var found = {};
+    for (var i = 0; i < lines.length; i++) {
+      var m = lines[i].match(/^\s*([a-z][a-z .]*?)\.?\s*[:：\-–]\s*(.+?)\s*$/i);
+      var k = m && KEYS[m[1].toLowerCase().replace(/\s+/g, ' ')];
+      if (!k) return false;
+      found[k] = m[2];
+    }
+    for (var key in found) p[key] = found[key];
+    return true;
+  }
+  function stripData(el, p) {
+    var run = [];
+    function flush(br) {
+      if (!run.length) return;
+      var txt = run.map(function (n) { return n.textContent; }).join('');
+      if (readLine(txt, p)) {
+        run.forEach(function (n) { if (n.parentNode) n.parentNode.removeChild(n); });
+        if (br && br.parentNode) br.parentNode.removeChild(br);
+      }
+      run = [];
+    }
+    Array.prototype.slice.call(el.childNodes).forEach(function (k) {
+      if (k.nodeType === 1 && k.tagName === 'BR') flush(k);
+      else if (k.nodeType === 1 && BLOCK.test(k.tagName)) {
+        flush(null);
+        stripData(k, p);
+        if (!k.textContent.trim() && !k.querySelector('img,iframe,video') && k.parentNode) k.parentNode.removeChild(k);
+      } else if (k.nodeType === 1 || k.nodeType === 3) run.push(k);
+    });
+    flush(null);
+  }
+  function list(v) { return v ? String(v).split(/[,\/|]+/).map(function (s) { return s.trim(); }).filter(Boolean) : []; }
+  function parseProduct(root) {
+    var raw = {};
+    stripData(root, raw);
+    var price = num(raw.price), sale = num(raw.sale);
+    if (!price && sale) { price = sale; sale = 0; }
+    var p = {
+      price: price, sale: sale && sale < price ? sale : 0,
+      sizes: list(raw.sizes), colors: list(raw.colors),
+      fabric: raw.fabric || '', code: raw.code || '',
+      out: /^(0|out|sold|no|nil)/i.test(String(raw.stock || '').trim())
+    };
+    p.pay = p.sale || p.price;
+    return p;
+  }
+  function priceHtml(p) {
+    if (!p.pay) return '<span class="ask">Price on WhatsApp</span>';
+    if (p.sale) return '<span class="now">' + money(p.sale) + '</span><span class="was">' + money(p.price) + '</span><span class="off">' + Math.round((1 - p.sale / p.price) * 100) + '% off</span>';
+    return '<span class="now">' + money(p.price) + '</span>';
+  }
+  function bigImg(src) { return String(src || '').replace(/\/s\d+(-[a-z0-9-]+)?\//i, '/s1200/').replace(/\/w\d+-h\d+(-[a-z0-9-]+)?\//i, '/s1200/').replace(/=[swh]\d+[^\/]*$/i, '=s1200'); }
+  function cardImg(src) { return String(src || '').replace(/\/s\d+(-[a-z0-9-]+)?\//i, '/w600-h750-p-k-no-nu/').replace(/=[swh]\d+[^\/]*$/i, '=w600-h750-p-k-no-nu'); }
+
+  /* ---------- Cart (kept in this browser) ---------- */
+  var KEY = 'rv_cart_v1';
+  var cart = [];
+  try { cart = JSON.parse(localStorage.getItem(KEY)) || []; } catch (e) { cart = []; }
+  function saveCart() { try { localStorage.setItem(KEY, JSON.stringify(cart)); } catch (e) {} renderCart(); }
+  function addToCart(item, qty) {
+    var line = null;
+    cart.forEach(function (l) { if (l.key === item.key) line = l; });
+    if (line) line.qty = Math.min(20, line.qty + qty);
+    else { item.qty = qty; cart.push(item); }
+    saveCart();
+  }
+  function totals() {
+    var sub = 0;
+    cart.forEach(function (l) { sub += l.price * l.qty; });
+    var del = !cart.length || (FREE_OVER && sub >= FREE_OVER) ? 0 : DELIVERY;
+    return { sub: sub, del: del, total: sub + del };
+  }
+  function sumHtml() {
+    var t = totals();
+    return '<div><span>Subtotal</span><span>' + money(t.sub) + '</span></div>' +
+      '<div><span>Delivery</span><span>' + (t.del ? money(t.del) : 'Free') + '</span></div>' +
+      '<div class="tot"><span>Total</span><span>' + money(t.total) + '</span></div>';
+  }
+  function renderCart() {
+    var n = 0;
+    cart.forEach(function (l) { n += l.qty; });
+    var c = $('#rv-count');
+    c.textContent = n;
+    c.setAttribute('data-n', n);
+    $('#rv-lines').innerHTML = cart.map(function (l, i) {
+      var opt = [l.size && 'Size: ' + l.size, l.color && 'Colour: ' + l.color].filter(Boolean).join(' · ');
+      return '<div class="rv-line">' +
+        (l.img ? '<img src="' + esc(l.img) + '" alt="" loading="lazy"/>' : '<span class="ph"></span>') +
+        '<div><h3><a href="' + esc(l.url) + '">' + esc(l.title) + '</a></h3>' + (opt ? '<div class="opt">' + esc(opt) + '</div>' : '') +
+        '<div class="rv-qty"><button type="button" data-line="' + i + '" data-d="-1" aria-label="Decrease">−</button><input type="number" value="' + l.qty + '" min="1" max="20" data-line="' + i + '" aria-label="Quantity"/><button type="button" data-line="' + i + '" data-d="1" aria-label="Increase">+</button></div></div>' +
+        '<div><div class="amt">' + money(l.price * l.qty) + '</div><button type="button" class="rm" data-rm="' + i + '">Remove</button></div></div>';
+    }).join('');
+    $('#rv-empty').hidden = cart.length > 0;
+    $('#rv-cart-foot').hidden = !cart.length || view !== 'cart';
+    $('#rv-sum').innerHTML = sumHtml();
+    $('#rv-sum2').innerHTML = sumHtml();
+  }
+  $('#rv-lines').addEventListener('click', function (e) {
+    var b = e.target.closest('button');
+    if (!b) return;
+    if (b.hasAttribute('data-rm')) { cart.splice(+b.getAttribute('data-rm'), 1); saveCart(); return; }
+    var l = cart[+b.getAttribute('data-line')];
+    if (l) { l.qty = Math.max(1, Math.min(20, l.qty + (+b.getAttribute('data-d')))); saveCart(); }
+  });
+  $('#rv-lines').addEventListener('change', function (e) {
+    var l = cart[+e.target.getAttribute('data-line')];
+    if (l) { l.qty = Math.max(1, Math.min(20, parseInt(e.target.value, 10) || 1)); saveCart(); }
+  });
+
+  /* ---------- Drawer ---------- */
+  var drawer = $('#rv-drawer'), view = 'cart', lastFocus = null;
+  function show(v) {
+    view = v;
+    $$('[data-view]', drawer).forEach(function (el) { el.hidden = el.getAttribute('data-view') !== v; });
+    if (v === 'cart') $('#rv-cart-foot').hidden = !cart.length;
+    $$('#rv-steps [data-step]').forEach(function (s) { s.classList.toggle('is-on', s.getAttribute('data-step') === v); });
+    $('#rv-drawer-title').textContent = v === 'checkout' ? 'Delivery Details' : v === 'done' ? 'Order Placed' : 'Your Cart';
+  }
+  function openCart(v) {
+    lastFocus = D.activeElement;
+    show(v || 'cart');
+    renderCart();
+    drawer.classList.add('is-open');
+    drawer.setAttribute('aria-hidden', 'false');
+    D.body.style.overflow = 'hidden';
+    setTimeout(function () { var f = v === 'checkout' ? $('#rv-f-name') : $('.rv-panel-head button', drawer); if (f) f.focus(); }, 60);
+  }
+  function closeCart() {
+    drawer.classList.remove('is-open');
+    drawer.setAttribute('aria-hidden', 'true');
+    D.body.style.overflow = '';
+    if (view === 'done') show('cart');
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  D.addEventListener('click', function (e) {
+    if (e.target.closest('[data-cart-open]')) openCart();
+    else if (e.target.closest('[data-cart-close]')) closeCart();
+  });
+  D.addEventListener('keydown', function (e) { if (e.key === 'Escape' && drawer.classList.contains('is-open')) closeCart(); });
+  $('#rv-to-checkout').addEventListener('click', function () { if (cart.length) { show('checkout'); $('#rv-f-name').focus(); } });
+  $('#rv-back').addEventListener('click', function () { show('cart'); renderCart(); });
+
+  /* Payment options: Cash on Delivery always; wallets and bank only when set in Store Settings. */
+  var pays = [['Cash on Delivery', 'Pay cash when the parcel arrives', '']];
+  if (S.jazzcash || S.easypaisa) pays.push(['JazzCash / Easypaisa', 'Send payment, then share the screenshot on WhatsApp', [S.jazzcash && 'JazzCash: ' + S.jazzcash, S.easypaisa && 'Easypaisa: ' + S.easypaisa].filter(Boolean).join('\n')]);
+  if (S.bank) pays.push(['Bank Transfer', 'Transfer, then share the receipt on WhatsApp', 'Bank: ' + S.bank]);
+  $('#rv-pay').innerHTML = pays.map(function (p, i) {
+    return '<label><input type="radio" name="payment" value="' + esc(p[0]) + '"' + (i ? '' : ' checked') + '/><span>' + esc(p[0]) + '<small>' + esc(p[1]) + '</small></span></label>';
+  }).join('');
+
+  /* ---------- Checkout ---------- */
+  /* Address and note start as text inputs and become multi-line boxes here. */
+  $$('input[data-ta]').forEach(function (inp) {
+    var ta = D.createElement('textarea');
+    ['id', 'name', 'maxlength', 'placeholder', 'autocomplete', 'required'].forEach(function (a) { if (inp.hasAttribute(a)) ta.setAttribute(a, inp.getAttribute(a)); });
+    inp.parentNode.replaceChild(ta, inp);
+  });
+  function fieldErr(id, msg) {
+    var f = $(id).closest('.rv-field');
+    f.classList.toggle('is-err', !!msg);
+    var e = $('.err', f);
+    if (msg && !e) { e = D.createElement('div'); e.className = 'err'; f.appendChild(e); }
+    if (e) { e.textContent = msg || ''; e.hidden = !msg; }
+    return !msg;
+  }
+  function orderId() {
+    var d = new Date(), p = function (n) { return (n < 10 ? '0' : '') + n; };
+    return 'RV' + String(d.getFullYear()).slice(2) + p(d.getMonth() + 1) + p(d.getDate()) + '-' + Math.floor(1000 + Math.random() * 9000);
+  }
+  $('#rv-checkout').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var f = e.target, v = function (n) { return (f.elements[n].value || '').trim(); };
+    var phone = v('phone').replace(/[\s\-()]/g, '');
+    var ok = [
+      fieldErr('#rv-f-name', v('name').length < 3 ? 'Please enter your full name.' : ''),
+      fieldErr('#rv-f-phone', /^(\+?92|0)3\d{9}$/.test(phone) ? '' : 'Enter a valid mobile number, e.g. 03XX XXXXXXX.'),
+      fieldErr('#rv-f-city', v('city').length < 2 ? 'Please enter your city.' : ''),
+      fieldErr('#rv-f-address', v('address').length < 10 ? 'Please enter your full address.' : '')
+    ].every(Boolean);
+    if (!ok) { var bad = $('.rv-field.is-err input, .rv-field.is-err textarea', f); if (bad) bad.focus(); return; }
+    if (!cart.length) { show('cart'); return; }
+
+    var t = totals(), id = orderId();
+    var payEl = f.querySelector('input[name="payment"]:checked');
+    var payment = payEl ? payEl.value : 'Cash on Delivery';
+    var items = cart.map(function (l, i) {
+      var opt = [l.size && 'Size ' + l.size, l.color && 'Colour ' + l.color].filter(Boolean).join(', ');
+      return (i + 1) + ') ' + l.title + (opt ? ' (' + opt + ')' : '') + ' x' + l.qty + ' = ' + money(l.price * l.qty);
+    });
+    var msg = ['*New Order ' + id + '*', ''].concat(items, [
+      '', 'Subtotal: ' + money(t.sub), 'Delivery: ' + (t.del ? money(t.del) : 'Free'), '*Total: ' + money(t.total) + '*',
+      'Payment: ' + payment, '', 'Name: ' + v('name'), 'Phone: ' + phone, 'City: ' + v('city'), 'Address: ' + v('address')
+    ]);
+    if (v('note')) msg.push('Note: ' + v('note'));
+
+    var data = {
+      order_id: id, name: v('name'), phone: phone, city: v('city'), address: v('address'), note: v('note'),
+      payment: payment, items: items.join('\n'), subtotal: t.sub, delivery: t.del, total: t.total,
+      page: location.href, website: v('website')
+    };
+    var btn = $('#rv-place');
+    btn.disabled = true;
+    btn.textContent = 'Placing order…';
+
+    function finish() {
+      var pay = pays.filter(function (p) { return p[0] === payment; })[0];
+      $('#rv-oid').textContent = 'Order ' + id + ' · ' + money(t.total);
+      $('#rv-paybox').hidden = !(pay && pay[2]);
+      $('#rv-paybox').textContent = pay && pay[2] ? 'Please send ' + money(t.total) + ' to:\n' + pay[2] + '\nReference: ' + id : '';
+      $('#rv-wa-confirm').href = waLink(msg.join('\n'));
+      cart = [];
+      saveCart();
+      f.reset();
+      btn.disabled = false;
+      btn.textContent = 'Place Order';
+      show('done');
+      $('#rv-wa-confirm').focus();
+    }
+    if (/^https:\/\/script\.google\.com\//.test(S.sheet) && window.fetch) {
+      var body = new URLSearchParams();
+      Object.keys(data).forEach(function (k) { body.append(k, data[k]); });
+      var timeout = new Promise(function (r) { setTimeout(r, 8000); });
+      Promise.race([fetch(S.sheet, { method: 'POST', mode: 'no-cors', body: body }), timeout]).then(finish, finish);
+    } else finish();
+  });
+
+  /* ---------- Listing cards ---------- */
+  function cardItem(card, p) {
+    var img = $('.rv-card-img img', card);
+    return { key: card.getAttribute('data-id'), id: card.getAttribute('data-id'), title: card.getAttribute('data-title'), url: card.getAttribute('data-url'), img: img ? img.currentSrc || img.src : '', price: p.pay, size: '', color: '' };
+  }
+  function setupCard(card, p) {
+    $('.rv-price', card).innerHTML = priceHtml(p);
+    var link = $('.rv-card-img', card), btn = $('.rv-card-add', card);
+    if (p.out) {
+      link.insertAdjacentHTML('beforeend', '<span class="rv-badge is-out">Sold out</span>');
+      btn.textContent = 'Sold out';
+      btn.disabled = true;
+      return;
+    }
+    if (p.sale) link.insertAdjacentHTML('beforeend', '<span class="rv-badge">-' + Math.round((1 - p.sale / p.price) * 100) + '%</span>');
+    if (!p.pay) { btn.textContent = 'Ask price'; btn.onclick = function () { window.open(waLink('Price of: ' + card.getAttribute('data-title') + '\n' + card.getAttribute('data-url')), '_blank', 'noopener'); }; return; }
+    if (p.sizes.length || p.colors.length) { btn.textContent = 'Choose options'; btn.onclick = function () { location.href = card.getAttribute('data-url'); }; return; }
+    btn.onclick = function () { addToCart(cardItem(card, p), 1); openCart(); };
+  }
+  var grid = $('#rv-grid');
+  if (grid) {
+    var cards = $$('.rv-card', grid);
+    cards.forEach(function (card) {
+      var tpl = $('template.rv-raw', card);
+      setupCard(card, parseProduct(tpl && tpl.content ? tpl.content : D.createDocumentFragment()));
+    });
+    if (!cards.length) grid.innerHTML = '<div class="rv-empty">No products found. <a href="/" style="text-decoration:underline">See all products</a></div>';
+    else $('#rv-sub').textContent = cards.length + (cards.length === 1 ? ' product' : ' products');
+  }
+
+  /* ---------- Product page ---------- */
+  var prod = $('#rv-product');
+  if (prod) {
+    var body = $('#rv-pbody');
+    var p = parseProduct(body);
+    var title = prod.getAttribute('data-title'), url = prod.getAttribute('data-url');
+
+    /* Gallery: every photo in the post */
+    var imgs = $$('img', body).map(function (im) { return { src: bigImg(im.getAttribute('src')), alt: im.getAttribute('alt') || title }; });
+    $$('img', body).forEach(function (im) {
+      var box = im.closest('.separator') || im.closest('a') || im;
+      if (box.parentNode) box.parentNode.removeChild(box);
+    });
+    $$('p,div', body).forEach(function (el) { if (!el.textContent.trim() && !el.querySelector('img,iframe,video,table')) el.parentNode.removeChild(el); });
+    if (!body.textContent.trim()) $('.rv-desc', prod).hidden = true;
+    var gmain = $('#rv-gmain'), thumbs = $('#rv-gthumbs');
+    function setMain(i) {
+      gmain.innerHTML = '<img src="' + esc(imgs[i].src) + '" alt="' + esc(imgs[i].alt) + '"/>';
+      $$('button', thumbs).forEach(function (b, j) { b.classList.toggle('is-on', i === j); });
+    }
+    if (imgs.length) {
+      if (imgs.length > 1) thumbs.innerHTML = imgs.map(function (im, i) { return '<button type="button" aria-label="Photo ' + (i + 1) + '"><img src="' + esc(cardImg(im.src)) + '" alt="" loading="lazy"/></button>'; }).join('');
+      $$('button', thumbs).forEach(function (b, i) { b.addEventListener('click', function () { setMain(i); }); });
+      setMain(0);
+    }
+
+    $('#rv-pprice').innerHTML = priceHtml(p);
+    var meta = [];
+    if (p.fabric) meta.push('<span><b>Fabric:</b> ' + esc(p.fabric) + '</span>');
+    if (p.code) meta.push('<span><b>Code:</b> ' + esc(p.code) + '</span>');
+    meta.push('<span><b>Availability:</b> ' + (p.out ? 'Sold out' : 'In stock') + '</span>');
+    $('#rv-pmeta').innerHTML = meta.join('');
+
+    var chosen = { size: '', color: '' };
+    function optGroup(name, key, values) {
+      return '<div class="rv-opt" data-opt="' + key + '"><div class="rv-opt-label">' + name + ' <span data-picked></span></div><div class="rv-opt-list">' +
+        values.map(function (v) { return '<button type="button" aria-pressed="false" data-v="' + esc(v) + '">' + esc(v) + '</button>'; }).join('') + '</div></div>';
+    }
+    $('#rv-popts').innerHTML = (p.sizes.length ? optGroup('Size', 'size', p.sizes) : '') + (p.colors.length ? optGroup('Colour', 'color', p.colors) : '');
+    $$('.rv-opt', prod).forEach(function (g) {
+      var key = g.getAttribute('data-opt');
+      g.addEventListener('click', function (e) {
+        var b = e.target.closest('button');
+        if (!b) return;
+        chosen[key] = b.getAttribute('data-v');
+        $$('button', g).forEach(function (x) { x.classList.toggle('is-on', x === b); x.setAttribute('aria-pressed', String(x === b)); });
+        $('[data-picked]', g).textContent = chosen[key];
+        g.classList.remove('is-err');
+        var er = $('.rv-opt-err', g);
+        if (er) er.remove();
+      });
+    });
+
+    var qty = $('#rv-pqty');
+    $$('.rv-buy .rv-qty button', prod).forEach(function (b) {
+      b.addEventListener('click', function () { qty.value = Math.max(1, Math.min(20, (parseInt(qty.value, 10) || 1) + (+b.getAttribute('data-step')))); });
+    });
+    function pick() {
+      var ok = true;
+      [['size', p.sizes], ['color', p.colors]].forEach(function (o) {
+        if (o[1].length && !chosen[o[0]]) {
+          ok = false;
+          var g = $('.rv-opt[data-opt="' + o[0] + '"]', prod);
+          g.classList.add('is-err');
+          if (!$('.rv-opt-err', g)) g.insertAdjacentHTML('beforeend', '<div class="rv-opt-err">Please choose a ' + (o[0] === 'size' ? 'size' : 'colour') + '.</div>');
+        }
+      });
+      if (!ok) { $('.rv-opt.is-err', prod).scrollIntoView({ block: 'center', behavior: 'smooth' }); return null; }
+      return {
+        key: prod.getAttribute('data-id') + '|' + chosen.size + '|' + chosen.color, id: prod.getAttribute('data-id'),
+        title: title, url: url, img: imgs[0] ? cardImg(imgs[0].src) : '', price: p.pay, size: chosen.size, color: chosen.color
+      };
+    }
+    var addBtn = $('#rv-padd'), buyBtn = $('#rv-pbuy');
+    if (p.out || !p.pay) {
+      addBtn.hidden = true;
+      $('.rv-qty', prod).hidden = true;
+      buyBtn.textContent = p.out ? 'Sold out · Ask on WhatsApp' : 'Ask price on WhatsApp';
+      buyBtn.onclick = function () { window.open(waLink((p.out ? 'Is this available again? ' : 'Price of: ') + title + '\n' + url), '_blank', 'noopener'); };
+    } else {
+      addBtn.onclick = function () { var it = pick(); if (it) { addToCart(it, parseInt(qty.value, 10) || 1); toast('Added to cart'); openCart(); } };
+      buyBtn.onclick = function () { var it = pick(); if (it) { addToCart(it, parseInt(qty.value, 10) || 1); openCart('checkout'); } };
+    }
+    $('#rv-pask').href = waLink('Assalam o Alaikum, I want to ask about: ' + title + '\n' + url);
+    $('#rv-assure').innerHTML = assure.map(function (a) { return '<li>' + a[0] + '<span><b>' + esc(a[1]) + '</b> · ' + esc(a[2]) + '</span></li>'; }).join('');
+
+    /* Related products from the same category */
+    var cat = $('.rv-crumb-cat', prod);
+    if (cat && window.fetch) {
+      fetch('/feeds/posts/default/-/' + encodeURIComponent(cat.getAttribute('data-label')) + '?alt=json&max-results=9')
+        .then(function (r) { return r.json(); })
+        .then(function (j) {
+          var out = [];
+          ((j.feed && j.feed.entry) || []).forEach(function (en) {
+            var link = (en.link || []).filter(function (l) { return l.rel === 'alternate'; })[0];
+            if (!link || link.href.split('?')[0] === url.split('?')[0] || out.length >= 4) return;
+            var t = D.createElement('template');
+            t.innerHTML = (en.content && en.content.$t) || (en.summary && en.summary.$t) || '';
+            var firstImg = t.content.querySelector('img');
+            var pp = parseProduct(t.content);
+            var src = en.media$thumbnail ? cardImg(en.media$thumbnail.url) : (firstImg ? cardImg(firstImg.getAttribute('src')) : '');
+            out.push({ title: en.title.$t, url: link.href, img: src, p: pp, id: (en.id.$t.match(/post-(\d+)/) || [])[1] || link.href });
+          });
+          if (!out.length) return;
+          var g = $('#rv-related-grid');
+          g.innerHTML = out.map(function (o) {
+            return '<article class="rv-card" data-id="' + esc(o.id) + '" data-title="' + esc(o.title) + '" data-url="' + esc(o.url) + '"><a class="rv-card-img" href="' + esc(o.url) + '" aria-label="' + esc(o.title) + '">' +
+              (o.img ? '<img src="' + esc(o.img) + '" alt="' + esc(o.title) + '" loading="lazy" width="600" height="750"/>' : '<span class="rv-noimg">Photo coming soon</span>') +
+              '</a><div class="rv-card-body"><h3 class="rv-card-title"><a href="' + esc(o.url) + '">' + esc(o.title) + '</a></h3><div class="rv-price"></div><button class="rv-btn rv-btn-sm rv-card-add" type="button">Add to Cart</button></div></article>';
+          }).join('');
+          $$('.rv-card', g).forEach(function (c, i) { setupCard(c, out[i].p); });
+          $('#rv-related').hidden = false;
+        })['catch'](function () {});
+    }
+  }
+
+  renderCart();
+})();
+//]]></script>
+</body>
+</html>

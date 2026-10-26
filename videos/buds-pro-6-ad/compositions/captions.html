@@ -1,0 +1,275 @@
+<template>
+  <style>
+    /* Kinetic speech type: words rise out of masks as they are spoken; product words carry the accent */
+    #root {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    .cgroup {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 1228px;
+      padding: 0 80px;
+      text-align: center;
+      overflow: visible;
+    }
+    .cline {
+      display: inline-block;
+      max-width: 920px;
+      font-family: "Inter", sans-serif;
+      font-weight: 700;
+      font-size: 54px;
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+      text-shadow: 0 4px 24px rgba(0, 0, 0, 0.55);
+    }
+    .m {
+      position: relative;
+      display: inline-block;
+      overflow: hidden;
+      vertical-align: bottom;
+      padding: 0 0.08em 0.16em;
+      margin: 0;
+    }
+    .cw {
+      display: inline-block;
+    }
+    .m.key {
+      font-weight: 900;
+      font-size: 1.32em;
+      letter-spacing: -0.035em;
+      color: #f3d417;
+    }
+    .ul {
+      position: absolute;
+      left: 0.08em;
+      right: 0.08em;
+      bottom: 0.06em;
+      height: 6px;
+      border-radius: 3px;
+      background: #f3d417;
+      transform-origin: 0 50%;
+    }
+  </style>
+  <div id="root" data-composition-id="captions" data-width="1080" data-height="1920">
+    <div id="cg0" class="clip cgroup" data-start="0.12" data-duration="0.26" data-track-index="0"><span class="cline"><span class="m"><span id="cg0w0" class="cw">Ji</span></span> <span class="m"><span id="cg0w1" class="cw">dosto,</span></span></span></div>
+    <div id="cg1" class="clip cgroup" data-start="0.38" data-duration="1.29" data-track-index="0"><span class="cline"><span class="m key"><span id="cg1w0" class="cw">Buds</span><i id="cg1w0u" class="ul"></i></span> <span class="m key"><span id="cg1w1" class="cw">Pro</span><i id="cg1w1u" class="ul"></i></span> <span class="m key"><span id="cg1w2" class="cw">6</span><i id="cg1w2u" class="ul"></i></span> <span class="m"><span id="cg1w3" class="cw">hamare</span></span> <span class="m"><span id="cg1w4" class="cw">paas</span></span></span></div>
+    <div id="cg2" class="clip cgroup" data-start="1.67" data-duration="1.18" data-track-index="0"><span class="cline"><span class="m key"><span id="cg2w0" class="cw">restock</span><i id="cg2w0u" class="ul"></i></span> <span class="m"><span id="cg2w1" class="cw">ho</span></span> <span class="m"><span id="cg2w2" class="cw">chuka</span></span> <span class="m"><span id="cg2w3" class="cw">hai.</span></span></span></div>
+    <div id="cg3" class="clip cgroup" data-start="2.85" data-duration="0.99" data-track-index="0"><span class="cline"><span class="m"><span id="cg3w0" class="cw">To</span></span> <span class="m"><span id="cg3w1" class="cw">der</span></span> <span class="m"><span id="cg3w2" class="cw">kis</span></span> <span class="m"><span id="cg3w3" class="cw">baat</span></span> <span class="m"><span id="cg3w4" class="cw">ki?</span></span></span></div>
+    <div id="cg4" class="clip cgroup" data-start="3.84" data-duration="0.75" data-track-index="0"><span class="cline"><span class="m"><span id="cg4w0" class="cw">Abhi</span></span> <span class="m key"><span id="cg4w1" class="cw">order</span><i id="cg4w1u" class="ul"></i></span> <span class="m"><span id="cg4w2" class="cw">karein!</span></span></span></div>
+    <div id="cg5" class="clip cgroup" data-start="4.59" data-duration="1.84" data-track-index="0"><span class="cline"><span class="m"><span id="cg5w0" class="cw">Is</span></span> <span class="m"><span id="cg5w1" class="cw">ke</span></span> <span class="m"><span id="cg5w2" class="cw">features</span></span> <span class="m"><span id="cg5w3" class="cw">ki</span></span> <span class="m"><span id="cg5w4" class="cw">baat</span></span> <span class="m"><span id="cg5w5" class="cw">karein.</span></span></span></div>
+    <div id="cg6" class="clip cgroup" data-start="6.43" data-duration="0.51" data-track-index="0"><span class="cline"><span class="m"><span id="cg6w0" class="cw">Is</span></span> <span class="m"><span id="cg6w1" class="cw">ke</span></span> <span class="m"><span id="cg6w2" class="cw">andar</span></span></span></div>
+    <div id="cg7" class="clip cgroup" data-start="6.94" data-duration="0.92" data-track-index="0"><span class="cline"><span class="m"><span id="cg7w0" class="cw">aap</span></span> <span class="m"><span id="cg7w1" class="cw">ko</span></span> <span class="m"><span id="cg7w2" class="cw">multiple</span></span> <span class="m"><span id="cg7w3" class="cw">features</span></span></span></div>
+    <div id="cg8" class="clip cgroup" data-start="7.86" data-duration="1.12" data-track-index="0"><span class="cline"><span class="m"><span id="cg8w0" class="cw">ke</span></span> <span class="m"><span id="cg8w1" class="cw">saath</span></span> <span class="m"><span id="cg8w2" class="cw">different</span></span> <span class="m key"><span id="cg8w3" class="cw">colors</span><i id="cg8w3u" class="ul"></i></span></span></div>
+    <div id="cg9" class="clip cgroup" data-start="8.98" data-duration="0.91" data-track-index="0"><span class="cline"><span class="m"><span id="cg9w0" class="cw">dekhne</span></span> <span class="m"><span id="cg9w1" class="cw">ko</span></span> <span class="m"><span id="cg9w2" class="cw">mil</span></span> <span class="m"><span id="cg9w3" class="cw">jaate</span></span> <span class="m"><span id="cg9w4" class="cw">hain.</span></span></span></div>
+    <div id="cg10" class="clip cgroup" data-start="9.89" data-duration="0.41" data-track-index="0"><span class="cline"><span class="m"><span id="cg10w0" class="cw">Sab</span></span> <span class="m"><span id="cg10w1" class="cw">se</span></span> <span class="m"><span id="cg10w2" class="cw">pehle</span></span></span></div>
+    <div id="cg11" class="clip cgroup" data-start="10.30" data-duration="1.01" data-track-index="0"><span class="cline"><span class="m key"><span id="cg11w0" class="cw">colors</span><i id="cg11w0u" class="ul"></i></span> <span class="m"><span id="cg11w1" class="cw">ki</span></span> <span class="m"><span id="cg11w2" class="cw">baat</span></span> <span class="m"><span id="cg11w3" class="cw">karte</span></span> <span class="m"><span id="cg11w4" class="cw">hain:</span></span></span></div>
+    <div id="cg12" class="clip cgroup" data-start="11.31" data-duration="0.42" data-track-index="0"><span class="cline"><span class="m key"><span id="cg12w0" class="cw">Red</span><i id="cg12w0u" class="ul"></i></span> <span class="m"><span id="cg12w1" class="cw">color</span></span></span></div>
+    <div id="cg13" class="clip cgroup" data-start="11.73" data-duration="1.54" data-track-index="0"><span class="cline"><span class="m"><span id="cg13w0" class="cw">aap</span></span> <span class="m"><span id="cg13w1" class="cw">ko</span></span> <span class="m"><span id="cg13w2" class="cw">dekhne</span></span> <span class="m"><span id="cg13w3" class="cw">ko</span></span> <span class="m"><span id="cg13w4" class="cw">mil</span></span> <span class="m"><span id="cg13w5" class="cw">jaata</span></span> <span class="m"><span id="cg13w6" class="cw">hai,</span></span></span></div>
+    <div id="cg14" class="clip cgroup" data-start="13.27" data-duration="0.80" data-track-index="0"><span class="cline"><span class="m key"><span id="cg14w0" class="cw">White</span><i id="cg14w0u" class="ul"></i></span> <span class="m"><span id="cg14w1" class="cw">color</span></span> <span class="m"><span id="cg14w2" class="cw">mein</span></span> <span class="m"><span id="cg14w3" class="cw">bhi</span></span></span></div>
+    <div id="cg15" class="clip cgroup" data-start="14.07" data-duration="0.62" data-track-index="0"><span class="cline"><span class="m"><span id="cg15w0" class="cw">available</span></span> <span class="m"><span id="cg15w1" class="cw">hai,</span></span></span></div>
+    <div id="cg16" class="clip cgroup" data-start="14.69" data-duration="1.24" data-track-index="0"><span class="cline"><span class="m key"><span id="cg16w0" class="cw">Black</span><i id="cg16w0u" class="ul"></i></span> <span class="m"><span id="cg16w1" class="cw">color</span></span> <span class="m"><span id="cg16w2" class="cw">mein</span></span> <span class="m"><span id="cg16w3" class="cw">bhi,</span></span></span></div>
+    <div id="cg17" class="clip cgroup" data-start="15.93" data-duration="0.67" data-track-index="0"><span class="cline"><span class="m"><span id="cg17w0" class="cw">aur</span></span> <span class="m"><span id="cg17w1" class="cw">saath</span></span> <span class="m"><span id="cg17w2" class="cw">saath</span></span></span></div>
+    <div id="cg18" class="clip cgroup" data-start="16.60" data-duration="0.49" data-track-index="0"><span class="cline"><span class="m"><span id="cg18w0" class="cw">aap</span></span> <span class="m"><span id="cg18w1" class="cw">ke</span></span> <span class="m"><span id="cg18w2" class="cw">paas</span></span></span></div>
+    <div id="cg19" class="clip cgroup" data-start="17.09" data-duration="0.64" data-track-index="0"><span class="cline"><span class="m key"><span id="cg19w0" class="cw">Yellow</span><i id="cg19w0u" class="ul"></i></span> <span class="m"><span id="cg19w1" class="cw">color</span></span> <span class="m"><span id="cg19w2" class="cw">mein</span></span> <span class="m"><span id="cg19w3" class="cw">bhi</span></span></span></div>
+    <div id="cg20" class="clip cgroup" data-start="17.73" data-duration="0.95" data-track-index="0"><span class="cline"><span class="m"><span id="cg20w0" class="cw">dekhne</span></span> <span class="m"><span id="cg20w1" class="cw">ko</span></span> <span class="m"><span id="cg20w2" class="cw">mil</span></span> <span class="m"><span id="cg20w3" class="cw">jaate</span></span> <span class="m"><span id="cg20w4" class="cw">hain.</span></span></span></div>
+    <div id="cg21" class="clip cgroup" data-start="18.68" data-duration="0.76" data-track-index="0"><span class="cline"><span class="m"><span id="cg21w0" class="cw">Agar</span></span> <span class="m"><span id="cg21w1" class="cw">aap</span></span> <span class="m"><span id="cg21w2" class="cw">log</span></span></span></div>
+    <div id="cg22" class="clip cgroup" data-start="19.44" data-duration="0.50" data-track-index="0"><span class="cline"><span class="m"><span id="cg22w0" class="cw">is</span></span> <span class="m"><span id="cg22w1" class="cw">offer</span></span> <span class="m"><span id="cg22w2" class="cw">se</span></span></span></div>
+    <div id="cg23" class="clip cgroup" data-start="19.94" data-duration="1.11" data-track-index="0"><span class="cline"><span class="m"><span id="cg23w0" class="cw">faida</span></span> <span class="m"><span id="cg23w1" class="cw">uthana</span></span> <span class="m"><span id="cg23w2" class="cw">chahte</span></span> <span class="m"><span id="cg23w3" class="cw">hain,</span></span></span></div>
+    <div id="cg24" class="clip cgroup" data-start="21.05" data-duration="1.56" data-track-index="0"><span class="cline"><span class="m key"><span id="cg24w0" class="cw">20%</span><i id="cg24w0u" class="ul"></i></span> <span class="m key"><span id="cg24w1" class="cw">off</span><i id="cg24w1u" class="ul"></i></span> <span class="m"><span id="cg24w2" class="cw">lag</span></span> <span class="m"><span id="cg24w3" class="cw">chuka</span></span> <span class="m"><span id="cg24w4" class="cw">hai!</span></span></span></div>
+    <div id="cg25" class="clip cgroup" data-start="22.61" data-duration="0.32" data-track-index="0"><span class="cline"><span class="m"><span id="cg25w0" class="cw">To</span></span> <span class="m"><span id="cg25w1" class="cw">abhi</span></span></span></div>
+    <div id="cg26" class="clip cgroup" data-start="22.93" data-duration="1.18" data-track-index="0"><span class="cline"><span class="m"><span id="cg26w0" class="cw">hamari</span></span> <span class="m key"><span id="cg26w1" class="cw">website</span><i id="cg26w1u" class="ul"></i></span> <span class="m"><span id="cg26w2" class="cw">ko</span></span> <span class="m"><span id="cg26w3" class="cw">visit</span></span> <span class="m"><span id="cg26w4" class="cw">karein</span></span></span></div>
+    <div id="cg27" class="clip cgroup" data-start="24.11" data-duration="1.40" data-track-index="0"><span class="cline"><span class="m"><span id="cg27w0" class="cw">aur</span></span> <span class="m"><span id="cg27w1" class="cw">apna</span></span> <span class="m key"><span id="cg27w2" class="cw">order</span><i id="cg27w2u" class="ul"></i></span> <span class="m"><span id="cg27w3" class="cw">place</span></span> <span class="m"><span id="cg27w4" class="cw">karein.</span></span></span></div>
+    <div id="cg29" class="clip cgroup" data-start="26.83" data-duration="1.38" data-track-index="0"><span class="cline"><span class="m key"><span id="cg29w0" class="cw">free</span><i id="cg29w0u" class="ul"></i></span> <span class="m key"><span id="cg29w1" class="cw">shipping</span><i id="cg29w1u" class="ul"></i></span> <span class="m"><span id="cg29w2" class="cw">ke</span></span> <span class="m"><span id="cg29w3" class="cw">saath</span></span> <span class="m"><span id="cg29w4" class="cw">mil</span></span> <span class="m"><span id="cg29w5" class="cw">rahe</span></span> <span class="m"><span id="cg29w6" class="cw">hain</span></span></span></div>
+    <div id="cg30" class="clip cgroup" data-start="28.21" data-duration="1.04" data-track-index="0"><span class="cline"><span class="m"><span id="cg30w0" class="cw">all</span></span> <span class="m"><span id="cg30w1" class="cw">over</span></span> <span class="m key"><span id="cg30w2" class="cw">Pakistan</span><i id="cg30w2u" class="ul"></i></span> <span class="m"><span id="cg30w3" class="cw">mein.</span></span></span></div>
+    <div id="cg31" class="clip cgroup" data-start="29.25" data-duration="0.75" data-track-index="0"><span class="cline"><span class="m"><span id="cg31w0" class="cw">Thank</span></span> <span class="m"><span id="cg31w1" class="cw">you!</span></span></span></div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    function grp(sel, s, e) {
+      tl.to(sel, { opacity: 0, y: -14, duration: 0.16, ease: "power2.in" }, e - 0.16);
+    }
+    function hit(sel, s) {
+      tl.fromTo(sel, { yPercent: 115, rotation: 5 }, { yPercent: 0, rotation: 0, duration: 0.34, ease: "expo.out" }, Math.max(0, s - 0.04));
+    }
+    function key(sel, s) {
+      tl.fromTo(sel, { scaleX: 0 }, { scaleX: 1, duration: 0.3, ease: "power3.out" }, s + 0.14);
+    }
+    hit("#cg0w0",0.03);
+    hit("#cg0w1",0.12);
+    grp("#cg0",0.12,0.38);
+    key("#cg1w0u",0.43);
+    hit("#cg1w0",0.43);
+    key("#cg1w1u",0.79);
+    hit("#cg1w1",0.79);
+    key("#cg1w2u",0.92);
+    hit("#cg1w2",0.92);
+    hit("#cg1w3",1.11);
+    hit("#cg1w4",1.42);
+    grp("#cg1",0.38,1.67);
+    key("#cg2w0u",1.72);
+    hit("#cg2w0",1.72);
+    hit("#cg2w1",2.34);
+    hit("#cg2w2",2.44);
+    hit("#cg2w3",2.71);
+    grp("#cg2",1.67,2.85);
+    hit("#cg3w0",2.90);
+    hit("#cg3w1",3.06);
+    hit("#cg3w2",3.30);
+    hit("#cg3w3",3.46);
+    hit("#cg3w4",3.69);
+    grp("#cg3",2.85,3.84);
+    hit("#cg4w0",3.89);
+    key("#cg4w1u",4.14);
+    hit("#cg4w1",4.14);
+    hit("#cg4w2",4.44);
+    grp("#cg4",3.84,4.59);
+    hit("#cg5w0",4.64);
+    hit("#cg5w1",4.80);
+    hit("#cg5w2",5.28);
+    hit("#cg5w3",5.68);
+    hit("#cg5w4",5.92);
+    hit("#cg5w5",6.08);
+    grp("#cg5",4.59,6.43);
+    hit("#cg6w0",6.48);
+    hit("#cg6w1",6.61);
+    hit("#cg6w2",6.74);
+    grp("#cg6",6.43,6.94);
+    hit("#cg7w0",6.99);
+    hit("#cg7w1",7.12);
+    hit("#cg7w2",7.28);
+    hit("#cg7w3",7.67);
+    grp("#cg7",6.94,7.86);
+    hit("#cg8w0",7.91);
+    hit("#cg8w1",8.04);
+    hit("#cg8w2",8.46);
+    key("#cg8w3u",8.86);
+    hit("#cg8w3",8.86);
+    grp("#cg8",7.86,8.98);
+    hit("#cg9w0",9.03);
+    hit("#cg9w1",9.42);
+    hit("#cg9w2",9.48);
+    hit("#cg9w3",9.57);
+    hit("#cg9w4",9.74);
+    grp("#cg9",8.98,9.89);
+    hit("#cg10w0",9.94);
+    hit("#cg10w1",10.04);
+    hit("#cg10w2",10.15);
+    grp("#cg10",9.89,10.30);
+    key("#cg11w0u",10.35);
+    hit("#cg11w0",10.35);
+    hit("#cg11w1",10.55);
+    hit("#cg11w2",10.71);
+    hit("#cg11w3",10.82);
+    hit("#cg11w4",11.03);
+    grp("#cg11",10.30,11.31);
+    key("#cg12w0u",11.36);
+    hit("#cg12w0",11.36);
+    hit("#cg12w1",11.57);
+    grp("#cg12",11.31,11.73);
+    hit("#cg13w0",11.78);
+    hit("#cg13w1",11.93);
+    hit("#cg13w2",12.15);
+    hit("#cg13w3",12.56);
+    hit("#cg13w4",12.66);
+    hit("#cg13w5",12.80);
+    hit("#cg13w6",13.09);
+    grp("#cg13",11.73,13.27);
+    key("#cg14w0u",13.32);
+    hit("#cg14w0",13.32);
+    hit("#cg14w1",13.56);
+    hit("#cg14w2",13.74);
+    hit("#cg14w3",13.92);
+    grp("#cg14",13.27,14.07);
+    hit("#cg15w0",14.12);
+    hit("#cg15w1",14.55);
+    grp("#cg15",14.07,14.69);
+    key("#cg16w0u",14.74);
+    hit("#cg16w0",14.74);
+    hit("#cg16w1",15.11);
+    hit("#cg16w2",15.38);
+    hit("#cg16w3",15.66);
+    grp("#cg16",14.69,15.93);
+    hit("#cg17w0",15.98);
+    hit("#cg17w1",16.17);
+    hit("#cg17w2",16.41);
+    grp("#cg17",15.93,16.60);
+    hit("#cg18w0",16.65);
+    hit("#cg18w1",16.81);
+    hit("#cg18w2",16.89);
+    grp("#cg18",16.60,17.09);
+    key("#cg19w0u",17.14);
+    hit("#cg19w0",17.14);
+    hit("#cg19w1",17.29);
+    hit("#cg19w2",17.44);
+    hit("#cg19w3",17.60);
+    grp("#cg19",17.09,17.73);
+    hit("#cg20w0",17.78);
+    hit("#cg20w1",18.04);
+    hit("#cg20w2",18.15);
+    hit("#cg20w3",18.29);
+    hit("#cg20w4",18.45);
+    grp("#cg20",17.73,18.68);
+    hit("#cg21w0",18.73);
+    hit("#cg21w1",18.97);
+    hit("#cg21w2",19.16);
+    grp("#cg21",18.68,19.44);
+    hit("#cg22w0",19.49);
+    hit("#cg22w1",19.63);
+    hit("#cg22w2",19.89);
+    grp("#cg22",19.44,19.94);
+    hit("#cg23w0",19.99);
+    hit("#cg23w1",20.40);
+    hit("#cg23w2",20.73);
+    hit("#cg23w3",20.93);
+    grp("#cg23",19.94,21.05);
+    key("#cg24w0u",21.10);
+    hit("#cg24w0",21.10);
+    key("#cg24w1u",21.77);
+    hit("#cg24w1",21.77);
+    hit("#cg24w2",21.95);
+    hit("#cg24w3",22.12);
+    hit("#cg24w4",22.40);
+    grp("#cg24",21.05,22.61);
+    hit("#cg25w0",22.66);
+    hit("#cg25w1",22.77);
+    grp("#cg25",22.61,22.93);
+    hit("#cg26w0",22.98);
+    key("#cg26w1u",23.25);
+    hit("#cg26w1",23.25);
+    hit("#cg26w2",23.55);
+    hit("#cg26w3",23.67);
+    hit("#cg26w4",23.90);
+    grp("#cg26",22.93,24.11);
+    hit("#cg27w0",24.16);
+    hit("#cg27w1",24.35);
+    key("#cg27w2u",24.59);
+    hit("#cg27w2",24.59);
+    hit("#cg27w3",25.01);
+    hit("#cg27w4",25.25);
+    grp("#cg27",24.11,25.51);
+    key("#cg29w0u",26.88);
+    hit("#cg29w0",26.88);
+    key("#cg29w1u",27.06);
+    hit("#cg29w1",27.06);
+    hit("#cg29w2",27.36);
+    hit("#cg29w3",27.48);
+    hit("#cg29w4",27.72);
+    hit("#cg29w5",27.84);
+    hit("#cg29w6",28.12);
+    grp("#cg29",26.83,28.21);
+    hit("#cg30w0",28.26);
+    hit("#cg30w1",28.44);
+    key("#cg30w2u",28.68);
+    hit("#cg30w2",28.68);
+    hit("#cg30w3",29.10);
+    grp("#cg30",28.21,29.25);
+    hit("#cg31w0",29.30);
+    hit("#cg31w1",29.57);
+    grp("#cg31",29.25,30.00);
+    window.__timelines["captions"] = tl;
+  </script>
+</template>

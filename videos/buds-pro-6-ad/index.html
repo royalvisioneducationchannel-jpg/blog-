@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/vendor/gsap.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: #0b0c10;
+      }
+      #root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        font-family: "Inter", sans-serif;
+      }
+      /* Two camera wrappers move together: footage below the wall type, cutout + callouts above it */
+      .cam {
+        position: absolute;
+        inset: 0;
+        transform-origin: 0 0;
+      }
+      #cam {
+        z-index: 1;
+      }
+      #camfg {
+        z-index: 3;
+      }
+      .fill {
+        position: absolute;
+        inset: 0;
+        width: 1080px;
+        height: 1920px;
+        object-fit: cover;
+      }
+      .scene {
+        position: absolute;
+        inset: 0;
+      }
+      #behind {
+        z-index: 2;
+      }
+      #stage {
+        z-index: 5;
+      }
+      #captions {
+        z-index: 6;
+      }
+      .co {
+        position: absolute;
+        inset: 0;
+      }
+      .co-svg {
+        position: absolute;
+        inset: 0;
+        overflow: visible;
+      }
+      .ring,
+      .lead,
+      .tick {
+        fill: none;
+        stroke: #121418;
+        stroke-width: 3;
+      }
+      .ring-under,
+      .lead-under {
+        fill: none;
+        stroke: rgba(255, 255, 255, 0.9);
+        stroke-width: 7;
+      }
+      .tick {
+        stroke-width: 4;
+      }
+      .co-lab {
+        position: absolute;
+        width: 460px;
+        height: 150px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+        padding-bottom: 14px;
+        color: #121418;
+      }
+      .co-kick {
+        font-weight: 700;
+        font-size: 28px;
+        letter-spacing: 0.34em;
+        text-transform: uppercase;
+        color: #3d424c;
+      }
+      .co-name {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        margin-top: 6px;
+        font-weight: 900;
+        font-size: 86px;
+        line-height: 1;
+        letter-spacing: -0.035em;
+      }
+      .co-sw {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        box-shadow: inset 0 0 0 2px rgba(18, 20, 24, 0.25);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-motion-blur="on" data-composition-id="main" data-start="0" data-duration="33" data-width="1080" data-height="1920">
+      <div id="cam" class="cam">
+        <video id="footage" class="clip fill" src="assets/media/footage.mp4" muted playsinline data-start="0" data-duration="30.35" data-track-index="0"></video>
+      </div>
+
+      <div id="behind" class="scene" data-composition-id="behind" data-composition-src="compositions/behind.html" data-start="0" data-duration="30.35" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+
+      <div id="camfg" class="cam">
+        <div id="matte-wrap" class="scene">
+          <video id="matte" class="clip fill" src="assets/media/person-matte.webm" muted playsinline data-start="0" data-media-start="0" data-duration="30.35" data-track-index="2" data-layout-allow-occlusion></video>
+        </div>
+        <div id="co-red" class="clip co" data-start="11.36" data-duration="1.94" data-track-index="4">
+          <svg class="co-svg" width="1080" height="1920" viewBox="0 0 1080 1920">
+            <line id="co-red-l1" class="lead-under" x1="800" y1="330" x2="800" y2="330" />
+            <line id="co-red-l2" class="lead" x1="800" y1="330" x2="800" y2="330" />
+            <g id="co-red-ring" transform="translate(861 783)">
+              <g id="co-red-spin">
+                <circle class="ring-under" r="136" />
+                <circle id="co-red-rc" class="ring" r="136" stroke-dasharray="855" stroke-dashoffset="855" />
+                <line class="tick" x1="0" y1="-150" x2="0" y2="-128" /><line class="tick" x1="128" y1="0" x2="150" y2="0" />
+                <line class="tick" x1="0" y1="128" x2="0" y2="150" /><line class="tick" x1="-150" y1="0" x2="-128" y2="0" />
+              </g>
+            </g>
+          </svg>
+          <div id="co-red-lab" class="co-lab" style="left: 570px; top: 180px">
+            <div class="co-kick">Color</div>
+            <div class="co-name"><span class="co-sw" style="background: #e5483e"></span>Red</div>
+          </div>
+        </div>
+        <div id="co-white" class="clip co" data-start="13.32" data-duration="1.4" data-track-index="5">
+          <svg class="co-svg" width="1080" height="1920" viewBox="0 0 1080 1920">
+            <line id="co-white-l1" class="lead-under" x1="270" y1="330" x2="270" y2="330" />
+            <line id="co-white-l2" class="lead" x1="270" y1="330" x2="270" y2="330" />
+            <g id="co-white-ring" transform="translate(410 727)">
+              <g id="co-white-spin">
+                <circle class="ring-under" r="117" />
+                <circle id="co-white-rc" class="ring" r="117" stroke-dasharray="735" stroke-dashoffset="735" />
+                <line class="tick" x1="0" y1="-131" x2="0" y2="-109" /><line class="tick" x1="109" y1="0" x2="131" y2="0" />
+                <line class="tick" x1="0" y1="109" x2="0" y2="131" /><line class="tick" x1="-131" y1="0" x2="-109" y2="0" />
+              </g>
+            </g>
+          </svg>
+          <div id="co-white-lab" class="co-lab" style="left: 40px; top: 180px">
+            <div class="co-kick">Color</div>
+            <div class="co-name"><span class="co-sw" style="background: #f4f4f2"></span>White</div>
+          </div>
+        </div>
+        <div id="co-black" class="clip co" data-start="14.74" data-duration="2.38" data-track-index="4">
+          <svg class="co-svg" width="1080" height="1920" viewBox="0 0 1080 1920">
+            <line id="co-black-l1" class="lead-under" x1="800" y1="330" x2="800" y2="330" />
+            <line id="co-black-l2" class="lead" x1="800" y1="330" x2="800" y2="330" />
+            <g id="co-black-ring" transform="translate(684 882)">
+              <g id="co-black-spin">
+                <circle class="ring-under" r="120" />
+                <circle id="co-black-rc" class="ring" r="120" stroke-dasharray="754" stroke-dashoffset="754" />
+                <line class="tick" x1="0" y1="-134" x2="0" y2="-112" /><line class="tick" x1="112" y1="0" x2="134" y2="0" />
+                <line class="tick" x1="0" y1="112" x2="0" y2="134" /><line class="tick" x1="-134" y1="0" x2="-112" y2="0" />
+              </g>
+            </g>
+          </svg>
+          <div id="co-black-lab" class="co-lab" style="left: 570px; top: 180px">
+            <div class="co-kick">Color</div>
+            <div class="co-name"><span class="co-sw" style="background: #2a2e38"></span>Black</div>
+          </div>
+        </div>
+        <div id="co-yellow" class="clip co" data-start="17.14" data-duration="1.56" data-track-index="5">
+          <svg class="co-svg" width="1080" height="1920" viewBox="0 0 1080 1920">
+            <line id="co-yellow-l1" class="lead-under" x1="270" y1="330" x2="270" y2="330" />
+            <line id="co-yellow-l2" class="lead" x1="270" y1="330" x2="270" y2="330" />
+            <g id="co-yellow-ring" transform="translate(282 681)">
+              <g id="co-yellow-spin">
+                <circle class="ring-under" r="123" />
+                <circle id="co-yellow-rc" class="ring" r="123" stroke-dasharray="773" stroke-dashoffset="773" />
+                <line class="tick" x1="0" y1="-137" x2="0" y2="-115" /><line class="tick" x1="115" y1="0" x2="137" y2="0" />
+                <line class="tick" x1="0" y1="115" x2="0" y2="137" /><line class="tick" x1="-137" y1="0" x2="-115" y2="0" />
+              </g>
+            </g>
+          </svg>
+          <div id="co-yellow-lab" class="co-lab" style="left: 40px; top: 180px">
+            <div class="co-kick">Color</div>
+            <div class="co-name"><span class="co-sw" style="background: #f3d417"></span>Yellow</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="stage" class="scene" data-composition-id="stage" data-composition-src="compositions/stage.html" data-start="0" data-duration="33" data-track-index="3" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div id="captions" class="scene" data-composition-id="captions" data-composition-src="compositions/captions.html" data-start="0" data-duration="30.2" data-track-index="6" data-track-kind="captions" data-width="1080" data-height="1920"></div>
+
+      <audio id="voice" class="clip" src="assets/audio/voice.wav" data-start="0" data-duration="30.35" data-track-index="7" data-volume="1"></audio>
+      <audio id="music" class="clip" src="assets/audio/music-hazy-after-hours.mp3" data-start="0" data-duration="33" data-media-start="3.14" data-track-index="8" data-volume="0.25" data-fade-in="0.4" data-fade-out="1.4"
+        data-automation='{"version":1,"lanes":[{"target":"volume","points":[{"t":0,"v":0.4},{"t":25.45,"v":0.4},{"t":25.75,"v":0.06},{"t":26.84,"v":0.06},{"t":26.9,"v":0.45},{"t":29.6,"v":0.45},{"t":30.0,"v":1}]}]}'></audio>
+      <audio id="sfx-rise" class="clip" src="assets/audio/whoosh-short.mp3" data-start="0.12" data-duration="0.57" data-track-index="9" data-volume="0.18"></audio>
+      <audio id="sfx-match" class="clip" src="assets/audio/whoosh-short.mp3" data-start="2.2" data-duration="0.57" data-track-index="9" data-volume="0.25"></audio>
+      <audio id="sfx-order" class="clip" src="assets/audio/impact-bass-1.mp3" data-start="3.89" data-duration="2.1" data-track-index="10" data-volume="0.15"></audio>
+      <audio id="sfx-colors" class="clip" src="assets/audio/whoosh-short.mp3" data-start="6.5" data-duration="0.57" data-track-index="9" data-volume="0.15"></audio>
+      <audio id="sfx-c1" class="clip" src="assets/audio/click-soft.mp3" data-start="11.36" data-duration="0.36" data-track-index="11" data-volume="0.3"></audio>
+      <audio id="sfx-c2" class="clip" src="assets/audio/click-soft.mp3" data-start="13.32" data-duration="0.36" data-track-index="11" data-volume="0.3"></audio>
+      <audio id="sfx-c3" class="clip" src="assets/audio/click-soft.mp3" data-start="14.74" data-duration="0.36" data-track-index="11" data-volume="0.3"></audio>
+      <audio id="sfx-c4" class="clip" src="assets/audio/click-soft.mp3" data-start="16.27" data-duration="0.36" data-track-index="12" data-volume="0.22"></audio>
+      <audio id="sfx-c5" class="clip" src="assets/audio/click-soft.mp3" data-start="17.14" data-duration="0.36" data-track-index="11" data-volume="0.3"></audio>
+      <audio id="sfx-riser" class="clip" src="assets/audio/riser.mp3" data-start="19.1" data-duration="2.0" data-media-start="8.0" data-track-index="13" data-volume="0.22" data-fade-in="0.6"></audio>
+      <audio id="sfx-off" class="clip" src="assets/audio/impact-bass-1.mp3" data-start="21.1" data-duration="2.1" data-track-index="10" data-volume="0.45"></audio>
+      <audio id="sfx-web" class="clip" src="assets/audio/whoosh-short.mp3" data-start="22.3" data-duration="0.57" data-track-index="9" data-volume="0.22"></audio>
+      <audio id="sfx-wipe" class="clip" src="assets/audio/whoosh-short.mp3" data-start="20.85" data-duration="0.57" data-track-index="12" data-volume="0.28"></audio>
+      <audio id="sfx-bars" class="clip" src="assets/audio/whoosh-short.mp3" data-start="25.28" data-duration="0.57" data-track-index="13" data-volume="0.14"></audio>
+      <audio id="sfx-line" class="clip" src="assets/audio/click-soft.mp3" data-start="26.6" data-duration="0.36" data-track-index="12" data-volume="0.2"></audio>
+      <audio id="sfx-ship" class="clip" src="assets/audio/impact-bass-1.mp3" data-start="26.88" data-duration="2.1" data-track-index="13" data-volume="0.35"></audio>
+      <audio id="sfx-truck" class="clip" src="assets/audio/whoosh-short.mp3" data-start="27.05" data-duration="0.57" data-track-index="9" data-volume="0.2"></audio>
+      <audio id="sfx-push" class="clip" src="assets/audio/whoosh-short.mp3" data-start="29.45" data-duration="0.57" data-track-index="11" data-volume="0.25"></audio>
+      <audio id="sfx-hero" class="clip" src="assets/audio/impact-bass-1.mp3" data-start="30.0" data-duration="2.1" data-track-index="10" data-volume="0.3"></audio>
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      const E = "power3.out";
+      const io = "power3.inOut";
+      const CAM = ["#cam", "#camfg"];
+      // origin is top-left; x = -(s-1)*540, y = -(s-1)*500 keeps the push centred on the speaker
+      const at = (s) => ({ scale: s, x: -(s - 1) * 540, y: -(s - 1) * 500 });
+      tl.set(CAM, at(1), 0);
+      // ORDER: slow push on the speaker
+      tl.to(CAM, { ...at(1.06), duration: 3.4, ease: "none" }, 3.0);
+      // COLORS: a lateral glide at a fixed size; the wall type drifts less, so it reads as its own plane
+      tl.to(CAM, { scale: 1.08, x: 0, y: -40, duration: 0.6, ease: io }, 6.48);
+      tl.to(CAM, { scale: 1.08, x: -86, y: -40, duration: 4.2, ease: "sine.inOut" }, 7.08);
+      // Colour reveals: the camera leans toward whichever box is being named (track data)
+      const S = 1.12, YC = -(S - 1) * 500;
+      const follow = (bx) => Math.max(-(S - 1) * 1080, Math.min(0, -(S - 1) * 540 - (bx - 540) * 0.35));
+      tl.to(CAM, { scale: S, x: follow(861), y: YC, duration: 0.6, ease: io }, 11.36);
+      tl.to(CAM, { x: follow(560), duration: 1.2, ease: "sine.inOut" }, 11.9);
+      tl.to(CAM, { x: follow(410), duration: 0.6, ease: io }, 13.32);
+      tl.to(CAM, { x: follow(560), duration: 0.6, ease: io }, 14.74);
+      tl.to(CAM, { x: follow(684), duration: 0.6, ease: io }, 16.27);
+      tl.to(CAM, { x: follow(282), duration: 0.6, ease: io }, 17.14);
+      // OFFER: back to wide, then a tension push that the 20% cut releases
+      tl.to(CAM, { ...at(1.0), duration: 0.45, ease: io }, 18.73);
+      tl.to(CAM, { ...at(1.14), duration: 1.65, ease: "power2.in" }, 19.2);
+      // WEBSITE: the reverse move, a pull-out
+      tl.set(CAM, at(1.14), 22.3);
+      tl.to(CAM, { ...at(1.02), duration: 2.9, ease: "power2.out" }, 22.66);
+      tl.set(CAM, at(1), 29.0);
+      // Push into the hero card: footage leaves upward with it
+      tl.to(CAM, { y: -1920, duration: 0.5, ease: "expo.inOut" }, 29.55);
+
+      // red
+      tl.fromTo("#co-red-lab", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.35, ease: E }, 11.36);
+      tl.to("#co-red-lab", { opacity: 0, duration: 0.14, ease: "power2.in" }, 13.16);
+      tl.fromTo("#co-red-rc", { attr: { "stroke-dashoffset": 855 } }, { attr: { "stroke-dashoffset": 0 }, duration: 0.45, ease: "power2.out" }, 11.36);
+      tl.fromTo("#co-red-ring", { opacity: 0 }, { opacity: 1, duration: 0.15, ease: "none" }, 11.36);
+      tl.fromTo("#co-red-spin", { rotation: 0 }, { rotation: 35, duration: 1.94, ease: "none", svgOrigin: "0 0" }, 11.36);
+      tl.to("#co-red-ring", { opacity: 0, duration: 0.14, ease: "none" }, 13.16);
+      tl.set("#co-red-ring", { attr: { transform: "translate(861 783)" } }, 11.36);
+      tl.to("#co-red-ring", { attr: { transform: "translate(857 780)" }, duration: 0.1, ease: "none" }, 11.433);
+      tl.to("#co-red-ring", { attr: { transform: "translate(845 773)" }, duration: 0.1, ease: "none" }, 11.533);
+      tl.to("#co-red-ring", { attr: { transform: "translate(799 827)" }, duration: 0.1, ease: "none" }, 11.633);
+      tl.to("#co-red-ring", { attr: { transform: "translate(709 943)" }, duration: 0.1, ease: "none" }, 11.733);
+      tl.to("#co-red-ring", { attr: { transform: "translate(625 1009)" }, duration: 0.1, ease: "none" }, 11.833);
+      tl.to("#co-red-ring", { attr: { transform: "translate(579 1021)" }, duration: 0.1, ease: "none" }, 11.933);
+      tl.to("#co-red-ring", { attr: { transform: "translate(545 1013)" }, duration: 0.1, ease: "none" }, 12.033);
+      tl.to("#co-red-ring", { attr: { transform: "translate(517 1017)" }, duration: 0.1, ease: "none" }, 12.133);
+      tl.to("#co-red-ring", { attr: { transform: "translate(503 1031)" }, duration: 0.1, ease: "none" }, 12.233);
+      tl.to("#co-red-ring", { attr: { transform: "translate(535 1017)" }, duration: 0.1, ease: "none" }, 12.333);
+      tl.to("#co-red-ring", { attr: { transform: "translate(557 1000)" }, duration: 0.1, ease: "none" }, 12.433);
+      tl.to("#co-red-ring", { attr: { transform: "translate(560 996)" }, duration: 0.1, ease: "none" }, 12.533);
+      tl.to("#co-red-ring", { attr: { transform: "translate(571 990)" }, duration: 0.1, ease: "none" }, 12.633);
+      tl.to("#co-red-ring", { attr: { transform: "translate(595 984)" }, duration: 0.1, ease: "none" }, 12.733);
+      tl.to("#co-red-ring", { attr: { transform: "translate(626 972)" }, duration: 0.1, ease: "none" }, 12.833);
+      tl.to("#co-red-ring", { attr: { transform: "translate(654 956)" }, duration: 0.1, ease: "none" }, 12.933);
+      tl.to("#co-red-ring", { attr: { transform: "translate(668 936)" }, duration: 0.1, ease: "none" }, 13.033);
+      tl.to("#co-red-ring", { attr: { transform: "translate(677 915)" }, duration: 0.1, ease: "none" }, 13.133);
+      tl.to("#co-red-ring", { attr: { transform: "translate(683 900)" }, duration: 0.1, ease: "none" }, 13.233);
+      tl.fromTo(["#co-red-l1", "#co-red-l2"], { attr: { x2: 800, y2: 330 } }, { attr: { x2: 841, y2: 632 }, duration: 0.3, ease: "power2.out" }, 11.48);
+      tl.to(["#co-red-l1", "#co-red-l2"], { attr: { x2: 731, y2: 793 }, duration: 0.053, ease: "none" }, 11.78);
+      tl.to(["#co-red-l1", "#co-red-l2"], { attr: { x2: 663, y2: 862 }, duration: 0.1, ease: "none" }, 11.833);
+      tl.to(["#co-red-l1", "#co-red-l2"], { attr: { x2: 625, y2: 876 }, duration: 0.1, ease: "none" }, 11.933);
+      tl.to(["#co-red-l1", "#co-red-l2"], { attr: { x2: 598, y2: 871 }, duration: 0.1, ease: "none" }, 12.033);
+      tl.to(["#co-red-l1", "#co-red-l2"], { attr: { x2: 575, y2: 876 }, duration: 0.1, ease: "none" }, 12.133);
+      tl.to(["#co-red-l1", "#co-red-l2"], { attr: { x2: 562, y2: 891 }, duration: 0.1, ease: "none" }, 12.233);
+      tl.to(["#co-red-l1", "#co-red-l2"], { attr: { x2: 590, y2: 875 }, duration: 0.1, ease: "none" }, 12.333);
+      tl.to(["#co-red-l1", "#co-red-l2"], { attr: { x2: 609, y2: 857 }, duration: 0.1, ease: "none" }, 12.433);
+      tl.to(["#co-red-l1", "#co-red-l2"], { attr: { x2: 612, y2: 853 }, duration: 0.1, ease: "none" }, 12.533);
+      tl.to(["#co-red-l1", "#co-red-l2"], { attr: { x2: 621, y2: 846 }, duration: 0.1, ease: "none" }, 12.633);
+      tl.to(["#co-red-l1", "#co-red-l2"], { attr: { x2: 640, y2: 839 }, duration: 0.1, ease: "none" }, 12.733);
+      tl.to(["#co-red-l1", "#co-red-l2"], { attr: { x2: 666, y2: 825 }, duration: 0.1, ease: "none" }, 12.833);
+      tl.to(["#co-red-l1", "#co-red-l2"], { attr: { x2: 689, y2: 808 }, duration: 0.1, ease: "none" }, 12.933);
+      tl.to(["#co-red-l1", "#co-red-l2"], { attr: { x2: 800, y2: 330 }, duration: 0.18, ease: "power2.in" }, 13.12);
+      // white
+      tl.fromTo("#co-white-lab", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.35, ease: E }, 13.32);
+      tl.to("#co-white-lab", { opacity: 0, duration: 0.14, ease: "power2.in" }, 14.58);
+      tl.fromTo("#co-white-rc", { attr: { "stroke-dashoffset": 735 } }, { attr: { "stroke-dashoffset": 0 }, duration: 0.45, ease: "power2.out" }, 13.32);
+      tl.fromTo("#co-white-ring", { opacity: 0 }, { opacity: 1, duration: 0.15, ease: "none" }, 13.32);
+      tl.fromTo("#co-white-spin", { rotation: 0 }, { rotation: 35, duration: 1.4, ease: "none", svgOrigin: "0 0" }, 13.32);
+      tl.to("#co-white-ring", { opacity: 0, duration: 0.14, ease: "none" }, 14.58);
+      tl.set("#co-white-ring", { attr: { transform: "translate(410 727)" } }, 13.32);
+      tl.to("#co-white-ring", { attr: { transform: "translate(443 720)" }, duration: 0.1, ease: "none" }, 13.433);
+      tl.to("#co-white-ring", { attr: { transform: "translate(538 752)" }, duration: 0.1, ease: "none" }, 13.533);
+      tl.to("#co-white-ring", { attr: { transform: "translate(630 803)" }, duration: 0.1, ease: "none" }, 13.633);
+      tl.to("#co-white-ring", { attr: { transform: "translate(664 815)" }, duration: 0.1, ease: "none" }, 13.733);
+      tl.to("#co-white-ring", { attr: { transform: "translate(698 826)" }, duration: 0.1, ease: "none" }, 13.833);
+      tl.to("#co-white-ring", { attr: { transform: "translate(722 792)" }, duration: 0.1, ease: "none" }, 13.933);
+      tl.to("#co-white-ring", { attr: { transform: "translate(778 712)" }, duration: 0.1, ease: "none" }, 14.033);
+      tl.to("#co-white-ring", { attr: { transform: "translate(815 658)" }, duration: 0.1, ease: "none" }, 14.133);
+      tl.to("#co-white-ring", { attr: { transform: "translate(815 666)" }, duration: 0.1, ease: "none" }, 14.233);
+      tl.to("#co-white-ring", { attr: { transform: "translate(804 731)" }, duration: 0.1, ease: "none" }, 14.333);
+      tl.to("#co-white-ring", { attr: { transform: "translate(801 812)" }, duration: 0.1, ease: "none" }, 14.433);
+      tl.to("#co-white-ring", { attr: { transform: "translate(802 859)" }, duration: 0.1, ease: "none" }, 14.533);
+      tl.to("#co-white-ring", { attr: { transform: "translate(802 870)" }, duration: 0.1, ease: "none" }, 14.633);
+      tl.to("#co-white-ring", { attr: { transform: "translate(803 869)" }, duration: 0.034, ease: "none" }, 14.733);
+      tl.fromTo(["#co-white-l1", "#co-white-l2"], { attr: { x2: 270, y2: 330 } }, { attr: { x2: 366, y2: 602 }, duration: 0.3, ease: "power2.out" }, 13.44);
+      tl.to(["#co-white-l1", "#co-white-l2"], { attr: { x2: 270, y2: 330 }, duration: 0.18, ease: "power2.in" }, 13.82);
+      // black
+      tl.fromTo("#co-black-lab", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.35, ease: E }, 14.74);
+      tl.to("#co-black-lab", { opacity: 0, duration: 0.14, ease: "power2.in" }, 16.98);
+      tl.fromTo("#co-black-rc", { attr: { "stroke-dashoffset": 754 } }, { attr: { "stroke-dashoffset": 0 }, duration: 0.45, ease: "power2.out" }, 16.27);
+      tl.fromTo("#co-black-ring", { opacity: 0 }, { opacity: 1, duration: 0.15, ease: "none" }, 16.27);
+      tl.fromTo("#co-black-spin", { rotation: 0 }, { rotation: 35, duration: 0.85, ease: "none", svgOrigin: "0 0" }, 16.27);
+      tl.to("#co-black-ring", { opacity: 0, duration: 0.14, ease: "none" }, 16.98);
+      tl.set("#co-black-ring", { attr: { transform: "translate(684 882)" } }, 14.74);
+      tl.to("#co-black-ring", { attr: { transform: "translate(682 888)" }, duration: 0.097, ease: "none" }, 16.27);
+      tl.to("#co-black-ring", { attr: { transform: "translate(670 891)" }, duration: 0.1, ease: "none" }, 16.367);
+      tl.to("#co-black-ring", { attr: { transform: "translate(651 890)" }, duration: 0.1, ease: "none" }, 16.467);
+      tl.to("#co-black-ring", { attr: { transform: "translate(626 892)" }, duration: 0.1, ease: "none" }, 16.567);
+      tl.to("#co-black-ring", { attr: { transform: "translate(604 901)" }, duration: 0.1, ease: "none" }, 16.667);
+      tl.to("#co-black-ring", { attr: { transform: "translate(592 906)" }, duration: 0.1, ease: "none" }, 16.767);
+      tl.to("#co-black-ring", { attr: { transform: "translate(581 887)" }, duration: 0.1, ease: "none" }, 16.867);
+      tl.to("#co-black-ring", { attr: { transform: "translate(572 835)" }, duration: 0.1, ease: "none" }, 16.967);
+      tl.to("#co-black-ring", { attr: { transform: "translate(572 766)" }, duration: 0.1, ease: "none" }, 17.067);
+      tl.to("#co-black-ring", { attr: { transform: "translate(586 699)" }, duration: 0.1, ease: "none" }, 17.167);
+      tl.to("#co-black-ring", { attr: { transform: "translate(592 679)" }, duration: 0.066, ease: "none" }, 17.267);
+      tl.fromTo(["#co-black-l1", "#co-black-l2"], { attr: { x2: 800, y2: 330 } }, { attr: { x2: 712, y2: 749 }, duration: 0.3, ease: "power2.out" }, 16.39);
+      tl.to(["#co-black-l1", "#co-black-l2"], { attr: { x2: 648, y2: 772 }, duration: 0.077, ease: "none" }, 16.69);
+      tl.to(["#co-black-l1", "#co-black-l2"], { attr: { x2: 638, y2: 778 }, duration: 0.1, ease: "none" }, 16.767);
+      tl.to(["#co-black-l1", "#co-black-l2"], { attr: { x2: 800, y2: 330 }, duration: 0.18, ease: "power2.in" }, 16.94);
+      // yellow
+      tl.fromTo("#co-yellow-lab", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.35, ease: E }, 17.14);
+      tl.to("#co-yellow-lab", { opacity: 0, duration: 0.14, ease: "power2.in" }, 18.56);
+      tl.fromTo("#co-yellow-rc", { attr: { "stroke-dashoffset": 773 } }, { attr: { "stroke-dashoffset": 0 }, duration: 0.45, ease: "power2.out" }, 17.14);
+      tl.fromTo("#co-yellow-ring", { opacity: 0 }, { opacity: 1, duration: 0.15, ease: "none" }, 17.14);
+      tl.fromTo("#co-yellow-spin", { rotation: 0 }, { rotation: 35, duration: 1.56, ease: "none", svgOrigin: "0 0" }, 17.14);
+      tl.to("#co-yellow-ring", { opacity: 0, duration: 0.14, ease: "none" }, 18.56);
+      tl.set("#co-yellow-ring", { attr: { transform: "translate(282 681)" } }, 17.14);
+      tl.to("#co-yellow-ring", { attr: { transform: "translate(274 663)" }, duration: 0.1, ease: "none" }, 17.2);
+      tl.to("#co-yellow-ring", { attr: { transform: "translate(262 655)" }, duration: 0.1, ease: "none" }, 17.3);
+      tl.to("#co-yellow-ring", { attr: { transform: "translate(253 656)" }, duration: 0.1, ease: "none" }, 17.4);
+      tl.to("#co-yellow-ring", { attr: { transform: "translate(246 656)" }, duration: 0.1, ease: "none" }, 17.5);
+      tl.to("#co-yellow-ring", { attr: { transform: "translate(243 656)" }, duration: 0.1, ease: "none" }, 17.6);
+      tl.to("#co-yellow-ring", { attr: { transform: "translate(242 656)" }, duration: 0.1, ease: "none" }, 17.7);
+      tl.to("#co-yellow-ring", { attr: { transform: "translate(239 657)" }, duration: 0.1, ease: "none" }, 17.8);
+      tl.to("#co-yellow-ring", { attr: { transform: "translate(231 681)" }, duration: 0.1, ease: "none" }, 17.9);
+      tl.to("#co-yellow-ring", { attr: { transform: "translate(227 729)" }, duration: 0.1, ease: "none" }, 18.0);
+      tl.to("#co-yellow-ring", { attr: { transform: "translate(228 754)" }, duration: 0.1, ease: "none" }, 18.1);
+      tl.to("#co-yellow-ring", { attr: { transform: "translate(228 758)" }, duration: 0.1, ease: "none" }, 18.2);
+      tl.to("#co-yellow-ring", { attr: { transform: "translate(229 758)" }, duration: 0.1, ease: "none" }, 18.3);
+      tl.to("#co-yellow-ring", { attr: { transform: "translate(232 760)" }, duration: 0.1, ease: "none" }, 18.4);
+      tl.to("#co-yellow-ring", { attr: { transform: "translate(238 763)" }, duration: 0.1, ease: "none" }, 18.5);
+      tl.to("#co-yellow-ring", { attr: { transform: "translate(246 760)" }, duration: 0.1, ease: "none" }, 18.6);
+      tl.to("#co-yellow-ring", { attr: { transform: "translate(247 758)" }, duration: 0.033, ease: "none" }, 18.7);
+      tl.fromTo(["#co-yellow-l1", "#co-yellow-l2"], { attr: { x2: 270, y2: 330 } }, { attr: { x2: 277, y2: 542 }, duration: 0.3, ease: "power2.out" }, 17.26);
+      tl.to(["#co-yellow-l1", "#co-yellow-l2"], { attr: { x2: 256, y2: 517 }, duration: 0.04, ease: "none" }, 17.56);
+      tl.to(["#co-yellow-l1", "#co-yellow-l2"], { attr: { x2: 254, y2: 517 }, duration: 0.1, ease: "none" }, 17.6);
+      tl.to(["#co-yellow-l1", "#co-yellow-l2"], { attr: { x2: 254, y2: 518 }, duration: 0.1, ease: "none" }, 17.7);
+      tl.to(["#co-yellow-l1", "#co-yellow-l2"], { attr: { x2: 252, y2: 519 }, duration: 0.1, ease: "none" }, 17.8);
+      tl.to(["#co-yellow-l1", "#co-yellow-l2"], { attr: { x2: 246, y2: 543 }, duration: 0.1, ease: "none" }, 17.9);
+      tl.to(["#co-yellow-l1", "#co-yellow-l2"], { attr: { x2: 242, y2: 591 }, duration: 0.1, ease: "none" }, 18.0);
+      tl.to(["#co-yellow-l1", "#co-yellow-l2"], { attr: { x2: 242, y2: 616 }, duration: 0.1, ease: "none" }, 18.1);
+      tl.to(["#co-yellow-l1", "#co-yellow-l2"], { attr: { x2: 242, y2: 620 }, duration: 0.1, ease: "none" }, 18.2);
+      tl.to(["#co-yellow-l1", "#co-yellow-l2"], { attr: { x2: 242, y2: 620 }, duration: 0.1, ease: "none" }, 18.3);
+      tl.to(["#co-yellow-l1", "#co-yellow-l2"], { attr: { x2: 244, y2: 622 }, duration: 0.1, ease: "none" }, 18.4);
+      tl.to(["#co-yellow-l1", "#co-yellow-l2"], { attr: { x2: 270, y2: 330 }, duration: 0.18, ease: "power2.in" }, 18.52);
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

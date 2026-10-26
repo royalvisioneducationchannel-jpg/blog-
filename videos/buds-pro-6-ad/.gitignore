@@ -1,0 +1,8 @@
+renders/
+*.mp4
+*.mov
+*.webm
+*.wav
+*.mp3
+.hyperframes/
+*.png

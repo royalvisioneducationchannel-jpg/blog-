@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/vendor/gsap.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: #0a0b0e;
+      }
+      #root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+      #cam {
+        position: absolute;
+        inset: 0;
+        transform-origin: 0 0;
+      }
+      #footage {
+        position: absolute;
+        inset: 0;
+        width: 1080px;
+        height: 1920px;
+        object-fit: cover;
+      }
+      .scene {
+        position: absolute;
+        inset: 0;
+      }
+      #captions {
+        z-index: 3;
+      }
+      #titles {
+        z-index: 2;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="32.5"
+      data-width="1080"
+      data-height="1920"
+    >
+      <div id="cam">
+        <video id="footage" class="clip" src="assets/media/footage.mp4" muted playsinline data-start="0" data-duration="30.35" data-track-index="0"></video>
+      </div>
+
+      <div
+        id="titles"
+        class="scene"
+        data-composition-id="titles"
+        data-composition-src="compositions/titles.html"
+        data-start="0"
+        data-duration="32.5"
+        data-track-index="1"
+        data-track-kind="graphics"
+        data-width="1080"
+        data-height="1920"
+      ></div>
+
+      <div
+        id="captions"
+        class="scene"
+        data-composition-id="captions"
+        data-composition-src="compositions/captions.html"
+        data-start="0"
+        data-duration="30.2"
+        data-track-index="2"
+        data-track-kind="captions"
+        data-width="1080"
+        data-height="1920"
+      ></div>
+
+      <audio id="voice" class="clip" src="assets/audio/voice.wav" data-start="0" data-duration="30.35" data-track-index="3" data-volume="1"></audio>
+      <audio
+        id="music"
+        class="clip"
+        src="assets/audio/music-hazy-after-hours.mp3"
+        data-start="0"
+        data-duration="32.5"
+        data-media-start="3.14"
+        data-track-index="4"
+        data-volume="0.25"
+        data-fade-in="0.4"
+        data-fade-out="1.2"
+        data-automation='{"version":1,"lanes":[{"target":"volume","points":[{"t":0,"v":0.4},{"t":29.6,"v":0.4},{"t":30.0,"v":1}]}]}'
+      ></audio>
+      <audio id="sfx-reveal" class="clip" src="assets/audio/whoosh-short.mp3" data-start="1.02" data-duration="0.57" data-track-index="5" data-volume="0.3"></audio>
+      <audio id="sfx-red" class="clip" src="assets/audio/click-soft.mp3" data-start="11.36" data-duration="0.36" data-track-index="6" data-volume="0.35"></audio>
+      <audio id="sfx-white" class="clip" src="assets/audio/click-soft.mp3" data-start="13.32" data-duration="0.36" data-track-index="6" data-volume="0.35"></audio>
+      <audio id="sfx-black" class="clip" src="assets/audio/click-soft.mp3" data-start="14.74" data-duration="0.36" data-track-index="6" data-volume="0.35"></audio>
+      <audio id="sfx-yellow" class="clip" src="assets/audio/click-soft.mp3" data-start="17.14" data-duration="0.36" data-track-index="6" data-volume="0.35"></audio>
+      <audio id="sfx-riser" class="clip" src="assets/audio/riser.mp3" data-start="19.1" data-duration="2.0" data-media-start="8.0" data-track-index="7" data-volume="0.22" data-fade-in="0.6"></audio>
+      <audio id="sfx-off" class="clip" src="assets/audio/impact-bass-1.mp3" data-start="21.1" data-duration="2.1" data-track-index="5" data-volume="0.45"></audio>
+      <audio id="sfx-ship" class="clip" src="assets/audio/whoosh-short.mp3" data-start="26.82" data-duration="0.57" data-track-index="5" data-volume="0.3"></audio>
+      <audio id="sfx-hero" class="clip" src="assets/audio/impact-bass-1.mp3" data-start="29.75" data-duration="2.1" data-track-index="7" data-volume="0.35"></audio>
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      // Virtual camera on the footage: origin is the top-left corner, so x/y keep the frame filled
+      const io = "power3.inOut";
+      tl.set("#cam", { scale: 1, x: 0, y: 0 }, 0);
+      tl.to("#cam", { scale: 1.04, x: -21.6, y: -28, duration: 10.2, ease: "none" }, 1.1);
+      // Colour reveals: push toward the box being named
+      tl.to("#cam", { scale: 1.2, x: -216, y: -36, duration: 0.4, ease: io }, 11.36);
+      tl.to("#cam", { scale: 1.2, x: -150, y: -36, duration: 0.4, ease: io }, 13.32);
+      tl.to("#cam", { scale: 1.2, x: -108, y: -36, duration: 0.4, ease: io }, 14.74);
+      tl.to("#cam", { scale: 1.2, x: 0, y: -36, duration: 0.45, ease: io }, 17.14);
+      tl.to("#cam", { scale: 1, x: 0, y: 0, duration: 0.5, ease: io }, 18.73);
+      tl.to("#cam", { scale: 1.06, x: -32.4, y: -42, duration: 1.85, ease: "power1.in" }, 19.25);
+      tl.set("#cam", { scale: 1, x: 0, y: 0 }, 22.0);
+      tl.to("#cam", { scale: 1.05, x: -27, y: -35, duration: 4.2, ease: "none" }, 22.66);
+      tl.set("#cam", { scale: 1, x: 0, y: 0 }, 28.0);
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

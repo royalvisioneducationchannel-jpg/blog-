@@ -1,0 +1,398 @@
+<template>
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      font-family: "Inter", sans-serif;
+      pointer-events: none;
+      --graphite: #0a0b0e;
+      --ink: #0d0e12;
+      --paper: #f5f5f7;
+      --muted: #8b919c;
+      --red: #e5483e;
+      --white: #f4f4f2;
+      --black: #2a2e38;
+      --yellow: #f3d417;
+    }
+    .full {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+    .band {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 178px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      color: var(--ink);
+    }
+    .kicker {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-weight: 700;
+      font-size: 26px;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: #4a4f59;
+    }
+    .kicker::before,
+    .kicker::after {
+      content: "";
+      width: 34px;
+      height: 2px;
+      background: currentColor;
+      opacity: 0.6;
+    }
+    .head {
+      margin-top: 10px;
+      font-weight: 900;
+      font-size: 76px;
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+    .swatches {
+      display: flex;
+      gap: 18px;
+      margin-top: 18px;
+    }
+    .sw {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+    }
+    .sw.red { background: var(--red); }
+    .sw.white { background: var(--white); border: 3px solid #c9ccd2; }
+    .sw.black { background: var(--black); }
+    .sw.yellow { background: var(--yellow); }
+    .color-row {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      margin-top: 12px;
+    }
+    .color-row .sw {
+      width: 58px;
+      height: 58px;
+    }
+    .color-name {
+      font-weight: 900;
+      font-size: 92px;
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+
+    /* Intro */
+    #intro {
+      background: var(--graphite);
+    }
+    .intro-stack {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 760px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: var(--paper);
+    }
+    .intro-title {
+      display: flex;
+      gap: 34px;
+      font-weight: 900;
+      font-size: 168px;
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
+    .mask {
+      display: inline-block;
+      overflow: hidden;
+      padding-bottom: 8px;
+    }
+    .mask > span {
+      display: inline-block;
+    }
+    .intro-line {
+      width: 640px;
+      height: 3px;
+      margin-top: 34px;
+      background: linear-gradient(90deg, transparent, rgba(245, 245, 247, 0.85), transparent);
+      transform-origin: 50% 50%;
+    }
+    .intro-sub {
+      margin-top: 28px;
+      font-weight: 600;
+      font-size: 30px;
+      letter-spacing: 0.42em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    /* Full-screen offer cards */
+    .card-bg {
+      background: radial-gradient(120% 70% at 50% 42%, #1a1d24 0%, var(--graphite) 70%);
+    }
+    .card-stack {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 560px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      color: var(--paper);
+    }
+    .big-num {
+      font-weight: 900;
+      font-size: 330px;
+      line-height: 0.9;
+      letter-spacing: -0.05em;
+    }
+    .big-word {
+      font-weight: 900;
+      font-size: 150px;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+    }
+    .card-sub {
+      margin-top: 30px;
+      font-weight: 600;
+      font-size: 34px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .sweep {
+      position: absolute;
+      top: -10%;
+      bottom: -10%;
+      left: 0;
+      width: 260px;
+      background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.09), transparent);
+    }
+    .ship-icon {
+      width: 120px;
+      height: 120px;
+      color: var(--paper);
+      margin-bottom: 36px;
+    }
+
+    /* Hero end card */
+    #hero-img {
+      position: absolute;
+      inset: 0;
+      width: 1080px;
+      height: 1920px;
+      object-fit: cover;
+      transform-origin: 470px 690px;
+    }
+    .hero-shade {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(10, 11, 14, 0) 42%, rgba(10, 11, 14, 0.78) 58%, rgba(10, 11, 14, 0.95) 100%);
+    }
+    .hero-stack {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 905px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      color: var(--paper);
+    }
+    .hero-title {
+      position: relative;
+      overflow: hidden;
+      font-weight: 900;
+      font-size: 128px;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      padding: 0 10px 6px;
+    }
+    .hero-title .sweep {
+      background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+      width: 180px;
+    }
+    .hero-meta {
+      margin-top: 24px;
+      font-weight: 600;
+      font-size: 30px;
+      letter-spacing: 0.06em;
+      color: #c9ccd2;
+    }
+    .hero-meta b {
+      color: var(--paper);
+      font-weight: 800;
+    }
+    .cta-pill {
+      margin-top: 36px;
+      padding: 20px 52px;
+      border-radius: 999px;
+      background: var(--paper);
+      color: var(--graphite);
+      font-weight: 800;
+      font-size: 36px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+  </style>
+  <div id="root" data-composition-id="titles" data-width="1080" data-height="1920" data-layout-allow-overlap>
+    <!-- 0 · Intro: on screen from frame 0 as the hook and thumbnail -->
+    <div id="intro" class="clip full" data-start="0" data-duration="1.55" data-track-index="0">
+      <div class="intro-stack">
+        <div class="intro-title">
+          <span class="mask"><span id="iw1">BUDS</span></span>
+          <span class="mask"><span id="iw2">PRO</span></span>
+          <span class="mask"><span id="iw3">6</span></span>
+        </div>
+        <div id="intro-line" class="intro-line"></div>
+        <div id="intro-sub" class="intro-sub">Back in Stock</div>
+      </div>
+    </div>
+
+    <!-- Top band headlines over the wall -->
+    <div id="hb-restock" class="clip band" data-start="1.3" data-duration="3.3" data-track-index="1">
+      <div id="hb-restock-k" class="kicker">Now Available</div>
+      <div id="hb-restock-h" class="head">Buds Pro 6</div>
+    </div>
+    <div id="hb-order" class="clip band" data-start="3.85" data-duration="2.6" data-track-index="2">
+      <div id="hb-order-k" class="kicker">Abhi</div>
+      <div id="hb-order-h" class="head">Order Karein</div>
+    </div>
+    <div id="hb-colors" class="clip band" data-start="7.9" data-duration="3.4" data-track-index="1">
+      <div id="hb-colors-k" class="kicker">Different Colors</div>
+      <div id="hb-colors-h" class="head">4 Colors</div>
+      <div class="swatches">
+        <span id="hs1" class="sw red"></span>
+        <span id="hs2" class="sw white"></span>
+        <span id="hs3" class="sw black"></span>
+        <span id="hs4" class="sw yellow"></span>
+      </div>
+    </div>
+    <div id="hc-red" class="clip band" data-start="11.36" data-duration="1.96" data-track-index="2">
+      <div class="kicker">Color</div>
+      <div class="color-row"><span class="sw red"></span><span class="color-name">Red</span></div>
+    </div>
+    <div id="hc-white" class="clip band" data-start="13.32" data-duration="1.42" data-track-index="1">
+      <div class="kicker">Color</div>
+      <div class="color-row"><span class="sw white"></span><span class="color-name">White</span></div>
+    </div>
+    <div id="hc-black" class="clip band" data-start="14.74" data-duration="2.4" data-track-index="2">
+      <div class="kicker">Color</div>
+      <div class="color-row"><span class="sw black"></span><span class="color-name">Black</span></div>
+    </div>
+    <div id="hc-yellow" class="clip band" data-start="17.14" data-duration="1.6" data-track-index="1">
+      <div class="kicker">Color</div>
+      <div class="color-row"><span class="sw yellow"></span><span class="color-name">Yellow</span></div>
+    </div>
+    <div id="hb-web" class="clip band" data-start="22.66" data-duration="2.95" data-track-index="2">
+      <div id="hb-web-k" class="kicker">Hamari Website Par</div>
+      <div id="hb-web-h" class="head">Order Now</div>
+    </div>
+
+    <!-- 20% OFF -->
+    <div id="card-off" class="clip full card-bg" data-start="21.1" data-duration="1.56" data-track-index="3">
+      <div id="off-sweep" class="sweep"></div>
+      <div class="card-stack">
+        <div id="off-num" class="big-num">20%</div>
+        <div id="off-word" class="big-word">OFF</div>
+        <div id="off-sub" class="card-sub">Buds Pro 6</div>
+      </div>
+    </div>
+
+    <!-- Free shipping -->
+    <div id="card-ship" class="clip full card-bg" data-start="26.88" data-duration="2.42" data-track-index="3">
+      <div id="ship-sweep" class="sweep"></div>
+      <div class="card-stack" style="top: 520px">
+        <svg id="ship-icon" class="ship-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h11v9H3z" /><path d="M14 10h4l3 3v3h-7" /><circle cx="7" cy="17.5" r="1.8" /><circle cx="17.5" cy="17.5" r="1.8" /></svg>
+        <div id="ship-w1" class="big-word">FREE</div>
+        <div id="ship-w2" class="big-word">SHIPPING</div>
+        <div id="ship-sub" class="card-sub">All Over Pakistan</div>
+      </div>
+    </div>
+
+    <!-- Hero end card: a held frame where all four boxes are up -->
+    <div id="hero" class="clip full" data-start="29.75" data-duration="2.75" data-track-index="4">
+      <img id="hero-img" src="assets/media/hero.png" alt="Buds Pro 6 in red, white, black and yellow" />
+      <div id="hero-shade" class="hero-shade"></div>
+      <div class="hero-stack">
+        <div id="hero-title" class="hero-title">BUDS PRO 6<div id="hero-sweep" class="sweep"></div></div>
+        <div id="hero-sw" class="swatches">
+          <span class="sw red"></span><span class="sw white"></span><span class="sw black"></span><span class="sw yellow"></span>
+        </div>
+        <div id="hero-meta" class="hero-meta"><b>20% OFF</b> &nbsp;·&nbsp; Free Shipping All Over Pakistan</div>
+        <div id="hero-cta" class="cta-pill">Order Now</div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    const E = "power3.out";
+
+    // Intro: words rise out of masks as they are spoken, then the curtain lifts
+    tl.fromTo("#iw1", { yPercent: 105 }, { yPercent: 0, duration: 0.32, ease: E }, 0.0);
+    tl.fromTo("#iw2", { yPercent: 105 }, { yPercent: 0, duration: 0.32, ease: E }, 0.12);
+    tl.fromTo("#iw3", { yPercent: 105 }, { yPercent: 0, duration: 0.32, ease: E }, 0.24);
+    tl.fromTo("#intro-line", { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "power2.inOut" }, 0.3);
+    tl.fromTo("#intro-sub", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.4, ease: E }, 0.55);
+    tl.fromTo("#intro", { clipPath: "inset(0% 0% 0% 0%)" }, { clipPath: "inset(0% 0% 100% 0%)", duration: 0.45, ease: "power3.inOut" }, 1.08);
+
+    // Band headlines
+    function band(k, h, s, d) {
+      tl.fromTo(k, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.35, ease: E }, s);
+      tl.fromTo(h, { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 0.45, ease: E }, s + 0.06);
+      tl.to([k, h], { opacity: 0, y: -12, duration: 0.25, ease: "power2.in" }, s + d - 0.25);
+    }
+    band("#hb-restock-k", "#hb-restock-h", 1.3, 3.3);
+    band("#hb-order-k", "#hb-order-h", 3.85, 2.6);
+    band("#hb-colors-k", "#hb-colors-h", 7.9, 3.4);
+    tl.fromTo(["#hs1", "#hs2", "#hs3", "#hs4"], { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, stagger: 0.09, ease: "back.out(2)" }, 8.5);
+    tl.to(["#hs1", "#hs2", "#hs3", "#hs4"], { opacity: 0, duration: 0.25, ease: "power2.in" }, 11.05);
+    band("#hb-web-k", "#hb-web-h", 22.66, 2.95);
+
+    // Color labels: snap in on the spoken colour, out just before the next
+    const colors = [["#hc-red", 11.36, 1.96], ["#hc-white", 13.32, 1.42], ["#hc-black", 14.74, 2.4], ["#hc-yellow", 17.14, 1.6]];
+    for (const [id, s, d] of colors) {
+      tl.fromTo(id + " .sw", { scale: 0.2, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.32, ease: "back.out(2.2)" }, s);
+      tl.fromTo(id + " .color-name", { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: 0.35, ease: E }, s + 0.04);
+      tl.fromTo(id + " .kicker", { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "none" }, s);
+      tl.to([id + " .sw", id + " .color-name", id + " .kicker"], { opacity: 0, duration: 0.14, ease: "power2.in" }, s + d - 0.14);
+    }
+
+    // 20% OFF
+    tl.fromTo("#card-off", { clipPath: "inset(48% 0% 48% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.32, ease: "power4.out" }, 21.1);
+    tl.fromTo("#off-num", { scale: 1.25, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.45, ease: "expo.out" }, 21.12);
+    tl.fromTo("#off-word", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.4, ease: E }, 21.3);
+    tl.fromTo("#off-sub", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "none" }, 21.5);
+    tl.fromTo("#off-sweep", { x: -300 }, { x: 1200, duration: 1.2, ease: "power1.inOut" }, 21.3);
+    tl.to("#card-off", { clipPath: "inset(0% 0% 100% 0%)", duration: 0.3, ease: "power3.in" }, 22.36);
+
+    // Free shipping
+    tl.fromTo("#card-ship", { clipPath: "inset(48% 0% 48% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.32, ease: "power4.out" }, 26.88);
+    tl.fromTo("#ship-icon", { x: -140, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5, ease: E }, 26.95);
+    tl.fromTo("#ship-w1", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.4, ease: E }, 26.98);
+    tl.fromTo("#ship-w2", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.4, ease: E }, 27.12);
+    tl.fromTo("#ship-sub", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: E }, 28.26);
+    tl.fromTo("#ship-sweep", { x: -300 }, { x: 1200, duration: 1.4, ease: "power1.inOut" }, 27.2);
+    tl.to("#card-ship", { clipPath: "inset(0% 0% 100% 0%)", duration: 0.3, ease: "power3.in" }, 29.0);
+
+    // Hero
+    tl.fromTo("#hero", { opacity: 0 }, { opacity: 1, duration: 0.25, ease: "none" }, 29.75);
+    tl.fromTo("#hero-img", { scale: 1.12 }, { scale: 1.2, duration: 2.75, ease: "none" }, 29.75);
+    tl.fromTo("#hero-title", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: E }, 29.95);
+    tl.fromTo("#hero-sweep", { x: -220 }, { x: 900, duration: 0.9, ease: "power1.inOut" }, 30.4);
+    tl.fromTo("#hero-sw .sw", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, stagger: 0.07, ease: "back.out(2)" }, 30.2);
+    tl.fromTo("#hero-meta", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.4, ease: E }, 30.45);
+    tl.fromTo("#hero-cta", { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(1.8)" }, 30.7);
+
+    window.__timelines["titles"] = tl;
+  </script>
+</template>

@@ -42,8 +42,11 @@
     }
     .outline {
       letter-spacing: 0.03em;
-      color: rgba(245, 245, 247, 0.07);
-      -webkit-text-stroke: 3px rgba(245, 245, 247, 0.28);
+      /* Inter's overlapping contours show through a plain stroke; an opaque fill painted over
+         the stroke hides them, leaving only the outer edge */
+      color: #13151a;
+      -webkit-text-stroke: 6px rgba(245, 245, 247, 0.3);
+      paint-order: stroke fill;
     }
     .solid {
       color: var(--paper);
@@ -274,7 +277,7 @@
     <div id="s9" class="clip scene" data-start="26.88" data-duration="2.42" data-track-index="1">
       <div class="bg"></div>
       <div class="giant" style="top: 300px; font-size: 300px">
-        <span class="mask"><span id="s9-free" class="outline" style="-webkit-text-stroke: 4px rgba(245, 245, 247, 0.9)">FREE</span></span>
+        <span class="mask"><span id="s9-free" class="outline" style="-webkit-text-stroke: 8px rgba(245, 245, 247, 0.9)">FREE</span></span>
       </div>
       <div class="giant" style="top: 570px; font-size: 168px">
         <span class="mask"><span id="s9-ship" class="solid">SHIPPING</span></span>
@@ -331,13 +334,13 @@
     const DESK = pose(456.6, 1623.6, 327.25); // measured at 2.8s: the handheld camera drifts 78px right, 10px down after frame 0.3
 
     // ── S1 ──
-    tl.fromTo("#s1-g1", { yPercent: 100 }, { yPercent: 0, duration: 0.55, ease: E }, 0.0);
-    tl.fromTo("#s1-g2", { yPercent: 100 }, { yPercent: 0, duration: 0.55, ease: E }, 0.08);
+    // Frame 0 is the thumbnail: the outlined name and the product are already on screen, then settle
+    tl.fromTo("#s1-giant", { scale: 1.08 }, { scale: 1, duration: 0.9, ease: E }, 0.0);
     // Outline fills solid as the name is spoken
     tl.fromTo("#s1-f1", { clipPath: "inset(0% 100% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.45, ease: "power2.inOut" }, 0.43);
     tl.fromTo("#s1-f2", { clipPath: "inset(0% 100% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.45, ease: "power2.inOut" }, 0.75);
-    tl.fromTo("#s1-prod", { ...pose(540, 1080, 760), y: pose(540, 1080, 760).y + 140, opacity: 0 }, { ...pose(540, 960, 760), opacity: 1, duration: 0.8, ease: "power3.out" }, 0.12);
-    tl.fromTo("#s1-shadow", { opacity: 0, scaleX: 0.6 }, { opacity: 1, scaleX: 1, duration: 0.8, ease: E }, 0.2);
+    tl.fromTo("#s1-prod", { ...pose(540, 1030, 700) }, { ...pose(540, 960, 760), duration: 0.9, ease: "power3.out" }, 0.0);
+    tl.fromTo("#s1-shadow", { opacity: 0.4, scaleX: 0.8 }, { opacity: 1, scaleX: 1, duration: 0.9, ease: E }, 0.0);
     tl.fromTo("#s1-ring-c", { strokeDashoffset: 2765 }, { strokeDashoffset: 0, duration: 1.1, ease: "power2.inOut" }, 0.45);
     tl.fromTo("#s1-ring", { rotation: -30 }, { rotation: 15, duration: 2.2, ease: "none" }, 0.45);
     tl.fromTo("#s1-shine", { xPercent: -120 }, { xPercent: 300, duration: 0.9, ease: "power1.inOut" }, 1.05);

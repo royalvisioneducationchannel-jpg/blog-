@@ -60,6 +60,7 @@ def file_hash(path):
 
 PAGE_LINK = re.compile(r'(href|action|data-redirect)="([a-z0-9-]+)\.(html|php)(#[^"]*)?"')
 ASSET_LINK = re.compile(r'(src|href)="assets/')
+SRCSET_ASSET = re.compile(r'(?<=[",] )assets/|(?<=srcset=")assets/')
 
 
 def clean_urls(doc):
@@ -70,7 +71,8 @@ def clean_urls(doc):
             return f'{attr}="/{name}.php{frag}"'
         return f'{attr}="/{"" if name == "index" else name}{frag}"'
     doc = PAGE_LINK.sub(repl, doc)
-    return ASSET_LINK.sub(r'\1="/assets/', doc)
+    doc = ASSET_LINK.sub(r'\1="/assets/', doc)
+    return SRCSET_ASSET.sub("/assets/", doc)
 
 
 def render_header(template, nav):

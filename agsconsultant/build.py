@@ -58,6 +58,21 @@ def file_hash(path):
     return hashlib.md5(path.read_bytes()).hexdigest()[:8]
 
 
+PAGE_LINK = re.compile(r'(href|action|data-redirect)="([a-z0-9-]+)\.(html|php)(#[^"]*)?"')
+ASSET_LINK = re.compile(r'(src|href)="assets/')
+
+
+def clean_urls(doc):
+    """Root-absolute, extensionless page links: about.html -> /about, index.html -> /."""
+    def repl(m):
+        attr, name, ext, frag = m.group(1), m.group(2), m.group(3), m.group(4) or ""
+        if ext == "php":
+            return f'{attr}="/{name}.php{frag}"'
+        return f'{attr}="/{"" if name == "index" else name}{frag}"'
+    doc = PAGE_LINK.sub(repl, doc)
+    return ASSET_LINK.sub(r'\1="/assets/', doc)
+
+
 def render_header(template, nav):
     out = template
     for key in NAV_KEYS:
@@ -85,7 +100,7 @@ def build():
             raise SystemExit(f"{page.name}: missing meta comment")
         meta = json.loads(m.group(1))
         body = raw[m.end():]
-        canonical = SITE_URL if page.name == "index.html" else SITE_URL + page.name
+        canonical = SITE_URL if page.name == "index.html" else SITE_URL + page.stem
         head = HEAD.format(
             title=html.escape(meta["title"]),
             description=html.escape(meta["description"]),
@@ -98,7 +113,7 @@ def build():
         doc = (head + icons + render_header(header_t, meta.get("nav", ""))
                + '<main id="main">\n' + body.rstrip() + "\n</main>\n"
                + footer + TAIL.format(js_v=js_v))
-        (OUT / page.name).write_text(doc, encoding="utf-8")
+        (OUT / page.name).write_text(clean_urls(doc), encoding="utf-8")
         if not meta.get("noindex"):
             built.append(canonical)
 

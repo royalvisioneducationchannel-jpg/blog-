@@ -1,0 +1,25 @@
+# AGS Consultant — clean URLs
+Options -MultiViews
+DirectoryIndex index.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # /index.html or /index  ->  /
+  RewriteCond %{THE_REQUEST} \s/+index(\.html)?[\s?] [NC]
+  RewriteRule ^ / [R=301,L]
+
+  # /about.html  ->  /about   (only for real browser requests, so no loop)
+  RewriteCond %{THE_REQUEST} \s/+([a-z0-9-]+)\.html[\s?] [NC]
+  RewriteRule ^ /%1 [R=301,L]
+
+  # /about/  ->  /about
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^([a-z0-9-]+)/$ /$1 [R=301,L]
+
+  # /about  ->  serve about.html
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{DOCUMENT_ROOT}/$1.html -f
+  RewriteRule ^([a-z0-9-]+)$ /$1.html [L]
+</IfModule>

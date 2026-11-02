@@ -1,7 +1,7 @@
 <?php
 /* Newsletter sign-up (legacy endpoint). Validates the address before emailing the team. */
 if (!isset($_SERVER['REQUEST_METHOD']) || $_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: index.html', true, 303);
+    header('Location: /', true, 303);
     exit;
 }
 
@@ -14,5 +14,5 @@ if ($hp === '' && filter_var($email, FILTER_VALIDATE_EMAIL) && strlen($email) <=
     @mail('aatika@agsconsultant.com.pk', 'Newsletter sign-up', 'Email: ' . $email, $headers, '-f' . $from);
 }
 
-header('Location: index.html', true, 303);
+header('Location: /', true, 303);
 exit;

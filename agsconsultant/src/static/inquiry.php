@@ -7,7 +7,7 @@
 
 $to       = 'aatika@agsconsultant.com.pk';
 $from     = 'info@agsconsultant.com.pk';
-$redirect = 'thank-you.html';
+$redirect = '/thank-you';
 
 if (!function_exists('mb_substr')) {
     function mb_substr($str, $start, $length = null, $encoding = null)
@@ -54,7 +54,7 @@ function ags_clean($key, $max = 200)
 }
 
 if (!isset($_SERVER['REQUEST_METHOD']) || $_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: inquiry.html', true, 303);
+    header('Location: /inquiry', true, 303);
     exit;
 }
 

@@ -25,11 +25,13 @@
         <li class="nav__item nav__item--has-dd">
           <button class="nav__link{{active:language}}" type="button" aria-expanded="false" aria-controls="dd-language">Language <svg class="icon"><use href="#i-chev-down"/></svg></button>
           <div class="dropdown" id="dd-language">
-            <a href="ielts.html"{{cur:ielts}}><span class="dd-badge">IELTS</span><span><strong>IELTS</strong><small>Academic &amp; General Training</small></span></a>
-            <a href="languge-cert.html"{{cur:languagecert}}><span class="dd-badge">LC</span><span><strong>LanguageCert</strong><small>English qualifications</small></span></a>
-            <a href="duolingo.html"{{cur:duolingo}}><span class="dd-badge">DET</span><span><strong>Duolingo English Test</strong><small>Online English test</small></span></a>
-            <a href="english-spoken.html"{{cur:spoken}}><span class="dd-badge">EN</span><span><strong>Spoken English</strong><small>Conversation &amp; fluency</small></span></a>
-            <a href="german-language.html"{{cur:german}}><span class="dd-badge">DE</span><span><strong>German Language</strong><small>Beginner to next steps</small></span></a>
+            <p class="dropdown__label">Tests &amp; language courses</p>
+            <a href="ielts.html"{{cur:ielts}}><span class="dd-icon dd-icon--navy"><svg class="icon"><use href="#i-pen"/></svg></span><span><strong>IELTS</strong><small>Academic &amp; General Training</small></span></a>
+            <a href="languge-cert.html"{{cur:languagecert}}><span class="dd-icon dd-icon--blue"><svg class="icon"><use href="#i-certificate"/></svg></span><span><strong>LanguageCert</strong><small>English qualifications</small></span></a>
+            <a href="duolingo.html"{{cur:duolingo}}><span class="dd-icon dd-icon--green"><svg class="icon"><use href="#i-laptop"/></svg></span><span><strong>Duolingo English Test</strong><small>Online English test</small></span></a>
+            <a href="english-spoken.html"{{cur:spoken}}><span class="dd-icon dd-icon--gold"><svg class="icon"><use href="#i-mic"/></svg></span><span><strong>Spoken English</strong><small>Conversation &amp; fluency</small></span></a>
+            <a href="german-language.html"{{cur:german}}><span class="dd-icon dd-icon--flag"><img src="assets/ags/img/flags/de.svg" alt="" width="40" height="30"></span><span><strong>German Language</strong><small>Beginner to next steps</small></span></a>
+            <a class="dropdown__foot" href="contact.html"><svg class="icon"><use href="#i-chat"/></svg><span>Ask about class schedules</span><svg class="icon dropdown__go"><use href="#i-arrow"/></svg></a>
           </div>
         </li>
         <li class="nav__item"><a class="nav__link" href="faqs.html"{{cur:faqs}}>FAQs</a></li>

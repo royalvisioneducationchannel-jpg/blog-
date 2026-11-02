@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Manrope:wght@600;700;800&display=swap">
-<link rel="stylesheet" href="assets/ags/css/site.css?v=77655f38">
+<link rel="stylesheet" href="assets/ags/css/site.css?v=d55a2f4c">
 <meta name="robots" content="noindex">
 </head>
 <body>
@@ -61,6 +61,8 @@
   <symbol id="i-headphones" viewBox="0 0 24 24"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1v-6h3zM3 19a2 2 0 0 0 2 2h1v-6H3z"/></symbol>
   <symbol id="i-pen" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></symbol>
   <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
+  <symbol id="i-laptop" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M2 20h20"/></symbol>
+  <symbol id="i-certificate" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="13" rx="2"/><path d="M7 8h10M7 11.5h6"/><circle cx="16.5" cy="17.5" r="2.5"/><path d="m15 19.6-.8 2.9 2.3-1 2.3 1-.8-2.9"/></symbol>
 </svg>
 <a class="skip-link" href="#main">Skip to content</a>
 <div class="topbar">
@@ -89,11 +91,13 @@
         <li class="nav__item nav__item--has-dd">
           <button class="nav__link" type="button" aria-expanded="false" aria-controls="dd-language">Language <svg class="icon"><use href="#i-chev-down"/></svg></button>
           <div class="dropdown" id="dd-language">
-            <a href="ielts.html"><span class="dd-badge">IELTS</span><span><strong>IELTS</strong><small>Academic &amp; General Training</small></span></a>
-            <a href="languge-cert.html"><span class="dd-badge">LC</span><span><strong>LanguageCert</strong><small>English qualifications</small></span></a>
-            <a href="duolingo.html"><span class="dd-badge">DET</span><span><strong>Duolingo English Test</strong><small>Online English test</small></span></a>
-            <a href="english-spoken.html"><span class="dd-badge">EN</span><span><strong>Spoken English</strong><small>Conversation &amp; fluency</small></span></a>
-            <a href="german-language.html"><span class="dd-badge">DE</span><span><strong>German Language</strong><small>Beginner to next steps</small></span></a>
+            <p class="dropdown__label">Tests &amp; language courses</p>
+            <a href="ielts.html"><span class="dd-icon dd-icon--navy"><svg class="icon"><use href="#i-pen"/></svg></span><span><strong>IELTS</strong><small>Academic &amp; General Training</small></span></a>
+            <a href="languge-cert.html"><span class="dd-icon dd-icon--blue"><svg class="icon"><use href="#i-certificate"/></svg></span><span><strong>LanguageCert</strong><small>English qualifications</small></span></a>
+            <a href="duolingo.html"><span class="dd-icon dd-icon--green"><svg class="icon"><use href="#i-laptop"/></svg></span><span><strong>Duolingo English Test</strong><small>Online English test</small></span></a>
+            <a href="english-spoken.html"><span class="dd-icon dd-icon--gold"><svg class="icon"><use href="#i-mic"/></svg></span><span><strong>Spoken English</strong><small>Conversation &amp; fluency</small></span></a>
+            <a href="german-language.html"><span class="dd-icon dd-icon--flag"><img src="assets/ags/img/flags/de.svg" alt="" width="40" height="30"></span><span><strong>German Language</strong><small>Beginner to next steps</small></span></a>
+            <a class="dropdown__foot" href="contact.html"><svg class="icon"><use href="#i-chat"/></svg><span>Ask about class schedules</span><svg class="icon dropdown__go"><use href="#i-arrow"/></svg></a>
           </div>
         </li>
         <li class="nav__item"><a class="nav__link" href="faqs.html">FAQs</a></li>

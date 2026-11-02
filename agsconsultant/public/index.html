@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Manrope:wght@600;700;800&display=swap">
-<link rel="stylesheet" href="assets/ags/css/site.css?v=537aefc0">
+<link rel="stylesheet" href="assets/ags/css/site.css?v=87ce1874">
 <link rel="preload" as="image" href="assets/ags/img/hero-counselling-session.webp">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"AGS Consultant","alternateName":"AGS Consultant — Apply, Go and Study","url":"https://agsconsultant.com.pk/","logo":"https://agsconsultant.com.pk/assets/ags/img/logo.jpg","telephone":"+92 300 1959995","email":"info@agsconsultant.com.pk","address":{"@type":"PostalAddress","streetAddress":"Alfateh Plaza, First Floor, Nos. 109–110","addressLocality":"Faisalabad","addressRegion":"Punjab","addressCountry":"PK"}}</script>
 </head>
@@ -109,12 +109,22 @@
 <section class="hero">
   <div class="container hero__grid">
     <div class="hero__copy">
-      <span class="eyebrow">Apply · Go · Study</span>
+      <span class="eyebrow">Study abroad consultants · Faisalabad</span>
       <h1>Your future starts with the <span class="hl">right guidance.</span></h1>
       <p class="lead">AGS Consultant helps ambitious students choose the right course, secure admission and confidently begin their international education journey.</p>
       <div class="btn-row">
         <a class="btn btn--gold" href="#counselling">Book free counselling <svg class="icon icon--arrow"><use href="#i-arrow"/></svg></a>
         <a class="btn btn--ghost" href="services.html">Explore services</a>
+      </div>
+      <div class="hero__flags">
+        <span class="hero__flags-label">Popular destinations</span>
+        <ul class="flag-stack">
+          <li><img src="assets/ags/img/flags/gb.svg" alt="United Kingdom" width="40" height="30"></li>
+          <li><img src="assets/ags/img/flags/au.svg" alt="Australia" width="40" height="30"></li>
+          <li><img src="assets/ags/img/flags/ca.svg" alt="Canada" width="40" height="30"></li>
+          <li><img src="assets/ags/img/flags/us.svg" alt="USA" width="40" height="30"></li>
+          <li><img src="assets/ags/img/flags/eu.svg" alt="Europe" width="40" height="30"></li>
+        </ul>
       </div>
       <div class="hero__trust">
         <div><strong>8+</strong><span>Years of excellence</span></div>
@@ -126,18 +136,25 @@
     <div class="hero__visual">
       <svg class="flight-path" viewBox="0 0 600 420" fill="none" aria-hidden="true">
         <path d="M20 380C120 120 360 10 580 60" stroke="currentColor" stroke-width="2" stroke-dasharray="2 10" stroke-linecap="round"/>
-        <g transform="translate(560 52) rotate(18)"><path d="M0-9 4 0 0 9-2 0Z M-12 0h16" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></g>
       </svg>
+      <span class="hero__plane" aria-hidden="true"><svg class="icon"><use href="#i-plane"/></svg></span>
       <div class="hero__photo">
         <img src="assets/ags/img/hero-counselling-session.webp" alt="AGS counsellor guiding students through university options on a laptop" width="900" height="858" fetchpriority="high">
       </div>
-      <div class="float-card float-card--b">
-        <span class="float-card__icon float-card__icon--blue"><svg class="icon"><use href="#i-cap"/></svg></span>
-        <span><strong>Free counselling</strong>Personal session with an expert</span>
-      </div>
-      <div class="float-card float-card--a">
-        <span class="float-card__icon"><svg class="icon"><use href="#i-passport"/></svg></span>
-        <span><strong>Admission to visa</strong>Guidance at every step</span>
+      <span class="flag-bubble flag-bubble--1"><img src="assets/ags/img/flags/gb.svg" alt="" width="40" height="30"></span>
+      <span class="flag-bubble flag-bubble--2"><img src="assets/ags/img/flags/ca.svg" alt="" width="40" height="30"></span>
+      <span class="flag-bubble flag-bubble--3"><img src="assets/ags/img/flags/au.svg" alt="" width="40" height="30"></span>
+
+      <div class="boarding-pass" aria-label="Your study abroad journey: from Faisalabad to your dream university">
+        <div class="boarding-pass__main">
+          <div class="boarding-pass__head"><span>Boarding pass</span><span>AGS Consultant</span></div>
+          <div class="boarding-pass__route">
+            <div><small>From</small><b>FSD</b><span>Faisalabad</span></div>
+            <span class="boarding-pass__line"><svg class="icon"><use href="#i-plane"/></svg></span>
+            <div><small>To</small><b>UNI</b><span>Your dream university</span></div>
+          </div>
+        </div>
+        <div class="boarding-pass__stub"><small>Class</small><b>Student</b></div>
       </div>
     </div>
   </div>
@@ -199,29 +216,37 @@
       <a class="btn btn--ghost" href="services.html">View all services <svg class="icon icon--arrow"><use href="#i-arrow"/></svg></a>
     </div>
     <div class="grid grid--4">
-      <article class="card reveal">
-        <span class="card__icon"><svg class="icon"><use href="#i-compass"/></svg></span>
-        <h3>Career Counselling</h3>
-        <p>Explore your strengths, interests and realistic international study options with an experienced consultant.</p>
-        <a class="link-arrow" href="services.html">Learn more <svg class="icon"><use href="#i-arrow"/></svg></a>
+      <article class="photo-card reveal">
+        <div class="photo-card__img"><img src="assets/ags/img/why-counselling.webp" alt="Counsellor advising students" width="580" height="500" loading="lazy"><span class="photo-card__icon"><svg class="icon"><use href="#i-compass"/></svg></span></div>
+        <div class="photo-card__body">
+          <h3>Career Counselling</h3>
+          <p>Explore your strengths, interests and realistic international study options with an experienced consultant.</p>
+          <a class="link-arrow" href="services.html">Learn more <svg class="icon"><use href="#i-arrow"/></svg></a>
+        </div>
       </article>
-      <article class="card reveal">
-        <span class="card__icon"><svg class="icon"><use href="#i-search"/></svg></span>
-        <h3>Course Selection</h3>
-        <p>Find the right university and course based on your academic profile, goals and budget.</p>
-        <a class="link-arrow" href="services.html">Learn more <svg class="icon"><use href="#i-arrow"/></svg></a>
+      <article class="photo-card reveal">
+        <div class="photo-card__img"><img src="assets/ags/img/student-abroad.webp" alt="Student with books on a university campus" width="700" height="627" loading="lazy"><span class="photo-card__icon"><svg class="icon"><use href="#i-search"/></svg></span></div>
+        <div class="photo-card__body">
+          <h3>Course Selection</h3>
+          <p>Find the right university and course based on your academic profile, goals and budget.</p>
+          <a class="link-arrow" href="services.html">Learn more <svg class="icon"><use href="#i-arrow"/></svg></a>
+        </div>
       </article>
-      <article class="card reveal">
-        <span class="card__icon"><svg class="icon"><use href="#i-file"/></svg></span>
-        <h3>Application Support</h3>
-        <p>Prepare accurate applications and supporting documents for a smoother admission process.</p>
-        <a class="link-arrow" href="services.html">Learn more <svg class="icon"><use href="#i-arrow"/></svg></a>
+      <article class="photo-card reveal">
+        <div class="photo-card__img"><img src="assets/ags/img/application-team.webp" alt="Team preparing a university application together" width="500" height="404" loading="lazy"><span class="photo-card__icon"><svg class="icon"><use href="#i-file"/></svg></span></div>
+        <div class="photo-card__body">
+          <h3>Application Support</h3>
+          <p>Prepare accurate applications and supporting documents for a smoother admission process.</p>
+          <a class="link-arrow" href="services.html">Learn more <svg class="icon"><use href="#i-arrow"/></svg></a>
+        </div>
       </article>
-      <article class="card reveal">
-        <span class="card__icon"><svg class="icon"><use href="#i-passport"/></svg></span>
-        <h3>Visa Guidance</h3>
-        <p>Get practical help with document preparation and confidence-building interview preparation.</p>
-        <a class="link-arrow" href="services.html">Learn more <svg class="icon"><use href="#i-arrow"/></svg></a>
+      <article class="photo-card reveal">
+        <div class="photo-card__img"><img src="assets/ags/img/visa-passport.webp" alt="Passport ready for a student visa application" width="500" height="404" loading="lazy"><span class="photo-card__icon"><svg class="icon"><use href="#i-passport"/></svg></span></div>
+        <div class="photo-card__body">
+          <h3>Visa Guidance</h3>
+          <p>Get practical help with document preparation and confidence-building interview preparation.</p>
+          <a class="link-arrow" href="services.html">Learn more <svg class="icon"><use href="#i-arrow"/></svg></a>
+        </div>
       </article>
     </div>
   </div>
@@ -230,17 +255,35 @@
 <!-- Destinations -->
 <section class="section">
   <div class="container">
-    <div class="section-head section-head--center">
-      <span class="eyebrow">Study destinations</span>
-      <h2>Where would you like to study?</h2>
-      <p>We guide students towards universities and colleges in leading study destinations. Tell us your preference — or let us help you choose.</p>
+    <div class="section-head section-head--split">
+      <div>
+        <span class="eyebrow">Study destinations</span>
+        <h2>Where would you like to study?</h2>
+        <p>We guide students towards universities and colleges in leading study destinations. Tell us your preference — or let us help you choose.</p>
+      </div>
+      <a class="btn btn--ghost" href="#counselling">Help me choose <svg class="icon icon--arrow"><use href="#i-arrow"/></svg></a>
     </div>
     <div class="grid grid--5">
-      <div class="dest reveal"><span class="dest__code">UK</span><h3>United Kingdom</h3><p>World-renowned universities and focused, shorter degree programmes.</p></div>
-      <div class="dest reveal"><span class="dest__code">AU</span><h3>Australia</h3><p>High-quality education with a welcoming, multicultural student life.</p></div>
-      <div class="dest reveal"><span class="dest__code">CA</span><h3>Canada</h3><p>Respected institutions and a wide range of college and university options.</p></div>
-      <div class="dest reveal"><span class="dest__code">US</span><h3>USA</h3><p>Flexible programmes and a huge choice of universities and subjects.</p></div>
-      <div class="dest reveal"><span class="dest__code">EU</span><h3>Europe</h3><p>Diverse study options across countries, cultures and languages.</p></div>
+      <a class="dest-card reveal" href="#counselling">
+        <span class="dest-card__flag"><img src="assets/ags/img/flags/gb.svg" alt="" width="640" height="480" loading="lazy"></span>
+        <span class="dest-card__body"><span class="dest-card__code">UK</span><h3>United Kingdom</h3><p>World-renowned universities and focused, shorter degree programmes.</p><span class="link-arrow">Explore <svg class="icon"><use href="#i-arrow"/></svg></span></span>
+      </a>
+      <a class="dest-card reveal" href="#counselling">
+        <span class="dest-card__flag"><img src="assets/ags/img/flags/au.svg" alt="" width="640" height="480" loading="lazy"></span>
+        <span class="dest-card__body"><span class="dest-card__code">AU</span><h3>Australia</h3><p>High-quality education with a welcoming, multicultural student life.</p><span class="link-arrow">Explore <svg class="icon"><use href="#i-arrow"/></svg></span></span>
+      </a>
+      <a class="dest-card reveal" href="#counselling">
+        <span class="dest-card__flag"><img src="assets/ags/img/flags/ca.svg" alt="" width="640" height="480" loading="lazy"></span>
+        <span class="dest-card__body"><span class="dest-card__code">CA</span><h3>Canada</h3><p>Respected institutions and a wide range of college and university options.</p><span class="link-arrow">Explore <svg class="icon"><use href="#i-arrow"/></svg></span></span>
+      </a>
+      <a class="dest-card reveal" href="#counselling">
+        <span class="dest-card__flag"><img src="assets/ags/img/flags/us.svg" alt="" width="640" height="480" loading="lazy"></span>
+        <span class="dest-card__body"><span class="dest-card__code">US</span><h3>USA</h3><p>Flexible programmes and a huge choice of universities and subjects.</p><span class="link-arrow">Explore <svg class="icon"><use href="#i-arrow"/></svg></span></span>
+      </a>
+      <a class="dest-card reveal" href="#counselling">
+        <span class="dest-card__flag"><img src="assets/ags/img/flags/eu.svg" alt="" width="640" height="480" loading="lazy"></span>
+        <span class="dest-card__body"><span class="dest-card__code">EU</span><h3>Europe</h3><p>Diverse study options across countries, cultures and languages.</p><span class="link-arrow">Explore <svg class="icon"><use href="#i-arrow"/></svg></span></span>
+      </a>
     </div>
     <div class="stats mt-32 reveal">
       <div class="stats__grid">
@@ -288,6 +331,29 @@
     <div class="split__media reveal">
       <div class="media-frame">
         <img src="assets/ags/img/language-classroom.webp" alt="Language instructor with students in a classroom" width="500" height="404" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Ticket CTA -->
+<section class="section section--tight">
+  <div class="container">
+    <div class="ticket reveal">
+      <div class="ticket__main">
+        <span class="eyebrow">Your journey starts here</span>
+        <h2>Ready to take off? Book your free counselling session.</h2>
+        <p>Sit down with an AGS counsellor in Faisalabad to discuss your goals, budget and the best destination for you.</p>
+        <div class="btn-row">
+          <a class="btn btn--gold" href="#counselling">Book free counselling <svg class="icon icon--arrow"><use href="#i-arrow"/></svg></a>
+          <a class="btn btn--light" href="https://wa.me/923001959995" target="_blank" rel="noopener">WhatsApp us</a>
+        </div>
+      </div>
+      <div class="ticket__stub" aria-hidden="true">
+        <div><small>Passenger</small><b>You</b></div>
+        <div><small>From</small><b>FSD</b></div>
+        <div><small>Destination</small><b>Your dream university</b></div>
+        <div class="ticket__barcode"></div>
       </div>
     </div>
   </div>

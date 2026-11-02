@@ -5,7 +5,7 @@
  * Compatible with PHP 7.0+ and PHP 8.x.
  */
 
-$to       = 'info@agsconsultant.com.pk';
+$to       = 'aatika@agsconsultant.com.pk';
 $from     = 'info@agsconsultant.com.pk';
 $redirect = 'thank-you.html';
 

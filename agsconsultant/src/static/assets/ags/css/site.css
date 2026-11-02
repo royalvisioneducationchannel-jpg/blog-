@@ -638,3 +638,49 @@ body.nav-open .wa-float { display: none; }
 @media (min-width: 341px) and (max-width: 700px) {
   .grid--5 > .dest-card:last-child:nth-child(odd) .dest-card__flag { aspect-ratio: 21 / 8; }
 }
+
+/* ===== About page ===== */
+.page-hero--media { padding-bottom: clamp(64px, 8vw, 104px); }
+.page-hero--media .page-hero__grid { grid-template-columns: 1.05fr .95fr; gap: clamp(36px, 5vw, 72px); }
+.page-hero--media::before { content: ""; position: absolute; right: 0; top: 0; width: 46%; height: 100%; background-image: radial-gradient(#dfe4f2 1.2px, transparent 1.2px); background-size: 22px 22px; -webkit-mask-image: linear-gradient(90deg, transparent, #000 40%); mask-image: linear-gradient(90deg, transparent, #000 40%); opacity: .7; }
+.page-hero--media .container { position: relative; }
+.collage { position: relative; max-width: 520px; margin-left: auto; padding: 0 0 40px 40px; }
+.collage__main { border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-lg); aspect-ratio: 1.16 / 1; }
+.collage__main img, .collage__side img { width: 100%; height: 100%; object-fit: cover; }
+.collage__side { position: absolute; left: 0; bottom: 0; width: 44%; aspect-ratio: 1; border-radius: 20px; overflow: hidden; border: 6px solid #fff; box-shadow: var(--shadow-lg); }
+.collage__flag { animation: floaty 7s ease-in-out infinite; }
+.collage__flag--1 { top: -18px; right: 18%; left: auto; }
+.collage__flag--2 { right: -20px; top: 44%; width: 48px; height: 48px; animation-delay: -3s; }
+.collage__badge { position: absolute; right: 18px; bottom: 6px; display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: var(--navy); color: #c9d0e6; border-radius: 16px; box-shadow: var(--shadow-lg); font-size: .82rem; line-height: 1.3; }
+.collage__badge strong { font-family: var(--font-head); font-size: 2rem; color: var(--gold); line-height: 1; }
+@media (max-width: 860px) {
+  .page-hero--media .page-hero__grid { grid-template-columns: 1fr; }
+  .collage { margin: 8px auto 0; max-width: 460px; }
+}
+@media (max-width: 480px) {
+  .collage { padding: 0 0 28px 22px; }
+  .collage__flag--2 { right: -6px; }
+  .collage__badge { right: 8px; padding: 10px 14px; }
+  .collage__badge strong { font-size: 1.6rem; }
+}
+
+.about-contact { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+.contact-chip { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); color: var(--ink); font-weight: 600; font-size: .92rem; }
+a.contact-chip:hover { border-color: #cdd5f2; color: var(--blue); }
+.contact-chip .icon { width: 16px; height: 16px; color: var(--blue); }
+
+.ags-meaning { position: relative; padding: clamp(26px, 4vw, 40px); border-radius: var(--radius-lg); background: var(--navy); color: #b9c1dd; overflow: hidden; box-shadow: var(--shadow-lg); }
+.ags-meaning::after { content: ""; position: absolute; right: -70px; top: -70px; width: 220px; height: 220px; border-radius: 50%; border: 2px dashed rgba(255, 255, 255, .12); }
+.ags-meaning__title { position: relative; margin: 0 0 22px; font-family: var(--font-head); font-size: .8rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); }
+.ags-meaning__title b { color: #fff; }
+.ags-row { position: relative; display: flex; gap: 18px; padding: 18px 0; border-top: 1px solid rgba(255, 255, 255, .1); }
+.ags-row:first-of-type { border-top: 0; padding-top: 0; }
+.ags-row__letter { width: 56px; height: 56px; flex: none; border-radius: 16px; display: grid; place-items: center; background: var(--gold); color: var(--ink); font-family: var(--font-head); font-weight: 800; font-size: 1.6rem; }
+.ags-row h3 { color: #fff; margin-bottom: 4px; font-size: 1.15rem; }
+.ags-row p { margin: 0; font-size: .94rem; }
+
+.media-frame--tall { aspect-ratio: 1.05 / 1; }
+.media-frame--tall img { width: 100%; height: 100%; object-fit: cover; }
+.checklist--lg { gap: 14px; margin: 24px 0 28px; }
+.checklist--lg li { font-size: 1rem; }
+.dest-strip { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; padding-top: 22px; border-top: 1px solid var(--line); font-size: .9rem; font-weight: 600; color: var(--muted); }

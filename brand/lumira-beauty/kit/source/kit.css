@@ -1,0 +1,126 @@
+@font-face { font-family: "Marcellus"; src: url("assets/Marcellus-Regular.ttf"); }
+@font-face { font-family: "Jost"; src: url("assets/Jost.ttf"); font-weight: 100 900; }
+
+:root {
+  --olive-deep: #444e36;
+  --olive: #5a6440;
+  --sage: #7e8c62;
+  --sage-pale: #dfe3d2;
+  --gold: #c4a878;
+  --gold-deep: #a8895a;
+  --cream: #fbf8f0;
+  --stone: #ece6d9;
+  --ink: #2e3324;
+  --muted: #6f7363;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: var(--stone); font-family: "Jost", sans-serif; color: var(--ink); }
+
+.board {
+  position: relative;
+  width: 1600px;
+  height: 2000px;
+  overflow: hidden;
+  background:
+    radial-gradient(70% 45% at 50% 46%, #f6f2e8 0%, rgba(246, 242, 232, 0) 70%),
+    var(--stone);
+  padding: 110px 120px;
+}
+.board + .board { margin-top: 40px; }
+
+/* Header system shared by every board */
+.hd { display: flex; justify-content: space-between; align-items: flex-end; }
+.hd .kicker { font-weight: 500; font-size: 22px; letter-spacing: 0.42em; text-transform: uppercase; color: var(--gold-deep); }
+.hd h1 { margin-top: 14px; font-family: "Marcellus", serif; font-weight: 400; font-size: 76px; line-height: 1.02; color: var(--olive-deep); }
+.hd h1 em { font-style: normal; color: var(--gold-deep); }
+.hd .brand { width: 120px; opacity: 0.95; }
+.rule { height: 1px; margin: 44px 0 0; background: linear-gradient(90deg, var(--gold) 0%, rgba(196, 168, 120, 0.15) 100%); }
+.foot {
+  position: absolute; left: 120px; right: 120px; bottom: 70px;
+  display: flex; justify-content: space-between;
+  font-size: 18px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted);
+}
+
+/* Numbered callouts */
+.num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--olive-deep); color: var(--cream);
+  font-weight: 600; font-size: 19px; flex: none;
+}
+.pin { position: absolute; }
+.pin .num { box-shadow: 0 0 0 5px rgba(251, 248, 240, 0.85); }
+.legend { display: grid; grid-template-columns: 1fr 1fr; gap: 26px 60px; }
+.legend li { list-style: none; display: flex; gap: 20px; align-items: flex-start; }
+.legend b { display: block; font-weight: 600; font-size: 24px; color: var(--olive-deep); }
+.legend div > span { display: block; margin-top: 4px; font-size: 20px; line-height: 1.4; color: var(--muted); }
+
+/* ── Product renders (front views). 1 mm = var(--mm) px ── */
+.prod { position: relative; }
+
+/* Face wash tube: crimp on top, flip-top cap at the bottom */
+.tube { width: calc(40 * var(--mm)); }
+.tube .crimp {
+  height: calc(9 * var(--mm)); margin: 0 calc(-1.5 * var(--mm));
+  background:
+    repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.06) 0 2px, rgba(255, 255, 255, 0) 2px 7px),
+    linear-gradient(90deg, #ddd7c8, #fbf9f2 35%, #f3eee2 70%, #d6cfbf);
+  border-radius: 3px 3px 0 0;
+}
+.tube .body {
+  position: relative;
+  height: calc(128 * var(--mm));
+  background: linear-gradient(90deg, #ddd6c6 0%, #f6f2e8 22%, #fffdf8 42%, #f4efe4 70%, #d3cbba 100%);
+  border-radius: 0 0 calc(7 * var(--mm)) calc(7 * var(--mm));
+}
+.tube .cap {
+  width: calc(30 * var(--mm)); height: calc(20 * var(--mm)); margin: -2px auto 0;
+  background: linear-gradient(90deg, #36402a 0%, #5d6845 30%, #6c7752 45%, #4c573a 75%, #2f3824 100%);
+  border-radius: 3px 3px 6px 6px;
+}
+
+/* Serum dropper: rubber bulb, gold collar, frosted glass */
+.dropper { width: calc(34 * var(--mm)); }
+.dropper .bulb {
+  width: calc(14 * var(--mm)); height: calc(26 * var(--mm)); margin: 0 auto;
+  border-radius: 48% 48% 10% 10% / 34% 34% 8% 8%;
+  background: linear-gradient(90deg, #39432c, #6b7652 40%, #57623f 65%, #323b25);
+}
+.dropper .collar {
+  width: calc(21 * var(--mm)); height: calc(17 * var(--mm)); margin: -2px auto 0;
+  background:
+    repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.07) 0 2px, rgba(255, 255, 255, 0) 2px 6px),
+    linear-gradient(90deg, #9c7f50, #e9d4a8 30%, #f6e6c4 45%, #c8a873 70%, #8d7146);
+  border-radius: 3px;
+}
+.dropper .glass {
+  position: relative; height: calc(72 * var(--mm)); margin-top: -1px;
+  border-radius: calc(5 * var(--mm)) calc(5 * var(--mm)) calc(4 * var(--mm)) calc(4 * var(--mm));
+  background: linear-gradient(90deg, #a9b292 0%, #d3d9c3 22%, #e6eadb 42%, #cfd5bd 70%, #9aa384 100%);
+}
+
+/* Moisturiser jar: wide lid over a cream double-wall body */
+.jar { width: calc(66 * var(--mm)); }
+.jar .lid {
+  height: calc(16 * var(--mm));
+  background: linear-gradient(90deg, #36402a 0%, #5d6845 28%, #6e7a54 45%, #4c573a 75%, #2f3824 100%);
+  border-radius: calc(3 * var(--mm)) calc(3 * var(--mm)) 2px 2px;
+}
+.jar .body {
+  position: relative; height: calc(38 * var(--mm)); margin: 0 calc(1.5 * var(--mm));
+  background: linear-gradient(90deg, #dad3c3 0%, #f6f2e8 22%, #fffdf8 42%, #f3eee3 70%, #d1c9b8 100%);
+  border-radius: 2px 2px calc(5 * var(--mm)) calc(5 * var(--mm));
+}
+.shade { position: absolute; left: 50%; transform: translateX(-50%); border-radius: 50%; background: radial-gradient(closest-side, rgba(46, 51, 36, 0.32), rgba(46, 51, 36, 0)); }
+
+/* Label system printed on each product */
+.lab {
+  position: absolute; left: 0; right: 0;
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  color: var(--olive-deep);
+}
+.lab .step { font-weight: 600; letter-spacing: 0.32em; text-transform: uppercase; color: var(--gold-deep); }
+.lab .name { font-family: "Marcellus", serif; line-height: 1.05; color: var(--olive-deep); }
+.lab .desc { letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); }
+.lab .qty { font-weight: 500; letter-spacing: 0.12em; color: var(--olive); }
+.lab .bar { height: 1px; background: var(--gold); }

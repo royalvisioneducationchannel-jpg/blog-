@@ -4,60 +4,64 @@
   var doc = document.documentElement;
   doc.classList.remove("no-js");
 
-  /* Sticky header shadow */
-  var header = document.querySelector(".site-header");
-  function onScroll() {
-    if (header) header.classList.toggle("is-scrolled", window.scrollY > 8);
-  }
-  window.addEventListener("scroll", onScroll, { passive: true });
-  onScroll();
+  /* Header: scroll state, language mega menu, mobile drawer */
+  var hdr = document.getElementById("site-header");
+  if (hdr) {
+    var megaBtn = hdr.querySelector(".hdr__link--mega");
+    var mega = document.getElementById("hdr-mega");
+    var toggle = hdr.querySelector(".hdr__toggle");
+    var subBtn = hdr.querySelector(".hdr__mlink--sub");
+    var sub = document.getElementById("hdr-msub");
+    var isWide = function () { return window.innerWidth >= 1180; };
 
-  /* Mobile navigation */
-  var toggle = document.querySelector(".nav-toggle");
-  var nav = document.getElementById("site-nav");
-  function setNav(open) {
-    document.body.classList.toggle("nav-open", open);
-    if (toggle) toggle.setAttribute("aria-expanded", String(open));
-    if (open && header) {
-      document.body.style.setProperty("--nav-top", header.getBoundingClientRect().bottom + "px");
+    var onScroll = function () { hdr.classList.toggle("is-scrolled", window.scrollY > 60); };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+
+    var setMega = function (open) {
+      hdr.classList.toggle("mega-open", open);
+      if (megaBtn) megaBtn.setAttribute("aria-expanded", String(open));
+    };
+    var setDrawer = function (open) {
+      hdr.classList.toggle("is-open", open);
+      document.body.classList.toggle("nav-open", open);
+      if (toggle) {
+        toggle.setAttribute("aria-expanded", String(open));
+        toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+      }
+    };
+
+    if (megaBtn && mega) {
+      megaBtn.addEventListener("click", function (e) { e.preventDefault(); setMega(!hdr.classList.contains("mega-open")); });
+      megaBtn.addEventListener("mouseenter", function () { if (isWide()) setMega(true); });
+      hdr.querySelectorAll(".hdr__nav .hdr__link:not(.hdr__link--mega)").forEach(function (l) {
+        l.addEventListener("mouseenter", function () { setMega(false); });
+      });
+      mega.addEventListener("mouseleave", function () { setMega(false); });
+      hdr.querySelector(".hdr__bar").addEventListener("mouseleave", function (e) {
+        if (!e.relatedTarget || !hdr.contains(e.relatedTarget)) setMega(false);
+      });
     }
-  }
-  if (toggle && nav) {
-    toggle.addEventListener("click", function () {
-      setNav(!document.body.classList.contains("nav-open"));
+    if (toggle) toggle.addEventListener("click", function () { setDrawer(!hdr.classList.contains("is-open")); });
+    if (subBtn && sub) {
+      subBtn.addEventListener("click", function () {
+        var open = !sub.classList.contains("is-open");
+        sub.classList.toggle("is-open", open);
+        subBtn.setAttribute("aria-expanded", String(open));
+      });
+      if (subBtn.classList.contains("is-active")) subBtn.click(); // open on language pages
+    }
+    document.addEventListener("click", function (e) {
+      if (!hdr.contains(e.target)) { setMega(false); setDrawer(false); }
     });
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape") {
-        setNav(false);
-        document.querySelectorAll(".nav__item--has-dd.is-open").forEach(function (el) {
-          el.classList.remove("is-open");
-          el.querySelector(".nav__link").setAttribute("aria-expanded", "false");
-        });
+        if (hdr.classList.contains("mega-open") && megaBtn) megaBtn.focus();
+        setMega(false); setDrawer(false);
       }
     });
-    window.addEventListener("resize", function () {
-      if (window.innerWidth > 1080) setNav(false);
-    });
+    window.addEventListener("resize", function () { if (isWide()) setDrawer(false); else setMega(false); });
   }
-
-  /* Dropdown (click/tap + keyboard) */
-  document.querySelectorAll(".nav__item--has-dd > .nav__link").forEach(function (btn) {
-    btn.addEventListener("click", function (e) {
-      e.preventDefault();
-      var item = btn.parentElement;
-      var open = !item.classList.contains("is-open");
-      item.classList.toggle("is-open", open);
-      btn.setAttribute("aria-expanded", String(open));
-    });
-  });
-  document.addEventListener("click", function (e) {
-    document.querySelectorAll(".nav__item--has-dd.is-open").forEach(function (item) {
-      if (!item.contains(e.target) && window.innerWidth > 1080) {
-        item.classList.remove("is-open");
-        item.querySelector(".nav__link").setAttribute("aria-expanded", "false");
-      }
-    });
-  });
 
   /* Reveal on scroll */
   var reveals = document.querySelectorAll(".reveal");

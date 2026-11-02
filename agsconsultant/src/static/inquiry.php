@@ -89,6 +89,9 @@ $optional = array(
     'budget'             => 'Estimated budget',
     'intake'             => 'Preferred intake',
     'service'            => 'Service interested in',
+    'city'               => 'City',
+    'english_test'       => 'English test / score',
+    'subject'            => 'Subject',
 );
 
 $lines   = array();

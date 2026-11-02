@@ -1,0 +1,168 @@
+<!--meta {
+  "title": "Apply Online | AGS Consultant — Start Your Study Abroad Application",
+  "description": "Apply online with AGS Consultant. Share your education, preferred destination and study plans, and our Faisalabad team will contact you with suitable next steps.",
+  "nav": "",
+  "og_image": "student-abroad.webp"
+} -->
+
+<!-- Page hero -->
+<section class="page-hero page-hero--compact">
+  <div class="container apply-hero">
+    <div>
+      <span class="eyebrow">Apply online</span>
+      <h1>Start your study abroad <span class="hl">application.</span></h1>
+      <p class="lead">Tell us about your education and plans. It takes about two minutes — our team will review your details and contact you with suitable next steps.</p>
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a><svg class="icon"><use href="#i-chev-right"/></svg><span aria-current="page">Apply Online</span>
+      </nav>
+    </div>
+    <div class="boarding-pass boarding-pass--static" aria-hidden="true">
+      <div class="boarding-pass__main">
+        <div class="boarding-pass__head"><span>Boarding pass</span><span>AGS Consultant</span></div>
+        <div class="boarding-pass__route">
+          <div><small>From</small><b>FSD</b><span>Faisalabad</span></div>
+          <span class="boarding-pass__line"><svg class="icon"><use href="#i-plane"/></svg></span>
+          <div><small>To</small><b>UNI</b><span>Your dream university</span></div>
+        </div>
+      </div>
+      <div class="boarding-pass__stub"><small>Step</small><b>1 of 3</b></div>
+    </div>
+  </div>
+</section>
+
+<section class="section apply-section">
+  <div class="container apply-grid">
+    <form class="form-card apply-form" action="inquiry.php" method="post" data-ags-form data-redirect="thank-you.html" novalidate>
+      <input type="hidden" name="form" value="Apply Online application">
+      <input type="hidden" name="_ts" value="">
+      <div class="hp" aria-hidden="true"><label>Leave this field empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+
+      <fieldset class="form-section">
+        <legend><span class="form-section__num">1</span>Personal details</legend>
+        <div class="form-grid">
+          <div class="field">
+            <label for="a-name">Full name <span class="req">*</span></label>
+            <input id="a-name" name="name" type="text" autocomplete="name" placeholder="Your full name" required maxlength="100">
+            <span class="field__error"></span>
+          </div>
+          <div class="field">
+            <label for="a-phone">Phone / WhatsApp <span class="req">*</span></label>
+            <input id="a-phone" name="phone" type="tel" autocomplete="tel" placeholder="+92 300 0000000" required maxlength="20">
+            <span class="field__error"></span>
+          </div>
+          <div class="field">
+            <label for="a-email">Email address <span class="req">*</span></label>
+            <input id="a-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required maxlength="120">
+            <span class="field__error"></span>
+          </div>
+          <div class="field">
+            <label for="a-city">City</label>
+            <input id="a-city" name="city" type="text" autocomplete="address-level2" placeholder="e.g. Faisalabad" maxlength="60">
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="form-section">
+        <legend><span class="form-section__num">2</span>Education</legend>
+        <div class="form-grid">
+          <div class="field">
+            <label for="a-edu">Current education <span class="req">*</span></label>
+            <select id="a-edu" name="education" required>
+              <option value="">Choose your level</option>
+              <option>SSC / Matric / O Levels</option>
+              <option>Intermediate / A Levels</option>
+              <option>Bachelor (2 years)</option>
+              <option>BS (4 years)</option>
+              <option>Master</option>
+              <option>Other</option>
+            </select>
+            <span class="field__error"></span>
+          </div>
+          <div class="field">
+            <label for="a-qual">Last qualification &amp; marks</label>
+            <input id="a-qual" name="last_qualification" type="text" placeholder="e.g. FSc Pre-Engineering, 78%" maxlength="120">
+          </div>
+          <div class="field field--full">
+            <label for="a-eng">English test</label>
+            <select id="a-eng" name="english_test">
+              <option value="">Choose an option</option>
+              <option>IELTS — taken</option>
+              <option>PTE — taken</option>
+              <option>LanguageCert — taken</option>
+              <option>Duolingo English Test — taken</option>
+              <option>Planning to take a test</option>
+              <option>Not yet / need guidance</option>
+            </select>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="form-section">
+        <legend><span class="form-section__num">3</span>Study plans</legend>
+        <p class="form-section__label">Preferred destination <span class="req">*</span></p>
+        <div class="dest-picker field" role="radiogroup" aria-label="Preferred destination">
+          <label class="dest-opt"><input type="radio" name="destination" value="United Kingdom" required><span><img src="assets/ags/img/flags/gb.svg" alt="" width="40" height="30">UK</span></label>
+          <label class="dest-opt"><input type="radio" name="destination" value="Australia"><span><img src="assets/ags/img/flags/au.svg" alt="" width="40" height="30">Australia</span></label>
+          <label class="dest-opt"><input type="radio" name="destination" value="Canada"><span><img src="assets/ags/img/flags/ca.svg" alt="" width="40" height="30">Canada</span></label>
+          <label class="dest-opt"><input type="radio" name="destination" value="USA"><span><img src="assets/ags/img/flags/us.svg" alt="" width="40" height="30">USA</span></label>
+          <label class="dest-opt"><input type="radio" name="destination" value="Europe"><span><img src="assets/ags/img/flags/eu.svg" alt="" width="40" height="30">Europe</span></label>
+          <label class="dest-opt"><input type="radio" name="destination" value="Not sure yet"><span><span class="dest-opt__q">?</span>Not sure</span></label>
+          <span class="field__error"></span>
+        </div>
+        <div class="form-grid mt-24">
+          <div class="field">
+            <label for="a-level">Study level</label>
+            <select id="a-level" name="study_level">
+              <option value="">Choose level</option>
+              <option>Foundation</option><option>Undergraduate</option><option>Postgraduate</option><option>Language course</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="a-intake">Preferred intake</label>
+            <select id="a-intake" name="intake">
+              <option value="">Choose intake</option>
+              <option>As soon as possible</option><option>January / February</option><option>May / June</option><option>September / October</option><option>Not sure yet</option>
+            </select>
+          </div>
+          <div class="field field--full">
+            <label for="a-budget">Estimated budget</label>
+            <select id="a-budget" name="budget">
+              <option value="">Choose budget</option>
+              <option>Under 20 lac</option><option>20–40 lac</option><option>40–60 lac</option><option>60+ lac</option><option>Need guidance</option>
+            </select>
+          </div>
+          <div class="field field--full">
+            <label for="a-msg">Anything else we should know?</label>
+            <textarea id="a-msg" name="message" rows="4" placeholder="Preferred subject, universities you are considering, or any questions" maxlength="2000"></textarea>
+          </div>
+        </div>
+      </fieldset>
+
+      <p class="form-consent">By submitting this form, you agree that AGS Consultant may contact you about counselling and study opportunities. We do not sell your information.</p>
+      <button class="btn btn--gold btn--block apply-submit" type="submit">Submit application <svg class="icon icon--arrow"><use href="#i-send"/></svg></button>
+      <div class="form-status" aria-live="polite"></div>
+    </form>
+
+    <aside class="apply-aside">
+      <div class="aside-card aside-card--navy">
+        <h3>What happens next?</h3>
+        <ol class="next-steps">
+          <li><span>1</span><div><strong>We review your details</strong><p>A counsellor looks at your education and study plans.</p></div></li>
+          <li><span>2</span><div><strong>We contact you</strong><p>Usually within one working day, by phone or WhatsApp.</p></div></li>
+          <li><span>3</span><div><strong>Free counselling session</strong><p>We discuss suitable courses, destinations and next steps.</p></div></li>
+        </ol>
+      </div>
+      <div class="aside-card">
+        <h3>Prefer to talk?</h3>
+        <p>Our Faisalabad team is happy to help.</p>
+        <a class="contact-chip contact-chip--block" href="tel:+923001959995"><svg class="icon"><use href="#i-phone"/></svg>+92 300 1959995</a>
+        <a class="btn btn--whatsapp btn--block mt-24" href="https://wa.me/923001959995?text=Hi%20AGS%20Consultant%2C%20I%20would%20like%20to%20apply." target="_blank" rel="noopener">Chat on WhatsApp</a>
+      </div>
+      <div class="aside-card aside-card--trust">
+        <div><strong>8+</strong><span>Years</span></div>
+        <div><strong>100+</strong><span>Success stories</span></div>
+        <div><strong>30+</strong><span>Universities</span></div>
+      </div>
+    </aside>
+  </div>
+</section>

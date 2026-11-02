@@ -112,6 +112,14 @@
   }
 
   function validate(field) {
+    if (field.type === "radio") {
+      var group = field.form ? field.form.querySelectorAll('input[name="' + field.name + '"]') : [field];
+      var anyRequired = false, checked = false;
+      Array.prototype.forEach.call(group, function (r) { if (r.required) anyRequired = true; if (r.checked) checked = true; });
+      if (anyRequired && !checked) { fieldError(field, "Please choose an option."); return false; }
+      fieldError(field, "");
+      return true;
+    }
     var v = (field.value || "").trim();
     if (field.required && !v) { fieldError(field, "This field is required."); return false; }
     if (v && field.type === "email" && !emailRe.test(v)) { fieldError(field, "Please enter a valid email address."); return false; }
@@ -128,7 +136,8 @@
     var fields = form.querySelectorAll("input:not([type=hidden]):not(.hp input), select, textarea");
 
     fields.forEach(function (f) {
-      f.addEventListener("blur", function () { if (f.value) validate(f); });
+      f.addEventListener("blur", function () { if (f.value && f.type !== "radio") validate(f); });
+      if (f.type === "radio") f.addEventListener("change", function () { validate(f); });
       f.addEventListener("input", function () {
         if (f.closest(".field") && f.closest(".field").classList.contains("has-error")) validate(f);
       });

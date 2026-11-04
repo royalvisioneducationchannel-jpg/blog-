@@ -127,6 +127,10 @@ selector .rvl-slot-thumb{overflow:hidden}
 selector .rvl-article:hover{transform:translateY(-3px)}
 selector .rvl-article .rvl-h3 .elementor-heading-title{font-size:23px}
 
+/* Menu: drop the theme's black underline on every "current" item (the #firm/#practice/#contact
+   links all count as current on the homepage); Elementor's gold underline marks the active page */
+selector nav .elementor-nav-menu .current-menu-item{border-bottom:0!important}
+
 /* Section headings: line, scales, line */
 selector .rvl-head .rvl-h2 .elementor-heading-title::after{content:"";width:112px;height:22px;margin-top:18px;background:{{scales_ink}} 50% 50%/22px 22px no-repeat,linear-gradient(var(--rvl-gold),var(--rvl-gold)) 0 50%/40px 1px no-repeat,linear-gradient(var(--rvl-gold),var(--rvl-gold)) 100% 50%/40px 1px no-repeat}
 selector .rvl-night .rvl-head .rvl-h2 .elementor-heading-title::after,selector .rvl-dark .rvl-head .rvl-h2 .elementor-heading-title::after{background:{{scales}} 50% 50%/22px 22px no-repeat,linear-gradient(var(--rvl-gold),var(--rvl-gold)) 0 50%/40px 1px no-repeat,linear-gradient(var(--rvl-gold),var(--rvl-gold)) 100% 50%/40px 1px no-repeat}

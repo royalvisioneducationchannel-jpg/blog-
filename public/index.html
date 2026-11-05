@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AdPilot AI · Facebook Ads Assistant</title>
+  <meta name="description" content="AI chatbot that creates, launches, optimises and reports on your Facebook ads.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="logo" aria-hidden="true">A</span><span>AdPilot <span class="brand-ai">AI</span></span></div>
+    <div class="topbar-right">
+      <span id="user-name" class="muted"></span>
+      <button id="logout-btn" class="btn btn-ghost" type="button" hidden>Disconnect</button>
+    </div>
+  </header>
+
+  <div id="alert" class="alert" role="alert" hidden></div>
+
+  <!-- Not connected -->
+  <main id="connect-view" class="connect" hidden>
+    <section class="connect-card">
+      <span class="eyebrow">Facebook Ads, on autopilot</span>
+      <h1>Your AI ads manager</h1>
+      <p class="lead">Connect your Facebook ad account and Page. Then just chat: create ad creatives, launch ads, fix high CPM, build custom &amp; lookalike audiences, and get a daily report.</p>
+      <ul class="features">
+        <li><strong>Create &amp; launch</strong> Upload an image, and the AI writes the copy and builds the campaign, ad set and ad.</li>
+        <li><strong>Optimise</strong> It spots high CPM/CPC, low CTR and ad fatigue, then pauses or fixes them.</li>
+        <li><strong>Audiences</strong> Customer lists, Page engagers, lookalikes and local radius targeting.</li>
+        <li><strong>Daily report</strong> An AI summary every morning, in Roman Urdu, Urdu or English.</li>
+      </ul>
+      <div id="setup-warning" class="setup-warning" hidden></div>
+      <a id="connect-btn" class="btn btn-fb" href="/auth/facebook">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M24 12a12 12 0 1 0-13.9 11.9v-8.4h-3V12h3V9.4c0-3 1.8-4.7 4.5-4.7 1.3 0 2.7.2 2.7.2v3h-1.5c-1.5 0-2 .9-2 1.9V12h3.4l-.5 3.5h-2.9v8.4A12 12 0 0 0 24 12Z"/></svg>
+        Connect Facebook Ads
+      </a>
+      <p class="fine">Nothing is turned on or spent without your approval.</p>
+    </section>
+  </main>
+
+  <!-- Connected -->
+  <div id="app-view" class="layout" hidden>
+    <aside class="sidebar">
+      <details class="panel" open>
+        <summary>Connected account</summary>
+        <label class="field">Ad account
+          <select id="account-select"><option value="">Loading…</option></select>
+        </label>
+        <label class="field">Facebook Page
+          <select id="page-select"><option value="">Loading…</option></select>
+        </label>
+        <button id="save-select" class="btn btn-primary btn-block" type="button">Save selection</button>
+      </details>
+
+      <details class="panel">
+        <summary>Automation rules</summary>
+        <form id="settings-form" class="settings">
+          <label class="toggle">
+            <input type="checkbox" name="autopilot">
+            <span>Autopilot: auto-pause failing ads in the daily run</span>
+          </label>
+          <div class="grid2">
+            <label class="field">Max CPM <input name="maxCpm" type="number" min="0" step="0.01"></label>
+            <label class="field">Max CPC <input name="maxCpc" type="number" min="0" step="0.01"></label>
+            <label class="field">Min CTR % <input name="minCtr" type="number" min="0" step="0.01"></label>
+            <label class="field">Max frequency <input name="maxFrequency" type="number" min="0" step="0.1"></label>
+          </div>
+          <label class="field">Min spend before auto-pause <input name="minSpendForPause" type="number" min="0" step="1"></label>
+          <label class="field">Report language
+            <select name="reportLanguage"><option>Roman Urdu</option><option>Urdu</option><option>English</option></select>
+          </label>
+          <p class="hint">Use 0 to switch a rule off. Amounts are in your ad account currency.</p>
+          <button class="btn btn-primary btn-block" type="submit">Save rules</button>
+        </form>
+      </details>
+
+      <details class="panel">
+        <summary>Daily reports</summary>
+        <button id="run-report" class="btn btn-ghost btn-block" type="button">Generate report now</button>
+        <div id="reports" class="reports"></div>
+      </details>
+    </aside>
+
+    <main class="chat">
+      <div class="chat-head">
+        <div>
+          <h2>Ads assistant</h2>
+          <p class="muted" id="context-line">Select an ad account and Page to begin.</p>
+        </div>
+        <button id="reset-chat" class="btn btn-ghost" type="button">New chat</button>
+      </div>
+
+      <div id="messages" class="messages" aria-live="polite"></div>
+
+      <div class="quick" id="quick">
+        <button type="button" data-prompt="Mera account overview do aur last 7 days ki performance batao.">📊 Last 7 days</button>
+        <button type="button" data-prompt="Meri product ke liye 3 ad creative variants likho (primary text, headline, CTA). Pehle mujh se product details pooch lo.">✍️ Write ad creative</button>
+        <button type="button" data-prompt="Kaun se ads ki CPM ya CPC high hai aur kya band karna chahiye? Data check karke batao.">🔍 What to pause?</button>
+        <button type="button" data-prompt="Meri Page engagers ki custom audience bana kar uska 1% lookalike banao.">👥 Lookalike audience</button>
+        <button type="button" data-prompt="Mujhe local audience chahiye: Lahore ke 10 km radius mein. Uske liye ad set targeting set karo.">📍 Local audience</button>
+      </div>
+
+      <form id="chat-form" class="composer">
+        <div id="attachments" class="attachments"></div>
+        <div class="composer-row">
+          <label class="icon-btn" title="Upload ad image">
+            <input id="file-input" type="file" accept="image/jpeg,image/png" hidden>
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m21 12-8.6 8.6a5 5 0 0 1-7-7l8.5-8.6a3.3 3.3 0 0 1 4.7 4.7l-8.6 8.6a1.7 1.7 0 0 1-2.4-2.4l7.9-7.9"/></svg>
+            <span class="sr-only">Upload ad image</span>
+          </label>
+          <label for="chat-input" class="sr-only">Message</label>
+          <textarea id="chat-input" rows="1" placeholder="e.g. Is image se ad banao, budget 1500 daily, Karachi ke liye…"></textarea>
+          <button id="send-btn" class="btn btn-primary" type="submit">Send</button>
+        </div>
+      </form>
+    </main>
+  </div>
+
+  <script src="app.js" type="module"></script>
+</body>
+</html>

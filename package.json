@@ -1,0 +1,24 @@
+{
+  "name": "adpilot-ai",
+  "version": "0.1.0",
+  "private": true,
+  "description": "AI chatbot that connects to Facebook Ads Manager to create, launch, optimise and report on ads.",
+  "type": "module",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "check": "node --check src/server.js && node scripts/check.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^1.5.0",
+    "dotenv": "^18.0.9",
+    "express": "^5.3.0",
+    "express-session": "^1.19.0",
+    "multer": "^2.5.0",
+    "node-cron": "^4.6.0"
+  }
+}

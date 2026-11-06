@@ -1,0 +1,171 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<style>
+  @font-face { font-family: "Nastaliq"; src: url("fonts/NotoNastaliqUrdu.ttf"); font-weight: 400 700; }
+  @font-face { font-family: "Cinzel"; src: url("fonts/Cinzel.ttf"); font-weight: 400 900; }
+  @font-face { font-family: "Montserrat"; src: url("fonts/Montserrat.ttf"); font-weight: 100 900; }
+  :root {
+    --green: #01411c;
+    --emerald: #0b6b3a;
+    --ivory: #f4eedf;
+    --gold: #c9a24a;
+    --gold-hi: #ead08a;
+    --ink: #0c1f14;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 1080px; height: 1350px; overflow: hidden; background: var(--ivory); }
+  .poster { position: relative; width: 1080px; height: 1350px; overflow: hidden;
+    background:
+      radial-gradient(80% 60% at 60% 55%, rgba(255, 252, 242, 0.9), rgba(244, 238, 223, 0) 70%),
+      radial-gradient(120% 90% at 50% 50%, #f4eedf 50%, #e4d9bf 100%);
+  }
+  /* parchment grain + faint geometric pattern */
+  .grain { position: absolute; inset: 0; opacity: 0.5; mix-blend-mode: multiply; }
+  .geo { position: absolute; inset: 0; opacity: 0.07; }
+
+  /* waving flag */
+  .flag { position: absolute; left: -60px; top: -40px; width: 1260px; height: 560px;
+    -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 52%, transparent 96%);
+    mask-image: linear-gradient(180deg, #000 0%, #000 52%, transparent 96%); }
+
+  /* arches */
+  .arch { position: absolute; }
+  .arch svg { position: absolute; inset: 0; overflow: visible; }
+
+  .verse { position: absolute; left: 78px; width: 410px; top: 372px; text-align: center;
+    font-family: "Nastaliq", serif; color: var(--green); font-size: 25px; line-height: 2.1; direction: rtl; white-space: nowrap; }
+  .verse .by { display: block; margin-top: 4px; font-family: "Montserrat", sans-serif; direction: ltr;
+    font-weight: 600; font-size: 13px; letter-spacing: 0.42em; color: #7a6a3a; }
+
+  .date { position: absolute; left: 30px; top: 500px; width: 60px; height: 520px; }
+  .date span { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%) rotate(-90deg);
+    white-space: nowrap; font-family: "Cinzel", serif; font-weight: 800; font-size: 34px; letter-spacing: 0.22em;
+    color: var(--gold); text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4); }
+
+  .caption { position: absolute; left: 118px; width: 330px; top: 1016px; text-align: center;
+    font-family: "Montserrat", sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 0.36em; text-transform: uppercase; color: #6d5f36; }
+
+  .page { position: absolute; background: #f7f0de; box-shadow: 0 10px 26px rgba(40, 30, 10, 0.22);
+    background-image: repeating-linear-gradient(180deg, transparent 0 15px, rgba(90, 70, 30, 0.18) 15px 16px); }
+
+  .band { position: absolute; left: 0; right: 0; bottom: 0; height: 250px; background:
+      linear-gradient(180deg, rgba(1, 65, 28, 0) 0%, rgba(1, 65, 28, 0.0) 6%, var(--green) 30%, #012e14 100%); }
+  .title { position: absolute; left: 0; right: 0; bottom: 92px; text-align: center;
+    font-family: "Cinzel", serif; font-weight: 800; font-size: 92px; letter-spacing: 0.16em; color: var(--ivory); }
+  .title b { color: var(--gold-hi); font-weight: 800; }
+  .sub { position: absolute; left: 0; right: 0; bottom: 50px; display: flex; justify-content: center; align-items: center; gap: 18px;
+    font-family: "Montserrat", sans-serif; font-weight: 600; font-size: 17px; letter-spacing: 0.34em; text-transform: uppercase; color: var(--gold-hi); }
+  .sub i { width: 46px; height: 1px; background: var(--gold); }
+  .hair { position: absolute; left: 70px; right: 70px; bottom: 214px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+</style>
+</head>
+<body>
+<div class="poster">
+  <svg class="grain" width="1080" height="1350"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" stitchTiles="stitch" /><feColorMatrix values="0 0 0 0 0.45  0 0 0 0 0.38  0 0 0 0 0.25  0 0 0 0.55 0" /></filter><rect width="100%" height="100%" filter="url(#n)" /></svg>
+  <svg class="geo" width="1080" height="1350">
+    <defs><pattern id="star" width="90" height="90" patternUnits="userSpaceOnUse">
+      <path d="M45 8 L56 34 L82 45 L56 56 L45 82 L34 56 L8 45 L34 34 Z" fill="none" stroke="#01411c" stroke-width="1.2" />
+      <rect x="27" y="27" width="36" height="36" fill="none" stroke="#01411c" stroke-width="1.2" transform="rotate(45 45 45)" />
+    </pattern></defs>
+    <rect width="100%" height="100%" fill="url(#star)" />
+  </svg>
+
+  <!-- Pakistan flag as waving silk -->
+  <svg class="flag" viewBox="0 0 1500 1000" preserveAspectRatio="none">
+    <defs>
+      <filter id="wave" x="-5%" y="-5%" width="110%" height="110%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.0012 0.0045" numOctaves="2" seed="4" result="t" />
+        <feDisplacementMap in="SourceGraphic" in2="t" scale="48" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+      <linearGradient id="folds" x1="0" y1="0" x2="1" y2="0.35">
+        <stop offset="0" stop-color="#000" stop-opacity="0.0" />
+        <stop offset="0.12" stop-color="#000" stop-opacity="0.32" />
+        <stop offset="0.22" stop-color="#fff" stop-opacity="0.16" />
+        <stop offset="0.34" stop-color="#000" stop-opacity="0.36" />
+        <stop offset="0.47" stop-color="#fff" stop-opacity="0.12" />
+        <stop offset="0.6" stop-color="#000" stop-opacity="0.34" />
+        <stop offset="0.72" stop-color="#fff" stop-opacity="0.16" />
+        <stop offset="0.86" stop-color="#000" stop-opacity="0.3" />
+        <stop offset="1" stop-color="#fff" stop-opacity="0.08" />
+      </linearGradient>
+      <mask id="crescent">
+        <rect width="1500" height="1000" fill="#000" />
+        <circle cx="955" cy="520" r="290" fill="#fff" />
+        <circle cx="1022" cy="468" r="252" fill="#000" />
+      </mask>
+    </defs>
+    <g filter="url(#wave)">
+      <rect width="1500" height="1000" fill="#f8f6ee" />
+      <rect x="375" width="1125" height="1000" fill="#01411c" />
+      <rect width="1500" height="1000" fill="#fff" mask="url(#crescent)" />
+      <polygon fill="#fff" transform="translate(1178 318) rotate(18)"
+        points="0,-100 23.5,-32.4 95.1,-30.9 38,12.4 58.8,80.9 0,40 -58.8,80.9 -38,12.4 -95.1,-30.9 -23.5,-32.4" />
+      <rect width="1500" height="1000" fill="url(#folds)" />
+    </g>
+  </svg>
+
+  <!-- floating manuscript pages behind the arches -->
+  <div class="page" style="left: 410px; top: 300px; width: 120px; height: 160px; transform: rotate(-18deg); filter: blur(1.2px)"></div>
+  <div class="page" style="left: 980px; top: 560px; width: 110px; height: 146px; transform: rotate(24deg); filter: blur(2px)"></div>
+
+  <!-- Iqbal Manzil, Sialkot: small arch -->
+  <div class="arch" style="left: 118px; top: 540px; width: 330px; height: 460px">
+    <svg viewBox="0 0 330 460">
+      <defs><clipPath id="a1"><path d="M10 460 L10 150 Q10 70 165 10 Q320 70 320 150 L320 460 Z" /></clipPath></defs>
+      <path d="M0 460 L0 148 Q0 62 165 0 Q330 62 330 148 L330 460 Z" fill="#c9a24a" />
+      <path d="M6 460 L6 149 Q6 66 165 6 Q324 66 324 149 L324 460 Z" fill="#f4eedf" />
+      <g clip-path="url(#a1)">
+        <!-- slot for an Iqbal Manzil photo; until then a quiet pattern panel -->
+        <rect width="330" height="460" fill="#01411c" />
+        <rect width="330" height="460" fill="url(#star2)" />
+        <rect width="330" height="460" fill="url(#vig)" />
+        <text x="165" y="214" text-anchor="middle" font-family="Montserrat" font-weight="600" font-size="12" letter-spacing="5" fill="#ead08a">BORN IN</text>
+        <text x="165" y="262" text-anchor="middle" font-family="Cinzel" font-weight="800" font-size="44" letter-spacing="3" fill="#f4eedf">SIALKOT</text>
+        <line x1="120" y1="286" x2="210" y2="286" stroke="#c9a24a" stroke-width="1.2" />
+        <text x="165" y="318" text-anchor="middle" font-family="Cinzel" font-weight="700" font-size="22" letter-spacing="6" fill="#ead08a">1877</text>
+        <text x="165" y="396" text-anchor="middle" font-family="Montserrat" font-weight="500" font-size="10.5" letter-spacing="2.4" fill="#dfe8dc" fill-opacity="0.85">BANG-E-DRA · BAL-E-JIBRIL</text>
+        <text x="165" y="416" text-anchor="middle" font-family="Montserrat" font-weight="500" font-size="10.5" letter-spacing="2.4" fill="#dfe8dc" fill-opacity="0.85">ZARB-E-KALIM</text>
+      </g>
+      <defs>
+        <pattern id="star2" width="66" height="66" patternUnits="userSpaceOnUse">
+          <path d="M33 6 L41 25 L60 33 L41 41 L33 60 L25 41 L6 33 L25 25 Z" fill="none" stroke="#c9a24a" stroke-opacity="0.28" stroke-width="1" />
+          <rect x="20" y="20" width="26" height="26" fill="none" stroke="#c9a24a" stroke-opacity="0.22" stroke-width="1" transform="rotate(45 33 33)" />
+        </pattern>
+        <radialGradient id="vig" cx="0.5" cy="0.55" r="0.65"><stop offset="0.35" stop-color="#01411c" stop-opacity="0.85" /><stop offset="1" stop-color="#01411c" stop-opacity="0" /></radialGradient>
+      </defs>
+    </svg>
+  </div>
+
+  <!-- Iqbal: large arch -->
+  <div class="arch" style="left: 488px; top: 236px; width: 532px; height: 872px">
+    <svg viewBox="0 0 532 872">
+      <defs><clipPath id="a2"><path d="M14 872 L14 250 Q14 120 266 16 Q518 120 518 250 L518 872 Z" /></clipPath>
+        <linearGradient id="goldEdge" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ead08a" /><stop offset="0.5" stop-color="#b8892f" /><stop offset="1" stop-color="#e6c579" /></linearGradient></defs>
+      <path d="M0 872 L0 246 Q0 108 266 0 Q532 108 532 246 L532 872 Z" fill="url(#goldEdge)" />
+      <path d="M8 872 L8 248 Q8 114 266 8 Q524 114 524 248 L524 872 Z" fill="#06130d" />
+      <g clip-path="url(#a2)">
+        <rect width="532" height="872" fill="#06130d" />
+        <image href="iqbal_duotone.jpg" x="-70" y="28" width="640" height="897" preserveAspectRatio="xMidYMid slice" />
+        <rect width="532" height="872" fill="url(#bot)" />
+      </g>
+      <defs><linearGradient id="bot" x1="0" y1="0" x2="0" y2="1"><stop offset="0.74" stop-color="#01411c" stop-opacity="0" /><stop offset="1" stop-color="#01411c" stop-opacity="0.85" /></linearGradient></defs>
+      <path d="M28 872 L28 254 Q28 134 266 34 Q504 134 504 254 L504 872" fill="none" stroke="#c9a24a" stroke-opacity="0.55" stroke-width="1.5" />
+    </svg>
+  </div>
+
+  <div class="verse">خودی کو کر بلند اتنا کہ ہر تقدیر سے پہلے<br />خدا بندے سے خود پوچھے بتا تیری رضا کیا ہے<span class="by">Allama Iqbal</span></div>
+  <div class="date"><span>9 November 1877</span></div>
+
+  <!-- foreground pages, out of focus -->
+  <div class="page" style="left: -40px; top: 1010px; width: 220px; height: 290px; transform: rotate(14deg); filter: blur(7px); opacity: 0.9"></div>
+  <div class="page" style="left: 930px; top: 140px; width: 150px; height: 200px; transform: rotate(-26deg); filter: blur(5px); opacity: 0.85"></div>
+
+  <div class="band"></div>
+  <div class="hair"></div>
+  <div class="title">IQBAL <b>DAY</b></div>
+  <div class="sub"><i></i>Shair-e-Mashriq · The Poet of the East<i></i></div>
+</div>
+</body>
+</html>

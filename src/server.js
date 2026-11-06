@@ -55,6 +55,13 @@ function requireUser(req, res, next) {
   next();
 }
 
+// Chat, approvals and reports need Claude; say so clearly instead of failing with a generic error.
+function requireAi(_req, res, next) {
+  if (missing.includes("ANTHROPIC_API_KEY"))
+    return res.status(503).json({ error: "AI is not set up yet: add ANTHROPIC_API_KEY to the .env file and restart the server." });
+  next();
+}
+
 const publicUser = (u) => ({
   name: u.name,
   adAccountId: u.adAccountId || null,
@@ -173,7 +180,7 @@ app.get("/api/chat", requireUser, (req, res) => {
   res.json({ messages: req.user.chatLog || [], pending: pendingList(req.user) });
 });
 
-app.post("/api/chat", requireUser, async (req, res) => {
+app.post("/api/chat", requireUser, requireAi, async (req, res) => {
   const message = String(req.body?.message || "").trim().slice(0, 8000);
   const attachments = Array.isArray(req.body?.attachments) ? req.body.attachments.slice(0, 4) : [];
   if (!message && !attachments.length) return res.status(400).json({ error: "Message is empty." });
@@ -242,13 +249,13 @@ async function resolveAction(req, res, approved) {
   res.status(result.status).json(result.body);
 }
 
-app.post("/api/actions/:id/approve", requireUser, (req, res) => resolveAction(req, res, true));
-app.post("/api/actions/:id/reject", requireUser, (req, res) => resolveAction(req, res, false));
+app.post("/api/actions/:id/approve", requireUser, requireAi, (req, res) => resolveAction(req, res, true));
+app.post("/api/actions/:id/reject", requireUser, requireAi, (req, res) => resolveAction(req, res, false));
 
 // ---------- Reports ----------
 app.get("/api/reports", requireUser, (req, res) => res.json({ reports: req.user.reports || [] }));
 
-app.post("/api/reports/run", requireUser, async (req, res) => {
+app.post("/api/reports/run", requireUser, requireAi, async (req, res) => {
   const report = await withLock(req.user.id, () => runDailyReport(getUser(req.user.id)));
   res.json({ report });
 });

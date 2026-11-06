@@ -14,6 +14,8 @@ export const config = {
     appId: env.META_APP_ID || "",
     appSecret: env.META_APP_SECRET || "",
     graphVersion: env.META_GRAPH_VERSION || "v23.0",
+    // Business-type apps use "Facebook Login for Business": set its Configuration ID here.
+    loginConfigId: env.META_LOGIN_CONFIG_ID || "",
     // Permissions requested at Facebook Login. Advanced access needs Meta App Review.
     scopes: [
       "ads_management",

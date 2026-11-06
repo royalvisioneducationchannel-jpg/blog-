@@ -88,6 +88,7 @@ This runs offline checks for currency conversion, targeting, insights parsing, r
 |---|---|
 | `APP_URL` | Public URL; the OAuth redirect is `${APP_URL}/auth/facebook/callback` |
 | `META_GRAPH_VERSION` | Graph API version (default `v23.0`) |
+| `META_LOGIN_CONFIG_ID` | Configuration ID from Facebook Login for Business (Business-type apps); when set it replaces the `scope` list |
 | `AI_MODEL` / `AI_EFFORT` | Claude model and effort (`low`, `medium`, `high`) |
 | `REPORT_CRON` / `REPORT_TZ` | Daily report schedule (default 9:00 Asia/Karachi) |
 | `DATA_DIR` | Where the JSON database and uploaded images are stored |

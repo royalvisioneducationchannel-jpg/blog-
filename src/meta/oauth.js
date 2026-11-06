@@ -9,7 +9,8 @@ export function loginUrl(state) {
   url.searchParams.set("client_id", config.meta.appId);
   url.searchParams.set("redirect_uri", redirectUri());
   url.searchParams.set("state", state);
-  url.searchParams.set("scope", config.meta.scopes.join(","));
+  if (config.meta.loginConfigId) url.searchParams.set("config_id", config.meta.loginConfigId);
+  else url.searchParams.set("scope", config.meta.scopes.join(","));
   url.searchParams.set("response_type", "code");
   return url.toString();
 }

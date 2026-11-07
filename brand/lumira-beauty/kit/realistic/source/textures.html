@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<style>
+  @font-face { font-family: "Marcellus"; src: url("assets/Marcellus-Regular.ttf"); }
+  @font-face { font-family: "Jost"; src: url("assets/Jost.ttf"); font-weight: 100 900; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: transparent; }
+  .t { position: relative; overflow: hidden; margin-bottom: 20px; }
+  .col { position: absolute; display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .ink { color: #444e36; }
+  .gold { color: #a8895a; }
+  .serif { font-family: "Marcellus", serif; line-height: 1.04; }
+  .caps { font-family: "Jost", sans-serif; text-transform: uppercase; }
+  .bar { height: 3px; background: #b89a6e; }
+</style>
+</head>
+<body>
+
+<!-- Tube print: circumference 125.7 mm x body 128 mm -> 2048 x 2086. Front is the centre (u = 0.5). -->
+<div id="tube" class="t" style="width: 2048px; height: 2086px">
+  <div class="col ink" style="left: 624px; width: 800px; top: 520px">
+    <img src="assets/word-olive.png" style="width: 250px" />
+    <img src="assets/skincare-olive.png" style="width: 124px; margin-top: 14px; opacity: 0.85" />
+    <div class="bar" style="width: 190px; margin: 56px 0 44px"></div>
+    <div class="caps gold" style="font-weight: 600; font-size: 26px; letter-spacing: 0.3em">01 · Cleanse</div>
+    <div class="serif ink" style="font-size: 68px; margin-top: 22px">Gentle<br />Face Wash</div>
+    <div class="caps" style="font-weight: 500; font-size: 21px; letter-spacing: 0.2em; margin-top: 30px; color: #6f7363">For all skin types</div>
+  </div>
+  <div class="caps ink" style="position: absolute; left: 0; right: 0; top: 1820px; text-align: center; font-weight: 500; font-size: 26px; letter-spacing: 0.12em">100 ml · 3.38 fl oz</div>
+  <!-- back panel (u = 0 / 1 seam side) -->
+  <div class="caps ink" style="position: absolute; left: 1700px; width: 300px; top: 700px; font-size: 18px; line-height: 1.7; letter-spacing: 0.08em; opacity: 0.75">Directions · Ingredients<br />Caution · Batch · Mfg · Exp<br />Made in Pakistan</div>
+  <div class="caps ink" style="position: absolute; left: 48px; width: 300px; top: 700px; font-size: 18px; line-height: 1.7; letter-spacing: 0.08em; opacity: 0.75">royalvision.online<br />Lumira by Royal Vision</div>
+</div>
+<!-- Tube foil: mark above the wordmark -->
+<div id="tubefoil" class="t" style="width: 2048px; height: 2086px">
+  <img src="assets/mark-gold.png" style="position: absolute; left: 949px; top: 300px; width: 150px" />
+</div>
+
+<!-- Serum label: circumference 108 mm x 72 mm -> 2048 x 1365; label 60 x 46 mm in the centre -->
+<div id="serum" class="t" style="width: 2048px; height: 1365px">
+  <div style="position: absolute; left: 455px; width: 1138px; top: 265px; height: 872px; background: #fbf8f0; border: 3px solid rgba(184, 154, 110, 0.5)">
+    <div class="col" style="left: 0; right: 0; top: 70px">
+      <img src="assets/word-olive.png" style="width: 230px" />
+      <div class="bar" style="width: 120px; margin: 34px 0 30px"></div>
+      <div class="caps gold" style="font-weight: 600; font-size: 26px; letter-spacing: 0.3em">02 · Treat</div>
+      <div class="serif ink" style="font-size: 76px; margin-top: 20px">Face<br />Serum</div>
+      <div class="caps ink" style="font-weight: 500; font-size: 24px; letter-spacing: 0.12em; margin-top: 44px">30 ml · 1.01 fl oz</div>
+    </div>
+  </div>
+</div>
+
+<!-- Jar body print: circumference 198 mm x 38 mm -> 3072 x 590 -->
+<div id="jar" class="t" style="width: 3072px; height: 590px">
+  <div class="col" style="left: 1036px; width: 1000px; top: 150px">
+    <div class="caps gold" style="font-weight: 600; font-size: 30px; letter-spacing: 0.32em">03 · Hydrate</div>
+    <div class="serif ink" style="font-size: 96px; margin-top: 18px">Daily Moisturizer</div>
+    <div class="caps ink" style="font-weight: 500; font-size: 28px; letter-spacing: 0.14em; margin-top: 30px">50 g · 1.76 oz</div>
+  </div>
+</div>
+<!-- Jar lid side: cream wordmark, 207 mm x 16 mm -> 3072 x 238 -->
+<div id="jarlid" class="t" style="width: 3072px; height: 238px">
+  <img src="assets/word-cream.png" style="position: absolute; left: 1311px; top: 78px; width: 450px" />
+</div>
+
+<!-- Sleeve top: 43 x 176 mm -> 430 x 1760, text runs along the band -->
+<div id="band" class="t" style="width: 430px; height: 1760px; background: #f8f4ea">
+  <div class="caps ink" style="position: absolute; left: 50%; top: 50%; width: 1700px; transform: translate(-50%, -50%) rotate(-90deg); text-align: center; font-weight: 500; font-size: 38px; letter-spacing: 0.42em">The Daily Ritual &nbsp;·&nbsp; Cleanse · Treat · Hydrate</div>
+</div>
+
+<!-- Lid inside print: 236 x 171 mm -> 2360 x 1710 -->
+<div id="lidin" class="t" style="width: 2360px; height: 1710px; background: #7e8c62">
+  <img src="assets/mark-cream.png" style="position: absolute; left: 170px; top: 190px; width: 230px; opacity: 0.92" />
+  <div class="serif" style="position: absolute; left: 170px; top: 500px; font-size: 150px; color: #fbf8f0">Your daily<br />ritual</div>
+  <div class="caps" style="position: absolute; left: 175px; top: 900px; font-size: 46px; line-height: 2.1; letter-spacing: 0.14em; color: #fbf8f0">
+    <b style="color: #f1e3c4">01</b>&nbsp; Cleanse — Face Wash<br /><b style="color: #f1e3c4">02</b>&nbsp; Treat — Face Serum<br /><b style="color: #f1e3c4">03</b>&nbsp; Hydrate — Moisturizer
+  </div>
+  <div class="caps" style="position: absolute; left: 175px; top: 1500px; font-size: 32px; letter-spacing: 0.4em; color: #dfe3d2">by Royal Vision</div>
+</div>
+
+<!-- Ritual card: 105 x 148 mm -> 1050 x 1480 -->
+<div id="card" class="t" style="width: 1050px; height: 1480px; background: #fbf8f0">
+  <div class="col" style="left: 0; right: 0; top: 150px">
+    <img src="assets/mark-color.png" style="width: 200px" />
+    <img src="assets/word-olive.png" style="width: 400px; margin-top: 50px" />
+    <div class="bar" style="width: 140px; margin: 50px 0"></div>
+    <div class="caps gold" style="font-weight: 600; font-size: 34px; letter-spacing: 0.34em">How to use</div>
+    <div class="caps ink" style="font-size: 30px; line-height: 2; letter-spacing: 0.12em; margin-top: 30px">01 Cleanse · 02 Treat · 03 Hydrate</div>
+    <div style="margin-top: 70px; width: 260px; height: 260px; background: repeating-conic-gradient(#444e36 0 25%, #fbf8f0 0 50%) 0 0 / 32px 32px; border: 14px solid #fbf8f0; outline: 4px solid #444e36"></div>
+    <div class="caps" style="font-size: 24px; letter-spacing: 0.2em; margin-top: 30px; color: #6f7363">Scan for the ritual</div>
+  </div>
+</div>
+</body>
+</html>

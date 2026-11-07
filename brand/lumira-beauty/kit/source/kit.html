@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Lumira Ritual Kit — Packaging</title>
+<link rel="stylesheet" href="kit.css" />
+<link rel="stylesheet" href="masks.css" />
+<style>
+  /* gold foil = a metallic gradient seen through the logo's alpha */
+  .foil {
+    background: linear-gradient(118deg, #a8895a 0%, #e9d6ad 28%, #c4a878 46%, #f3e6c8 58%, #b0905f 78%, #d9c194 100%);
+    -webkit-mask-size: contain; mask-size: contain;
+    -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+    -webkit-mask-position: center; mask-position: center;
+  }
+  .paper-olive {
+    background:
+      radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.035) 0 1px, transparent 1.5px) 0 0 / 7px 7px,
+      radial-gradient(circle at 70% 60%, rgba(0, 0, 0, 0.05) 0 1px, transparent 1.5px) 0 0 / 9px 9px,
+      var(--olive-deep);
+  }
+  .paper-cream {
+    background:
+      radial-gradient(circle at 30% 40%, rgba(120, 100, 60, 0.05) 0 1px, transparent 1.5px) 0 0 / 8px 8px,
+      var(--cream);
+  }
+
+  /* ── Board 1: 3D closed box ── */
+  .scene { position: absolute; left: 0; right: 0; top: 380px; height: 900px; perspective: 3000px; }
+  .box3d {
+    --W: 600px; --D: 438px; --H: 163px;
+    position: absolute; left: 470px; top: 170px; width: var(--W); height: var(--D);
+    transform-style: preserve-3d; transform: rotateX(58deg) rotateZ(-34deg);
+  }
+  .face { position: absolute; }
+  .f-top { inset: 0; transform: translateZ(var(--H)); border-radius: 3px; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15); }
+  .f-front { left: 0; top: calc(var(--D) - var(--H)); width: var(--W); height: var(--H); transform-origin: 50% 100%; transform: rotateX(-90deg); filter: brightness(0.82); }
+  .f-right { left: calc(var(--W) - var(--H)); top: 0; width: var(--H); height: var(--D); transform-origin: 100% 50%; transform: rotateY(90deg); filter: brightness(0.66); }
+  .f-shadow { left: -40px; top: -20px; width: calc(var(--W) + 120px); height: calc(var(--D) + 90px); border-radius: 40px; background: rgba(46, 51, 36, 0.38); filter: blur(34px); transform: translateZ(-2px) translate(40px, 40px); }
+  .band { position: absolute; top: 0; bottom: 0; left: 66%; width: 18%; }
+  .band.top { display: flex; align-items: center; justify-content: center; }
+  .band .vtext {
+    writing-mode: vertical-rl; transform: rotate(180deg);
+    font-weight: 500; font-size: 17px; letter-spacing: 0.42em; text-transform: uppercase; color: var(--olive-deep);
+  }
+  .lid-mark { position: absolute; left: 13%; top: 17%; width: 46%; height: 66%; }
+  .front-word { position: absolute; left: 14%; top: 34%; width: 40%; height: 30%; }
+
+  /* products standing in front of the box */
+  .stand { position: absolute; display: flex; align-items: flex-end; gap: 46px; }
+  .stand .prod { --mm: 2.6px; }
+
+  /* ── Board 2: top-down open box ── */
+  .flat { position: absolute; width: 624px; height: 455px; border-radius: 6px; }
+  .lid-in { left: 120px; top: 420px; }
+  .base { left: 856px; top: 420px; }
+  .rim { position: absolute; inset: 0; border-radius: 6px; box-shadow: inset 0 0 0 16px var(--olive-deep), 0 30px 60px rgba(46, 51, 36, 0.25); }
+  .tray { position: absolute; inset: 16px; border-radius: 3px; }
+  .cav { position: absolute; border-radius: 60px; background: #e8e1d0; box-shadow: inset 0 6px 14px rgba(46, 51, 36, 0.35), inset 0 -2px 4px rgba(255, 255, 255, 0.6); }
+  .tview { position: absolute; }
+  .label-cap { position: absolute; font-size: 22px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); }
+
+  /* ── Board 4 ── */
+  table.spec { width: 100%; border-collapse: collapse; font-size: 21px; }
+  table.spec th { text-align: left; font-weight: 600; font-size: 17px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-deep); padding: 0 16px 14px 0; border-bottom: 2px solid var(--olive-deep); }
+  table.spec td { padding: 15px 16px 15px 0; border-bottom: 1px solid rgba(68, 78, 54, 0.18); vertical-align: top; line-height: 1.35; color: var(--ink); }
+  table.spec td:first-child { font-weight: 600; color: var(--olive-deep); white-space: nowrap; }
+  .tnum { font-variant-numeric: tabular-nums; }
+</style>
+</head>
+<body>
+
+<!-- ═════════ BOARD 1 · OUTSIDE ═════════ -->
+<section class="board" id="b1">
+  <div class="hd">
+    <div><div class="kicker">Lumira · Ritual Kit · 01 / 04</div><h1>Bahar se — <em>the box</em></h1></div>
+    <img class="brand" src="assets/mark-color.png" alt="Lumira mark" />
+  </div>
+  <div class="rule"></div>
+
+  <div class="scene">
+    <div class="box3d">
+      <div class="face f-shadow"></div>
+      <div class="face f-front paper-olive">
+        <div class="foil m-word front-word"></div>
+        <div class="band paper-cream"></div>
+      </div>
+      <div class="face f-right paper-olive"></div>
+      <div class="face f-top paper-olive">
+        <div class="foil m-mark lid-mark"></div>
+        <div class="band top paper-cream"><span class="vtext">The Daily Ritual · Cleanse · Treat · Hydrate</span></div>
+      </div>
+    </div>
+
+    <div class="stand" style="left: 1010px; top: 470px">
+      <div class="prod tube">
+        <div class="crimp"></div>
+        <div class="body">
+          <div class="lab" style="top: 46px">
+            <div class="foil m-mark" style="width: 40px; height: 42px"></div>
+            <img src="assets/word-olive.png" style="width: 78px; margin-top: 10px" alt="" />
+            <div class="bar" style="width: 50px; margin: 14px 0 12px"></div>
+            <div class="step" style="font-size: 8px">01 · Cleanse</div>
+            <div class="name" style="font-size: 17px; margin-top: 6px">Gentle<br />Face Wash</div>
+            <div class="qty" style="font-size: 8px; margin-top: 70px">100 ml</div>
+          </div>
+        </div>
+        <div class="cap"></div>
+      </div>
+      <div class="prod dropper">
+        <div class="bulb"></div><div class="collar"></div>
+        <div class="glass">
+          <div class="lab paper-cream" style="top: 34px; bottom: 26px; left: 6px; right: 6px; padding-top: 16px; border-radius: 2px">
+            <img src="assets/word-olive.png" style="width: 62px" alt="" />
+            <div class="step" style="font-size: 7px; margin-top: 10px">02 · Treat</div>
+            <div class="name" style="font-size: 15px; margin-top: 5px">Face<br />Serum</div>
+            <div class="qty" style="font-size: 7px; margin-top: 12px">30 ml</div>
+          </div>
+        </div>
+      </div>
+      <div class="prod jar">
+        <div class="lid"></div>
+        <div class="body">
+          <div class="lab" style="top: 14px">
+            <img src="assets/word-olive.png" style="width: 70px" alt="" />
+            <div class="step" style="font-size: 7px; margin-top: 7px">03 · Hydrate</div>
+            <div class="name" style="font-size: 14px; margin-top: 4px">Daily Moisturizer</div>
+            <div class="qty" style="font-size: 7px; margin-top: 6px">50 g</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- callouts -->
+    <div class="pin" style="left: 500px; top: 150px"><span class="num">1</span></div>
+    <div class="pin" style="left: 905px; top: 290px"><span class="num">2</span></div>
+    <div class="pin" style="left: 700px; top: 500px"><span class="num">3</span></div>
+    <div class="pin" style="left: 1225px; top: 420px"><span class="num">4</span></div>
+  </div>
+
+  <ul class="legend" style="position: absolute; left: 120px; right: 120px; top: 1330px">
+    <li><span class="num">1</span><div><b>Gold foil logo — lid par</b><span>Hot-foil gold + halka emboss (ubhra hua). Mark bara, beech se thora left.</span></div></li>
+    <li><span class="num">2</span><div><b>Cream sleeve (belly band)</b><span>Textured cream paper ki patti, lid aur front par lipti. Is par "The Daily Ritual · Cleanse · Treat · Hydrate".</span></div></li>
+    <li><span class="num">3</span><div><b>Rigid box — olive soft-touch</b><span>2-piece (lid + base) 2 mm greyboard, upar olive textured paper wrap. Front par gold foil "LUMIRA".</span></div></li>
+    <li><span class="num">4</span><div><b>3 products — ek hi label system</b><span>Cream body, olive cap/lid, gold accent. Har product par step number: 01 Cleanse, 02 Treat, 03 Hydrate.</span></div></li>
+  </ul>
+
+  <div style="position: absolute; left: 120px; right: 120px; top: 1700px; display: flex; gap: 22px; align-items: center">
+    <span style="width: 56px; height: 56px; border-radius: 50%; background: var(--olive-deep)"></span>
+    <span style="width: 56px; height: 56px; border-radius: 50%; background: var(--sage)"></span>
+    <span style="width: 56px; height: 56px; border-radius: 50%; background: linear-gradient(118deg, #a8895a, #e9d6ad 40%, #c4a878)"></span>
+    <span style="width: 56px; height: 56px; border-radius: 50%; background: var(--cream); box-shadow: inset 0 0 0 2px #d9d2c2"></span>
+    <span style="margin-left: 18px; font-size: 21px; color: var(--muted); line-height: 1.5">Olive <span class="tnum">#444E36</span> · Sage <span class="tnum">#7E8C62</span> · Gold foil · Cream <span class="tnum">#FBF8F0</span><br />Fonts: Marcellus (naam) · Jost (chhota text) — logo se match</span>
+  </div>
+  <div class="foot"><span>Lumira Skincare · by Royal Vision</span><span>Box 240 × 175 × 65 mm</span></div>
+</section>
+
+<!-- ═════════ BOARD 2 · INSIDE ═════════ -->
+<section class="board" id="b2">
+  <div class="hd">
+    <div><div class="kicker">Lumira · Ritual Kit · 02 / 04</div><h1>Andar se — <em>unboxing</em></h1></div>
+    <img class="brand" src="assets/mark-color.png" alt="Lumira mark" />
+  </div>
+  <div class="rule"></div>
+
+  <div class="label-cap" style="left: 120px; top: 360px">Lid — andar ki print</div>
+  <div class="label-cap" style="left: 856px; top: 360px">Base — insert tray</div>
+
+  <!-- lid inside -->
+  <div class="flat lid-in" style="background: var(--sage)">
+    <div class="rim"></div>
+    <div style="position: absolute; inset: 16px; display: grid; grid-template-columns: 1fr 230px; padding: 46px 40px 40px 48px; gap: 26px; color: var(--cream)">
+      <div>
+        <img src="assets/mark-cream.png" style="width: 70px; opacity: 0.9" alt="" />
+        <div style="font-family: Marcellus, serif; font-size: 40px; line-height: 1.08; margin-top: 18px">Your daily<br />ritual</div>
+        <div style="margin-top: 24px; font-size: 16px; line-height: 2; letter-spacing: 0.06em">
+          <b style="color: #f1e3c4">01</b> &nbsp;Cleanse — Face Wash<br />
+          <b style="color: #f1e3c4">02</b> &nbsp;Treat — Face Serum<br />
+          <b style="color: #f1e3c4">03</b> &nbsp;Hydrate — Moisturizer
+        </div>
+      </div>
+      <!-- card pocket with the ritual card standing in it -->
+      <div style="position: relative">
+        <div class="paper-cream" style="position: absolute; left: 0; right: 0; top: 0; height: 300px; border-radius: 4px; box-shadow: 0 10px 22px rgba(0, 0, 0, 0.25); padding: 22px 20px; color: var(--olive-deep); text-align: center">
+          <img src="assets/word-olive.png" style="width: 120px" alt="" />
+          <div style="font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; margin-top: 12px; color: var(--gold-deep)">How to use</div>
+          <div style="margin: 14px auto 0; width: 104px; height: 104px; background: repeating-conic-gradient(var(--olive-deep) 0 25%, var(--cream) 0 50%) 0 0 / 13px 13px; border: 6px solid var(--cream); outline: 2px solid var(--olive-deep)"></div>
+          <div style="font-size: 11px; margin-top: 10px; color: var(--muted)">QR → video + website</div>
+        </div>
+        <div style="position: absolute; left: -6px; right: -6px; top: 196px; height: 140px; background: var(--olive); border-radius: 2px 2px 6px 6px; box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2)"></div>
+        <div style="position: absolute; left: 0; right: 0; top: 230px; text-align: center; font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color: #f1e3c4">Card pocket</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- base with insert tray, products top-down -->
+  <div class="flat base paper-olive">
+    <div class="rim"></div>
+    <div class="tray paper-cream">
+      <!-- face wash lying (cap left) -->
+      <div class="cav" style="left: 64px; top: 48px; width: 448px; height: 122px"></div>
+      <div class="tview" style="left: 74px; top: 58px; width: 428px; height: 102px; display: flex">
+        <div style="width: 62px; background: linear-gradient(180deg, #36402a, #6c7752 45%, #2f3824); border-radius: 8px 3px 3px 8px"></div>
+        <div style="flex: 1; position: relative; background: linear-gradient(180deg, #d6cfbf, #fffdf8 42%, #efe9dc 75%, #d0c8b6); border-radius: 18px 0 0 18px">
+          <img src="assets/word-olive.png" style="position: absolute; left: 50%; top: 50%; width: 120px; transform: translate(-50%, -50%) rotate(0deg)" alt="" />
+        </div>
+        <div style="width: 26px; background: repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.07) 0 2px, transparent 2px 6px), linear-gradient(180deg, #d6cfbf, #fbf9f2 45%, #d0c8b6); border-radius: 0 3px 3px 0"></div>
+      </div>
+      <!-- serum lying (bulb left) -->
+      <div class="cav" style="left: 40px; top: 238px; width: 318px; height: 104px"></div>
+      <div class="tview" style="left: 50px; top: 249px; width: 298px; height: 82px; display: flex; align-items: center">
+        <div style="width: 66px; height: 36px; background: linear-gradient(180deg, #39432c, #6b7652 45%, #323b25); border-radius: 22px 4px 4px 22px"></div>
+        <div style="width: 44px; height: 54px; background: repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.08) 0 2px, transparent 2px 5px), linear-gradient(180deg, #9c7f50, #f6e6c4 45%, #8d7146); border-radius: 3px"></div>
+        <div style="flex: 1; height: 82px; position: relative; background: linear-gradient(180deg, #9aa384, #e6eadb 45%, #a9b292); border-radius: 4px 12px 12px 4px">
+          <div class="paper-cream" style="position: absolute; left: 30px; right: 26px; top: 6px; bottom: 6px; border-radius: 2px; display: flex; align-items: center; justify-content: center">
+            <img src="assets/word-olive.png" style="width: 92px" alt="" />
+          </div>
+        </div>
+      </div>
+      <!-- moisturizer jar from above -->
+      <div class="cav" style="left: 398px; top: 206px; width: 182px; height: 182px; border-radius: 50%"></div>
+      <div class="tview" style="left: 408px; top: 216px; width: 162px; height: 162px; border-radius: 50%; background: radial-gradient(circle at 38% 34%, #6e7a54, #4c573a 55%, #343e28 100%); box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25)">
+        <div class="foil m-mark" style="position: absolute; inset: 40px"></div>
+      </div>
+      <!-- ribbon pull tab -->
+      <div style="position: absolute; left: 282px; bottom: -16px; width: 26px; height: 64px; background: linear-gradient(90deg, #b0905f, #e9d6ad 50%, #a8895a); clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 84%, 0 100%)"></div>
+    </div>
+  </div>
+
+  <!-- pins -->
+  <div class="pin" style="left: 110px; top: 400px"><span class="num">1</span></div>
+  <div class="pin" style="left: 690px; top: 400px"><span class="num">2</span></div>
+  <div class="pin" style="left: 846px; top: 400px"><span class="num">3</span></div>
+  <div class="pin" style="left: 1140px; top: 452px"><span class="num">4</span></div>
+  <div class="pin" style="left: 890px; top: 690px"><span class="num">5</span></div>
+  <div class="pin" style="left: 1440px; top: 640px"><span class="num">6</span></div>
+  <div class="pin" style="left: 1196px; top: 862px"><span class="num">7</span></div>
+
+  <!-- dimensions -->
+  <div style="position: absolute; left: 856px; top: 950px; width: 624px; display: flex; align-items: center; gap: 12px; color: var(--muted); font-size: 18px; letter-spacing: 0.2em">
+    <span style="flex: 1; height: 1px; background: var(--muted)"></span><span class="tnum">240 mm</span><span style="flex: 1; height: 1px; background: var(--muted)"></span>
+  </div>
+
+  <ul class="legend" style="position: absolute; left: 120px; right: 120px; top: 1010px">
+    <li><span class="num">1</span><div><b>Lid ke andar sage print</b><span>Khulte hi pehli nazar: mark + "Your daily ritual" + 3 steps ka order. Offset print, matte.</span></div></li>
+    <li><span class="num">2</span><div><b>Card pocket + ritual card</b><span>Lid mein patti wala pocket. Card (A6, 350 gsm): istemal ka tareeqa + QR (website / how-to video).</span></div></li>
+    <li><span class="num">3</span><div><b>Insert tray — cream</b><span>Paper-wrapped EVA foam ya molded pulp (eco). Har product ki apni naap ki jagah — hilta nahi, toot-phoot se bachta hai.</span></div></li>
+    <li><span class="num">4</span><div><b>Face Wash 100 ml (lita hua)</b><span>Olive cap, cream tube. Tray mein sab se upar — step 01.</span></div></li>
+    <li><span class="num">5</span><div><b>Face Serum 30 ml</b><span>Frosted sage glass + gold collar + olive dropper bulb.</span></div></li>
+    <li><span class="num">6</span><div><b>Moisturizer 50 g jar</b><span>Upar se dekhne par olive lid par gold foil mark — tray mein "seal" jaisa lagta hai.</span></div></li>
+    <li><span class="num">7</span><div><b>Ribbon pull tab</b><span>Gold satin ribbon: tray ko asaani se bahar nikalne ke liye, aur premium feel.</span></div></li>
+    <li><span class="num">+</span><div><b>Shipping ke liye</b><span>Kraft mailer box → andar cream tissue paper → gold "Lumira" seal sticker → phir kit box.</span></div></li>
+  </ul>
+  <div class="foot"><span>Unboxing order: mailer → tissue → sleeve → lid → card → products</span><span>Tray 240 × 175 mm</span></div>
+</section>
+
+<!-- ═════════ BOARD 3 · PRODUCTS ═════════ -->
+<section class="board" id="b3">
+  <div class="hd">
+    <div><div class="kicker">Lumira · Ritual Kit · 03 / 04</div><h1>Teen products — <em>front labels</em></h1></div>
+    <img class="brand" src="assets/mark-color.png" alt="Lumira mark" />
+  </div>
+  <div class="rule"></div>
+
+  <div style="position: absolute; left: 0; right: 0; top: 420px; height: 900px; display: flex; justify-content: center; align-items: flex-end; gap: 120px">
+    <!-- tube -->
+    <div class="prod tube" style="--mm: 5px">
+      <div class="crimp"></div>
+      <div class="body">
+        <div class="lab" style="top: 70px">
+          <div class="foil m-mark" style="width: 76px; height: 80px"></div>
+          <img src="assets/word-olive.png" style="width: 150px; margin-top: 18px" alt="" />
+          <img src="assets/skincare-olive.png" style="width: 74px; margin-top: 8px; opacity: 0.8" alt="" />
+          <div class="bar" style="width: 90px; margin: 26px 0 22px"></div>
+          <div class="step" style="font-size: 14px">01 · Cleanse</div>
+          <div class="name" style="font-size: 34px; margin-top: 12px">Gentle<br />Face Wash</div>
+          <div class="desc" style="font-size: 12px; margin-top: 16px">For all skin types</div>
+          <div class="qty" style="font-size: 15px; margin-top: 150px">100 ml · 3.38 fl oz</div>
+        </div>
+      </div>
+      <div class="cap"></div>
+      <div class="shade" style="bottom: -24px; width: 280px; height: 44px"></div>
+    </div>
+
+    <!-- dropper -->
+    <div class="prod dropper" style="--mm: 5px">
+      <div class="bulb"></div><div class="collar"></div>
+      <div class="glass">
+        <div class="lab paper-cream" style="top: 60px; bottom: 44px; left: 12px; right: 12px; padding-top: 34px; border-radius: 3px; box-shadow: inset 0 0 0 1px rgba(196, 168, 120, 0.4)">
+          <img src="assets/word-olive.png" style="width: 116px" alt="" />
+          <div class="bar" style="width: 60px; margin: 18px 0"></div>
+          <div class="step" style="font-size: 12px">02 · Treat</div>
+          <div class="name" style="font-size: 30px; margin-top: 10px">Face<br />Serum</div>
+          <div class="qty" style="font-size: 13px; margin-top: 24px">30 ml · 1.01 fl oz</div>
+        </div>
+      </div>
+      <div class="shade" style="bottom: -22px; width: 240px; height: 40px"></div>
+    </div>
+
+    <!-- jar -->
+    <div class="prod jar" style="--mm: 5px">
+      <div class="lid" style="display: flex; align-items: center; justify-content: center">
+        <img src="assets/word-cream.png" style="width: 110px; opacity: 0.85" alt="" />
+      </div>
+      <div class="body">
+        <div class="lab" style="top: 30px">
+          <div class="foil m-mark" style="width: 44px; height: 46px"></div>
+          <div class="step" style="font-size: 12px; margin-top: 14px">03 · Hydrate</div>
+          <div class="name" style="font-size: 30px; margin-top: 8px">Daily Moisturizer</div>
+          <div class="qty" style="font-size: 13px; margin-top: 12px">50 g · 1.76 oz</div>
+        </div>
+      </div>
+      <div class="shade" style="bottom: -22px; width: 400px; height: 40px"></div>
+    </div>
+  </div>
+
+  <div style="position: absolute; left: 120px; right: 120px; top: 1420px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 50px">
+    <div><div class="kicker" style="font-weight: 600; font-size: 18px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-deep)">01 · Face Wash</div>
+      <p style="margin-top: 14px; font-size: 21px; line-height: 1.5; color: var(--ink)">100 ml soft-touch matte <b>cream tube</b>, olive flip-top cap. Print seedha tube par (offset/silk) — label ki zaroorat nahi. Gold mark: hot-foil.</p></div>
+    <div><div class="kicker" style="font-weight: 600; font-size: 18px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-deep)">02 · Serum</div>
+      <p style="margin-top: 14px; font-size: 21px; line-height: 1.5; color: var(--ink)">30 ml <b>frosted glass dropper</b> (halki sage tint ya clear frosted), gold collar, olive rubber bulb. Cream paper label wrap.</p></div>
+    <div><div class="kicker" style="font-weight: 600; font-size: 18px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-deep)">03 · Moisturizer</div>
+      <p style="margin-top: 14px; font-size: 21px; line-height: 1.5; color: var(--ink)">50 g <b>double-wall jar</b> (cream PP/acrylic), olive screw lid — lid ke upar gold foil mark, andar seal disc + spatula.</p></div>
+  </div>
+  <div style="position: absolute; left: 120px; right: 120px; top: 1740px; font-size: 19px; line-height: 1.5; color: var(--muted)">
+    Label par sirf wohi likhein jo formula se sabit ho. Final formula aane par product ke naam ke neeche 1 line ka asal fayda (e.g. ingredient) add karein — koi "whitening", "100%", ya dawa jaisa daawa na likhein.
+  </div>
+  <div class="foot"><span>Ek label system · 3 products</span><span>Scale: actual proportions</span></div>
+</section>
+
+<!-- ═════════ BOARD 4 · BACK LABEL + SPECS ═════════ -->
+<section class="board" id="b4">
+  <div class="hd">
+    <div><div class="kicker">Lumira · Ritual Kit · 04 / 04</div><h1>Back label &amp; <em>printing specs</em></h1></div>
+    <img class="brand" src="assets/mark-color.png" alt="Lumira mark" />
+  </div>
+  <div class="rule"></div>
+
+  <div style="position: absolute; left: 120px; top: 380px; width: 470px; height: 760px; border-radius: 8px; box-shadow: 0 30px 60px rgba(46, 51, 36, 0.2)" class="paper-cream">
+    <div style="padding: 40px 38px; font-size: 15px; line-height: 1.5; color: var(--ink)">
+      <img src="assets/word-olive.png" style="width: 130px" alt="" />
+      <div style="font-family: Marcellus, serif; font-size: 26px; color: var(--olive-deep); margin-top: 14px">Gentle Face Wash</div>
+      <div style="height: 1px; background: var(--gold); margin: 18px 0"></div>
+      <b style="font-size: 12px; letter-spacing: 0.25em; color: var(--gold-deep)">DIRECTIONS</b>
+      <p style="margin: 6px 0 14px">Geele chehre par thori si miqdar lein, halke haathon se 30–60 second massage karein, paani se dho lein. Subah aur raat.</p>
+      <b style="font-size: 12px; letter-spacing: 0.25em; color: var(--gold-deep)">INGREDIENTS</b>
+      <p style="margin: 6px 0 14px; color: var(--muted)">[Final formula ki INCI list — sab se zyada miqdar wala pehle]</p>
+      <b style="font-size: 12px; letter-spacing: 0.25em; color: var(--gold-deep)">CAUTION</b>
+      <p style="margin: 6px 0 14px">Sirf bahar ke istemal ke liye. Aankhon se bachayein. Jalan ho to istemal band karein. Bachon ki pohanch se door rakhein.</p>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px 14px; font-size: 13px; color: var(--ink)">
+        <span>Batch No: ______</span><span>Net: 100 ml</span>
+        <span>Mfg: __ / ____</span><span>Exp: __ / ____</span>
+      </div>
+      <p style="margin-top: 14px; font-size: 13px; color: var(--muted)">Manufactured for: Royal Vision, Faisalabad, Pakistan · Made in Pakistan · royalvision.online</p>
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-top: 18px">
+        <div style="width: 170px; height: 74px; background: repeating-linear-gradient(90deg, var(--ink) 0 2px, transparent 2px 4px, var(--ink) 4px 5px, transparent 5px 8px, var(--ink) 8px 11px, transparent 11px 13px)"></div>
+        <div style="font-size: 12px; text-align: right; color: var(--muted)">PSQCA mark<br />(jahan lagu ho)</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="position: absolute; left: 650px; right: 120px; top: 380px">
+    <table class="spec">
+      <tr><th>Hissa</th><th>Material / finish</th></tr>
+      <tr><td>Kit box</td><td>Rigid 2-piece, 2 mm greyboard, olive textured/soft-touch paper wrap, gold hot-foil + emboss (lid mark, front "LUMIRA")</td></tr>
+      <tr><td>Sleeve</td><td>Cream textured paper 250–300 gsm, 1-colour olive print</td></tr>
+      <tr><td>Lid inside</td><td>Sage print (offset/digital), card pocket</td></tr>
+      <tr><td>Insert</td><td>Paper-wrapped EVA foam (premium) ya molded pulp (eco, sasta)</td></tr>
+      <tr><td>Cards</td><td>A6, 350 gsm cream, matte — how-to + QR; thank-you card</td></tr>
+      <tr><td>Face wash</td><td>100 ml matte tube, olive flip-top, direct print</td></tr>
+      <tr><td>Serum</td><td>30 ml frosted glass dropper, gold collar, cream label</td></tr>
+      <tr><td>Moisturizer</td><td>50 g double-wall jar, olive lid, seal disc + spatula</td></tr>
+      <tr><td>Shipping</td><td>Kraft mailer box, cream tissue, gold seal sticker</td></tr>
+    </table>
+  </div>
+
+  <div style="position: absolute; left: 120px; right: 120px; top: 1220px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px">
+    <div>
+      <div class="kicker" style="font-weight: 600; font-size: 18px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-deep)">Label par zaroori (checklist)</div>
+      <ul style="margin-top: 16px; padding-left: 24px; font-size: 20px; line-height: 1.7">
+        <li>Product ka naam + net quantity (ml / g)</li>
+        <li>Ingredients (INCI), zyada se kam</li>
+        <li>Istemal ka tareeqa + caution</li>
+        <li>Batch no., Mfg aur Expiry date</li>
+        <li>Manufacturer ka naam / pata, Made in Pakistan</li>
+        <li>Skin cream (moisturizer): PSQCA PS 3228</li>
+        <li>Barcode (online / stores ke liye)</li>
+      </ul>
+    </div>
+    <div>
+      <div class="kicker" style="font-weight: 600; font-size: 18px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-deep)">Shuru kaise karein</div>
+      <ul style="margin-top: 16px; padding-left: 24px; font-size: 20px; line-height: 1.7">
+        <li>Pehle bottles / tube / jar ke samples lein, phir naap final karein</li>
+        <li>Unhi naap par box + insert ka dieline banwayein</li>
+        <li>1 digital sample box (mock-up) — phir order</li>
+        <li>Shuru mein labels (tube par bhi) — MOQ kam</li>
+        <li>Rigid box ka MOQ aam tor par 300–500 pcs</li>
+        <li>Lahore / Karachi packaging houses se 3 quotes</li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot"><span>Daawe: sirf wohi jo formula aur testing se sabit</span><span>Lumira · by Royal Vision</span></div>
+</section>
+
+</body>
+</html>

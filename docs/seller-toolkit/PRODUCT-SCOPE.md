@@ -73,7 +73,18 @@ Reference points seen (first-party, 2026-11-11): iLoveIMG Premium US$5/month (an
 
 No "most popular", scarcity or savings badges. Unpriced products show a **pending-price** state and checkout is blocked.
 
-## 6. Decisions required from the owner
+## 6. Owner decisions recorded (2026-11-11)
+
+| Decision | Answer |
+|---|---|
+| Brand name | **Seller Toolkit** (final) |
+| Business country | **Pakistan** |
+| Currency | **PKR** |
+| Page builder licence | **PRO Elements** (unofficial GPL redistribution of Elementor Pro). Accepted by the owner with no Elementor vendor support or official updates. Keep Elementor core and PRO Elements versions compatible and test before each update. |
+| WooCommerce Subscriptions budget | _Pending (needed for Phase 07)_ |
+| Refund / cancellation rules | _Pending (needed for Phases 07 and 11)_ |
+
+## 7. Decisions still required from the owner
 
 1. Final **brand name** (working name: Seller Toolkit)
 2. **Business country** and legal entity (decides gateway eligibility and taxes)

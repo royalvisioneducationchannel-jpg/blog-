@@ -1,0 +1,31 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Customer detail — Seller Toolkit admin (prototype)</title><meta name="robots" content="noindex">
+<link rel="stylesheet" href="styles.css">
+<style>.cols{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px} .cols>*{min-width:0} .c21{grid-template-columns:2fr 1fr} @media(max-width:1100px){.cols,.c21{grid-template-columns:1fr}} dl{display:grid;grid-template-columns:auto 1fr;gap:8px 16px;margin:0;font-size:14px} dt{color:var(--text-2)} dd{margin:0}
+.note-in{width:100%;min-height:72px;border:1px solid var(--input);border-radius:var(--r-sm);padding:10px;font:14px var(--font-body)}</style></head><body>
+<div class="review-bar">Design prototype · Platform admin CRM (wp-admin capability required) · <strong>Demo customer</strong></div>
+<div class="app">
+  <nav class="side" aria-label="Admin"><a class="brand" href="#" style="padding:6px 12px 14px"><img src="../brand/logo-mark.svg" alt="">Admin</a>
+    <a href="#"><svg class="ico"><use href="../brand/icons.svg#i-home"/></svg>Dashboard</a><a href="#" aria-current="page"><svg class="ico"><use href="../brand/icons.svg#i-user"/></svg>Customers</a><a href="#"><svg class="ico"><use href="../brand/icons.svg#i-card"/></svg>Subscriptions</a><a href="#"><svg class="ico"><use href="../brand/icons.svg#i-chart"/></svg>Usage & credits</a><a href="#"><svg class="ico"><use href="../brand/icons.svg#i-bell"/></svg>Reminders</a><a href="#"><svg class="ico"><use href="../brand/icons.svg#i-cutout"/></svg>Providers</a><a href="#"><svg class="ico"><use href="../brand/icons.svg#i-sliders"/></svg>Plans & limits</a></nav>
+  <div>
+    <div class="app-top"><strong>Admin · Customer</strong><span style="margin-left:auto" class="badge demo">Demo</span></div>
+    <main class="main">
+      <div class="main-head"><div><small><a href="#">Customers</a> / Demo Seller</small><h1 style="font-size:28px;margin:6px 0 4px">Demo Seller <span class="badge demo">Demo</span></h1><p class="muted" style="margin:0">demo.seller@example.com · Customer since 2 Sep 2026 · Workspace #D-001</p></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn secondary sm">Send payment link</button><button class="btn secondary sm">Adjust credits…</button></div></div>
+      <div class="cols">
+        <div class="card"><h3>Subscription</h3><dl><dt>Plan</dt><dd>Image Pro <span class="badge free">Active</span></dd><dt>Renewal</dt><dd>Manual · due 16 Nov 2026</dd><dt>Segment</dt><dd><span class="badge dev">Expiring soon</span></dd><dt>Source of truth</dt><dd><a href="#">WooCommerce subscription #— ↗</a></dd></dl><p class="muted" style="font-size:12px;margin:12px 0 0">Billing state is read from WooCommerce; it can't be edited here.</p></div>
+        <div class="card"><h3>Usage</h3><dl><dt>Saved presets</dt><dd>7 / 20</dd><dt>Brand kits</dt><dd>1 / 5</dd><dt>BG credits</dt><dd>— (not available)</dd><dt>Last active</dt><dd>Today 10:42 PKT</dd></dl></div>
+        <div class="card"><h3>Consent & contact</h3><dl><dt>Service emails</dt><dd>On (required)</dd><dt>Marketing email</dt><dd>Off</dd><dt>WhatsApp</dt><dd>Not opted in</dd><dt>Timezone</dt><dd>Asia/Karachi</dd></dl></div>
+      </div>
+      <div class="cols c21" style="margin-top:16px">
+        <div class="card"><h3>Timeline</h3><ul class="timeline">
+          <li><time>11 Nov 09:00</time><span>Reminder “Renew in 7 days” sent (email) · delivered</span></li>
+          <li><time>16 Oct 14:10</time><span>Payment received · Order #— · Image Pro Oct–Nov</span></li>
+          <li><time>2 Sep 11:31</time><span>Payment failed · gateway message shown to customer</span></li>
+          <li><time>2 Sep 11:05</time><span>Account created · email verified</span></li></ul></div>
+        <div class="card"><h3>Internal notes</h3><textarea class="note-in" aria-label="Add internal note" placeholder="Visible to admins only. Avoid sensitive data."></textarea><button class="btn secondary sm" style="margin-top:8px">Add note</button>
+          <h4 style="margin-top:18px">Support tickets</h4><p class="muted" style="font-size:14px;margin:0">None open.</p></div>
+      </div>
+    </main>
+  </div>
+</div></body></html>

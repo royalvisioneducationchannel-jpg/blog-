@@ -1,0 +1,31 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Subscriptions & billing — Seller Toolkit portal (prototype)</title><meta name="robots" content="noindex">
+<link rel="stylesheet" href="styles.css">
+<style>.sub{display:grid;grid-template-columns:1.4fr 1fr;gap:16px} .sub>*{min-width:0} @media(max-width:1000px){.sub{grid-template-columns:1fr}} dl{display:grid;grid-template-columns:auto 1fr;gap:10px 20px;margin:0;font-size:15px} dt{color:var(--text-2)} dd{margin:0;font-weight:600}
+.acts{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}</style></head><body>
+<div class="review-bar">Design prototype · Billing · <strong>Demo data</strong> · Manual-renewal example (gateway not chosen yet)</div>
+<div class="app">
+  <nav class="side" aria-label="Portal"><a class="brand" href="home.html" style="padding:6px 12px 14px"><img src="../brand/logo-mark.svg" alt="">Seller Toolkit</a>
+    <a href="dashboard.html"><svg class="ico"><use href="../brand/icons.svg#i-home"/></svg>Overview</a><a href="tool.html"><svg class="ico"><use href="../brand/icons.svg#i-resize"/></svg>My Tools</a><a href="#"><svg class="ico"><use href="../brand/icons.svg#i-folder"/></svg>Projects</a><a href="#"><svg class="ico"><use href="../brand/icons.svg#i-palette"/></svg>Brand Kit</a><a href="#"><svg class="ico"><use href="../brand/icons.svg#i-chart"/></svg>Usage & Credits</a>
+    <span class="sep">Account</span><a href="billing.html" aria-current="page"><svg class="ico"><use href="../brand/icons.svg#i-card"/></svg>Subscriptions</a><a href="#history"><svg class="ico"><use href="../brand/icons.svg#i-invoice"/></svg>Billing History</a><a href="#"><svg class="ico"><use href="../brand/icons.svg#i-bell"/></svg>Notifications</a><a href="#"><svg class="ico"><use href="../brand/icons.svg#i-help"/></svg>Support</a><a href="#"><svg class="ico"><use href="../brand/icons.svg#i-sliders"/></svg>Settings</a></nav>
+  <div>
+    <div class="app-top"><a class="brand" href="home.html"><img src="../brand/logo-mark.svg" alt="">Seller Toolkit</a><span style="margin-left:auto" class="badge demo">Demo</span></div>
+    <nav class="tabs-m" aria-label="Portal"><a href="dashboard.html">Overview</a><a href="#">My Tools</a><a href="billing.html" aria-current="page">Billing</a><a href="#">Usage</a><a href="#">Support</a></nav>
+    <main class="main">
+      <div class="main-head"><div><h1 style="font-size:28px;margin:0 0 4px">Subscriptions & billing</h1><p class="muted" style="margin:0">Demo Workspace</p></div></div>
+      <div class="note warn" style="margin-bottom:16px"><svg class="ico"><use href="../brand/icons.svg#i-clock"/></svg><div><strong>Renewal due in 5 days.</strong> This plan renews manually — you won't be charged automatically. Pay before 16 Nov 2026 to keep editing saved presets.</div></div>
+      <div class="sub">
+        <div class="card"><div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap"><h3 style="margin:0">Image Pro</h3><span class="badge free">Active</span></div>
+          <dl style="margin-top:16px"><dt>Billing interval</dt><dd>Monthly</dd><dt>Price</dt><dd>PKR — <span class="muted" style="font-weight:400">(pending approval)</span></dd><dt>Renewal type</dt><dd>Manual — “Renew manually”</dd><dt>Paid through</dt><dd>16 Nov 2026</dd><dt>Payment method</dt><dd>[Gateway not chosen yet]</dd></dl>
+          <div class="acts"><button class="btn primary">Renew now</button><button class="btn secondary">Change plan</button><button class="btn ghost">Cancel at period end</button></div>
+          <p class="muted" style="font-size:13px;margin:12px 0 0">If you cancel, you keep access until 16 Nov 2026. Saved presets stay readable for [grace period — owner to decide].</p></div>
+        <div class="card"><h3>What happens if you don't renew</h3><ul style="padding-left:18px;margin:0;font-size:14px;color:var(--text-2);display:grid;gap:8px"><li>Free tools keep working.</li><li>Saved presets and brand kits become read-only.</li><li>Nothing is deleted without notice.</li></ul></div>
+      </div>
+      <h2 id="history" style="font-size:20px;margin:32px 0 12px">Billing history</h2>
+      <div class="tbl-wrap" style="background:#fff"><table class="tbl"><thead><tr><th>Date</th><th>Description</th><th>Status</th><th class="num">Amount</th><th></th></tr></thead><tbody>
+        <tr><td>16 Oct 2026</td><td>Image Pro · Oct–Nov (Demo)</td><td><span class="badge free">Paid</span></td><td class="num">PKR —</td><td><a href="#">Receipt</a></td></tr>
+        <tr><td>16 Sep 2026</td><td>Image Pro · Sep–Oct (Demo)</td><td><span class="badge free">Paid</span></td><td class="num">PKR —</td><td><a href="#">Receipt</a></td></tr>
+        <tr><td>2 Sep 2026</td><td>Image Pro · payment attempt (Demo)</td><td><span class="badge err">Failed</span></td><td class="num">PKR —</td><td><a href="#">Details</a></td></tr></tbody></table></div>
+    </main>
+  </div>
+</div></body></html>

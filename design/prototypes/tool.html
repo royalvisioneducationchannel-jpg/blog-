@@ -1,0 +1,60 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Marketplace resizer — Seller Toolkit (prototype)</title><meta name="robots" content="noindex">
+<link rel="stylesheet" href="styles.css">
+<style>
+.tool-head{padding:28px 0 16px;display:flex;justify-content:space-between;gap:16px;align-items:flex-end;flex-wrap:wrap} .tool-head h1{font-size:clamp(26px,3vw,34px);margin:0 0 6px}
+.modes{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px} .modes a{display:flex;align-items:center;gap:8px;padding:9px 14px;border:1px solid var(--border);border-radius:999px;text-decoration:none;color:var(--text);font-size:14px;background:#fff} .modes a[aria-current=page]{background:var(--tint);border-color:var(--primary);color:var(--primary);font-weight:600} .modes .ico{width:18px;height:18px}
+.ws{display:grid;grid-template-columns:330px 1fr;gap:16px;margin-bottom:24px} .ws>*{min-width:0} @media(max-width:960px){.ws{grid-template-columns:1fr}}
+.panel{display:grid;gap:14px;align-content:start} .mkts{display:grid;grid-template-columns:1fr 1fr;gap:8px} .mkts button{display:flex;align-items:center;gap:8px;justify-content:center;border:1px solid var(--border);background:#fff;border-radius:var(--r-sm);min-height:48px;font:14px var(--font-body);cursor:pointer} .mkts button[aria-pressed=true]{border:2px solid var(--primary);background:var(--tint)} .mkts img{height:18px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.drop{border:1.5px dashed var(--input);border-radius:var(--r-lg);padding:20px;text-align:center;display:grid;gap:6px;justify-items:center;background:var(--surface)} .drop .ico{width:28px;height:28px;color:var(--primary)}
+.stage{display:grid;gap:12px;align-content:start}
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:12px} .cmp .placeholder{aspect-ratio:1} .cap{display:flex;justify-content:space-between;font-size:13px;color:var(--text-2);margin-top:6px}
+.q{list-style:none;margin:0;padding:0;border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;background:#fff} .q li{display:flex;align-items:center;gap:12px;padding:10px 14px;border-bottom:1px solid var(--border);font-size:14px} .q li:last-child{border:0} .q .th{width:36px;height:36px;border-radius:6px;background:var(--surface);border:1px solid var(--border)} .q .grow{flex:1;min-width:0} .q b{display:block;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.actions{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}
+.limits{display:grid;grid-template-columns:repeat(4,1fr);gap:12px} @media(max-width:700px){.limits{grid-template-columns:1fr 1fr}} .limits div{background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:12px} .limits b{display:block;font:600 18px var(--font-head)} .limits span{font-size:13px;color:var(--text-2)}
+</style></head><body>
+<div class="review-bar">Design prototype · Tool workspace · Demo files</div>
+<header class="hdr"><div class="wrap"><a class="brand" href="home.html"><img src="../brand/logo-mark.svg" alt="">Seller Toolkit</a>
+<nav class="nav" aria-label="Main"><a href="tool.html" aria-current="page">Tools</a><a href="pricing.html">Pricing</a><a href="#">Guides</a></nav>
+<div class="end"><a class="btn ghost signin" href="dashboard.html">Sign in</a><button class="btn secondary sm menu-btn">Menu</button></div></div></header>
+
+<div class="wrap">
+  <div class="tool-head"><div><h1>Marketplace resizer</h1><p class="muted" style="margin:0">Put product photos on a consistent marketplace canvas.</p></div>
+    <span class="badge free"><svg class="ico" style="width:14px;height:14px"><use href="../brand/icons.svg#i-device"/></svg>Runs on your device · Free</span></div>
+  <nav class="modes" aria-label="Image tools">
+    <a href="#" aria-current="page"><svg class="ico"><use href="../brand/icons.svg#i-resize"/></svg>Resize</a><a href="#"><svg class="ico"><use href="../brand/icons.svg#i-compress"/></svg>Compress</a><a href="#"><svg class="ico"><use href="../brand/icons.svg#i-square"/></svg>Square</a><a href="#"><svg class="ico"><use href="../brand/icons.svg#i-bulk"/></svg>Bulk & ZIP</a><a href="#"><svg class="ico"><use href="../brand/icons.svg#i-watermark"/></svg>Watermark</a><a href="#"><svg class="ico"><use href="../brand/icons.svg#i-cutout"/></svg>Background</a>
+  </nav>
+
+  <div class="ws">
+    <form class="card panel" onsubmit="return false">
+      <div class="drop"><svg class="ico"><use href="../brand/icons.svg#i-upload"/></svg><strong>Add product photos</strong><small>JPG, PNG, WebP · up to 20 MB each</small><button class="btn secondary sm" type="button">Choose photos</button></div>
+      <div><h4 style="margin-bottom:8px">Marketplace</h4><div class="mkts">
+        <button type="button" aria-pressed="true"><img src="https://lightyellow-alligator-410734.hostingersite.com/wp-content/plugins/seller-tools/assets/daraz.svg" alt="">Daraz</button>
+        <button type="button" aria-pressed="false"><img src="https://lightyellow-alligator-410734.hostingersite.com/wp-content/plugins/seller-tools/assets/shopify.svg" alt="">Shopify</button>
+        <button type="button" aria-pressed="false"><img src="https://lightyellow-alligator-410734.hostingersite.com/wp-content/plugins/seller-tools/assets/amazon.png" alt="">Amazon</button>
+        <button type="button" aria-pressed="false"><img src="https://lightyellow-alligator-410734.hostingersite.com/wp-content/plugins/seller-tools/assets/etsy.svg" alt="">Etsy</button></div>
+        <small>Editable preset — check the marketplace's guidelines for your category.</small></div>
+      <div class="two"><label class="f">Width (px)<input value="1200" inputmode="numeric"></label><label class="f">Height (px)<input value="1200" inputmode="numeric"></label></div>
+      <label class="f">Fit<select><option>Fit entire photo</option><option>Fill canvas and crop</option></select></label>
+      <div class="two"><label class="f">Background<select><option>White</option><option>Transparent</option></select></label><label class="f">Format<select><option>JPG</option><option>WebP</option><option>PNG</option></select></label></div>
+      <button class="btn primary" type="submit">Process 3 photos</button>
+    </form>
+
+    <div class="stage">
+      <div class="guide" role="note" aria-label="Studio Guide"><span class="bot"><svg class="ico"><use href="../brand/icons.svg#i-guide"/></svg></span>
+        <div><div class="who">Studio Guide <span>· 2 suggestions based on your files</span></div>
+        <ul><li><strong>Fix:</strong> <a href="#">demo-shoes.jpg is 48 MP</a> — larger than the 16 MP output limit. Choose “Limit longest side” to continue.</li><li><strong>Tip:</strong> Two photos are portrait. <a href="#">Use “Fit entire photo”</a> so nothing is cropped.</li></ul></div></div>
+      <div class="card" style="padding:16px"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;gap:8px;flex-wrap:wrap"><strong>demo-kurta-front.jpg</strong><div class="seg"><button aria-pressed="false">Original</button><button aria-pressed="true">Compare</button><button aria-pressed="false">Result</button></div></div>
+        <div class="cmp"><div><div class="placeholder">Original<br><small>real product photo</small></div><div class="cap"><span>3000 × 2000</span><span>2.4 MB</span></div></div><div><div class="placeholder">Result<br><small>1200 × 1200 white canvas</small></div><div class="cap"><span>1200 × 1200</span><span>186 KB · JPG</span></div></div></div></div>
+      <ul class="q" aria-label="Photo queue"><li><span class="th"></span><div class="grow"><b>demo-kurta-front.jpg</b><small class="muted">1200 × 1200 · 186 KB</small></div><span class="badge free">Done</span></li>
+        <li><span class="th"></span><div class="grow"><b>demo-kurta-back.jpg</b><small class="muted">1200 × 1200 · 171 KB</small></div><span class="badge free">Done</span></li>
+        <li><span class="th"></span><div class="grow"><b>demo-shoes.jpg</b><small class="muted">Too large to process at full size (48 MP)</small></div><span class="badge err">Needs a choice</span></li></ul>
+      <div class="actions"><span class="note ok" style="flex:1;min-width:240px"><svg class="ico"><use href="../brand/icons.svg#i-lock"/></svg>Photos stay on this device. Output files have new names and no photo metadata.</span><button class="btn primary">Download 2 as ZIP</button></div>
+    </div>
+  </div>
+
+  <h2 style="font-size:22px">Limits</h2>
+  <div class="limits" style="margin-bottom:56px"><div><b>50</b><span>photos per batch</span></div><div><b>20 MB</b><span>per photo</span></div><div><b>100 MB</b><span>per batch</span></div><div><b>16 MP</b><span>largest output (8,192 px side)</span></div></div>
+</div>
+</body></html>

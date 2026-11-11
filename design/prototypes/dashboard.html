@@ -1,0 +1,45 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Overview — Seller Toolkit portal (prototype)</title><meta name="robots" content="noindex">
+<link rel="stylesheet" href="styles.css">
+<style>.prod{display:flex;gap:14px;align-items:flex-start} .prod .tile{flex:none} .row2{display:grid;grid-template-columns:2fr 1fr;gap:16px} .row2>*{min-width:0} @media(max-width:1100px){.row2{grid-template-columns:1fr}}
+.empty{text-align:center;padding:28px;display:grid;gap:8px;justify-items:center} .empty .tile{width:48px;height:48px}</style></head><body>
+<div class="review-bar">Design prototype · Customer portal at /app/ · <strong>Demo account and data</strong></div>
+<div class="app">
+  <nav class="side" aria-label="Portal">
+    <a class="brand" href="home.html" style="padding:6px 12px 14px"><img src="../brand/logo-mark.svg" alt="">Seller Toolkit</a>
+    <a href="dashboard.html" aria-current="page"><svg class="ico"><use href="../brand/icons.svg#i-home"/></svg>Overview</a>
+    <a href="tool.html"><svg class="ico"><use href="../brand/icons.svg#i-resize"/></svg>My Tools</a>
+    <a href="#"><svg class="ico"><use href="../brand/icons.svg#i-folder"/></svg>Projects</a>
+    <a href="#"><svg class="ico"><use href="../brand/icons.svg#i-palette"/></svg>Brand Kit</a>
+    <a href="#"><svg class="ico"><use href="../brand/icons.svg#i-chart"/></svg>Usage & Credits</a>
+    <span class="sep">Account</span>
+    <a href="billing.html"><svg class="ico"><use href="../brand/icons.svg#i-card"/></svg>Subscriptions</a>
+    <a href="billing.html#history"><svg class="ico"><use href="../brand/icons.svg#i-invoice"/></svg>Billing History</a>
+    <a href="#"><svg class="ico"><use href="../brand/icons.svg#i-bell"/></svg>Notifications</a>
+    <a href="#"><svg class="ico"><use href="../brand/icons.svg#i-help"/></svg>Support</a>
+    <a href="#"><svg class="ico"><use href="../brand/icons.svg#i-sliders"/></svg>Settings</a>
+  </nav>
+  <div>
+    <div class="app-top"><a class="brand" href="home.html"><img src="../brand/logo-mark.svg" alt="">Seller Toolkit</a><span style="margin-left:auto" class="badge demo">Demo</span></div>
+    <nav class="tabs-m" aria-label="Portal"><a href="#" aria-current="page">Overview</a><a href="#">My Tools</a><a href="#">Projects</a><a href="#">Brand Kit</a><a href="#">Usage</a><a href="billing.html">Billing</a><a href="#">Support</a></nav>
+    <main class="main">
+      <div class="main-head"><div><span class="badge demo">Demo workspace</span><h1 style="font-size:28px;margin:8px 0 4px">Assalam o Alaikum, Demo Seller</h1><p class="muted" style="margin:0">Demo Workspace · Owner</p></div><a class="btn primary" href="tool.html">Open Studio</a></div>
+
+      <div class="guide" style="margin-bottom:16px"><span class="bot"><svg class="ico"><use href="../brand/icons.svg#i-guide"/></svg></span><div><div class="who">Studio Guide <span>· rule-based tips, not an AI model</span></div><ul><li><a href="billing.html">Your Image Pro renewal is due in 5 days</a> — renew manually to keep saved presets editable.</li><li><a href="#">Add your logo to a brand kit</a> to watermark in one click.</li></ul></div></div>
+
+      <div class="grid g3" style="margin-bottom:16px">
+        <div class="card kpi"><div class="l">Active plan</div><div class="v">Image Pro</div><small>Renews manually · 16 Nov 2026</small></div>
+        <div class="card kpi"><div class="l">Saved presets</div><div class="v">7 <small class="muted" style="font-size:15px">/ 20</small></div><div class="bar" aria-hidden="true"><i style="width:35%"></i></div></div>
+        <div class="card kpi"><div class="l">Background credits</div><div class="v">—</div><small>Not available yet (provider change)</small></div>
+      </div>
+      <div class="row2">
+        <div class="card"><h3>Recent work</h3><div class="tbl-wrap"><table class="tbl"><thead><tr><th>Project</th><th>Tool</th><th>Updated</th></tr></thead><tbody>
+          <tr><td>Demo — Eid kurta listing</td><td>Resize · Daraz 1200²</td><td>Today, 10:42</td></tr>
+          <tr><td>Demo — Shoe photos</td><td>Watermark</td><td>Yesterday</td></tr>
+          <tr><td>Demo — Invoice INV-014</td><td>Invoice</td><td>9 Nov 2026</td></tr></tbody></table></div>
+          <p class="muted" style="font-size:13px;margin:10px 0 0">Projects save your settings. Photos are stored only when you choose “Save photos”.</p></div>
+        <div class="card"><h3>Seller Desk</h3><div class="empty"><span class="tile"><svg class="ico lg"><use href="../brand/icons.svg#i-box"/></svg></span><strong>Not part of your plan</strong><p class="muted" style="margin:0;font-size:14px">Orders, stock and courier payment matching. Planned — not on sale yet.</p></div></div>
+      </div>
+    </main>
+  </div>
+</div></body></html>

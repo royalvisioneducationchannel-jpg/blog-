@@ -8,8 +8,8 @@ _Last updated: 2026-11-11_
 |---|---|---|
 | — | Build pack saved to repository | ✅ Done |
 | 00 | Connect, inspect and protect | ✅ Complete (follow-up: off-server backup copy) |
-| 01 | Audit tools, validate needs, define scope | 🟡 **Deliverables done. Waiting on owner decisions** (§ Needs owner input) |
-| 02 | Design system and prototypes | ⏭️ Next, after the decisions |
+| 01 | Audit tools, validate needs, define scope | ✅ Complete (owner decisions recorded) |
+| 02 | Design system and prototypes | 🟡 **Previews delivered. Waiting on owner design review** |
 | 03 | WordPress and Elementor foundation | Not started |
 | 04 | Homepage, directory and sales pages | Not started |
 | 05 | Polish tools and advanced workflows | Not started |
@@ -40,9 +40,18 @@ _Last updated: 2026-11-11_
 - COD/courier reconciliation for Pakistani sellers **already exists** (Wasooli, launched 5 Nov 2026; Oshi Courier). Seller Desk needs pilot evidence before it is built or sold.
 - No deletions or merges are recommended. Dead legacy code (`views/image.php`) can be cleaned up later with approval.
 
+## Phase 02: delivered for review
+
+- `design/DESIGN-SYSTEM.md`: tokens with measured contrast, typography, spacing, brand mark, icon family, components, trust rules, Studio Guide, Elementor mapping
+- `design/brand/logo-mark.svg` (original mark) and `design/brand/icons.svg` (32 original icons)
+- `design/fonts/`: Poppins 500/600/700, self-hosted (OFL-1.1, from npm @fontsource/poppins 5.3.0)
+- `design/prototypes/`: home, pricing, tool workspace, customer dashboard, billing, admin customer detail (static HTML, Demo data)
+- `design/previews/`: 12 screenshots (1440 px and 390 px), **0 horizontal overflow**, Poppins loaded
+
 ## Decisions
 
-- Working brand name: **Seller Toolkit** (final name pending).
+- Brand name: **Seller Toolkit** (final). Country: **Pakistan**. Currency: **PKR**. Page builder: **PRO Elements** (owner accepted; no Elementor vendor support).
+- Add `--input` #848D9A for form-control borders, because #DFE3E9 only reaches 1.29:1.
 - Only the `Seller_Toolkit_Dev` connector is used; live-site connectors are excluded.
 - Free limits stay unchanged until a deliberate plan change is approved.
 - Background removal is not sold until a tested replacement provider adapter exists.
@@ -50,12 +59,15 @@ _Last updated: 2026-11-11_
 
 ## Needs owner input
 
-**Blocking Phase 02 (brand/design) and the pricing work:**
-1. Final **brand name**
-2. **Business country** and legal entity
-3. **Currency** (PKR only, or PKR + USD)
-4. **Licence budget:** official Elementor Pro or PRO Elements; WooCommerce Subscriptions
-5. **Refund/cancellation** rules
+**Blocking Phase 03:**
+1. **Design review** of the Phase 02 previews: approve, or list changes
+
+**Needed later (Phase 07 / 11):**
+2. WooCommerce Subscriptions licence budget
+3. Refund/cancellation rules (and the grace period after a missed renewal)
+4. Legal entity name, city and contact details for the footer and policies
+5. Real product photos (or approval for licensed stock) for the hero and tool previews
+6. Urdu font preference (before translated pages)
 
 **Optional approvals:**
 6. ~~Fix H1 now~~ ✅ Done (seller-tools 1.2.2)
@@ -94,6 +106,5 @@ _Last updated: 2026-11-11_
 
 ## Exact next step
 
-1. Owner answers decisions 1–5 (and optionally 6–8).
-2. Record them here and in `PRODUCT-SCOPE.md` §6.
-3. Start **Phase 02**: design tokens, original brand mark and icon family, and desktop + mobile previews of the homepage, pricing, one tool workspace, customer dashboard, billing screen and admin customer detail. One concrete design review before broad implementation.
+1. Owner reviews the 12 previews in `design/previews/` (or opens `design/prototypes/*.html`) and approves or lists changes.
+2. Apply the feedback, then start **Phase 03**: map the tokens to Elementor/PRO Elements globals, build the header, footer and reusable components with Flexbox Containers, add the plugin modules (tool registry, plans, entitlements, usage ledger) with versioned migrations, and prove the existing tools still work.

@@ -1,0 +1,62 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pricing — Seller Toolkit (prototype)</title><meta name="robots" content="noindex">
+<link rel="stylesheet" href="styles.css">
+<style>
+.ph{text-align:center;padding:48px 0 24px} .ph .lead{margin:0 auto 20px}
+.plan{display:flex;flex-direction:column;gap:14px} .plan .price{font:600 22px var(--font-head)} .plan .sub{font-size:13px;color:var(--text-2);min-height:38px}
+.plan ul{list-style:none;padding:0;margin:0;display:grid;gap:8px;font-size:14px} .plan li{display:flex;gap:8px} .plan li .ico{width:18px;height:18px;margin-top:2px;color:var(--success)} .plan li.x{color:var(--text-2)} .plan li.x .ico{color:var(--text-2)}
+.plan .btn{margin-top:auto}
+.cmp th:first-child,.cmp td:first-child{position:sticky;left:0;background:#fff;min-width:180px} .cmp td{text-align:center} .cmp td:first-child{text-align:left}
+.terms{display:grid;grid-template-columns:repeat(3,1fr);gap:16px} @media(max-width:800px){.terms{grid-template-columns:1fr}}
+</style></head><body>
+<div class="review-bar">Design prototype · Pending-price state shown on development until prices are approved</div>
+<header class="hdr"><div class="wrap"><a class="brand" href="home.html"><img src="../brand/logo-mark.svg" alt="">Seller Toolkit</a>
+<nav class="nav" aria-label="Main"><a href="tool.html">Tools</a><a href="pricing.html" aria-current="page">Pricing</a><a href="#">Guides</a></nav>
+<div class="end"><a class="btn ghost signin" href="dashboard.html">Sign in</a><a class="btn primary sm" href="tool.html">Open Studio</a><button class="btn secondary sm menu-btn">Menu</button></div></div></header>
+
+<div class="wrap">
+  <div class="ph"><h1 style="font-size:clamp(30px,3.6vw,44px)">Simple plans. Free tools stay free.</h1>
+    <p class="lead">All prices in PKR. You see the price, billing interval, limits and renewal type before you pay.</p>
+    <div class="seg" role="group" aria-label="Billing interval"><button aria-pressed="true">Monthly</button><button aria-pressed="false">Yearly</button></div>
+  </div>
+  <div class="note warn" style="margin-bottom:24px"><svg class="ico"><use href="../brand/icons.svg#i-alert"/></svg><div><strong>Not on sale yet.</strong> Paid plans are in development and prices are awaiting approval. Checkout is switched off until both are ready.</div></div>
+
+  <div class="grid g4">
+    <div class="card plan"><h3>Free</h3><div class="price">PKR 0</div><div class="sub">No account needed</div>
+      <ul><li><svg class="ico"><use href="../brand/icons.svg#i-check"/></svg>9 tools (8 in your browser)</li><li><svg class="ico"><use href="../brand/icons.svg#i-check"/></svg>50 photos · 20 MB each · 100 MB per batch</li><li><svg class="ico"><use href="../brand/icons.svg#i-check"/></svg>Invoice, profit, UTM</li><li class="x"><svg class="ico"><use href="../brand/icons.svg#i-lock"/></svg>No saved work</li></ul>
+      <a class="btn secondary" href="tool.html">Use free tools</a></div>
+    <div class="card plan"><h3>Image Pro <span class="badge dev">In development</span></h3><div class="price">PKR — <small class="muted">/ month</small></div><div class="sub">Price pending approval · renews monthly</div>
+      <ul><li><svg class="ico"><use href="../brand/icons.svg#i-check"/></svg>20 saved presets</li><li><svg class="ico"><use href="../brand/icons.svg#i-check"/></svg>5 brand kits</li><li><svg class="ico"><use href="../brand/icons.svg#i-check"/></svg>25 saved project settings</li><li class="x"><svg class="ico"><use href="../brand/icons.svg#i-lock"/></svg>No cloud photo storage at launch</li></ul>
+      <button class="btn" disabled>Not on sale yet</button></div>
+    <div class="card plan"><h3>Seller Desk <span class="badge dev">Planned</span></h3><div class="price">PKR — <small class="muted">/ month</small></div><div class="sub">Sold only after it is built and tested</div>
+      <ul><li><svg class="ico"><use href="../brand/icons.svg#i-check"/></svg>Products, stock ledger, orders</li><li><svg class="ico"><use href="../brand/icons.svg#i-check"/></svg>Courier payment matching from CSV</li><li><svg class="ico"><use href="../brand/icons.svg#i-check"/></svg>1 workspace · 2 seats</li><li class="x"><svg class="ico"><use href="../brand/icons.svg#i-lock"/></svg>No live courier connections</li></ul>
+      <button class="btn" disabled>Not on sale yet</button></div>
+    <div class="card plan"><h3>Seller Suite <span class="badge dev">Planned</span></h3><div class="price">PKR — <small class="muted">/ month</small></div><div class="sub">Image Pro + Seller Desk in one plan</div>
+      <ul><li><svg class="ico"><use href="../brand/icons.svg#i-check"/></svg>Everything in both plans</li><li><svg class="ico"><use href="../brand/icons.svg#i-check"/></svg>Same limits — not doubled</li><li><svg class="ico"><use href="../brand/icons.svg#i-check"/></svg>1 workspace · 2 seats</li></ul>
+      <button class="btn" disabled>Not on sale yet</button></div>
+  </div>
+
+  <h2 style="margin-top:56px">Compare features</h2>
+  <div class="tbl-wrap"><table class="tbl cmp"><thead><tr><th>Feature</th><th>Free</th><th>Image Pro</th><th>Seller Desk</th><th>Seller Suite</th></tr></thead><tbody>
+    <tr><td>Local image tools</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr>
+    <tr><td>Saved presets</td><td>—</td><td>20</td><td>—</td><td>20</td></tr>
+    <tr><td>Brand kits</td><td>—</td><td>5</td><td>—</td><td>5</td></tr>
+    <tr><td>Orders & stock</td><td>—</td><td>—</td><td>✓</td><td>✓</td></tr>
+    <tr><td>Courier payment matching</td><td>—</td><td>—</td><td>CSV only</td><td>CSV only</td></tr>
+    <tr><td>Seats</td><td>—</td><td>1</td><td>2</td><td>2</td></tr>
+    <tr><td>Ads shown</td><td>On public pages only</td><td>None in workspace</td><td>None</td><td>None</td></tr>
+  </tbody></table></div>
+
+  <h2 style="margin-top:56px">Background-removal credits</h2>
+  <div class="card" style="display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap"><span class="tile"><svg class="ico lg"><use href="../brand/icons.svg#i-cutout"/></svg></span>
+    <div style="flex:1;min-width:240px"><h3>Pay only for successful removals <span class="badge off">Not available yet</span></h3><p class="muted" style="margin:0">One-time credit packs, separate from plans. A failed removal does not use a credit. Your selected photo is sent to the removal provider only when you click Remove. We are moving to a new provider before selling credits.</p></div></div>
+
+  <h2 style="margin-top:56px">Before you buy</h2>
+  <div class="terms" style="margin-bottom:64px">
+    <div class="card"><h4>Renewal</h4><p class="muted" style="margin:0">Shown on each plan: automatic or manual. If manual, you will see “Renew manually” and get a payment link — we never promise auto-renewal we can't do.</p></div>
+    <div class="card"><h4>Cancellation</h4><p class="muted" style="margin:0">[Rule pending owner decision] — e.g. cancel any time; access continues until the paid period ends.</p></div>
+    <div class="card"><h4>Taxes & fees</h4><p class="muted" style="margin:0">[Pending] Shown at checkout once the payment method and tax treatment are confirmed.</p></div>
+  </div>
+</div>
+<footer class="ftr"><div class="wrap">[Footer as on home]</div></footer>
+</body></html>

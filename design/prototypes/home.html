@@ -1,0 +1,105 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Home — Seller Toolkit (prototype)</title><meta name="robots" content="noindex">
+<link rel="stylesheet" href="styles.css">
+<style>
+.hero{padding:56px 0 64px} .hero .wrap{display:grid;grid-template-columns:5fr 6fr;gap:48px;align-items:center}
+.hero .ctas{display:flex;gap:12px;flex-wrap:wrap;margin:24px 0 20px} .facts{display:flex;gap:20px;flex-wrap:wrap;font-size:14px;color:var(--text-2)} .facts span{display:flex;gap:6px;align-items:center} .facts .ico{color:var(--success);width:18px;height:18px}
+.preview{position:relative;background:#fff;border:1px solid var(--border);border-radius:16px;box-shadow:0 12px 40px rgba(32,37,43,.10);overflow:hidden}
+.preview .bar-top{display:flex;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px solid var(--border);font-size:13px;color:var(--text-2)}
+.preview .body{display:grid;grid-template-columns:190px 1fr;min-height:330px} .preview aside{border-right:1px solid var(--border);padding:14px;display:grid;gap:10px;align-content:start;font-size:13px}
+.preview .opt{display:grid;gap:4px} .preview .opt b{font:600 12px var(--font-head);color:var(--text-2)} .preview .opt div{border:1px solid var(--input);border-radius:6px;padding:7px 9px}
+.preview .stage{padding:14px;display:grid;gap:10px;align-content:start} .preview .imgs{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.preview .imgs .placeholder{aspect-ratio:1} .preview .row{display:flex;justify-content:space-between;font-size:13px;border:1px solid var(--border);border-radius:8px;padding:8px 10px}
+.annot{position:absolute;background:#20252B;color:#fff;font-size:12px;border-radius:8px;padding:6px 9px;max-width:190px;line-height:1.35}
+.mk{display:flex;gap:12px;flex-wrap:wrap;align-items:center} .mk a{display:flex;align-items:center;gap:10px;border:1px solid var(--border);border-radius:10px;padding:12px 16px;text-decoration:none;color:var(--text);font-size:14px;background:#fff;min-height:56px} .mk img{height:22px;width:auto}
+.plans .card{display:flex;flex-direction:column;gap:12px} .plans ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:14px} .plans li{display:flex;gap:8px} .plans li .ico{color:var(--success);width:18px;height:18px;margin-top:2px}
+.price{font:600 20px var(--font-head)} .price small{font:400 13px var(--font-body)}
+.steps{counter-reset:s} .steps .card{position:relative;padding-top:44px} .steps .card::before{counter-increment:s;content:counter(s);position:absolute;top:16px;left:24px;width:24px;height:24px;border-radius:50%;background:var(--tint);color:var(--primary);font:600 13px/24px var(--font-head);text-align:center}
+details{border-bottom:1px solid var(--border);padding:16px 0} summary{font:600 16px var(--font-head);cursor:pointer;list-style:none;display:flex;justify-content:space-between} summary::-webkit-details-marker{display:none} details p{color:var(--text-2);margin:10px 0 0}
+@media(max-width:1024px){.hero .wrap{grid-template-columns:1fr}.annot{display:none}}
+@media(max-width:640px){.preview .body{grid-template-columns:1fr}.preview aside{border-right:0;border-bottom:1px solid var(--border);grid-template-columns:1fr 1fr}}
+</style></head><body>
+<div class="review-bar">Design prototype for review · Demo data is labelled · Prices pending owner approval</div>
+<header class="hdr"><div class="wrap">
+  <a class="brand" href="home.html"><img src="../brand/logo-mark.svg" alt="">Seller Toolkit</a>
+  <nav class="nav" aria-label="Main"><a href="tool.html">Tools <svg class="ico" style="width:16px;height:16px"><use href="../brand/icons.svg#i-down"/></svg></a><a href="pricing.html">Pricing</a><a href="#">Guides</a></nav>
+  <div class="end"><a class="btn ghost signin" href="dashboard.html">Sign in</a><a class="btn primary sm" href="tool.html">Open Studio</a><button class="btn secondary sm menu-btn" aria-label="Open menu">Menu</button></div>
+</div></header>
+
+<section class="hero"><div class="wrap">
+  <div>
+    <span class="eyebrow">For online sellers in Pakistan</span>
+    <h1>Tools and a workspace for your selling day.</h1>
+    <p class="lead">Prepare product photos for Daraz, Shopify, Amazon and Etsy listings, work out profit per order, and make a clean invoice — free, in your browser.</p>
+    <div class="ctas"><a class="btn primary" href="tool.html">Try free tools</a><a class="btn secondary" href="pricing.html">Compare plans</a></div>
+    <div class="facts"><span><svg class="ico"><use href="../brand/icons.svg#i-check"/></svg>No signup for free tools</span><span><svg class="ico"><use href="../brand/icons.svg#i-check"/></svg>Photos processed on your device</span><span><svg class="ico"><use href="../brand/icons.svg#i-check"/></svg>Up to 50 photos per batch</span></div>
+  </div>
+  <div class="preview" aria-label="Product interface preview with demo data">
+    <div class="bar-top"><span class="badge demo">Demo</span> Product Image Studio · Marketplace resize</div>
+    <div class="body">
+      <aside><div class="opt"><b>Marketplace</b><div>Daraz · 1200 × 1200</div></div><div class="opt"><b>Fit</b><div>Fit entire photo</div></div><div class="opt"><b>Background</b><div>White</div></div><div class="opt"><b>Format</b><div>JPG · 82%</div></div></aside>
+      <div class="stage">
+        <div class="imgs"><div class="placeholder">Original<br>product photo<br><small>(real photo to be supplied)</small></div><div class="placeholder">Result<br>1200 × 1200<br><small>white canvas</small></div></div>
+        <div class="row"><span>demo-kurta-front.jpg</span><span>2.4 MB → 186 KB</span></div>
+        <div class="row"><span>demo-kurta-back.jpg</span><span>2.1 MB → 171 KB</span></div>
+      </div>
+    </div>
+    <div class="annot" style="right:14px;top:58px">Your photos stay on this device. Nothing is uploaded.</div>
+    <div class="annot" style="left:205px;bottom:16px">Compare size and dimensions before you download</div>
+  </div>
+</div></section>
+
+<section class="section alt"><div class="wrap">
+  <h2>Start from your marketplace</h2>
+  <p class="muted">Editable canvas presets. Check each marketplace's current image guidelines for your category. Seller Toolkit is not affiliated with these marketplaces.</p>
+  <div class="mk">
+    <a href="tool.html"><img src="https://lightyellow-alligator-410734.hostingersite.com/wp-content/plugins/seller-tools/assets/daraz.svg" alt="">Daraz preset</a>
+    <a href="tool.html"><img src="https://lightyellow-alligator-410734.hostingersite.com/wp-content/plugins/seller-tools/assets/shopify.svg" alt="">Shopify preset</a>
+    <a href="tool.html"><img src="https://lightyellow-alligator-410734.hostingersite.com/wp-content/plugins/seller-tools/assets/amazon.png" alt="">Amazon preset</a>
+    <a href="tool.html"><img src="https://lightyellow-alligator-410734.hostingersite.com/wp-content/plugins/seller-tools/assets/etsy.svg" alt="">Etsy preset</a>
+  </div>
+</div></section>
+
+<section class="section"><div class="wrap">
+  <div style="display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:24px"><div><h2>Free tools you can use today</h2><p class="muted" style="margin:0">Nine tools. Eight run fully in your browser.</p></div>
+  <div class="seg" role="group" aria-label="Filter tools"><button aria-pressed="true">All</button><button aria-pressed="false">Photos</button><button aria-pressed="false">Money</button><button aria-pressed="false">Marketing</button></div></div>
+  <div class="grid g3">
+    <a class="card tool-card" href="tool.html"><div class="top"><span class="tile"><svg class="ico lg"><use href="../brand/icons.svg#i-resize"/></svg></span><span class="badge free">Free</span></div><h3>Marketplace resizer</h3><p>Fit photos to a marketplace canvas with contain or crop.</p><span class="go">Open tool →</span></a>
+    <a class="card tool-card" href="#"><div class="top"><span class="tile"><svg class="ico lg"><use href="../brand/icons.svg#i-compress"/></svg></span><span class="badge free">Free</span></div><h3>Image compressor</h3><p>Smaller JPG, WebP or PNG with a real before/after size.</p><span class="go">Open tool →</span></a>
+    <a class="card tool-card" href="#"><div class="top"><span class="tile"><svg class="ico lg"><use href="../brand/icons.svg#i-square"/></svg></span><span class="badge free">Free</span></div><h3>Square maker</h3><p>Centre a photo on a white or transparent square.</p><span class="go">Open tool →</span></a>
+    <a class="card tool-card" href="#"><div class="top"><span class="tile"><svg class="ico lg"><use href="../brand/icons.svg#i-bulk"/></svg></span><span class="badge free">Free</span></div><h3>Bulk resize & ZIP</h3><p>Up to 50 photos, one download.</p><span class="go">Open tool →</span></a>
+    <a class="card tool-card" href="#"><div class="top"><span class="tile"><svg class="ico lg"><use href="../brand/icons.svg#i-watermark"/></svg></span><span class="badge free">Free</span></div><h3>Watermark</h3><p>Add your logo or shop name.</p><span class="go">Open tool →</span></a>
+    <a class="card tool-card" href="#"><div class="top"><span class="tile"><svg class="ico lg"><use href="../brand/icons.svg#i-cutout"/></svg></span><span class="badge off">Not available yet</span></div><h3>Background remover</h3><p>Paid service. Being moved to a new provider; not on sale.</p><span class="go">Learn why →</span></a>
+    <a class="card tool-card" href="#"><div class="top"><span class="tile"><svg class="ico lg"><use href="../brand/icons.svg#i-profit"/></svg></span><span class="badge free">Free</span></div><h3>Profit calculator</h3><p>Net profit, margin and markup per sale in PKR.</p><span class="go">Open tool →</span></a>
+    <a class="card tool-card" href="#"><div class="top"><span class="tile"><svg class="ico lg"><use href="../brand/icons.svg#i-invoice"/></svg></span><span class="badge free">Free</span></div><h3>Invoice generator</h3><p>Itemised invoice to print or save as PDF.</p><span class="go">Open tool →</span></a>
+    <a class="card tool-card" href="#"><div class="top"><span class="tile"><svg class="ico lg"><use href="../brand/icons.svg#i-link"/></svg></span><span class="badge free">Free</span></div><h3>UTM link builder</h3><p>Track which post or ad brought a sale.</p><span class="go">Open tool →</span></a>
+  </div>
+</div></section>
+
+<section class="section alt plans"><div class="wrap">
+  <h2>Plans</h2><p class="muted">Free stays free. Paid plans add saved work and business tools when they are ready. Prices in PKR are pending approval — nothing can be bought yet.</p>
+  <div class="grid g4" style="margin-top:24px">
+    <div class="card"><h3>Free</h3><div class="price">PKR 0</div><ul><li><svg class="ico"><use href="../brand/icons.svg#i-check"/></svg>All free tools</li><li><svg class="ico"><use href="../brand/icons.svg#i-check"/></svg>50 photos / 100 MB per batch</li></ul><a class="btn secondary" href="tool.html">Use free tools</a></div>
+    <div class="card"><h3>Image Pro <span class="badge dev">In development</span></h3><div class="price">Price pending</div><ul><li><svg class="ico"><use href="../brand/icons.svg#i-check"/></svg>20 saved presets</li><li><svg class="ico"><use href="../brand/icons.svg#i-check"/></svg>5 brand kits</li></ul><button class="btn" disabled>Not on sale yet</button></div>
+    <div class="card"><h3>Seller Desk <span class="badge dev">Planned</span></h3><div class="price">Price pending</div><ul><li><svg class="ico"><use href="../brand/icons.svg#i-check"/></svg>Orders, stock, expenses</li><li><svg class="ico"><use href="../brand/icons.svg#i-check"/></svg>Courier payment matching (CSV)</li></ul><button class="btn" disabled>Not on sale yet</button></div>
+    <div class="card"><h3>Seller Suite <span class="badge dev">Planned</span></h3><div class="price">Price pending</div><ul><li><svg class="ico"><use href="../brand/icons.svg#i-check"/></svg>Image Pro + Seller Desk</li><li><svg class="ico"><use href="../brand/icons.svg#i-check"/></svg>Limits listed before purchase</li></ul><button class="btn" disabled>Not on sale yet</button></div>
+  </div>
+</div></section>
+
+<section class="section steps"><div class="wrap"><h2>How it works</h2>
+  <div class="grid g3" style="margin-top:24px"><div class="card"><h3>Choose a task</h3><p class="muted">Pick a marketplace size, compress, or add your logo.</p></div><div class="card"><h3>Check the result</h3><p class="muted">See dimensions and file size before downloading.</p></div><div class="card"><h3>Download</h3><p class="muted">One photo or a ZIP of the whole batch.</p></div></div>
+</div></section>
+
+<section class="section alt"><div class="wrap" style="max-width:820px"><h2>Questions</h2>
+  <details open><summary>Are my photos uploaded?<span>+</span></summary><p>No. Resize, compress, square, bulk and watermark run on your device. Only the background remover (when available) sends the photo you choose to a removal service, and it says so before you click.</p></details>
+  <details><summary>Do I need an account?<span>+</span></summary><p>Not for free tools. An account will be needed for saved presets and paid plans.</p></details>
+  <details><summary>How do I get help?<span>+</span></summary><p>Contact details will be published here once the owner confirms them.</p></details>
+</div></section>
+
+<footer class="ftr"><div class="wrap"><div class="cols">
+  <div><a class="brand" href="#"><img src="../brand/logo-mark.svg" alt="">Seller Toolkit</a><p style="margin-top:12px">[Business name, city and contact — owner to supply]</p></div>
+  <div><h4>Tools</h4><ul><li><a href="#">Image tools</a></li><li><a href="#">Profit calculator</a></li><li><a href="#">Invoice generator</a></li></ul></div>
+  <div><h4>Company</h4><ul><li><a href="#">About</a></li><li><a href="#">Contact</a></li><li><a href="#">Help</a></li></ul></div>
+  <div><h4>Policies</h4><ul><li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li><li><a href="#">Refunds & cancellation</a></li><li><a href="#">Accessibility</a></li></ul></div>
+</div></div></footer>
+</body></html>

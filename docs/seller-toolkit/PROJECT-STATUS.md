@@ -7,9 +7,9 @@ _Last updated: 2026-11-11_
 | Phase | Name | Status |
 |---|---|---|
 | — | Build pack saved to repository | ✅ Done |
-| 00 | Connect, inspect and protect | ✅ **Complete** (one recommended follow-up: an off-server backup copy) |
-| 01 | Audit tools, validate needs, define scope | ⏭️ **Next** |
-| 02 | Design system and prototypes | Not started |
+| 00 | Connect, inspect and protect | ✅ Complete (follow-up: off-server backup copy) |
+| 01 | Audit tools, validate needs, define scope | 🟡 **Deliverables done. Waiting on owner decisions** (§ Needs owner input) |
+| 02 | Design system and prototypes | ⏭️ Next, after the decisions |
 | 03 | WordPress and Elementor foundation | Not started |
 | 04 | Homepage, directory and sales pages | Not started |
 | 05 | Polish tools and advanced workflows | Not started |
@@ -22,58 +22,70 @@ _Last updated: 2026-11-11_
 | 12 | Security, reliability, full journey QA | Not started |
 | 13 | Final domain, activation, handover | Not started |
 
-## Phase 00: completed work (evidence in `PHASE-00-INVENTORY.md`)
+## Phase 01: completed work
 
-- **Target verified:** `lightyellow-alligator-410734.hostingersite.com` is on the owner's Hostinger account. WordPress 7.1.4 on PHP 8.3.36. No customers, orders or WooCommerce.
-- **Connections:** Hostinger API ✅. Dev-site WordPress connector `Seller_Toolkit_Dev` ✅ (verified it points at the dev site). Live-site connectors `Novalra` (store) and `Royal_law` are **excluded**. A cloud environment that reaches only the dev host ✅.
-- **Inventory:** theme, 12 plugins, 12 pages, 9 tools, server limits, cron, email, caching, auto-update settings.
-- **Backup R0 created and verified** in `/home/u56136xxxx/seller-toolkit-backups/2026-11-11-R0/`, outside the webroot, permissions 0700. Contents: full database plus all 18,644 files, with 0 missing, all 4 zip integrity checks OK, the 23 custom-code file hashes matching live, and SQL rows equal to live rows. Includes `RESTORE.txt` and `MANIFEST.txt`.
-- **Staging protection R1 applied (dev only):** "Discourage search engines" is on; every page and REST response sends a `noindex, nofollow` meta tag and `X-Robots-Tag` header; the sitemap is disabled (404).
-- **Regression after R1:** 12/12 routes OK with no site JS errors. A real Image Resizer run produced a 2000×2000 JPEG in a ZIP that downloaded and opened correctly.
-- **Isolation confirmed:** no WooCommerce, gateway, SMTP or customer data on dev, and plugin/theme auto-updates are off.
+| Deliverable | File |
+|---|---|
+| Tool audit: 40+ tests, findings by severity, keep/improve recommendations | `TOOL-AUDIT.md` |
+| Competitor and provider research (first-party, dated) | `COMPETITOR-RESEARCH.md` |
+| 5 interview questions and pilot checklist (nobody contacted) | `VALIDATION-PLAN.md` |
+| Catalog, plan-feature-limit matrix, release plan, cost worksheet, DRAFT prices | `PRODUCT-SCOPE.md` |
+| Re-runnable audit tests | `tests/tool-audit/` |
+
+**Key results**
+- 8 of 9 tools work and process locally in the browser. Free limits are confirmed at **50 files / 20 MB each / 100 MB batch**.
+- **H1:** the invoice shows PKR totals that don't add up (350 + 60 shown as 409). This is a display rounding bug.
+- **H2:** the compressor and watermark fail for 16–36 MP photos, even though uploads up to 36 MP are accepted.
+- **H3:** **remove.bg ends its standalone service and self-serve API on 1 Dec 2026** (first-party FAQ). Unused credits expire then, and the current background-remover adapter will stop working. → Do not buy remove.bg credits. Pick a replacement provider in Phase 10 (Photoroom API at $0.02/image, or Leonardo.ai).
+- COD/courier reconciliation for Pakistani sellers **already exists** (Wasooli, launched 5 Nov 2026; Oshi Courier). Seller Desk needs pilot evidence before it is built or sold.
+- No deletions or merges are recommended. Dead legacy code (`views/image.php`) can be cleaned up later with approval.
 
 ## Decisions
 
-- Working brand name: **Seller Toolkit** (final name to be confirmed before branding/domain launch).
-- Spec source of truth: `docs/seller-toolkit/MASTER-PROMPT.md`.
-- Only the `Seller_Toolkit_Dev` connector is used for site work. `Novalra` and `Royal_law` are never used.
-- Novamira's write guardrail is respected: PHP and `.htaccess` changes go only through `wp-content/novamira-sandbox/`, with no bypass.
-- Plugin/theme source is not committed while this repo is public. The server backup R0 and the sandbox version zips are the current source copies.
+- Working brand name: **Seller Toolkit** (final name pending).
+- Only the `Seller_Toolkit_Dev` connector is used; live-site connectors are excluded.
+- Free limits stay unchanged until a deliberate plan change is approved.
+- Background removal is not sold until a tested replacement provider adapter exists.
+- Seller Desk is not sold until pilot evidence, the demo flow and isolation tests pass.
 
 ## Needs owner input
 
-**Recommended soon (not blocking Phase 01):**
-1. **Off-server backup copy:** download the R0 folder once through hPanel File Manager (`seller-toolkit-backups/2026-11-11-R0/`), or generate an hPanel backup. Keep it private: it contains password hashes and tokens.
-2. **Make the GitHub repo private.** Then the plugin source can be versioned here.
-3. **Elementor Pro vs "PRO Elements":** buy official Elementor Pro, or explicitly accept PRO Elements on dev. Needed before Phase 03.
+**Blocking Phase 02 (brand/design) and the pricing work:**
+1. Final **brand name**
+2. **Business country** and legal entity
+3. **Currency** (PKR only, or PKR + USD)
+4. **Licence budget:** official Elementor Pro or PRO Elements; WooCommerce Subscriptions
+5. **Refund/cancellation** rules
 
-**For Phase 01:**
-4. Final brand name, business country, currency, licence budget, refund/cancellation rules.
+**Optional approvals:**
+6. Fix **H1 (invoice totals)** now instead of waiting for Phase 05 (small, low-risk change on dev)
+7. Run the **seller pilot** (VALIDATION-PLAN.md)
+8. Fund a capped free background-removal trial (default: no)
 
-## Blockers
-
-- None for Phase 01.
+**Still recommended from Phase 00:** off-server backup copy; make the GitHub repo private.
 
 ## Not yet live / not configured
 
-- remove.bg key (background removal disabled; the UI says so correctly)
-- WooCommerce, subscriptions, payment gateway
-- SMTP/sender domain, real server cron
-- Dev-site password protection (noindex is not access control; needed before test customer data, Phase 06)
-- `WP_ENVIRONMENT_TYPE` is still `production` on dev (set it to `staging` before Phase 07)
+- Background-removal provider (remove.bg is sunsetting; replacement not chosen)
+- WooCommerce, subscriptions, payment gateway, SMTP, real cron
+- Dev-site password protection (noindex is not access control)
+- `WP_ENVIRONMENT_TYPE` = production on dev (set it to staging before Phase 07)
+
+## Environment notes
+
+- The cloud environment `blog- (Seller Toolkit dev)` allows: the dev host, www.remove.bg, www.photoroom.com, www.iloveimg.com, apps.shopify.com, oshicourier.pk (research). WebFetch cannot resolve hosts here, so use `curl` through the proxy.
 
 ## Rollback points
 
 | Point | What | Roll back |
 |---|---|---|
-| R0 | Baseline full backup, 2026-11-11 | `RESTORE.txt` in the backup folder (dev site only) |
-| R1 | `blog_public` 1 → 0; added `wp-content/novamira-sandbox/seller-staging-noindex.php` | Re-tick visibility under Settings → Reading; delete or disable the sandbox file |
+| R0 | Baseline full backup, 2026-11-11 (`~/seller-toolkit-backups/2026-11-11-R0/`) | `RESTORE.txt` (dev site only) |
+| R1 | `blog_public` 1 → 0; `wp-content/novamira-sandbox/seller-staging-noindex.php` | Re-tick visibility; delete the sandbox file |
+
+Phase 01 made **no site changes** (read-only testing).
 
 ## Exact next step
 
-**Phase 01: audit tools, validate needs and define the sellable scope.**
-1. Test all 9 tools with valid, invalid and large files at 360/390/768/1440 px. Record features, processing location, errors, limits and mobile usability. Note from Phase 00: a resized JPEG came out larger than the PNG original (9.7 KB → 33.4 KB), so check compression honesty.
-2. Write `TOOL-AUDIT.md` with keep / improve / merge / hide recommendations (no deletions).
-3. Research competitors from first-party docs, with dated sources. Write 5 interview questions and a pilot checklist.
-4. Write the draft catalog, plan-feature-limit matrix and cost worksheet (prices marked DRAFT).
-5. Ask the owner for brand name, country, currency, licence budget and refund rules.
+1. Owner answers decisions 1–5 (and optionally 6–8).
+2. Record them here and in `PRODUCT-SCOPE.md` §6.
+3. Start **Phase 02**: design tokens, original brand mark and icon family, and desktop + mobile previews of the homepage, pricing, one tool workspace, customer dashboard, billing screen and admin customer detail. One concrete design review before broad implementation.

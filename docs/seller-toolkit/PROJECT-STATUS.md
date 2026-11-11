@@ -13,8 +13,8 @@ _Last updated: 2026-11-11_
 | 03 | WordPress and Elementor foundation | ✅ Complete — see `PHASE-03-FOUNDATION.md` |
 | 04 | Homepage, directory and sales pages | ✅ Complete — see `PHASE-04-PUBLIC-PAGES.md` |
 | 05 | Polish tools and advanced workflows | ✅ Complete — see `TOOL-AUDIT.md` §7 |
-| 06 | Customer portal, workspaces, access control | ⏭️ **Next** |
-| 07 | Checkout, payments, subscription lifecycle | Not started |
+| 06 | Customer portal, workspaces, access control | ✅ Complete — see `PHASE-06-PORTAL.md` |
+| 07 | Checkout, payments, subscription lifecycle | ⏭️ **Next** (needs owner inputs) |
 | 08 | Seller Desk operations workspace | Not started |
 | 09 | Platform CRM and renewal communications | Not started |
 | 10 | Paid providers, usage limits, spending controls | Not started |
@@ -126,11 +126,24 @@ _Last updated: 2026-11-11_
 - Evidence: new feature tests (16 checks) plus the full Phase 01 matrix (unchanged results). Before/after table in `TOOL-AUDIT.md` §7.
 - Rollback: install `~/seller-toolkit-backups/releases/seller-tools-1.4.0.zip` (or R4 code).
 
+## Phase 06 summary
+
+- seller-tools **1.6.2**: `/app/` portal (10 sections with honest states); register, verify, login, reset and logout; customer role without wp-admin; per-account plus per-IP abuse limits; workspace-scoped REST; no-store and noindex; **test-mail mode** (no email leaves the server; admin Mail log).
+- Evidence: two isolated test accounts (workspaces #4 and #5); cross-workspace access → 403/401; URL ID tampering ignored; brute-force lock per account; reset without enumeration.
+- Rollback point **R5**.
+
+## Needs owner input (before Phase 07 can finish)
+
+1. **Payment gateway:** which provider you have, or can get, a merchant account with in Pakistan (e.g. Safepay, a bank gateway, JazzCash/Easypaisa merchant). Sandbox credentials go into WP settings, never into chat.
+2. **WooCommerce Subscriptions licence** (paid) **or** manual renewal only (no auto-charge; "Renew manually" plus payment links).
+3. **Prices** in PKR for Image Pro (and whether to sell it before its features are built: recommendation **no**).
+4. **Refund and cancellation rules.**
+5. Optional: approve installing the **Two Factor** plugin for admin MFA.
+
 ## Exact next step
 
-**Phase 06: customer portal at `/app/`, accounts and access control:**
-1. Registration, email verification, login and password reset using maintained WordPress mechanisms; spam and rate controls; no wp-admin for customers.
-2. Portal shell (Overview, My Tools, Projects, Brand Kit, Usage & Credits, Subscriptions, Billing History, Notifications, Support, Settings) with empty, loading, error and expired states. Paid areas show honest "not available yet" states.
-3. Workspace created at signup; every private query is scoped; **two isolated test accounts**, with ID/URL tampering tests.
-4. Keep `/app/` out of caches, the sitemap and ads; add "Sign in" to the header once it works.
-5. Needs from the owner before real users: a sender email for verification and reset mails. Until then, use test recipients only.
+**Phase 07: checkout and subscription lifecycle (sandbox only).**
+1. Verify gateway eligibility and documentation for the chosen provider, and whether its WooCommerce extension supports the chosen renewal engine.
+2. Install WooCommerce (free) on dev; switch `WP_ENVIRONMENT_TYPE` to staging; map WooCommerce products to `ST_Plans`; add the entitlement grant source from paid orders and subscriptions.
+3. Sandbox-test purchase, failure, abandoned checkout, renewal (or manual renewal), cancellation, duplicate webhook and refund. Live charging stays disabled.
+4. **Image Pro features themselves (presets, brand kits) must be built before Image Pro is sold.** Phase 07 can build checkout plumbing, but the product stays "Not on sale".

@@ -12,8 +12,8 @@ _Last updated: 2026-11-11_
 | 02 | Design system and prototypes | ✅ Approved by owner (2026-11-11) |
 | 03 | WordPress and Elementor foundation | ✅ Complete — see `PHASE-03-FOUNDATION.md` |
 | 04 | Homepage, directory and sales pages | ✅ Complete — see `PHASE-04-PUBLIC-PAGES.md` |
-| 05 | Polish tools and advanced workflows | ⏭️ **Next** |
-| 06 | Customer portal, workspaces, access control | Not started |
+| 05 | Polish tools and advanced workflows | ✅ Complete — see `TOOL-AUDIT.md` §7 |
+| 06 | Customer portal, workspaces, access control | ⏭️ **Next** |
 | 07 | Checkout, payments, subscription lifecycle | Not started |
 | 08 | Seller Desk operations workspace | Not started |
 | 09 | Platform CRM and renewal communications | Not started |
@@ -35,7 +35,7 @@ _Last updated: 2026-11-11_
 **Key results**
 - 8 of 9 tools work and process locally in the browser. Free limits are confirmed at **50 files / 20 MB each / 100 MB batch**.
 - **H1:** the invoice showed PKR totals that didn't add up. ✅ **Fixed in seller-tools 1.2.2** (owner-approved, 2026-11-11). See the change log below.
-- **H2:** the compressor and watermark fail for 16–36 MP photos, even though uploads up to 36 MP are accepted.
+- **H2:** ✅ Fixed in 1.5.0 with an explicit "Limit longest side" option (Phase 05).
 - **H3:** **remove.bg ends its standalone service and self-serve API on 1 Dec 2026** (first-party FAQ). Unused credits expire then, and the current background-remover adapter will stop working. → Do not buy remove.bg credits. Pick a replacement provider in Phase 10 (Photoroom API at $0.02/image, or Leonardo.ai).
 - COD/courier reconciliation for Pakistani sellers **already exists** (Wasooli, launched 5 Nov 2026; Oshi Courier). Seller Desk needs pilot evidence before it is built or sold.
 - No deletions or merges are recommended. Dead legacy code (`views/image.php`) can be cleaned up later with approval.
@@ -120,13 +120,17 @@ _Last updated: 2026-11-11_
 - Evidence: 20 routes 200, one H1 each, 0 broken internal links, filters and toggle tested, no overflow at 360–1024, tools identical to baseline.
 - Rollback point **R4**: `~/seller-toolkit-backups/2026-11-11-R4-pre-phase04/`.
 
+## Phase 05 summary
+
+- seller-tools **1.5.0**: H2 fixed (explicit "Limit longest side"); compressor target size with honest "not reached"; watermark 9 positions, tiling and text shadow; profit in PKR with packaging, COD and payment-% fields plus the formula; invoice logo and discount; resizer options cleaned up; mobile tabs wrap.
+- Evidence: new feature tests (16 checks) plus the full Phase 01 matrix (unchanged results). Before/after table in `TOOL-AUDIT.md` §7.
+- Rollback: install `~/seller-toolkit-backups/releases/seller-tools-1.4.0.zip` (or R4 code).
+
 ## Exact next step
 
-**Phase 05: polish the existing tools** (reuse the current code; re-run `tests/tool-audit` for the before/after inventory):
-1. **H2:** add a "Limit longest side" option to the compressor and watermark for 16–36 MP photos (explicit, never silent).
-2. Compressor: optional target size using real encoding attempts, with an honest "target not reached".
-3. Watermark: 9 positions, tiling and spacing, a contrast-safe default, export matching the preview.
-4. Profit: PKR default, COD/courier/packaging/payment-% fields, formula and assumptions shown, decimals allowed.
-5. Invoice: logo, discount, tax lines (no "legally compliant" claims).
-6. Resizer: make "Gallery image" meaningful or remove it; mobile tab strip.
-7. Background remover: keep it disabled; the provider adapter is replaced in Phase 10.
+**Phase 06: customer portal at `/app/`, accounts and access control:**
+1. Registration, email verification, login and password reset using maintained WordPress mechanisms; spam and rate controls; no wp-admin for customers.
+2. Portal shell (Overview, My Tools, Projects, Brand Kit, Usage & Credits, Subscriptions, Billing History, Notifications, Support, Settings) with empty, loading, error and expired states. Paid areas show honest "not available yet" states.
+3. Workspace created at signup; every private query is scoped; **two isolated test accounts**, with ID/URL tampering tests.
+4. Keep `/app/` out of caches, the sitemap and ads; add "Sign in" to the header once it works.
+5. Needs from the owner before real users: a sender email for verification and reset mails. Until then, use test recipients only.

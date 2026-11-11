@@ -1,0 +1,41 @@
+const { chromium } = require('playwright'); const path = require('path'); const fs = require('fs');
+const S = process.argv[2], FX = S + '/fixtures', OUT = S + '/out5'; fs.mkdirSync(OUT, { recursive: true });
+const T = 'https://lightyellow-alligator-410734.hostingersite.com/tools/';
+const log = (id, r) => console.log(id.padEnd(46), JSON.stringify(r));
+async function open(ctx, slug) { const pg = await ctx.newPage(); pg.on('pageerror', e => console.log('JSERR', slug, e.message)); await pg.goto(T + slug + '/?v=' + Date.now(), { waitUntil: 'networkidle' }); return pg; }
+const done = pg => pg.waitForFunction(() => document.querySelector('[data-cancel]').hidden && !/^Processing|^Stopping/.test(document.querySelector('[data-studio-status]').textContent), null, { timeout: 180000 });
+const info = pg => pg.evaluate(() => ({ status: document.querySelector('[data-studio-status]').textContent.trim(), queue: [...document.querySelectorAll('[data-queue] small')].map(s => s.textContent) }));
+async function zipOut(pg, name) { const d = pg.waitForEvent('download'); await pg.click('[data-zip]'); const p = path.join(OUT, name + '.zip'); await (await d).saveAs(p); return p; }
+(async () => {
+  const b = await chromium.launch(); const ctx = await b.newContext({ viewport: { width: 1440, height: 900 }, acceptDownloads: true });
+  let pg = await open(ctx, 'image-compressor');
+  log('H2a 20MP, limit off (must explain)', await (async () => { await pg.setInputFiles('input[name=photos]', FX + '/large-5000x4000.jpg'); await pg.click('[data-process]'); await done(pg); return info(pg); })());
+  log('H2b 20MP, limit 4096', await (async () => { await pg.selectOption('select[name=maxSide]', '4096'); await pg.click('[data-process]'); await done(pg); const i = await info(pg); i.zip = await zipOut(pg, 'H2b'); return i; })());
+  pg = await open(ctx, 'image-compressor');
+  log('H2c 32MP, limit 3000', await (async () => { await pg.setInputFiles('input[name=photos]', FX + '/huge-6500x5000-32MP.jpg'); await pg.selectOption('select[name=maxSide]', '3000'); await pg.click('[data-process]'); await done(pg); return info(pg); })());
+  pg = await open(ctx, 'image-compressor');
+  log('T1 target 300 KB (3000x2000)', await (async () => { await pg.setInputFiles('input[name=photos]', FX + '/photo-3000x2000.jpg'); await pg.fill('input[name=targetKb]', '300'); await pg.click('[data-process]'); await done(pg); const i = await info(pg); i.zip = await zipOut(pg, 'T1'); return i; })());
+  log('T2 target 20 KB (unreachable)', await (async () => { await pg.fill('input[name=targetKb]', '20'); await pg.click('[data-process]'); await done(pg); return info(pg); })());
+  log('T3 target with PNG output', await (async () => { await pg.selectOption('select[name=format]', 'image/png'); await pg.fill('input[name=targetKb]', '300'); await pg.click('[data-process]'); await done(pg); return info(pg); })());
+  pg = await open(ctx, 'watermark');
+  log('W5 watermark positions offered', await pg.$$eval('select[name=position] option', o => o.map(x => x.value)));
+  log('W6 tile text watermark', await (async () => { await pg.setInputFiles('input[name=photos]', FX + '/photo-3000x2000.jpg'); await pg.selectOption('select[name=watermarkType]', 'text'); await pg.fill('input[name=text]', 'DEMO STORE'); await pg.selectOption('select[name=layout]', 'tile'); await pg.click('[data-process]'); await done(pg); const i = await info(pg); i.zip = await zipOut(pg, 'W6'); return i; })());
+  log('W7 single top-center', await (async () => { await pg.selectOption('select[name=layout]', 'single'); await pg.selectOption('select[name=position]', 'top-center'); await pg.click('[data-process]'); await done(pg); const i = await info(pg); i.zip = await zipOut(pg, 'W7'); return i; })());
+  log('W8 32MP watermark with limit 3000', await (async () => { await pg.click('[data-clear]'); await pg.setInputFiles('input[name=photos]', FX + '/huge-6500x5000-32MP.jpg'); await pg.selectOption('select[name=maxSide]', '3000'); await pg.click('[data-process]'); await done(pg); return info(pg); })());
+  pg = await open(ctx, 'image-resizer');
+  log('R7 listing type options', await pg.$$eval('[data-listing-type] option', o => o.map(x => x.textContent)));
+  pg = await open(ctx, 'profit-calculator');
+  log('P7 default currency + new fields', { currency: await pg.inputValue('select[name=currency]'), fields: await pg.$$eval('.workspace input', i => i.map(x => x.name)) });
+  for (const [k, v] of Object.entries({ price: '2500', cost: '1200', shipping: '200', packaging: '50', courier: '100', fees: '150', paymentPct: '2', ads: '100', other: '0' })) await pg.fill(`input[name=${k}]`, v);
+  log('P8 PKR 2500, costs 1800 + 2% fee (50)', await pg.evaluate(() => ({ net: document.querySelector('[data-net]').textContent, fee: document.querySelector('[data-payment-fee]').textContent, total: document.querySelector('[data-expenses]').textContent, margin: document.querySelector('[data-margin]').textContent, heading: document.querySelector('.result h2').textContent, formula: !!document.querySelector('.result .hint') })));
+  await pg.fill('input[name=cost]', '7.333'); log('P9 cost with 3 decimals', await pg.textContent('[data-net]'));
+  pg = await open(ctx, 'invoice-generator');
+  await pg.fill('textarea[name=business]', 'Demo Seller'); await pg.fill('textarea[name=client]', 'Demo Customer'); await pg.fill('input[name=number]', 'INV-002');
+  await pg.fill('input[name=item]', 'Demo mug'); await pg.fill('input[name=quantity]', '3'); await pg.fill('input[name=rate]', '1000'); await pg.fill('input[name=discount]', '10'); await pg.fill('input[name=tax]', '17');
+  await pg.setInputFiles('input[name=invoiceLogo]', FX + '/logo.png');
+  log('I5 discount 10% + tax 17% + logo', await pg.evaluate(() => ({ currency: document.querySelector('select[name=currency]').value, lines: ['subtotal', 'discount', 'tax', 'total'].map(k => document.querySelector(`[data-invoice=${k}]`).textContent), logo: !document.querySelector('[data-invoice-logo]').hidden })));
+  await pg.setInputFiles('input[name=invoiceLogo]', FX + '/notes.txt'); log('I6 invalid logo', { status: await pg.textContent('[data-status]'), logoHidden: await pg.$eval('[data-invoice-logo]', e => e.hidden) });
+  const m = await b.newPage({ viewport: { width: 390, height: 844 } }); await m.goto(T + 'image-resizer/', { waitUntil: 'networkidle' });
+  log('M1 mobile tabs all visible', await m.evaluate(() => { const W = innerWidth; const tabs = [...document.querySelectorAll('[data-mode-button]')]; return { tabs: tabs.length, offscreen: tabs.filter(t => t.getBoundingClientRect().right > W + 1).length, overflowX: document.documentElement.scrollWidth - W }; }));
+  await b.close();
+})();

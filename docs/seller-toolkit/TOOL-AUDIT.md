@@ -122,3 +122,29 @@ These match the earlier "50 files / 20 MB / 100 MB" assumption. **Recommendation
 ## 6. Before/after feature inventory baseline (for Phase 05)
 
 This audit is the "before" state. Phase 05 must re-run this matrix and show the "after" state per tool.
+
+---
+
+## 7. Phase 05 — after inventory (seller-tools 1.5.0, 2026-11-11)
+
+Deployed as a ZIP through the WordPress plugin upgrader: overlay JS/CSS plus 17 counted PHP view edits. Re-tested with `tests/tool-audit/phase05-test.js` and the full Phase 01 matrix.
+
+| Tool | Before (1.2.x) | After (1.5.0) | Evidence |
+|---|---|---|---|
+| Compressor | Failed on photos >16 MP (H2) | **"Limit longest side"** option (Off / 4096 / 3000 / 2048 / 1600). Without it, the error says exactly what to do. **Never shrinks silently.** | 20 MP, limit off → explains; limit 4096 → 4096×3277; 32 MP at 3000 → 3000×2308 |
+| Compressor | No target size | **Optional target size (KB)** using real encoding attempts (binary search on quality, floor 30%). Reports "Fits N KB at Q% quality", or honestly "**Target not reached** — smallest is X at 30% quality". Ignored for PNG, with a note. | 300 KB → 294.5 KB at 44%; 20 KB → "not reached (178.5 KB)"; PNG → ignored note |
+| Watermark | 5 positions; no tiling; white text unreadable on light photos | **9 positions**, **tile layout** with spacing, **soft shadow** for text contrast (default on), same "Limit longest side" option | Positions list verified; tile and top-center outputs visually checked; 32 MP at 3000 → 3000×2308 |
+| Resizer | "Gallery image" did nothing different | Options reduced to "Product image (marketplace preset)" and "Store banner (custom size)" | Option list verified |
+| Studio (mobile) | Tab strip scrolled, "Square maker" hidden | Tabs wrap on ≤900 px | 390 px: 6/6 tabs on screen, 0 overflow |
+| Profit | USD default; 2-decimal rule rejected 7.333; no packaging/COD/payment fee; no formula | **PKR default**; any decimals; **packaging, courier/COD, payment fee %**; "**Estimated** net profit" with the **formula and assumptions** (not reconciled; returns not included) | 2500 − (1800 + 2% = 50) = PKR 650, margin 26%; 7.333 accepted |
+| Invoice | No logo or discount | **Logo** (PNG/JPG/WebP ≤ 2 MB, stays on device), **discount %** applied before tax, PKR default | 3000 − 10% = 2700; tax 17% = 459; total 3159; invalid logo rejected |
+| Currency list | USD first | PKR first (profit and invoice) | Verified |
+
+**Unchanged and still passing:** all Phase 01 tests (resize contain/cover, transparency, invalid files, 42 MP rejection, square maker, bulk 20 in about 2.4 s, cancel, 50-file and 100 MB limits, watermark errors, invoice 409.49, UTM validation, background remover 503 when unconfigured).
+
+**Not done in Phase 05 (left out of scope deliberately):**
+- Bulk: custom filename pattern with preview; per-file retry. Processing stays sequential, which is bounded and memory-safe.
+- Background remover: still disabled. The provider adapter is replaced in Phase 10 (remove.bg self-serve API ends on 1 Dec 2026).
+- Image Pro features (saved presets, brand kits, saved projects) need accounts and entitlements (Phases 06–07). **Not sold** until built.
+- Marketplace preset guidance still says "check the marketplace's guidelines". Official per-category requirements were not researched, so presets are never called "requirements".
+- Low-memory phone testing was not possible here. Large-batch capacity is not advertised beyond the stated limits.

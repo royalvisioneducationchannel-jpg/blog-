@@ -11,8 +11,8 @@ _Last updated: 2026-11-11_
 | 01 | Audit tools, validate needs, define scope | ✅ Complete (owner decisions recorded) |
 | 02 | Design system and prototypes | ✅ Approved by owner (2026-11-11) |
 | 03 | WordPress and Elementor foundation | ✅ Complete — see `PHASE-03-FOUNDATION.md` |
-| 04 | Homepage, directory and sales pages | ⏭️ **Next** |
-| 05 | Polish tools and advanced workflows | Not started |
+| 04 | Homepage, directory and sales pages | ✅ Complete — see `PHASE-04-PUBLIC-PAGES.md` |
+| 05 | Polish tools and advanced workflows | ⏭️ **Next** |
 | 06 | Customer portal, workspaces, access control | Not started |
 | 07 | Checkout, payments, subscription lifecycle | Not started |
 | 08 | Seller Desk operations workspace | Not started |
@@ -112,10 +112,21 @@ _Last updated: 2026-11-11_
 - Evidence: 23/23 server tests (transactional, rolled back); existing tools re-tested against the Phase 01 baseline with identical results; header verified at 5 widths; mobile menu verified open.
 - Rollback point **R3**: `~/seller-toolkit-backups/2026-11-11-R3-pre-phase03/` (DB 503 rows plus plugin and theme code). Steps are in PHASE-03-FOUNDATION.md §7.
 
+## Phase 04 summary
+
+- 8 new pages (Pricing, 3 plan details, How it works, Guides, Help, Contact "coming soon"). Home, Tools and 10 tool pages converted to editable Elementor layouts; the original shortcodes and how-to text are kept.
+- seller-tools **1.4.0**: `[seller_tools_directory]` (registry: search plus task and price filters) and `[seller_tools_pricing]` (plans: PKR, pending prices, disabled purchase, interval toggle).
+- Menu: Tools ▾, Pricing, How it works, Guides, Help. Footer also has Contact. No Sign in until the Phase 06 portal exists.
+- Evidence: 20 routes 200, one H1 each, 0 broken internal links, filters and toggle tested, no overflow at 360–1024, tools identical to baseline.
+- Rollback point **R4**: `~/seller-toolkit-backups/2026-11-11-R4-pre-phase04/`.
+
 ## Exact next step
 
-**Phase 04: homepage, directory and sales pages** (Elementor, editable):
-1. Rebuild Home with the approved design and editable components, and convert `/tools/` to use the registry with real search and filter (free/paid/task).
-2. Create the Pricing page (pending-price state, checkout blocked), plan/bundle detail pages, How It Works, Guides (index), Help and Contact. Then add Pricing and Guides to the `st-primary` menu.
-3. Keep every CTA pointing to a working destination; no placeholder testimonials, no fake integrations.
-4. Needs from the owner for Contact/Help: a support email or WhatsApp number to publish (or approval to show "coming soon" with no contact form).
+**Phase 05: polish the existing tools** (reuse the current code; re-run `tests/tool-audit` for the before/after inventory):
+1. **H2:** add a "Limit longest side" option to the compressor and watermark for 16–36 MP photos (explicit, never silent).
+2. Compressor: optional target size using real encoding attempts, with an honest "target not reached".
+3. Watermark: 9 positions, tiling and spacing, a contrast-safe default, export matching the preview.
+4. Profit: PKR default, COD/courier/packaging/payment-% fields, formula and assumptions shown, decimals allowed.
+5. Invoice: logo, discount, tax lines (no "legally compliant" claims).
+6. Resizer: make "Gallery image" meaningful or remove it; mobile tab strip.
+7. Background remover: keep it disabled; the provider adapter is replaced in Phase 10.

@@ -23,7 +23,10 @@ Every session working on this project must follow it.
 
 ## Site safety (verified 2026-11-11)
 
+- Use **only** the `Seller_Toolkit_Dev` WordPress connector for site work (verified dev site). Re-check `home_url()` before any write.
 - The WordPress connectors `Novalra` (royalvisiontraders.com, LIVE store) and `Royal_law` (royalvisionlaw.com) are **not** the dev site. Never use them for this project.
+- Respect Novamira's guardrail: PHP/.htaccess writes only in `wp-content/novamira-sandbox/`. Never bypass it via execute-php.
+- Latest verified backup: R0 in `~/seller-toolkit-backups/2026-11-11-R0/` (outside webroot). Make a new backup before risky changes.
 - The same Hostinger account hosts the live sites: always confirm the domain before any Hostinger write action.
 - This repo is public: never commit credentials or account IDs, and don't commit plugin source until the repo is private.
 

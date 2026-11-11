@@ -1,6 +1,6 @@
 # Phase 00 — Environment Inventory, Connections & Protection
 
-_Inspected: 2026-11-11 (read-only). No changes were made to any website._
+_Inspected: 2026-11-11. Read-only, then backup R0, then staging protection R1 on the **dev site only**. No live site was touched._
 _Sensitive identifiers are masked because this repository is currently **public**._
 
 ## 1. Verified development target
@@ -18,7 +18,27 @@ _Sensitive identifiers are masked because this repository is currently **public*
 | Other sites on the same account | `royalvisiontraders.com` (**LIVE store, WooCommerce with real orders**), `royalvisionlaw.com` (live) | Hostinger API. **Not to be touched by this project.** |
 
 Hosting plan: `hostinger_business_v5` (active). Database: 1 MySQL DB, **14 MB used of 3,072 MB max**.
-Not readable through the API: PHP version of this site (the plugin requires PHP 8.0+, and the other sites on the account run PHP 8.3.36), memory limit, max execution time, upload limit, inode/storage quota. These need to be checked in hPanel or through the WordPress connection (Site Health).
+
+**Server limits (read through the dev-site connector, 2026-11-11):**
+
+| Setting | Value |
+|---|---|
+| PHP | 8.3.36 (LiteSpeed SAPI) |
+| PHP memory_limit | 2048M (WP_MEMORY_LIMIT 40M, WP_MAX_MEMORY_LIMIT 2048M) |
+| max_execution_time | **30 s** (matters for server-side batch jobs and provider calls) |
+| upload_max_filesize / post_max_size | 2048M / 2048M |
+| max_input_vars | 5000 |
+| MySQL / MariaDB | 11.8.9, 40 tables, prefix `wp_` |
+| PHP extensions | gd, imagick, zip, curl, mbstring, intl, openssl, exif, fileinfo (no `sodium` listed) |
+| Disabled functions | exec, shell_exec, system, passthru, proc_open, popen (so no `mysqldump`/CLI) |
+| `home` / `siteurl` | both `https://…` ✅ |
+| WP environment type | `production` (should become `staging` before any subscription plugin is installed, Phase 07) |
+| Timezone | UTC (+00:00) |
+| Permalinks | `/%postname%/` |
+| WP-Cron | enabled, 18 scheduled events, no `DISABLE_WP_CRON` |
+| Auto-updates | Plugins **off**, themes **off**, WordPress core major **on** |
+
+Account disk/inode quota is not exposed to PHP (the free-space figure PHP reports is the whole server's), so check it in hPanel before storing customer files (Phase 10).
 
 ## 2. Connection status
 
@@ -27,7 +47,7 @@ Not readable through the API: PHP version of this site (the plugin requires PHP 
 | Hostinger API (MCP) | ✅ Connected | Whole hosting account | Read inventory, list/read files (text only, secrets refused), plugin/theme lists. **No shared-hosting backup operation exists in this API.** |
 | WordPress MCP `Novalra` | ✅ Connected | **royalvisiontraders.com (LIVE store)** | ❌ **Must not be used.** Wrong site. |
 | WordPress MCP `Royal_law` | ✅ Connected | royalvisionlaw.com (live) | ❌ Wrong site. |
-| WordPress MCP for **dev site** | ❌ **Missing** | Dev site has Novamira 1.12.7 installed and exposes the OAuth MCP endpoint `/wp-json/mcp/novamira-oauth` (verified in its REST index) | Needed from Phase 01 for settings, DB-level checks, Site Health, noindex, and the Elementor work |
+| WordPress MCP `Seller_Toolkit_Dev` | ✅ Connected 2026-11-11 | **Dev site.** Verified: `home` = dev URL, theme `seller-toolkit` | **The only WordPress connector used for this project.** Novamira guardrail: PHP and `.htaccess` writes are allowed only in `wp-content/novamira-sandbox/`. |
 | Cloud session network → dev site | ✅ Enabled 2026-11-11 | New personal environment `blog- (Seller Toolkit dev)` allowing only the dev host | HTTP + browser testing |
 
 ## 3. Theme & plugins (dev site)
@@ -98,9 +118,12 @@ Brand assets in plugin: `assets/amazon.png`, `daraz.svg`, `shopify.svg`, `etsy.s
 | Item | Finding | Risk |
 |---|---|---|
 | SSL | HTTPS works (CDN). WordPress `siteurl` registered as `http://…` in Hostinger's install record | Low; verify `home`/`siteurl` after the WP connection |
-| robots.txt | `Googlebot: Disallow /`, **all other bots: Allow /** | ⚠️ Staging is **not** fully protected from indexing |
-| Meta robots | `max-image-preview:large`, **no `noindex`** | ⚠️ Same |
-| Sitemap | `/wp-sitemap.xml` is public (pages, posts, users) | ⚠️ Same |
+| Search-engine visibility | **Fixed (R1):** `blog_public` 1 → 0 ("Discourage search engines") | ✅ |
+| Meta robots | **Fixed (R1):** all 12 routes now output `noindex, nofollow` | ✅ |
+| `X-Robots-Tag` header | **Added (R1):** `noindex, nofollow` on all pages and REST responses, via `wp-content/novamira-sandbox/seller-staging-noindex.php` | ✅ Static files (images/CSS) are not covered, because `.htaccess` is write-protected by Novamira |
+| Sitemap | **Fixed (R1):** `/wp-sitemap.xml` → 404 | ✅ |
+| robots.txt | Unchanged: `Googlebot: Disallow /`, others `Allow /` (served by Hostinger's preview-domain mu-plugin) | Acceptable: crawlers must be able to fetch a page to see its `noindex`. |
+| Access protection | Not enabled. **noindex is not access control.** Anyone with the URL can open the dev site. | Add a password before any private or test customer data exists (Phase 06) |
 | REST user list | `/wp-json/wp/v2/users` lists the `admin` username publicly | Medium; harden later (Phase 12, or earlier with approval) |
 | Cron | Default WP-Cron (runs on page visits). No real server cron verified. | Needed before reminders and renewals (Phase 09/07) |
 | Email | No SMTP plugin, so PHP `mail()` default. No sender or SPF/DKIM/DMARC configured for this domain. | Fine for dev isolation; must be set up in Phase 09 |
@@ -108,17 +131,38 @@ Brand assets in plugin: `assets/amazon.png`, `daraz.svg`, `shopify.svg`, `etsy.s
 
 ## 7. Backup record
 
-| Backup | Status |
-|---|---|
-| Full site (files + database) via Hostinger hPanel | ⏳ **Not yet created.** The Hostinger API has no backup operation for shared/cloud web hosting, so the owner has to create it in hPanel. |
-| Source snapshot of the tool static files (JS/CSS/SVG + theme CSS/JS) | Downloaded into the **session scratchpad only** for comparison. Sizes match the server, except `amazon.png`, which the CDN re-compresses (38 KB served vs 103 KB on disk). **Not committed**, because the repo is public. It is temporary and will be lost when this session ends. |
-| PHP source of plugin/theme | Read and inventoried; **not stored** anywhere outside the server yet |
+### Backup R0: created and verified 2026-11-11 (before any change)
 
-**Verification still required:** after the owner generates the hPanel backup, record its date/time and confirm both the **files** and **database** archives can be downloaded and opened (the zip lists `wp-content/plugins/seller-tools/`, and the `.sql`/`.gz` contains `wp_posts` rows for page IDs 9–29). Restore rehearsal happens on a safe copy later (Phase 12), never over a live site.
+**Location:** `/home/u56136xxxx/seller-toolkit-backups/2026-11-11-R0/` on the hosting account. It sits **outside `public_html`**, so it is not web-accessible. Folder permissions are `0700`. It can be reached through hPanel File Manager.
 
-## 8. Rollback point
+| File | Content | Size | SHA-256 (first 16) |
+|---|---|---|---|
+| `database.sql` | Full DB: 40 tables, 504 rows (PHP-generated; `mysqldump` is disabled on this host) | 823 KB | `93fa0bdf8a7ca2cf` |
+| `files-1-custom-config-root.zip` | Root files incl. `wp-config.php`, `.htaccess`, `.private`, mu-plugins, sandbox, uploads, **seller-tools plugin**, **seller-toolkit theme** | 0.5 MB, 61 files | `73a7127199f9627b` |
+| `files-2-themes.zip` | Other themes | 23.6 MB, 4,037 files | `630722c40a61beae` |
+| `files-3-plugins.zip` | Other plugins | 63.5 MB, 11,224 files | `282ebad7b292c959` |
+| `files-4-wp-core.zip` | `wp-admin`, `wp-includes` | 22.5 MB, 3,322 files | `d6f2126f741ae932` |
+| `MANIFEST.txt`, `RESTORE.txt` | Full checksums and step-by-step restore instructions | | |
 
-**Rollback point R0 = state recorded in this document (2026-11-11), before any change.** It becomes restorable once the hPanel backup in §7 exists. Restore route: hPanel → this website → Backups → restore files + database from that date. Restore only this dev website. **Never restore over royalvisiontraders.com.**
+**Verification performed:**
+- ✅ Every zip opened with an integrity check (`ZipArchive::CHECKCONS`): OK ×4
+- ✅ Completeness: live `public_html` has **18,644 files**, the zips hold **18,644 unique entries**, **0 missing**
+- ✅ Readability: extracted the custom plugin and theme (23 files) to a temp folder; **all 23 SHA-256 hashes match the live files**. Temp folder removed afterwards.
+- ✅ Database: 40 `CREATE TABLE` statements = 40 live tables; 504 `INSERT` rows = 504 live rows; end-of-dump marker present; all 12 page IDs (9–29) and 16 `[seller_tool…` shortcodes present
+- ⚠️ **Same-server copy only.** It does not protect against hosting-account or server loss. **Recommended:** download it once, or generate an hPanel backup, so a copy exists off the server.
+- ⏳ A full restore rehearsal on a separate safe copy is scheduled for Phase 12. It must never be run over a live site.
+- 🔒 `database.sql` and `files-1` contain the admin password hash, `wp-config.php` and Novamira OAuth tokens. Never upload them anywhere public.
+
+**Older source history found on the server:** `wp-content/novamira-sandbox/` holds earlier packages: `seller-toolkit-tools.zip`, `seller-tools-before-studio.zip`, `seller-studio-v110.zip`, `seller-tools-before-v120.zip`, `seller-studio-v120.zip`, `seller-studio-v122.zip`, and `seller-toolkit-theme.zip`. They are web-blocked (HTTP 403) and included in backup R0.
+
+## 8. Rollback points
+
+| Point | When | What changed | How to roll back |
+|---|---|---|---|
+| **R0** | 2026-11-11, before any change | Nothing (baseline) | `RESTORE.txt` in the backup folder: extract zips 4 → 3 → 2 → 1 into `public_html`, then import `database.sql` with phpMyAdmin. **Dev website only.** Never restore over royalvisiontraders.com or royalvisionlaw.com. |
+| **R1** | 2026-11-11, staging protection | (a) option `blog_public` 1 → 0; (b) new file `wp-content/novamira-sandbox/seller-staging-noindex.php` | (a) Settings → Reading → untick "Discourage search engines"; (b) delete or disable that sandbox file. No other files or content were touched. |
+
+**Post-change regression (R1):** 12/12 routes return 200 with no site JS errors and forms initialised. Real functional test: the Image Resizer turned an 800×500 PNG into a **2000×2000 JPEG** inside `product-images.zip`. The ZIP downloaded and opened correctly. The background-remover endpoint is still `ready:false`.
 
 ## 9. Dependency & license checklist
 

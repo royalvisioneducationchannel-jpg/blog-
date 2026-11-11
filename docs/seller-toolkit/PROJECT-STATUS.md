@@ -9,9 +9,9 @@ _Last updated: 2026-11-11_
 | — | Build pack saved to repository | ✅ Done |
 | 00 | Connect, inspect and protect | ✅ Complete (follow-up: off-server backup copy) |
 | 01 | Audit tools, validate needs, define scope | ✅ Complete (owner decisions recorded) |
-| 02 | Design system and prototypes | 🟡 **Previews delivered. Waiting on owner design review** |
-| 03 | WordPress and Elementor foundation | Not started |
-| 04 | Homepage, directory and sales pages | Not started |
+| 02 | Design system and prototypes | ✅ Approved by owner (2026-11-11) |
+| 03 | WordPress and Elementor foundation | ✅ Complete — see `PHASE-03-FOUNDATION.md` |
+| 04 | Homepage, directory and sales pages | ⏭️ **Next** |
 | 05 | Polish tools and advanced workflows | Not started |
 | 06 | Customer portal, workspaces, access control | Not started |
 | 07 | Checkout, payments, subscription lifecycle | Not started |
@@ -104,7 +104,18 @@ _Last updated: 2026-11-11_
 
 **Deployment method for plugin changes:** build the ZIP (exact, counted replacements) → back up the current version → install with `Plugin_Upgrader` (overwrite) → verify. Novamira's rule against writing PHP outside the sandbox is respected; nothing bypasses it.
 
+## Phase 03 summary
+
+- Theme kept and adapted: 1.1.0 → 1.1.2 (Elementor locations with theme fallback, self-hosted Poppins and tokens, icons, legacy palette mapped to tokens).
+- PRO Elements: global colours and fonts, width 1240, Google Fonts off. Header and footer templates on the entire site; 6 reusable components (tool card, pricing card, FAQ, comparison, trust note, CTA).
+- seller-tools **1.3.0**: registry (single source), plans (nothing sellable), entitlements (server-side, no double limits), workspaces, idempotent usage ledger, append-only audit log, versioned migrations, read-only admin, data-safe uninstall, public `/registry` and `/plans` endpoints.
+- Evidence: 23/23 server tests (transactional, rolled back); existing tools re-tested against the Phase 01 baseline with identical results; header verified at 5 widths; mobile menu verified open.
+- Rollback point **R3**: `~/seller-toolkit-backups/2026-11-11-R3-pre-phase03/` (DB 503 rows plus plugin and theme code). Steps are in PHASE-03-FOUNDATION.md §7.
+
 ## Exact next step
 
-1. Owner reviews the 12 previews in `design/previews/` (or opens `design/prototypes/*.html`) and approves or lists changes.
-2. Apply the feedback, then start **Phase 03**: map the tokens to Elementor/PRO Elements globals, build the header, footer and reusable components with Flexbox Containers, add the plugin modules (tool registry, plans, entitlements, usage ledger) with versioned migrations, and prove the existing tools still work.
+**Phase 04: homepage, directory and sales pages** (Elementor, editable):
+1. Rebuild Home with the approved design and editable components, and convert `/tools/` to use the registry with real search and filter (free/paid/task).
+2. Create the Pricing page (pending-price state, checkout blocked), plan/bundle detail pages, How It Works, Guides (index), Help and Contact. Then add Pricing and Guides to the `st-primary` menu.
+3. Keep every CTA pointing to a working destination; no placeholder testimonials, no fake integrations.
+4. Needs from the owner for Contact/Help: a support email or WhatsApp number to publish (or approval to show "coming soon" with no contact form).

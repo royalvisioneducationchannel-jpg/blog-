@@ -26,7 +26,9 @@ Every session working on this project must follow it.
 - Use **only** the `Seller_Toolkit_Dev` WordPress connector for site work (verified dev site). Re-check `home_url()` before any write.
 - The WordPress connectors `Novalra` (royalvisiontraders.com, LIVE store) and `Royal_law` (royalvisionlaw.com) are **not** the dev site. Never use them for this project.
 - Respect Novamira's guardrail: PHP/.htaccess writes only in `wp-content/novamira-sandbox/`. Never bypass it via execute-php.
-- Latest verified backup: R0 in `~/seller-toolkit-backups/2026-11-11-R0/` (outside webroot). Make a new backup before risky changes.
+- Backups (outside webroot): R0 full site, R2 plugin 1.2.1, R3 pre-Phase-03 (DB + code) in `~/seller-toolkit-backups/`. Make a new backup before risky changes.
+- Deploy plugin/theme changes as ZIP packages (counted replacements + overlay uploaded via novamira/create-upload-link) installed with WordPress's Plugin_Upgrader/Theme_Upgrader; keep packages in `~/seller-toolkit-backups/releases/`. Lint locally with `php -l` first.
+- After any header/layout change, run `tests/phase03/header-check.js` (overflow-x:clip can hide off-screen items).
 - The same Hostinger account hosts the live sites: always confirm the domain before any Hostinger write action.
 - This repo is public: never commit credentials or account IDs, and don't commit plugin source until the repo is private.
 

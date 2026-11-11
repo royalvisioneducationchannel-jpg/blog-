@@ -34,7 +34,7 @@ _Last updated: 2026-11-11_
 
 **Key results**
 - 8 of 9 tools work and process locally in the browser. Free limits are confirmed at **50 files / 20 MB each / 100 MB batch**.
-- **H1:** the invoice shows PKR totals that don't add up (350 + 60 shown as 409). This is a display rounding bug.
+- **H1:** the invoice showed PKR totals that didn't add up. ✅ **Fixed in seller-tools 1.2.2** (owner-approved, 2026-11-11). See the change log below.
 - **H2:** the compressor and watermark fail for 16–36 MP photos, even though uploads up to 36 MP are accepted.
 - **H3:** **remove.bg ends its standalone service and self-serve API on 1 Dec 2026** (first-party FAQ). Unused credits expire then, and the current background-remover adapter will stop working. → Do not buy remove.bg credits. Pick a replacement provider in Phase 10 (Photoroom API at $0.02/image, or Leonardo.ai).
 - COD/courier reconciliation for Pakistani sellers **already exists** (Wasooli, launched 5 Nov 2026; Oshi Courier). Seller Desk needs pilot evidence before it is built or sold.
@@ -58,7 +58,7 @@ _Last updated: 2026-11-11_
 5. **Refund/cancellation** rules
 
 **Optional approvals:**
-6. Fix **H1 (invoice totals)** now instead of waiting for Phase 05 (small, low-risk change on dev)
+6. ~~Fix H1 now~~ ✅ Done (seller-tools 1.2.2)
 7. Run the **seller pilot** (VALIDATION-PLAN.md)
 8. Fund a capped free background-removal trial (default: no)
 
@@ -82,7 +82,15 @@ _Last updated: 2026-11-11_
 | R0 | Baseline full backup, 2026-11-11 (`~/seller-toolkit-backups/2026-11-11-R0/`) | `RESTORE.txt` (dev site only) |
 | R1 | `blog_public` 1 → 0; `wp-content/novamira-sandbox/seller-staging-noindex.php` | Re-tick visibility; delete the sandbox file |
 
-Phase 01 made **no site changes** (read-only testing).
+| R2 | Before the H1 fix: exact copy of plugin 1.2.1 (`~/seller-toolkit-backups/2026-11-11-R2-pre-invoice-fix/seller-tools-1.2.1.zip`, sha256 `3253afd2…`) | Install that ZIP with WordPress's plugin upgrader (overwrite), or Plugins → Add New → Upload |
+
+## Change log (dev site)
+
+| Date | Version | Change | Verified |
+|---|---|---|---|
+| 2026-11-11 | seller-tools **1.2.2** | **H1 fix:** `tools.js` `money()` always shows 2 decimals; script version bumped 1.2.1 → 1.2.2 (cache busting; JS is browser-cached for 7 days). Deployed as a ZIP (`~/seller-toolkit-backups/releases/seller-tools-1.2.2.zip`, sha256 `ecf1ab06…`) through WordPress's plugin upgrader. Plugin stayed active. | Invoice: 99.99 + 250.00 = 349.99, tax 59.50, total 409.49 on screen and in the PDF. Regression: 12/12 pages OK, resize to ZIP OK, profit and UTM OK, background-remover status unchanged, noindex still active. |
+
+**Deployment method for plugin changes:** build the ZIP (exact, counted replacements) → back up the current version → install with `Plugin_Upgrader` (overwrite) → verify. Novamira's rule against writing PHP outside the sandbox is respected; nothing bypasses it.
 
 ## Exact next step
 

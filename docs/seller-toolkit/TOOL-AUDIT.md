@@ -96,7 +96,7 @@ These match the earlier "50 files / 20 MB / 100 MB" assumption. **Recommendation
 
 | ID | Severity | Finding | Fix direction (Phase 05 unless approved sooner) |
 |---|---|---|---|
-| **H1** | High | Invoice displays PKR (and any currency whose `en` format has 0 decimals) rounded per line, so visible totals don't add up | Always format with 2 decimals, or round amounts to the displayed precision before summing |
+| **H1** | High | Invoice displays PKR (and any currency whose `en` format has 0 decimals) rounded per line, so visible totals don't add up | ✅ **FIXED 2026-11-11 in plugin 1.2.2:** money is always formatted with 2 decimals. Re-test: 99.99 + 250.00 = 349.99, tax 59.50, total 409.49 (screen and PDF). Side effect: the profit calculator also shows 2 decimals (e.g. "PKR 750.00"). |
 | **H2** | High | Compressor and watermark accept 16–36 MP photos, then fail. Common for 20–50 MP cameras. | Add an explicit "limit longest side" option and say so before processing, or raise the output cap with a memory guard. Never shrink silently. |
 | **H3** | High (external) | **remove.bg standalone service and self-serve API end on 1 Dec 2026 09:00 CET.** API moves to Leonardo.ai, and unused PAYG credits expire (first-party remove.bg FAQ and API page, read 2026-11-11). The current adapter will stop working. | **Do not buy remove.bg credits.** In Phase 10, build a provider adapter for a verified replacement (candidates: Leonardo.ai, or Photoroom API at $0.02/image) |
 | M1 | Medium | Profit calculator: USD default; costs with >2 decimals rejected with a vague message | Default currency from settings; allow `step="any"`; precise message |

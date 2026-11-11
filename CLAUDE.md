@@ -21,6 +21,12 @@ Every session working on this project must follow it.
   1. Completed  2. Evidence  3. Needs owner input  4. Not yet live  5. Next phase
 - Communicate progress in plain language; the owner is comfortable with Roman Urdu/English.
 
+## Site safety (verified 2026-11-11)
+
+- The WordPress connectors `Novalra` (royalvisiontraders.com, LIVE store) and `Royal_law` (royalvisionlaw.com) are **not** the dev site. Never use them for this project.
+- The same Hostinger account hosts the live sites: always confirm the domain before any Hostinger write action.
+- This repo is public: never commit credentials or account IDs, and don't commit plugin source until the repo is private.
+
 ## Known target (verify before use)
 
 - Dev URL candidate: `https://lightyellow-alligator-410734.hostingersite.com/`

@@ -13,16 +13,17 @@ HINGE = (0, BD / 2, BH)
 
 def foam_mat():
     m, nt, out = mat("foam")
-    b = bsdf(nt, (0.030, 0.040, 0.024, 1), 0.92, sheen=0.25, spec=0.15)
+    b = bsdf(nt, (0.042, 0.054, 0.032, 1), 0.92, sheen=0.25, spec=0.15)
     paper_bump(nt, b, scale=2500, strength=0.15)
     nt.links.new(b.outputs[0], out.inputs[0]); return m
 
 def insert_with_products():
-    tray = cube("insert", B.IL, B.ID, B.IH, (0, 0, B.FLOOR + B.IH / 2), bevel=mm(0.8), m=foam_mat())
+    tray = cube("insert", B.IL, B.ID, B.IH, (0, 0, B.FLOOR + B.IH / 2), m=foam_mat())
+    for p in tray.data.polygons: p.use_smooth = False
     cuts, ITOP = [], B.ITOP
     def slot(name, x0, x1, y, r, depth):
         axis_z = ITOP - depth + r
-        c = cyl(name, r, x1 - x0, 0); c.rotation_euler = (0, math.radians(90), 0); c.location = (mm(x0), mm(y), axis_z)
+        c = cyl(name, r, mm(x1 - x0), 0); c.rotation_euler = (0, math.radians(90), 0); c.location = (mm(x0), mm(y), axis_z)
         top = cube(name + "_top", mm(x1 - x0), 2 * r, mm(30), (mm((x0 + x1) / 2), mm(y), axis_z + mm(15)))
         cuts.extend([c, top]); return axis_z
     tube_z = slot("cut_tube", -95, 67, 42, mm(21), mm(25))

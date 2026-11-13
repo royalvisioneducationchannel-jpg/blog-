@@ -57,7 +57,7 @@ def base_with_products():
     cuts = []
     def slot(name, x0, x1, y, r, depth):
         axis_z = ITOP - depth + r
-        c = cyl(name, r, x1 - x0, 0); c.rotation_euler = (0, math.radians(90), 0); c.location = (mm(x0), mm(y), axis_z)
+        c = cyl(name, r, mm(x1 - x0), 0); c.rotation_euler = (0, math.radians(90), 0); c.location = (mm(x0), mm(y), axis_z)
         top = cube(name + "_top", mm(x1 - x0), 2 * r, mm(30), (mm((x0 + x1) / 2), mm(y), axis_z + mm(15)))
         cuts.extend([c, top]); return axis_z
     tube_z = slot("cut_tube", -95, 67, 42, mm(21), mm(25))

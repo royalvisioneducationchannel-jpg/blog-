@@ -58,7 +58,7 @@ def leaf(name, L, W, loc, rot, curl, m):
     return o
 
 def build():
-    world((0.42, 0.52, 0.32), 0.38)
+    world((0.42, 0.52, 0.32), 0.5)
     s = bpy.context.scene; s.render.film_transparent = True
     try: s.cycles.film_transparent_glass = True
     except AttributeError: pass
@@ -70,6 +70,17 @@ def build():
     cam = (mm(-10), -0.66, 0.15)
     for fn, (x, y), z in ((P.face_wash, (mm(-62), mm(18)), mm(46)), (P.serum2, (mm(8), mm(-40)), mm(20)), (P.moisturizer, (mm(70), mm(14)), mm(32))):
         group(fn(), (x, y, z), rot_z=facing((x, y), cam), name=fn.__name__)
+    # keep printed labels matte so the small type stays readable at cover size
+    for m in bpy.data.materials:
+        if m.name in ("fw_print", "serum_print") and m.node_tree:
+            for n in m.node_tree.nodes:
+                if n.type == "BSDF_PRINCIPLED" and n.inputs["Metallic"].default_value < 0.5:
+                    n.inputs["Coat Weight"].default_value = 0.0
+                    n.inputs["Specular IOR Level"].default_value = 0.18
+                    n.inputs["Roughness"].default_value = 0.7
+                elif n.type == "BSDF_PRINCIPLED":  # gold foil: deeper tone so it reads on cream
+                    n.inputs["Base Color"].default_value = (0.42, 0.27, 0.09, 1)
+                    n.inputs["Roughness"].default_value = 0.32
     g1, g2 = m_leaf("leafA", (0.035, 0.085, 0.022, 1)), m_leaf("leafB", (0.07, 0.13, 0.04, 1))
     leaf("l1", mm(115), mm(26), (mm(-105), mm(55), mm(2)), (6, -8, 165), 0.25, g1)
     leaf("l2", mm(105), mm(24), (mm(118), mm(60), mm(2)), (5, -10, 30), 0.3, g2)
@@ -77,11 +88,12 @@ def build():
     leaf("l4", mm(95), mm(22), (mm(55), mm(-70), mm(1)), (3, -8, -30), 0.12, g1)
     leaf("l5", mm(140), mm(30), (mm(-120), mm(95), mm(2)), (10, -22, 70), 0.4, g1)
     tgt = (mm(5), 0, mm(88))
-    B.lamp("key", (-0.55, -0.5, 0.6), tgt, 9, 1.0, (1.0, 0.95, 0.86))
-    B.lamp("fill", (0.6, -0.55, 0.3), tgt, 2.5, 1.4, (0.95, 1.0, 0.92))
+    B.lamp("key", (-0.55, -0.5, 0.6), tgt, 13, 1.2, (1.0, 0.96, 0.90))
+    B.lamp("fill", (0.45, -0.7, 0.25), tgt, 5, 1.6, (0.95, 1.0, 0.92))
     B.lamp("rim", (0.45, 0.45, 0.5), tgt, 9, 0.6, (1.0, 0.96, 0.85))
     B.lamp("rimL", (-0.5, 0.45, 0.4), tgt, 4, 0.6, (0.9, 1.0, 0.85))
-    camera(cam, tgt, lens=62, fstop=11)
+    camera(cam, tgt, lens=78, fstop=16)
+    bpy.context.scene.view_settings.exposure = 0.25
 
 if __name__ == "__main__":
     out, w, h, spp = sys.argv[1], int(sys.argv[2]), int(sys.argv[3]), int(sys.argv[4])

@@ -1,0 +1,77 @@
+<template>
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+    }
+    .full {
+      position: absolute;
+      inset: 0;
+      width: 1080px;
+      height: 1920px;
+      object-fit: cover;
+    }
+    .card,
+    .card-shadow {
+      position: absolute;
+      left: 40px;
+      top: 470px;
+      width: 1000px;
+      height: 563px;
+      border-radius: 30px;
+    }
+    .card {
+      object-fit: cover;
+    }
+    .card-shadow {
+      background: #0e1530;
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.45), 0 0 0 4px rgba(255, 255, 255, 0.85);
+    }
+  </style>
+  <div id="root" data-composition-id="broll" data-width="1080" data-height="1920" data-layout-allow-overlap>
+    <video id="b-notebook-bg" class="clip full" src="assets/broll/notebook-bg.mp4" muted playsinline data-start="0.0" data-duration="3.2" data-track-index="0"></video>
+    <div id="b-notebook-shadow" class="clip card-shadow" data-start="0.0" data-duration="3.2" data-track-index="1"></div>
+    <video id="b-notebook" class="clip card" src="assets/broll/notebook.mp4" muted playsinline data-start="0.0" data-duration="3.2" data-track-index="2"></video>
+    <video id="b-typing-bg" class="clip full" src="assets/broll/typing-bg.mp4" muted playsinline data-start="11.95" data-duration="1.2" data-track-index="3"></video>
+    <div id="b-typing-shadow" class="clip card-shadow" data-start="11.95" data-duration="1.2" data-track-index="4"></div>
+    <video id="b-typing" class="clip card" src="assets/broll/typing.mp4" muted playsinline data-start="11.95" data-duration="1.2" data-track-index="5"></video>
+    <video id="b-pen-bg" class="clip full" src="assets/broll/pen-bg.mp4" muted playsinline data-start="13.15" data-duration="1.55" data-track-index="0"></video>
+    <div id="b-pen-shadow" class="clip card-shadow" data-start="13.15" data-duration="1.55" data-track-index="1"></div>
+    <video id="b-pen" class="clip card" src="assets/broll/pen.mp4" muted playsinline data-start="13.15" data-duration="1.55" data-track-index="2"></video>
+    <video id="b-keyboard" class="clip full" src="assets/broll/keyboard.mp4" muted playsinline data-start="17.2" data-duration="2.6" data-track-index="3"></video>
+    <video id="b-screen-bg" class="clip full" src="assets/broll/screen-bg.mp4" muted playsinline data-start="19.8" data-duration="2.85" data-track-index="0"></video>
+    <div id="b-screen-shadow" class="clip card-shadow" data-start="19.8" data-duration="2.85" data-track-index="1"></div>
+    <video id="b-screen" class="clip card" src="assets/broll/screen.mp4" muted playsinline data-start="19.8" data-duration="2.85" data-track-index="2"></video>
+    <video id="b-exam-bg" class="clip full" src="assets/broll/exam-bg.mp4" muted playsinline data-start="27.6" data-duration="2.48" data-track-index="3"></video>
+    <div id="b-exam-shadow" class="clip card-shadow" data-start="27.6" data-duration="2.48" data-track-index="4"></div>
+    <video id="b-exam" class="clip card" src="assets/broll/exam.mp4" muted playsinline data-start="27.6" data-duration="2.48" data-track-index="5"></video>
+    <video id="b-consult-bg" class="clip full" src="assets/broll/consult-bg.mp4" muted playsinline data-start="30.3" data-duration="3.25" data-track-index="0"></video>
+    <div id="b-consult-shadow" class="clip card-shadow" data-start="30.3" data-duration="3.25" data-track-index="1"></div>
+    <video id="b-consult" class="clip card" src="assets/broll/consult.mp4" muted playsinline data-start="30.3" data-duration="3.25" data-track-index="2"></video>
+    <video id="b-phone-bg" class="clip full" src="assets/broll/phone-bg.mp4" muted playsinline data-start="33.55" data-duration="2.7" data-track-index="3"></video>
+    <div id="b-phone-shadow" class="clip card-shadow" data-start="33.55" data-duration="2.7" data-track-index="4"></div>
+    <video id="b-phone" class="clip card" src="assets/broll/phone.mp4" muted playsinline data-start="33.55" data-duration="2.7" data-track-index="5"></video>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    
+tl.fromTo("#b-notebook", { scale: 1.0 }, { scale: 1.05, duration: 3.2, ease: "none" }, 0.0);
+    tl.fromTo(["#b-notebook-bg"], { opacity: 0 }, { opacity: 1, duration: 0.18, ease: "power2.out" }, 0.0);
+    tl.fromTo(["#b-notebook", "#b-notebook-shadow"], { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.3, ease: "power3.out" }, 0.0);
+    tl.fromTo("#b-typing", { scale: 1.0 }, { scale: 1.05, duration: 1.2, ease: "none" }, 11.95);
+    tl.fromTo(["#b-typing-bg"], { opacity: 0 }, { opacity: 1, duration: 0.18, ease: "power2.out" }, 11.95);
+    tl.fromTo(["#b-typing", "#b-typing-shadow"], { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.3, ease: "power3.out" }, 11.95);
+    tl.fromTo("#b-pen", { scale: 1.0 }, { scale: 1.05, duration: 1.55, ease: "none" }, 13.15);
+    tl.fromTo("#b-keyboard", { scale: 1.0 }, { scale: 1.06, duration: 2.6, ease: "none" }, 17.2);
+    tl.fromTo("#b-keyboard", { opacity: 0 }, { opacity: 1, duration: 0.18, ease: "power2.out" }, 17.2);
+    tl.fromTo("#b-screen", { scale: 1.0 }, { scale: 1.05, duration: 2.85, ease: "none" }, 19.8);
+    tl.fromTo("#b-exam", { scale: 1.0 }, { scale: 1.05, duration: 2.48, ease: "none" }, 27.6);
+    tl.fromTo(["#b-exam-bg"], { opacity: 0 }, { opacity: 1, duration: 0.18, ease: "power2.out" }, 27.6);
+    tl.fromTo(["#b-exam", "#b-exam-shadow"], { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.3, ease: "power3.out" }, 27.6);
+    tl.fromTo("#b-consult", { scale: 1.0 }, { scale: 1.05, duration: 3.25, ease: "none" }, 30.3);
+    tl.fromTo(["#b-consult-bg"], { opacity: 0 }, { opacity: 1, duration: 0.18, ease: "power2.out" }, 30.3);
+    tl.fromTo(["#b-consult", "#b-consult-shadow"], { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.3, ease: "power3.out" }, 30.3);
+    tl.fromTo("#b-phone", { scale: 1.0 }, { scale: 1.05, duration: 2.7, ease: "none" }, 33.55);
+    window.__timelines["broll"] = tl;
+  </script>
+</template>

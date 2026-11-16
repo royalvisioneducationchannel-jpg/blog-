@@ -15,8 +15,16 @@ Skills: WordPress, Elementor, WooCommerce, Meta (Facebook/Instagram) Ads, Meta P
 - Apply within the first 15–60 minutes after posting. Watch "Most Recent" feed, best time 8 PM – 2 AM PKT (US clients active).
 - Filters: payment verified, few proposals (under 10–15 ideal), client has spend history and good rating (check reviews freelancers gave the client).
 - Prefer "Less than 1 week" duration jobs for quick wins and fast reviews.
-- Use keyword combos and minus words, e.g. `Elementor fix -Canva`, `WordPress form fix`, `Meta ads Pakistan`, `Facebook pixel`, `WooCommerce fix`.
-- Save the best searches and check them daily.
+- Use Upwork Boolean search (official): `AND`, `OR`, `NOT` in UPPERCASE, "exact phrase" in quotes, ( ) for groups, `*` wildcard. The `-`, `+` and `!` operators do NOT work.
+- Saved searches:
+  - `(Elementor OR WordPress) AND (fix* OR bug OR issue OR responsive) NOT (Canva OR Wix OR Shopify OR Squarespace)`
+  - `"Meta Pixel" OR "Facebook Pixel" OR "Conversions API"`
+  - `("Meta ads" OR "Facebook ads" OR "Instagram ads") AND (setup OR campaign OR manage*)`
+  - `WooCommerce AND (fix* OR checkout OR payment OR shipping)`
+  - `(Pakistan OR Urdu OR PKR OR Lahore OR Karachi) AND (WordPress OR Elementor OR "Meta ads" OR Facebook)`
+  - `(banner OR flyer OR "social media post") AND (Photoshop OR Illustrator) NOT Canva`
+- Filters on every search: payment verified, proposals "Less than 5" / "5 to 10", client history with hires.
+- Save the best searches, turn on instant job alerts, and check them daily.
 - Search Pakistan-specific jobs (local market, Urdu, PKR clients) – less competition.
 - Read the skills list but judge by the actual task (skills lists are often generic).
 - If someone is already "interviewing", apply fast or skip.

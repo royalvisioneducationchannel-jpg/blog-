@@ -58,4 +58,14 @@ Skills: WordPress, Elementor, WooCommerce, Meta (Facebook/Instagram) Ads, Meta P
 
 ## 7. After winning
 - Deliver fast, send a short report with screenshots of tests.
-- Ask for a review and long-term work (maintenance, monthly ads).
+- Always ask for a review and long-term work (maintenance, monthly ads).
+
+## 8. Extra proposal tricks (from "32 Upwork Proposal Hacks", John Morris)
+- Find the client's name in past reviews on the job page if it's not in the post; use it in line 1.
+- Mirror the client's tone: formal client → formal reply, casual client → casual reply.
+- Answer the hiring criteria the client repeats most (e.g. "fast", "mobile", "today").
+- Optional: a short (<1 min) intro video link in addition to the written proposal (YouTube unlisted / Loom), not instead of it.
+- Upwork cover letters are plain text: no bold/italic. Use CAPS headings, short lines and bullets.
+- One polite follow-up after a few days if no reply; never more.
+- "Out-niche" bigger freelancers: be the specialist (Elementor fixes, Meta Pixel, WooCommerce) rather than a generalist.
+- Promise only what you can deliver; meet deadlines and send updates.

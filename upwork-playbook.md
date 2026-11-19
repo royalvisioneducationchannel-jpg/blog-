@@ -59,7 +59,7 @@ Skills: WordPress, Elementor, WooCommerce, Meta (Facebook/Instagram) Ads, Meta P
 - Title: study ~25 ideal jobs, use their most common keywords. Example: "WordPress & Elementor Expert | Meta Ads Specialist".
 - Overview: results and case studies, not just a skills list.
 - Professional photo (no selfie).
-- Request real testimonials from past clients (Profile → Request a testimonial), including off-Upwork clients.
+- Testimonials: Upwork no longer accepts new testimonial requests (help article "About testimonials on your profile"). Instead: bring real past clients via Direct Contracts (0% fee, real reviews), and put real results + screenshots in portfolio descriptions.
 - Upload only real certifications.
 - Focus on a niche; portfolio shows only the best, most relevant work.
 - Consider an Upwork Project Catalog listing (fixed-price packages).

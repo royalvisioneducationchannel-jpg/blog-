@@ -10,11 +10,13 @@
  * because it describes what the 2023 registration letter says. Safe to re-run.
  */
 
-$offices = array(
-	'lahore'     => array( 'Lahore Office', '1st Floor, 52 CCA, DD Block, DHA Phase 4, Lahore 54000, Pakistan', '52 CCA, DD Block, DHA Phase 4, Lahore' ),
-	'high-court' => array( 'High Court Office', 'G-13, Annexe Aiwan-e-Auqaf, The Mall, near Shah Chiragh Masjid, Mozang Chungi, Lahore 54000, Pakistan', 'G-13, Annexe Aiwan-e-Auqaf, The Mall, Lahore' ),
-	'faisalabad' => array( 'Faisalabad Office', '1395-B, Pilot Ground, People\'s Colony No. 1, Faisalabad 38000, Pakistan', '1395-B, People\'s Colony No. 1, Faisalabad' ),
+$offices = array( // Exactly as the firm gave them (name, full address, address shown in compact places).
+	'lahore'     => array( 'Royal Vision Law Associates (Lahore Office)', '1st Floor, 52 CCA DD Block, DHA Phase 4, Lahore, 54000 Pakistan' ),
+	'high-court' => array( 'Royal Vision Law Associates (High Court Office)', 'G-13, Anexy Aiwan-e-Auqaf, The Mall, Near Shah Chiragh Masjid, Mozang Chungi, Lahore, 54000 Pakistan' ),
+	'faisalabad' => array( 'Royal Vision Law Associates (Faisalabad Office)', '1395 - B, Pilot Ground, People\'s Colony No 1, Faisalabad, 38000 Pakistan' ),
 );
+foreach ( $offices as &$o ) { $o[2] = $o[1]; } // Full address everywhere, never shortened.
+unset( $o );
 $map   = function ( $address ) { return 'https://www.google.com/maps/search/?api=1&query=' . rawurlencode( $address ); };
 $phone = '<a href="tel:+923345298703">+92 334 5298703</a>';
 $out   = array();
@@ -66,13 +68,15 @@ $swap = function ( $v ) use ( &$swap, $text ) {
 	if ( is_array( $v ) ) { foreach ( $v as $k => $x ) { $v[ $k ] = $swap( $x ); } return $v; }
 	return is_string( $v ) ? strtr( $v, $text ) : $v;
 };
-$walk = function ( array $els, $doc_id ) use ( &$walk, $swap, $by_id, $prose, &$out ) {
+$walk = function ( array $els, $doc_id ) use ( &$walk, $swap, $by_id, $prose, $full, &$out ) {
 	foreach ( $els as &$el ) {
 		$el['settings'] = $swap( $el['settings'] );
 		foreach ( $by_id[ $doc_id ][ $el['id'] ] ?? array() as $k => $v ) { $el['settings'][ $k ] = $v; $out['set'][] = "$doc_id:{$el['id']}:$k"; }
 		if ( isset( $prose[ $doc_id ] ) && isset( $el['settings']['editor'] ) ) {
 			$before = $el['settings']['editor'];
 			$el['settings']['editor'] = strtr( $before, $prose[ $doc_id ] );
+			$el['settings']['editor'] = preg_replace( '#(<h2>Contact</h2>\s*<p>).*?(Telephone: )#s', '$1' . implode( '<br>', $full ) . '<br>$2', $el['settings']['editor'] );
+			$el['settings']['editor'] = preg_replace( '#Offices: .*?\. (Telephone: )#s', 'Offices: ' . implode( '; ', $full ) . '. $1', $el['settings']['editor'] );
 			if ( $before !== $el['settings']['editor'] ) { $out['set'][] = "$doc_id:{$el['id']}:prose"; }
 		}
 		if ( 53 === $doc_id && isset( $el['settings']['icon_list'] ) ) {
@@ -126,6 +130,28 @@ foreach ( array( 22, 53, 55, 105, 3, 45 ) as $doc_id ) {
 		$at = array_search( '69e952f', array_column( $els, 'id' ), true ); // before Contact
 		array_splice( $els, false === $at ? count( $els ) - 1 : $at, 0, array( $section ) );
 		$out['set'][] = '22:offices-section';
+	}
+
+	if ( 22 === $doc_id ) { // keep existing office cards in step with $offices
+		foreach ( $els as &$sec ) {
+			if ( 'offices' !== ( $sec['settings']['_element_id'] ?? '' ) ) { continue; }
+			foreach ( $sec['elements'] as &$grid ) {
+				if ( false === strpos( $grid['settings']['css_classes'] ?? '', 'rvl-office-grid' ) ) { continue; }
+				foreach ( array_values( $offices ) as $i => $o ) {
+					if ( ! isset( $grid['elements'][ $i ] ) ) { continue; }
+					$grid['elements'][ $i ]['settings']['link']['url'] = $map( $o[1] );
+					foreach ( $grid['elements'][ $i ]['elements'] as &$w ) {
+						$cls = $w['settings']['_css_classes'] ?? '';
+						if ( false !== strpos( $cls, 'rvl-h3' ) ) { $w['settings']['title'] = $o[0]; }
+						if ( false !== strpos( $cls, 'rvl-body' ) ) { $w['settings']['editor'] = '<p>' . esc_html( $o[1] ) . '</p>'; }
+					}
+					unset( $w );
+				}
+				$out['set'][] = '22:offices-cards';
+			}
+			unset( $grid );
+		}
+		unset( $sec );
 	}
 
 	$save = array( 'elements' => $els );

@@ -3,7 +3,7 @@ from PIL import Image, ImageDraw, ImageFilter, ImageEnhance
 W,H=960,1200
 src=sys.argv[1] + '/%d.webp'  # transparent studio cut-outs supplied by the firm
 # n: (slug, head_top, chin_y, face_cx)
-P={24:('ch-abdul-nabi-qamar',4,385,500),10:('arshad-mehmood-warraich',50,530,548),11:('younis-amin',60,520,540),12:('shahid-amin',44,490,565),
+P={25:('ch-abdul-nabi-qamar',4,385,500),10:('arshad-mehmood-warraich',50,530,548),11:('younis-amin',60,520,540),12:('shahid-amin',44,490,565),
    13:('rana-tahir-mehmood',16,600,490),14:('imran-ali',47,470,560),16:('ch-umar-shahzad-ashraf',85,580,575)}
 HEAD=500; TOP=96  # target head height (hair top->chin) and hair-top y on canvas
 def backdrop():

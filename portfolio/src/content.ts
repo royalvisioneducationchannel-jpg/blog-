@@ -21,16 +21,22 @@ export const profile = {
 };
 
 export const hero = {
-  line1: 'Websites that stand out.',
-  line2: 'Campaigns built with purpose.',
-  left: ['WordPress & Elementor', 'WooCommerce', 'Meta Ads'],
-  right: ['Based in Pakistan', 'Elementor Developer', 'Meta Ads Specialist'],
+  greeting: 'Hi, I’m Saleem',
+  lineA: ['Websites that', 'stand out.'],
+  lineB: ['Campaigns built', 'with purpose.'],
+  lead: 'I design and build WordPress & Elementor websites and WooCommerce stores, and run Meta ads on Facebook and Instagram that bring real enquiries.',
+  chips: ['WordPress', 'Elementor', 'WooCommerce', 'Meta Ads', 'Meta Pixel'],
 };
 
-export const statement = {
-  title: 'Good design brings real enquiries.',
-  text: 'I help businesses grow online with WordPress & Elementor websites, WooCommerce stores and Meta ads: built with care, tested on every screen and reported honestly, so you always know what your website and your ad budget are doing for you.',
-};
+/* Verified numbers only (Meta Ads Manager lifetime data + live projects on this site). */
+export const stats = [
+  { value: 6521, prefix: '', suffix: '', label: 'Messaging conversations from Meta campaigns' },
+  { value: 951, prefix: '', suffix: 'K', label: 'People reached on Facebook & Instagram' },
+  { value: 3, prefix: '', suffix: '', label: 'Live websites in this portfolio' },
+  { value: 65, prefix: 'PKR ', suffix: '', label: 'Best cost per conversation' },
+];
+
+export const marquee = ['WordPress', 'Elementor Pro', 'WooCommerce', 'Meta Ads', 'Meta Pixel', 'Landing Pages', 'Photoshop', 'Illustrator', 'Rank Math SEO'];
 
 export type Shot = { src: string; w: number; h: number; alt: string };
 

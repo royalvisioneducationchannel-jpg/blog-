@@ -1,9 +1,12 @@
 # Muhammad Saleem — portfolio
 
-Standalone portfolio site: React 18 + TypeScript + Vite, GSAP ScrollTrigger for scroll storytelling, Geist font.
-Minimal editorial style: off-white and dark navy sections, oversized type, a rising glow under the hero,
-word-by-word statement reveal, pinned "Selected Works" with marquee project names, stacking service rows,
-and a round teal call-to-action that opens the contact form.
+Standalone portfolio site: React 18 + TypeScript + Vite, Three.js via React Three Fiber (lazy-loaded shader hero),
+GSAP ScrollTrigger and Lenis smooth scrolling. Geist with Instrument Serif italic accents.
+
+Design: dark midnight canvas with a cobalt accent and one ivory section (About). Preloader, custom cursor,
+magnetic buttons, interactive 3D shader blob in the hero, skills marquee with verified counters, stacking
+project cards, spotlight service cards, pricing tabs (Websites / Meta Ads / Quick fixes) and a closing CTA
+that opens the contact form.
 
 ## Run
 
@@ -36,6 +39,7 @@ Everything is in `src/content.ts`: profile, links, projects, services, skills, p
 ## Implementation notes
 
 - All text, project details, forms and links are plain, accessible HTML. The animated hero heading keeps an `aria-label` with the full sentence.
-- Animation ownership: GSAP owns the hero letter reveal, the glow and title scroll effects, and the statement word reveal. CSS owns the marquee and card transitions. React state (from ScrollTrigger progress) picks the active project.
-- `prefers-reduced-motion` and the header motion toggle stop the marquee, letter reveal and scroll effects. The choice is remembered in localStorage when available.
+- Animation ownership: GSAP owns the hero line reveal, the hero copy and project-card scroll effects and the counters; the R3F frame loop owns the 3D blob; CSS owns the marquee, floating cards and hover states; a small rAF loop owns the custom cursor.
+- The 3D scene is lazy-loaded, renders only while the hero is visible, and falls back to a CSS gradient orb without WebGL.
+- `prefers-reduced-motion` and the header motion toggle turn off smooth scrolling, the preloader, custom cursor, marquee, 3D idle motion and scroll effects. The choice is remembered in localStorage when available.
 - Case studies and the contact form open in native `<dialog>` elements (Escape closes them, focus is handled by the browser).

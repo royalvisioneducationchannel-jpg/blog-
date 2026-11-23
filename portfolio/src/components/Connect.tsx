@@ -158,32 +158,36 @@ export default function Connect() {
   ].filter(([, h]) => h) as [string, string][];
 
   return (
-    <section className="connect dark" id="connect" aria-labelledby="connect-title">
-      <h2 id="connect-title" className="display center">
-        Connect
-      </h2>
-      <ul className="connect__links">
-        {links.map(([l, h]) => (
-          <li key={l}>
-            <a href={h} target={h.startsWith('mailto') ? undefined : '_blank'} rel="noopener noreferrer">
-              {l}
-            </a>
-          </li>
-        ))}
-      </ul>
-      <div className="connect__line">
-        <p>
-          Let’s build something
-          <br /> worth showing together
-        </p>
-        <button type="button" className="orb" onClick={() => choose()}>
-          Get in touch
+    <footer className="cta3" id="contact" aria-labelledby="cta-title">
+      <div className="cta3__glow" aria-hidden="true" />
+      <div className="wrap cta3__inner">
+        <p className="eyebrow">Have a project in mind?</p>
+        <h2 id="cta-title" className="cta3__title">
+          Let’s build something <em>worth showing.</em>
+        </h2>
+        <p className="cta3__lead">Tell me what you need. I’ll reply with questions or a clear plan and price, with no obligation.</p>
+        <button type="button" className="orb3" data-magnetic onClick={() => choose()}>
+          <span>Start a project</span>
         </button>
+        <div className="cta3__bottom">
+          <p>
+            © {new Date().getFullYear()} {profile.name} · {profile.location}
+          </p>
+          <ul>
+            {links.map(([l, h]) => (
+              <li key={l}>
+                <a href={h} target={h.startsWith('mailto') ? undefined : '_blank'} rel="noopener noreferrer">
+                  {l} ↗
+                </a>
+              </li>
+            ))}
+            <li>
+              <a href="#top">Back to top ↑</a>
+            </li>
+          </ul>
+        </div>
       </div>
-      <p className="connect__copy">
-        {new Date().getFullYear()} © {profile.name} · {profile.location}
-      </p>
       <ContactDialog />
-    </section>
+    </footer>
   );
 }

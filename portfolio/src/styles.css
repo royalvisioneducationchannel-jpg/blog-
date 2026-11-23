@@ -1059,6 +1059,27 @@ em {
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
+.about3__links {
+  display: flex;
+  gap: 12px;
+  margin-top: 18px;
+}
+.about3__links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(10, 14, 24, 0.18);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  transition: background 0.25s, color 0.25s;
+}
+.about3__links a:hover {
+  background: var(--ink);
+  color: var(--ivory);
+}
 .proc {
   margin-top: clamp(70px, 9vw, 130px);
 }

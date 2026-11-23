@@ -12,7 +12,7 @@ export const profile = {
   portrait: './img/portrait-cutout.webp',
   links: {
     upwork: 'https://www.upwork.com/freelancers/~01d6e2c0380c59ed62',
-    linkedin: '', // TODO: add your public LinkedIn profile URL
+    linkedin: 'https://www.linkedin.com/in/saleem-chishti',
     email: '', // TODO: add the public email address you want clients to use
     whatsapp: '', // TODO: optional, e.g. https://wa.me/923001234567
   },

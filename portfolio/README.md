@@ -28,7 +28,7 @@ Everything is in `src/content.ts`: profile, links, projects, services, skills, p
 | Item | Status |
 |---|---|
 | Public email | Empty. The form falls back to copying the brief and sending the client to Upwork. |
-| LinkedIn URL | Empty; the link is hidden until added. |
+| LinkedIn URL | Added (www.linkedin.com/in/saleem-chishti). |
 | WhatsApp link | Optional; hidden while empty. |
 | Form backend | Empty `formEndpoint`. Add e.g. a Formspree endpoint to send inquiries directly. A success message is shown only when the endpoint returns OK. |
 | Testimonials | None yet (Upwork has 0 reviews). The section is hidden while the list is empty. |

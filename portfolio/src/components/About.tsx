@@ -37,6 +37,16 @@ export default function About() {
             <li>Partner access only, never your passwords</li>
           </ul>
           <p className="about3__langs">Languages: {profile.languages.join(' · ')}</p>
+          <p className="about3__links">
+            {profile.links.linkedin && (
+              <a href={profile.links.linkedin} target="_blank" rel="noopener noreferrer">
+                LinkedIn ↗
+              </a>
+            )}
+            <a href={profile.links.upwork} target="_blank" rel="noopener noreferrer">
+              Upwork ↗
+            </a>
+          </p>
         </div>
       </div>
 

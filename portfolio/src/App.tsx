@@ -6,9 +6,8 @@ import CaseDialog from './components/CaseDialog';
 import Services from './components/Services';
 import About from './components/About';
 import Packages from './components/Packages';
-import Process from './components/Process';
-import Contact from './components/Contact';
-import { profile, testimonials } from './content';
+import Connect from './components/Connect';
+import { testimonials } from './content';
 import { InquiryProvider, MotionProvider } from './motion';
 
 export default function App() {
@@ -23,8 +22,8 @@ export default function App() {
           <Services onOpen={setCaseId} />
           <About />
           {testimonials.length > 0 && (
-            <section className="testimonials section--light" aria-label="Client testimonials">
-              <div className="container">
+            <section className="light testi" aria-label="Client testimonials">
+              <div className="wrap">
                 {testimonials.map((t) => (
                   <figure key={t.name}>
                     <blockquote>“{t.quote}”</blockquote>
@@ -37,27 +36,8 @@ export default function App() {
             </section>
           )}
           <Packages />
-          <Process />
-          <Contact />
+          <Connect />
         </main>
-        <footer className="footer">
-          <div className="container footer__inner">
-            <p>
-              © {new Date().getFullYear()} {profile.name} · {profile.location}
-            </p>
-            <p>
-              <a href={profile.links.upwork} target="_blank" rel="noopener noreferrer">
-                Upwork ↗
-              </a>
-              {profile.links.linkedin && (
-                <a href={profile.links.linkedin} target="_blank" rel="noopener noreferrer">
-                  LinkedIn ↗
-                </a>
-              )}
-              <a href="#top">Back to top ↑</a>
-            </p>
-          </div>
-        </footer>
         <CaseDialog id={caseId} onClose={() => setCaseId(null)} />
       </InquiryProvider>
     </MotionProvider>

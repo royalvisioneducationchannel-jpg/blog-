@@ -1,6 +1,9 @@
-# Floating Digital Studio — Muhammad Saleem portfolio
+# Muhammad Saleem — portfolio
 
-Standalone portfolio site: React 18 + TypeScript + Vite, Three.js via React Three Fiber (hero scene), GSAP ScrollTrigger (intro and scroll storytelling).
+Standalone portfolio site: React 18 + TypeScript + Vite, GSAP ScrollTrigger for scroll storytelling, Geist font.
+Minimal editorial style: off-white and dark navy sections, oversized type, a rising glow under the hero,
+word-by-word statement reveal, pinned "Selected Works" with marquee project names, stacking service rows,
+and a round teal call-to-action that opens the contact form.
 
 ## Run
 
@@ -32,8 +35,7 @@ Everything is in `src/content.ts`: profile, links, projects, services, skills, p
 
 ## Implementation notes
 
-- Text, project details, forms and links are plain HTML, outside WebGL.
-- The 3D scene is lazy-loaded after first paint. It renders only while the hero is on screen and the tab is visible, and caps device pixel ratio (lower on low-core devices).
-- A static composition of the same previews is shown first. It stays as the fallback when WebGL is unavailable or the scene fails.
-- `prefers-reduced-motion` and the header motion toggle stop decorative floating, tilt and intro animation. The choice is remembered in localStorage when available.
-- Animation ownership: GSAP owns text reveal and the intro/scroll values; R3F `useFrame` owns 3D transforms; CSS owns DOM float keyframes; CSS variables (`--px`, `--py`, `--away`) drive DOM tilt and parallax wrappers.
+- All text, project details, forms and links are plain, accessible HTML. The animated hero heading keeps an `aria-label` with the full sentence.
+- Animation ownership: GSAP owns the hero letter reveal, the glow and title scroll effects, and the statement word reveal. CSS owns the marquee and card transitions. React state (from ScrollTrigger progress) picks the active project.
+- `prefers-reduced-motion` and the header motion toggle stop the marquee, letter reveal and scroll effects. The choice is remembered in localStorage when available.
+- Case studies and the contact form open in native `<dialog>` elements (Escape closes them, focus is handled by the browser).

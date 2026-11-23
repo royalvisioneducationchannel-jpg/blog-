@@ -10,7 +10,6 @@ export const profile = {
   location: 'Faisalabad, Pakistan',
   languages: ['English', 'Urdu', 'Punjabi'],
   portrait: './img/portrait-cutout.webp',
-  portraitFramed: './img/portrait-about.webp',
   links: {
     upwork: 'https://www.upwork.com/freelancers/~01d6e2c0380c59ed62',
     linkedin: '', // TODO: add your public LinkedIn profile URL
@@ -19,6 +18,18 @@ export const profile = {
   },
   // TODO: optional form backend (e.g. a Formspree endpoint). Empty = email/Upwork fallback.
   formEndpoint: '',
+};
+
+export const hero = {
+  line1: 'Websites that stand out.',
+  line2: 'Campaigns built with purpose.',
+  left: ['WordPress & Elementor', 'WooCommerce', 'Meta Ads'],
+  right: ['Based in Pakistan', 'Elementor Developer', 'Meta Ads Specialist'],
+};
+
+export const statement = {
+  title: 'Good design brings real enquiries.',
+  text: 'I help businesses grow online with WordPress & Elementor websites, WooCommerce stores and Meta ads: built with care, tested on every screen and reported honestly, so you always know what your website and your ad budget are doing for you.',
 };
 
 export type Shot = { src: string; w: number; h: number; alt: string };
@@ -39,6 +50,7 @@ export type Project = {
   creative?: Shot[];
   decisions: string[];
   service: string;
+  tags: string[];
 };
 
 export const projects: Project[] = [
@@ -68,6 +80,7 @@ export const projects: Project[] = [
       'Product feeds connected so the same catalog can power Meta and Google shopping ads.',
     ],
     service: 'WooCommerce Stores',
+    tags: ['WooCommerce', 'Elementor', 'Integrations'],
   },
   {
     id: 'royal-vision-education',
@@ -96,6 +109,7 @@ export const projects: Project[] = [
       'Student journey shown as a timeline so the process feels clear and trustworthy.',
     ],
     service: 'Business Websites & Landing Pages',
+    tags: ['Elementor Pro', 'Lead Gen', 'Forms'],
   },
   {
     id: 'royal-vision-law',
@@ -123,6 +137,7 @@ export const projects: Project[] = [
       'Primary action “Discuss your matter” repeated where visitors are ready to decide.',
     ],
     service: 'Business Websites & Landing Pages',
+    tags: ['Web Design', 'Elementor', 'Responsive'],
   },
   {
     id: 'meta-ads-study-abroad',
@@ -150,6 +165,7 @@ export const projects: Project[] = [
       'Cost per conversation used as the main success metric, because it reflects real enquiries.',
     ],
     service: 'Meta Ads Campaigns',
+    tags: ['Meta Ads', 'Lead Gen', 'Reporting'],
   },
 ];
 

@@ -60,20 +60,19 @@ export function useMediaQuery(q: string) {
   return m;
 }
 
-/* Shared inquiry state: package/service selections prefill the contact form. */
+/* Shared inquiry state: package/service selections prefill the contact form dialog. */
 type Inquiry = { projectType?: string; pkg?: string };
-type InquiryCtx = { inquiry: Inquiry; choose: (i: Inquiry) => void };
-const ICtx = createContext<InquiryCtx>({ inquiry: {}, choose: () => {} });
+type InquiryCtx = { inquiry: Inquiry; open: boolean; choose: (i?: Inquiry) => void; close: () => void };
+const ICtx = createContext<InquiryCtx>({ inquiry: {}, open: false, choose: () => {}, close: () => {} });
 
 export function InquiryProvider({ children }: { children: ReactNode }) {
   const [inquiry, setInquiry] = useState<Inquiry>({});
-  const choose = (i: Inquiry) => {
+  const [open, setOpen] = useState(false);
+  const choose = (i: Inquiry = {}) => {
     setInquiry(i);
-    const el = document.getElementById('contact');
-    el?.scrollIntoView({ behavior: document.documentElement.classList.contains('motion-off') ? 'auto' : 'smooth' });
-    window.setTimeout(() => document.getElementById('f-name')?.focus({ preventScroll: true }), 600);
+    setOpen(true);
   };
-  return <ICtx.Provider value={{ inquiry, choose }}>{children}</ICtx.Provider>;
+  return <ICtx.Provider value={{ inquiry, open, choose, close: () => setOpen(false) }}>{children}</ICtx.Provider>;
 }
 
 export const useInquiry = () => useContext(ICtx);

@@ -1,13 +1,16 @@
 import { useEffect, useRef } from 'react';
-import { projects } from '../content';
+import { projects, type Shot } from '../content';
 import { useInquiry } from '../motion';
-import { BrowserFrame, Card, PhoneFrame } from './Frames';
 
 const typeFor: Record<string, string> = {
   'Business Websites & Landing Pages': 'Business website',
   'WooCommerce Stores': 'WooCommerce store',
   'Meta Ads Campaigns': 'Meta ads campaign',
 };
+
+const Img = ({ s, className }: { s: Shot; className?: string }) => (
+  <img className={className} src={s.src} width={s.w} height={s.h} alt={s.alt} loading="lazy" decoding="async" />
+);
 
 export default function CaseDialog({ id, onClose }: { id: string | null; onClose: () => void }) {
   const ref = useRef<HTMLDialogElement>(null);
@@ -22,62 +25,49 @@ export default function CaseDialog({ id, onClose }: { id: string | null; onClose
   }, [p]);
 
   return (
-    <dialog ref={ref} className="case" aria-labelledby="case-title" onClose={onClose} onClick={(e) => e.target === ref.current && onClose()}>
+    <dialog ref={ref} className="case2" aria-labelledby="case-title" onClose={onClose} onClick={(e) => e.target === ref.current && onClose()}>
       {p && (
-        <div className="case__body">
-          <button type="button" className="case__close" onClick={onClose} aria-label="Close case study">
+        <div className="case2__body">
+          <button type="button" className="x" onClick={onClose} aria-label="Close case study">
             ✕
           </button>
-          <p className="kicker">{p.category}</p>
-          <h2 id="case-title" className="h2">
-            {p.title}
-          </h2>
-
-          <div className="case__hero">
-            {p.desktop && <BrowserFrame shot={p.desktop} url={p.live} />}
-            {p.creative && <Card shot={p.creative[0]} />}
+          <p className="caps">{p.category}</p>
+          <h2 id="case-title">{p.title}</h2>
+          <div className="case2__shots">
+            {p.desktop && <Img s={p.desktop} className="shot shot--desk" />}
+            {p.mobile && <Img s={p.mobile} className="shot shot--phone" />}
+            {p.creative?.map((c) => <Img key={c.src} s={c} className="shot shot--desk" />)}
           </div>
-
-          <div className="case__cols">
-            <section>
-              <h3 className="h4">Brief &amp; context</h3>
+          <div className="case2__cols">
+            <div>
+              <h3>Brief</h3>
               <p>{p.brief}</p>
-              <h3 className="h4">My responsibilities</h3>
+              <h3>My role</h3>
               <p>{p.role}</p>
-              <ul className="ticks">
+              <h3>Delivered</h3>
+              <ul>
                 {p.delivered.map((d) => (
                   <li key={d}>{d}</li>
                 ))}
               </ul>
-            </section>
-            <section>
-              <h3 className="h4">Design &amp; implementation decisions</h3>
-              <ul className="ticks">
+            </div>
+            <div>
+              <h3>Decisions</h3>
+              <ul>
                 {p.decisions.map((d) => (
                   <li key={d}>{d}</li>
                 ))}
               </ul>
-              <h3 className="h4">{p.outcomeVerified ? 'Verified result' : 'What was delivered'}</h3>
+              <h3>{p.outcomeVerified ? 'Verified result' : 'Outcome'}</h3>
               <p>{p.outcome}</p>
-              <p className="tags">
-                {p.tools.map((t) => (
-                  <span key={t}>{t}</span>
-                ))}
-              </p>
-            </section>
-          </div>
-
-          {(p.mobile || (p.creative && p.creative[1])) && (
-            <div className="case__more">
-              {p.mobile && <PhoneFrame shot={p.mobile} />}
-              {p.creative?.[1] && <Card shot={p.creative[1]} />}
+              <h3>Tools</h3>
+              <p className="case2__tools">{p.tools.join(' · ')}</p>
             </div>
-          )}
-
-          <div className="case__ctas">
+          </div>
+          <div className="case2__ctas">
             <button
               type="button"
-              className="btn btn--primary"
+              className="pillbtn pillbtn--accent"
               onClick={() => {
                 onClose();
                 choose({ projectType: typeFor[p.service] ?? 'Other' });
@@ -86,8 +76,8 @@ export default function CaseDialog({ id, onClose }: { id: string | null; onClose
               Discuss a similar project
             </button>
             {p.live && (
-              <a className="btn btn--ghost-dark" href={p.live} target="_blank" rel="noopener noreferrer">
-                Visit Live Website ↗
+              <a className="pillbtn" href={p.live} target="_blank" rel="noopener noreferrer">
+                Visit live site ↗
               </a>
             )}
           </div>

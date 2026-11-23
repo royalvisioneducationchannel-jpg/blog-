@@ -1,165 +1,92 @@
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { projects, profile, type Project } from '../content';
-import { useMediaQuery } from '../motion';
-import { BrowserFrame, Card, PhoneFrame } from './Frames';
+import { projects } from '../content';
 
 gsap.registerPlugin(ScrollTrigger);
 
-function Media({ p, eager = false }: { p: Project; eager?: boolean }) {
-  if (p.creative) {
-    return (
-      <div className="media media--creative">
-        <Card shot={p.creative[0]} className="m-a" />
-        {p.creative[1] && <Card shot={p.creative[1]} className="m-b" />}
-      </div>
-    );
-  }
+function Marquee({ text }: { text: string }) {
+  const item = `${text} `;
   return (
-    <div className={`media ${p.mobile ? 'media--duo' : 'media--solo'}`}>
-      {p.desktop && <BrowserFrame shot={p.desktop} url={p.live} eager={eager} className="m-desk" />}
-      {p.mobile && <PhoneFrame shot={p.mobile} className="m-phone" />}
+    <div className="mq" aria-hidden="true">
+      <div className="mq__track">
+        {Array.from({ length: 6 }).map((_, i) => (
+          <span key={i}>{item}</span>
+        ))}
+      </div>
     </div>
   );
 }
 
 export default function Work({ onOpen }: { onOpen: (id: string) => void }) {
-  const desktop = useMediaQuery('(min-width: 960px)');
   const [active, setActive] = useState(0);
-  const steps = useRef<(HTMLElement | null)[]>([]);
+  const runway = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!desktop) return;
-    const triggers = steps.current.map((el, i) =>
-      ScrollTrigger.create({
-        trigger: el,
-        start: 'top 55%',
-        end: 'bottom 55%',
-        onToggle: (self) => self.isActive && setActive(i),
-      }),
-    );
-    return () => triggers.forEach((t) => t.kill());
-  }, [desktop]);
-
-  const goTo = (i: number) => {
-    const el = steps.current[i];
-    if (!el) return;
-    const smooth = !document.documentElement.classList.contains('motion-off');
-    window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - window.innerHeight * 0.2, behavior: smooth ? 'smooth' : 'auto' });
-  };
-
-  const pad = (n: number) => String(n).padStart(2, '0');
+    const st = ScrollTrigger.create({
+      trigger: runway.current,
+      start: 'top top',
+      end: 'bottom bottom',
+      onUpdate: (self) => setActive(Math.min(projects.length - 1, Math.floor(self.progress * projects.length))),
+    });
+    return () => st.kill();
+  }, []);
 
   return (
-    <section className="work section--dark" id="work" aria-labelledby="work-title">
-      <div className="container">
-        <header className="section-head">
-          <p className="kicker">Selected work</p>
-          <h2 id="work-title" className="h2">
-            Real projects, <span className="muted">live and in use.</span>
-          </h2>
-          <p className="section-lead">
-            Each project shows the brief, my role, what I delivered and the tools used. Visit the live sites or open a case study for details.
-          </p>
-        </header>
+    <section className="work2 light" id="work" aria-labelledby="work-title">
+      <h2 id="work-title" className="display center">
+        Selected Works
+      </h2>
 
-        <div className="work__grid">
-          {desktop && (
-            <div className="work__stage" aria-hidden="true">
-              <div className="work__stage-inner">
-                {projects.map((p, i) => (
-                  <div
-                    key={p.id}
-                    className={`stage-item stage-item--${i + 1} ${i === active ? 'is-active' : i < active ? 'is-before' : 'is-after'}`}
-                  >
-                    <Media p={p} eager={i === 0} />
-                  </div>
-                ))}
-              </div>
-              <div className="work__progress">
-                <span className="work__count">
-                  {pad(active + 1)} <span>/ {pad(projects.length)}</span>
-                </span>
-                <span className="work__bar">
-                  <span style={{ transform: `scaleX(${(active + 1) / projects.length})` }} />
-                </span>
-              </div>
+      <div className="work2__runway" ref={runway} style={{ height: `${projects.length * 100 + 40}svh` }}>
+        <div className="work2__sticky">
+          {projects.map((p, i) => (
+            <div key={p.id} className={`work2__name ${i === active ? 'is-on' : ''}`}>
+              <Marquee text={p.title.toUpperCase()} />
             </div>
-          )}
+          ))}
 
-          <div className="work__steps">
-            {desktop && (
-              <nav className="work__nav" aria-label="Jump to project">
-                {projects.map((p, i) => (
-                  <button key={p.id} type="button" className={i === active ? 'is-active' : ''} aria-current={i === active ? 'true' : undefined} onClick={() => goTo(i)}>
-                    <span>{pad(i + 1)}</span> {p.title}
-                  </button>
-                ))}
-              </nav>
-            )}
-            {projects.map((p, i) => (
-              <article key={p.id} className={`step ${i === active ? 'is-active' : ''}`} ref={(el) => (steps.current[i] = el)} aria-labelledby={`${p.id}-t`}>
-                {!desktop && (
-                  <div className="step__media">
-                    <Media p={p} />
-                  </div>
-                )}
-                <p className="step__index">
-                  {pad(i + 1)} — {p.category}
-                </p>
-                <h3 id={`${p.id}-t`} className="h3">
-                  {p.title}
-                </h3>
-                <p className="step__brief">{p.brief}</p>
-                <dl className="step__meta">
-                  <div>
-                    <dt>My role</dt>
-                    <dd>{p.role}</dd>
-                  </div>
-                  <div>
-                    <dt>Delivered</dt>
-                    <dd>
-                      <ul>
-                        {p.delivered.slice(0, 4).map((d) => (
-                          <li key={d}>{d}</li>
-                        ))}
-                      </ul>
-                    </dd>
-                  </div>
-                  <div>
-                    <dt>Tools</dt>
-                    <dd className="tags">
-                      {p.tools.map((t) => (
+          {projects.map((p, i) => {
+            const shot = p.desktop ?? p.creative![0];
+            const state = i === active ? 'is-active' : i < active ? 'is-before' : 'is-after';
+            return (
+              <article key={p.id} className={`wcard ${state}`} aria-hidden={i !== active} aria-labelledby={`wc-${p.id}`}>
+                <button type="button" className="wcard__open" onClick={() => onOpen(p.id)} tabIndex={i === active ? 0 : -1}>
+                  <img src={shot.src} width={shot.w} height={shot.h} alt={shot.alt} loading={i === 0 ? 'eager' : 'lazy'} decoding="async" />
+                  <span className="wcard__arrow" aria-hidden="true">
+                    ↗
+                  </span>
+                  <span className="wcard__bar">
+                    <span id={`wc-${p.id}`} className="wcard__title">
+                      {p.title}
+                    </span>
+                    <span className="wcard__tags">
+                      {p.tags.map((t) => (
                         <span key={t}>{t}</span>
                       ))}
-                    </dd>
-                  </div>
-                  <div>
-                    <dt>{p.outcomeVerified ? 'Verified result' : 'Outcome'}</dt>
-                    <dd>{p.outcome}</dd>
-                  </div>
-                </dl>
-                <div className="step__ctas">
-                  <button type="button" className="btn btn--light" onClick={() => onOpen(p.id)}>
-                    View Case Study
-                  </button>
-                  {p.live && (
-                    <a className="btn btn--ghost" href={p.live} target="_blank" rel="noopener noreferrer">
-                      Visit Live Website ↗
-                    </a>
-                  )}
-                </div>
+                    </span>
+                  </span>
+                  <span className="sr-only">Open case study</span>
+                </button>
               </article>
-            ))}
-            <aside className="trust-inline">
-              <span>Live projects you can visit</span>
-              <span>Ad results from Meta Ads Manager</span>
-              <a href={profile.links.upwork} target="_blank" rel="noopener noreferrer">
-                Hire securely via Upwork ↗
+            );
+          })}
+
+          <p className="work2__meta" aria-live="polite">
+            <span>
+              {String(active + 1).padStart(2, '0')} / {String(projects.length).padStart(2, '0')}
+            </span>
+            <span>{projects[active].category}</span>
+            {projects[active].live ? (
+              <a href={projects[active].live} target="_blank" rel="noopener noreferrer">
+                Visit live site ↗
               </a>
-            </aside>
-          </div>
+            ) : (
+              <button type="button" onClick={() => onOpen(projects[active].id)}>
+                View case study ↗
+              </button>
+            )}
+          </p>
         </div>
       </div>
     </section>
